@@ -12,11 +12,11 @@
   },
   "iconLibrary": "lucide",
   "aliases": {
-    "components": "@nexsoft-admin/ui/src",
-    "utils": "@nexsoft-admin/utils/src/namespaces/styles",
+    "components": "src/components",
+    "utils": "@nexsoft-admin/utils",
     "hooks": "@nexsoft-admin/hooks",
     "lib": "@nexsoft-admin/utils",
-    "ui": "@nexsoft-admin/ui/src/components"
+    "ui": "src/components"
   },
   "registries": {}
 }
