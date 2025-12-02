@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "src/styles/global.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "iconLibrary": "lucide",
+  "aliases": {
+    "components": "@nexsoft-admin/ui/src",
+    "utils": "@nexsoft-admin/utils/src/namespaces/styles",
+    "hooks": "@nexsoft-admin/hooks",
+    "lib": "@nexsoft-admin/utils",
+    "ui": "@nexsoft-admin/ui/src/components"
+  },
+  "registries": {}
+}

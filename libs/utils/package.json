@@ -1,0 +1,48 @@
+{
+  "name": "@nexsoft-admin/utils",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@nexsoft-admin/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "nx": {
+    "name": "utils",
+    "tags": [
+      "scope:shared",
+      "type:util"
+    ],
+    "targets": {
+      "build": {
+        "executor": "@nx/esbuild:esbuild",
+        "outputs": [
+          "{options.outputPath}"
+        ],
+        "options": {
+          "outputPath": "libs/utils/dist",
+          "main": "libs/utils/src/index.ts",
+          "tsConfig": "libs/utils/tsconfig.lib.json",
+          "format": [
+            "esm"
+          ],
+          "declarationRootDir": "libs/utils/src"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "dayjs": "^1.11.19",
+    "tailwind-merge": "^3.4.0",
+    "zod": "^4.1.13"
+  }
+}
