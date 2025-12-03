@@ -1,6 +1,5 @@
 /// <reference types='vitest' />
 import { defineConfig } from 'vite';
-import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 import * as path from 'path';
@@ -10,7 +9,6 @@ export default defineConfig(() => ({
   cacheDir: '../../node_modules/.vite/libs/ui',
   plugins: [
     react(),
-    tailwindcss(),
     dts({
       entryRoot: 'src',
       tsconfigPath: path.join(import.meta.dirname, 'tsconfig.lib.json'),
@@ -40,7 +38,32 @@ export default defineConfig(() => ({
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
-      external: ['react', 'react-dom', 'react/jsx-runtime'],
+      external: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime',
+        // Radix UI packages
+        /^@radix-ui\/.*/,
+        // Heavy dependencies
+        'recharts',
+        'lucide-react',
+        'cmdk',
+        'embla-carousel-react',
+        'react-day-picker',
+        'react-resizable-panels',
+        'sonner',
+        'vaul',
+        'input-otp',
+        'date-fns',
+        'next-themes',
+        // Utility packages (should be externalized)
+        'class-variance-authority',
+        'clsx',
+        'tailwind-merge',
+        // Utils from workspace
+        '@nexsoft-admin/utils',
+        '@nexsoft-admin/hooks',
+      ],
     },
   },
   test: {

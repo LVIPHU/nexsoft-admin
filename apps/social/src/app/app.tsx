@@ -15,7 +15,7 @@ export function App() {
       <br />
       <Button>Hello</Button>
       <div role="navigation">
-        <ul>
+        <ul className='flex gap-2'>
           <li>
             <Link to="/">Home</Link>
           </li>
