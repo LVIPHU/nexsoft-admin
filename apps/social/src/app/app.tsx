@@ -1,5 +1,6 @@
 import NxWelcome from './nx-welcome';
 import { Route, Routes, Link } from 'react-router-dom';
+import { Button } from '@nexsoft-admin/ui';
 
 export function App() {
   return (
@@ -12,6 +13,7 @@ export function App() {
       <br />
       <hr />
       <br />
+      <Button>Hello</Button>
       <div role="navigation">
         <ul>
           <li>
