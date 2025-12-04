@@ -1,5 +1,6 @@
 export * from './namespaces/date.js'
 export * from './namespaces/error.js'
+export * from './namespaces/i18n.js'
 export * from './namespaces/languages.js'
 export * from './namespaces/number.js'
 export * from './namespaces/object.js'

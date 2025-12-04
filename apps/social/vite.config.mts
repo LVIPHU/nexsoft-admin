@@ -2,6 +2,7 @@
 import { defineConfig } from 'vite';
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react';
+import { lingui } from '@lingui/vite-plugin';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
@@ -14,7 +15,15 @@ export default defineConfig(() => ({
     port: 4300,
     host: 'localhost',
   },
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react({
+      babel: {
+        plugins: ['@lingui/babel-plugin-lingui-macro'],
+      },
+    }),
+    lingui(),
+    tailwindcss(),
+  ],
   // Uncomment this if you are using workers.
   // worker: {
   //  plugins: [],
