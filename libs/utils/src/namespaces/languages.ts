@@ -36,4 +36,5 @@ export const languages = [
 export type Language = typeof languages[number]
 export type LanguageId = Language['id']
 
+export const defaultLanguage = languages[0].id
 export const localeIds: LanguageId[] = languages.map(l => l.id)

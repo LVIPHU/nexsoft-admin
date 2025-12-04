@@ -43,7 +43,12 @@
     ".next",
     "eslint.config.js",
     "eslint.config.cjs",
-    "eslint.config.mjs"
+    "eslint.config.mjs",
+    "lingui.config.mjs"
   ],
-  "references": []
+  "references": [
+    {
+      "path": "../../libs/utils"
+    }
+  ]
 }

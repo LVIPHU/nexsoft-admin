@@ -9,10 +9,6 @@
     ]
   },
   "dependencies": {
-    "next": "~16.0.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "tailwindcss": "^4.1.17",
-    "zod": "^4.1.13"
+    "next": "~16.0.1"
   }
 }
