@@ -1,35 +1,25 @@
-[12:07:25.645] [INFO] storybook v10.1.4
-[12:07:27.038] [DEBUG] Getting package.json info for C:/Projects/nexsoft-admin/package.json...
-[12:07:27.040] [WARN] You are currently using Storybook [1m10.1.4[22m but you have packages which are incompatible with it:
-
-- @storybook/addon-essentials@8.6.14 which depends on 8.6.14
- Repo: https://github.com/storybookjs/storybook/tree/next/code/addons/essentials
-- @storybook/addon-interactions@8.6.14 which depends on 8.6.14
- Repo: https://github.com/storybookjs/storybook/tree/next/code/addons/interactions
-
-Please consider updating your packages or contacting the maintainers for compatibility details.
-
-For more details on compatibility guidance, see:
-https://github.com/storybookjs/storybook/issues/32836
-[12:07:27.647] [INFO] Starting...
-[12:07:27.996] [ERROR] [38;2;241;97;97mSB_CORE-SERVER_0004 (NoMatchingExportError): There was an exports mismatch error when trying to build Storybook.
-Please check whether the versions of your Storybook packages match whenever possible, as this might be the cause.
-
-Problematic example:
-{ "@storybook/react": "7.5.3", "@storybook/react-vite": "7.4.5", "storybook": "7.3.0" }
-
-Correct example:
-{ "@storybook/react": "7.5.3", "@storybook/react-vite": "7.5.3", "storybook": "7.5.3" }
-
-Please run `npx storybook doctor` for guidance on how to fix this issue.
-
-More info: 
-[39m
-    at buildOrThrow (file:///C:/Projects/nexsoft-admin/node_modules/storybook/dist/core-server/index.js:5561:9)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[14:32:43.120] [INFO] storybook v10.1.4
+[14:32:46.119] [DEBUG] Getting package.json info for C:/Projects/nexsoft-admin/package.json...
+[14:32:46.135] [WARN] Could not resolve addon "@storybook/addon-essentials", skipping. Is it installed?
+[14:32:46.142] [WARN] Could not resolve addon "@storybook/addon-interactions", skipping. Is it installed?
+[14:32:46.229] [WARN] Could not resolve addon "@storybook/addon-essentials", skipping. Is it installed?
+[14:32:46.230] [WARN] Could not resolve addon "@storybook/addon-interactions", skipping. Is it installed?
+[14:32:46.697] [INFO] Starting...
+[14:32:47.030] [DEBUG] Starting preview..
+[14:32:48.447] [DEBUG] Using tsconfig paths for react-docgen
+[14:32:48.448] [ERROR] Failed to build the preview
+[14:32:48.450] [ERROR] [38;2;241;97;97mReferenceError: __dirname is not defined[39m
+    at Object.viteFinal (file:///C:/Projects/nexsoft-admin/libs/ui/.storybook/main.ts:23:37)
+    at file:///C:/Projects/nexsoft-admin/node_modules/storybook/dist/_node-chunks/chunk-QZJSO2TW.js:10134:36
+    at async createViteServer (file:///C:/Projects/nexsoft-admin/node_modules/@storybook/builder-vite/dist/index.js:6410:21)
+    at async Module.start (file:///C:/Projects/nexsoft-admin/node_modules/@storybook/builder-vite/dist/index.js:6435:17)
+    at async storybookDevServer (file:///C:/Projects/nexsoft-admin/node_modules/storybook/dist/core-server/index.js:7180:82)
+    at async buildOrThrow (file:///C:/Projects/nexsoft-admin/node_modules/storybook/dist/core-server/index.js:5556:12)
     at async buildDevStandalone (file:///C:/Projects/nexsoft-admin/node_modules/storybook/dist/core-server/index.js:7582:66)
     at async withTelemetry (file:///C:/Projects/nexsoft-admin/node_modules/storybook/dist/_node-chunks/chunk-6KX7N5UF.js:205:12)
     at async dev (file:///C:/Projects/nexsoft-admin/node_modules/storybook/dist/bin/core.js:2734:3)
     at async _Command.<anonymous> (file:///C:/Projects/nexsoft-admin/node_modules/storybook/dist/bin/core.js:2801:92)
-[12:07:27.998] [WARN] Broken build, fix the error above.
+[14:32:48.451] [WARN] Broken build, fix the error above.
 You may need to refresh the browser.
+[14:32:48.454] [WARN] Could not resolve addon "@storybook/addon-essentials", skipping. Is it installed?
+[14:32:48.454] [WARN] Could not resolve addon "@storybook/addon-interactions", skipping. Is it installed?
