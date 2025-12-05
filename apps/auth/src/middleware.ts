@@ -2,10 +2,10 @@
  * For more info see
  * https://nextjs.org/docs/app/building-your-application/routing/internationalization
  * */
-import { type NextRequest, NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server';
 
-import Negotiator from 'negotiator'
-import { localeIds } from "@nexsoft-admin/utils"
+import Negotiator from 'negotiator';
+import { localeIds } from '@nexsoft-admin/utils';
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -30,9 +30,7 @@ function getRequestLocale(requestHeaders: Headers): string {
     headers: { 'accept-language': langHeader }
   }).languages(localeIds.slice())
 
-  const activeLocale = languages[0] || localeIds[0] || 'en'
-
-  return activeLocale
+  return languages[0] || localeIds[0] || 'en'
 }
 
 export const config = {
