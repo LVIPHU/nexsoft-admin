@@ -5,6 +5,8 @@
   "scripts": {
     "dev:auth": "npx nx dev auth --port=3000",
     "dev:social": "npx nx dev social --port=3001",
+    "build:auth": "npx nx build auth",
+    "build:social": "npx nx build social",
     "i18n:extract": "lingui extract",
     "i18n:extract:auth": "lingui extract --config apps/auth/lingui.config.mjs",
     "i18n:extract:social": "lingui extract --config apps/social/lingui.config.mjs",
