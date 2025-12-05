@@ -13,8 +13,8 @@
     "i18n:compile": "lingui compile",
     "i18n:compile:auth": "lingui compile --config apps/auth/lingui.config.mjs",
     "i18n:compile:social": "lingui compile --config apps/social/lingui.config.mjs",
-    "storybook:ui": "nx storybook ui",
-    "build-storybook:ui": "nx build-storybook ui"
+    "storybook:ui": "npx nx storybook ui",
+    "build-storybook:ui": "npx nx build-storybook ui"
   },
   "private": true,
   "author": {

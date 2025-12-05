@@ -48,6 +48,9 @@
   ],
   "references": [
     {
+      "path": "../../libs/ui"
+    },
+    {
       "path": "../../libs/utils"
     }
   ]
