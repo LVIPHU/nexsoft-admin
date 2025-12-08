@@ -40,6 +40,7 @@ function FormRadioGroup<T extends FieldValues>({
     >
       {({ value, onChange, onBlur, error, disabled }) => (
         <RadioGroup
+          id={name}
           value={value as string}
           onValueChange={(val) => onChange(val)}
           onBlur={onBlur}

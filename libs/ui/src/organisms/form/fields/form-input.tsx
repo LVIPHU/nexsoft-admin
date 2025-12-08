@@ -41,6 +41,7 @@ function FormInput<T extends FieldValues>({
     >
       {({ value, onChange, onBlur, error, disabled }) => (
         <Input
+          id={name}
           type={type}
           value={value as string}
           onChange={(e) => onChange(e.target.value)}

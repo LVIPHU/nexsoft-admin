@@ -39,6 +39,7 @@ function FormSwitch<T extends FieldValues>({
       {({ value, onChange, onBlur, error, disabled }) => (
         <div className="flex items-center gap-2">
           <Switch
+            id={name}
             checked={value as boolean}
             onCheckedChange={(checked) => onChange(checked)}
             onBlur={onBlur}

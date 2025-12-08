@@ -33,7 +33,7 @@ function Form<T extends z.ZodType<any, any, any>>({
   children,
   ...formOptions
 }: FormProps<T>) {
-  const form = useForm<z.infer<T> & FieldValues>({
+  const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema) as any,
     defaultValues: defaultValues as any,
     ...formOptions,
@@ -59,7 +59,7 @@ function Form<T extends z.ZodType<any, any, any>>({
 
       // Find changed fields
       const changedFields: FormChangeInfo<z.infer<T>>['changedFields'] = []
-      
+
       const allKeys = new Set([
         ...Object.keys(currentValues || {}),
         ...Object.keys(previousValues || {}),
@@ -115,7 +115,7 @@ function Form<T extends z.ZodType<any, any, any>>({
   // Handle form submit
   const handleSubmit = form.handleSubmit(async (data) => {
     await onSubmit(data as z.infer<T>)
-    
+
     // Reset form after successful submit if enabled
     // If onSubmit throws, this won't execute
     if (resetAfterSubmit) {

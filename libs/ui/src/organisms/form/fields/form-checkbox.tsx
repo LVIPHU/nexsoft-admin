@@ -43,6 +43,7 @@ function FormCheckbox<T extends FieldValues>({
         {({ value, onChange, onBlur, error, disabled }) => (
           <div className="flex items-center gap-2">
             <Checkbox
+              id={name}
               checked={value as boolean}
               onCheckedChange={(checked) => onChange(checked)}
               onBlur={onBlur}
@@ -92,6 +93,7 @@ function FormCheckbox<T extends FieldValues>({
             {options.map((option) => (
               <div key={String(option.value)} className="flex items-center gap-2">
                 <Checkbox
+                  id={name}
                   checked={selectedValues.includes(option.value)}
                   onCheckedChange={(checked) => handleChange(option.value, checked as boolean)}
                   onBlur={onBlur}

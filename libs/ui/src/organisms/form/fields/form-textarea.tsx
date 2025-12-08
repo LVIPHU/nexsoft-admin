@@ -40,6 +40,7 @@ function FormTextarea<T extends FieldValues>({
     >
       {({ value, onChange, onBlur, error, disabled }) => (
         <Textarea
+          id={name}
           value={value as string}
           onChange={(e) => onChange(e.target.value)}
           onBlur={onBlur}
