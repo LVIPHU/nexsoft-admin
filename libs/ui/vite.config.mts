@@ -87,6 +87,7 @@ export default defineConfig(() => ({
         table: 'src/organisms/table/index.ts',
         tabs: 'src/organisms/tabs/index.ts',
         tooltip: 'src/organisms/tooltip/index.ts',
+        form: 'src/organisms/form/index.ts',
       },
       formats: ['es' as const],
     },
@@ -95,7 +96,9 @@ export default defineConfig(() => ({
       external: [
         'react',
         'react-dom',
+        'react-hook-form',
         'react/jsx-runtime',
+        /^@hookform\/resolvers/,
         // Radix UI packages
         /^@radix-ui\/.*/,
         // Heavy dependencies
@@ -107,6 +110,7 @@ export default defineConfig(() => ({
         'react-resizable-panels',
         'sonner',
         'vaul',
+        'zod',
         'input-otp',
         'date-fns',
         'next-themes',
