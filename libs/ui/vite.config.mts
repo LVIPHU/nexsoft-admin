@@ -32,7 +32,7 @@ export default defineConfig(() => ({
       entry: {
         // Main export (backward compatibility)
         index: 'src/index.ts',
-        // Atoms (20 components)
+        // Atoms (22 components)
         alert: 'src/atoms/alert/index.ts',
         'aspect-ratio': 'src/atoms/aspect-ratio/index.ts',
         avatar: 'src/atoms/avatar/index.ts',
@@ -40,6 +40,8 @@ export default defineConfig(() => ({
         button: 'src/atoms/button/index.ts',
         checkbox: 'src/atoms/checkbox/index.ts',
         empty: 'src/atoms/empty/index.ts',
+        flex: 'src/atoms/flex/index.ts',
+        grid: 'src/atoms/grid/index.ts',
         input: 'src/atoms/input/index.ts',
         kbd: 'src/atoms/kbd/index.ts',
         label: 'src/atoms/label/index.ts',
