@@ -16,33 +16,16 @@
     }
   },
   "nx": {
-    "name": "utils",
     "tags": [
       "scope:shared",
       "type:util"
-    ],
-    "targets": {
-      "build": {
-        "executor": "@nx/esbuild:esbuild",
-        "outputs": [
-          "{options.outputPath}"
-        ],
-        "options": {
-          "outputPath": "libs/utils/dist",
-          "main": "libs/utils/src/index.ts",
-          "tsConfig": "libs/utils/tsconfig.lib.json",
-          "format": [
-            "esm"
-          ],
-          "declarationRootDir": "libs/utils/src"
-        }
-      }
-    }
+    ]
   },
   "dependencies": {
     "clsx": "^2.1.1",
     "dayjs": "^1.11.19",
     "tailwind-merge": "^3.4.0",
+    "tslib": "^2.3.0",
     "zod": "^4.1.13"
   }
 }

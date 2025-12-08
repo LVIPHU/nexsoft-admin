@@ -10,9 +10,6 @@
       "path": "./apps/social"
     },
     {
-      "path": "./libs/utils"
-    },
-    {
       "path": "./libs/ui"
     },
     {
@@ -23,6 +20,9 @@
     },
     {
       "path": "./apps/auth"
+    },
+    {
+      "path": "./libs/utils"
     }
   ]
 }
