@@ -272,12 +272,14 @@ export const TwoColumnLayout: Story = {
             toast.success('Form submitted!')
           }}
         >
-          <Grid cols={2} mdCols={2} gap={4}>
-            <FormGenerator
-              schema={complexSchema}
-              fieldConfigs={fieldConfigs}
-            />
-          </Grid>
+          <FormGenerator
+            as={Grid}
+            cols={2}
+            mdCols={2}
+            gap={4}
+            schema={complexSchema}
+            fieldConfigs={fieldConfigs}
+          />
           <div className="mt-6">
             <Button type="submit">Submit</Button>
           </div>

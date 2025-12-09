@@ -1,5 +1,6 @@
 'use client'
 
+import * as React from 'react'
 import { z } from 'zod'
 import type { FieldPath } from 'react-hook-form'
 import { FormInput } from '../fields/form-input'
@@ -11,6 +12,7 @@ import { FormRadioGroup } from '../fields/form-radio-group'
 import { FormSwitch } from '../fields/form-switch'
 import type { FieldConfig } from './field-config'
 import { FieldGroup } from '../../../molecules'
+import { cn } from '@nexsoft-admin/utils'
 
 // Type for Zod string validation checks
 type ZodStringCheck = {
@@ -21,7 +23,8 @@ type FormGeneratorProps<T extends z.ZodType> = {
   schema: T
   fieldConfigs?: FieldConfig[]
   className?: string
-}
+  as?: React.ElementType
+} & Omit<React.ComponentPropsWithoutRef<'div'>, 'className' | 'as'> & Record<string, unknown>
 
 // Helper function to infer field type from Zod schema
 function inferFieldType(
@@ -85,6 +88,8 @@ function FormGenerator<T extends z.ZodType>({
   schema,
   fieldConfigs = [],
   className,
+  as: Component = FieldGroup,
+  ...props
 }: FormGeneratorProps<T>) {
   // Get schema shape if it's an object
   const schemaShape =
@@ -162,9 +167,9 @@ function FormGenerator<T extends z.ZodType>({
   }).filter(Boolean)
 
   return (
-    <FieldGroup className={className}>
+    <Component className={cn(className)} {...props}>
       {fields}
-    </FieldGroup>
+    </Component>
   )
 }
 
