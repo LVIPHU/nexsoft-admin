@@ -1,9 +1,7 @@
 'use client'
 
-import * as React from 'react'
 import { z } from 'zod'
 import type { FieldPath } from 'react-hook-form'
-import { FormGrid } from '../layout/form-grid'
 import { FormInput } from '../fields/form-input'
 import { FormTextarea } from '../fields/form-textarea'
 import { FormSelect } from '../fields/form-select'
@@ -11,7 +9,8 @@ import { FormNativeSelect } from '../fields/form-native-select'
 import { FormCheckbox } from '../fields/form-checkbox'
 import { FormRadioGroup } from '../fields/form-radio-group'
 import { FormSwitch } from '../fields/form-switch'
-import type { FieldConfig, FormLayoutConfig } from './field-config'
+import type { FieldConfig } from './field-config'
+import { FieldGroup } from '../../../molecules'
 
 // Type for Zod string validation checks
 type ZodStringCheck = {
@@ -21,7 +20,7 @@ type ZodStringCheck = {
 type FormGeneratorProps<T extends z.ZodType> = {
   schema: T
   fieldConfigs?: FieldConfig[]
-  layout?: FormLayoutConfig
+  className?: string
 }
 
 // Helper function to infer field type from Zod schema
@@ -85,7 +84,7 @@ function getEnumOptions(schema: z.ZodTypeAny): Array<{ label: string; value: str
 function FormGenerator<T extends z.ZodType>({
   schema,
   fieldConfigs = [],
-  layout,
+  className,
 }: FormGeneratorProps<T>) {
   // Get schema shape if it's an object
   const schemaShape =
@@ -106,11 +105,10 @@ function FormGenerator<T extends z.ZodType>({
       label: customConfig?.label || fieldName,
       description: customConfig?.description,
       placeholder: customConfig?.placeholder,
-      options: customConfig?.options || (fieldType === 'select' || fieldType === 'radio-group' 
-        ? getEnumOptions(fieldSchema as z.ZodTypeAny) 
+      options: customConfig?.options || (fieldType === 'select' || fieldType === 'radio-group'
+        ? getEnumOptions(fieldSchema as z.ZodTypeAny)
         : undefined),
-      orientation: customConfig?.orientation || layout?.defaultOrientation || 'vertical',
-      cols: customConfig?.cols,
+      orientation: customConfig?.orientation || 'vertical',
       disabled: customConfig?.disabled,
       hidden: customConfig?.hidden,
       required: customConfig?.required,
@@ -163,34 +161,10 @@ function FormGenerator<T extends z.ZodType>({
     return renderField()
   }).filter(Boolean)
 
-  // Group fields by cols if needed
-  const fieldsWithCols = fields.map((field, index) => {
-    let fieldName: string | undefined
-    if (React.isValidElement(field) && field.props) {
-      const props = field.props as { name?: string }
-      fieldName = props.name
-    }
-    const fieldConfig = fieldName ? configMap.get(fieldName) : undefined
-    const cols = fieldConfig?.cols || layout?.cols || 1
-
-    return (
-      <div
-        key={fieldName || index}
-        className={cols === 2 ? 'md:col-span-1' : 'col-span-1'}
-      >
-        {field}
-      </div>
-    )
-  })
-
   return (
-    <FormGrid
-      cols={layout?.cols || 1}
-      gapCols={layout?.gapCols}
-      gapRows={layout?.gapRows}
-    >
-      {fieldsWithCols}
-    </FormGrid>
+    <FieldGroup className={className}>
+      {fields}
+    </FieldGroup>
   )
 }
 

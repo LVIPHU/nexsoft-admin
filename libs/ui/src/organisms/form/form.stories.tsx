@@ -11,11 +11,11 @@ import {
   FormTextarea,
   FormSelect,
   FormSwitch,
-  FormGrid,
   FormGroup,
   type FieldConfig,
 } from './index'
 import { Button } from '../../atoms/button/button'
+import { Grid } from '../../atoms/grid/grid'
 
 const meta: Meta<typeof Form> = {
   title: 'Organisms/Form',
@@ -84,11 +84,12 @@ export const BasicForm: Story = {
             toast.success(`Signed in as: ${data.identifier}`)
           }}
         >
-          <FormGenerator
-            schema={signInSchema}
-            fieldConfigs={fieldConfigs}
-            layout={{ cols: 1, gapRows: 'gap-4' }}
-          />
+          <Grid cols={1} gap={4}>
+            <FormGenerator
+              schema={signInSchema}
+              fieldConfigs={fieldConfigs}
+            />
+          </Grid>
           <div className="mt-6">
             <Button type="submit">Sign In</Button>
           </div>
@@ -128,11 +129,12 @@ export const WithResetAfterSubmit: Story = {
             toast.success('Form submitted and reset!')
           }}
         >
-          <FormGenerator
-            schema={signInSchema}
-            fieldConfigs={fieldConfigs}
-            layout={{ cols: 1, gapRows: 'gap-4' }}
-          />
+          <Grid cols={1} gap={4}>
+            <FormGenerator
+              schema={signInSchema}
+              fieldConfigs={fieldConfigs}
+            />
+          </Grid>
           <div className="mt-6">
             <Button type="submit">Submit & Reset</Button>
           </div>
@@ -175,11 +177,12 @@ const WithFormChangeTrackingComponent = () => {
           toast.success('Form submitted successfully!')
         }}
       >
-        <FormGenerator
-          schema={signInSchema}
-          fieldConfigs={fieldConfigs}
-          layout={{ cols: 1, gapRows: 'gap-4' }}
-        />
+        <Grid cols={1} gap={4}>
+          <FormGenerator
+            schema={signInSchema}
+            fieldConfigs={fieldConfigs}
+          />
+        </Grid>
         <div className="mt-6">
           <Button type="submit">Submit</Button>
         </div>
@@ -208,31 +211,26 @@ export const TwoColumnLayout: Story = {
       {
         name: 'firstName',
         label: 'First Name',
-        cols: 1,
         orientation: 'vertical',
       },
       {
         name: 'lastName',
         label: 'Last Name',
-        cols: 1,
         orientation: 'vertical',
       },
       {
         name: 'email',
         label: 'Email',
-        cols: 2,
         orientation: 'vertical',
       },
       {
         name: 'phone',
         label: 'Phone',
-        cols: 1,
         orientation: 'vertical',
       },
       {
         name: 'country',
         label: 'Country',
-        cols: 1,
         orientation: 'vertical',
         options: [
           { label: 'United States', value: 'us' },
@@ -245,14 +243,12 @@ export const TwoColumnLayout: Story = {
         name: 'message',
         label: 'Message',
         type: 'textarea',
-        cols: 2,
         orientation: 'vertical',
       },
       {
         name: 'terms',
         label: 'I accept the terms and conditions',
         type: 'switch',
-        cols: 2,
         orientation: 'horizontal',
       },
     ]
@@ -276,11 +272,12 @@ export const TwoColumnLayout: Story = {
             toast.success('Form submitted!')
           }}
         >
-          <FormGenerator
-            schema={complexSchema}
-            fieldConfigs={fieldConfigs}
-            layout={{ cols: 2, gapCols: 'gap-x-4', gapRows: 'gap-y-4' }}
-          />
+          <Grid cols={2} mdCols={2} gap={4}>
+            <FormGenerator
+              schema={complexSchema}
+              fieldConfigs={fieldConfigs}
+            />
+          </Grid>
           <div className="mt-6">
             <Button type="submit">Submit</Button>
           </div>
@@ -309,7 +306,7 @@ export const ManualFormFields: Story = {
             toast.success('Profile updated!')
           }}
         >
-          <FormGrid cols={1} gapRows="gap-4">
+          <Grid cols={1} gap={4}>
             <FormInput
               name="name"
               config={{
@@ -367,7 +364,7 @@ export const ManualFormFields: Story = {
                 orientation: 'horizontal',
               }}
             />
-          </FormGrid>
+          </Grid>
           <div className="mt-6">
             <Button type="submit">Update Profile</Button>
           </div>
@@ -441,7 +438,7 @@ export const WithFormGroups: Story = {
         >
           <FormGroup legend="Personal Information">
             <p className="text-sm text-muted-foreground mb-4">Update your personal details.</p>
-            <FormGrid cols={1} gapRows="gap-4">
+            <Grid cols={1} gap={4}>
               <FormInput
                 name="name"
                 config={fieldConfigs.find((f) => f.name === 'name')}
@@ -455,12 +452,12 @@ export const WithFormGroups: Story = {
                 name="bio"
                 config={fieldConfigs.find((f) => f.name === 'bio')}
               />
-            </FormGrid>
+            </Grid>
           </FormGroup>
 
           <FormGroup legend="Account Settings">
             <p className="text-sm text-muted-foreground mb-4">Manage your account preferences.</p>
-            <FormGrid cols={1} gapRows="gap-4">
+            <Grid cols={1} gap={4}>
               <FormSelect
                 name="role"
                 config={fieldConfigs.find((f) => f.name === 'role')}
@@ -473,7 +470,7 @@ export const WithFormGroups: Story = {
                 name="active"
                 config={fieldConfigs.find((f) => f.name === 'active')}
               />
-            </FormGrid>
+            </Grid>
           </FormGroup>
 
           <div className="mt-6">

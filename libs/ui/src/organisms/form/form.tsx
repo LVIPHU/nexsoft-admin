@@ -5,13 +5,12 @@ import { useForm, FormProvider, type UseFormProps, type FieldValues } from 'reac
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { z } from 'zod'
 import { cn } from '@nexsoft-admin/utils'
-import type { FormChangeInfo, FormLayoutConfig, FieldConfig } from './generator/field-config'
+import type { FormChangeInfo, FieldConfig } from './generator/field-config'
 
 type FormProps<T extends z.ZodType<any, any, any>> = {
   schema: T
   defaultValues?: Partial<z.infer<T>>
   fieldConfigs?: FieldConfig[]
-  layout?: FormLayoutConfig
   onSubmit: (data: z.infer<T>) => void | Promise<void>
   resetAfterSubmit?: boolean
   onFormChange?: (changeInfo: FormChangeInfo<z.infer<T>>) => void
@@ -24,7 +23,6 @@ function Form<T extends z.ZodType<any, any, any>>({
   schema,
   defaultValues,
   fieldConfigs,
-  layout,
   onSubmit,
   resetAfterSubmit = false,
   onFormChange,

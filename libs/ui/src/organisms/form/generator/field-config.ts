@@ -33,19 +33,11 @@ export type FieldConfig = {
   placeholder?: string
   options?: FieldOption[]
   orientation?: FieldOrientation
-  cols?: 1 | 2
   disabled?: boolean
   hidden?: boolean
   required?: boolean
   className?: string
   render?: (field: ControllerRenderProps) => ReactNode
-}
-
-export type FormLayoutConfig = {
-  cols?: 1 | 2
-  gapCols?: string // Tailwind gap class (e.g., 'gap-4', 'gap-x-6')
-  gapRows?: string // Tailwind gap class (e.g., 'gap-4', 'gap-y-6')
-  defaultOrientation?: FieldOrientation
 }
 
 export type FormChangeInfo<T> = {

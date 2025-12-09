@@ -31,9 +31,6 @@ export { FormSwitch } from './fields/form-switch'
 export type { FormSwitchProps } from './fields/form-switch'
 
 // Layout components
-export { FormGrid } from './layout/form-grid'
-export type { FormGridProps } from './layout/form-grid'
-
 export { FormGroup } from './layout/form-group'
 export type { FormGroupProps } from './layout/form-group'
 
@@ -47,7 +44,6 @@ export type {
   FieldOrientation,
   FieldOption,
   FieldConfig,
-  FormLayoutConfig,
   FormChangeInfo,
 } from './generator/field-config'
 
