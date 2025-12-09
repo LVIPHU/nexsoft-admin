@@ -115,6 +115,7 @@ export default defineConfig(() => ({
         'zod',
         'input-otp',
         'date-fns',
+        'motion',
         'next-themes',
         // Utility packages (should be externalized)
         'class-variance-authority',

@@ -1,15 +1,19 @@
 import * as React from "react"
 import { cn } from "@nexsoft-admin/utils"
 
+export type GridTemplateCols = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+export type Gap = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16
+
+
 export type GridProps = {
   children: React.ReactNode
   className?: string
-  cols?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
-  mdCols?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
-  lgCols?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
-  gap?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16
-  rowGap?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16
-  colGap?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16
+  cols?: GridTemplateCols
+  mdCols?: GridTemplateCols
+  lgCols?: GridTemplateCols
+  gap?: Gap
+  rowGap?: Gap
+  colGap?: Gap
   flow?: "row" | "col" | "dense" | "row-dense" | "col-dense"
   rows?: number
   autoRows?: "auto" | "min" | "max" | "fr"
