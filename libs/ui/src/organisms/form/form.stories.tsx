@@ -84,9 +84,7 @@ export const BasicForm: Story = {
             toast.success(`Signed in as: ${data.identifier}`);
           }}
         >
-          <Grid cols={1} gap={4}>
-            <FormGenerator schema={signInSchema} fieldConfigs={fieldConfigs} />
-          </Grid>
+          <FormGenerator schema={signInSchema} fieldConfigs={fieldConfigs} />
           <div className='mt-6'>
             <Button type='submit'>Sign In</Button>
           </div>
@@ -126,9 +124,7 @@ export const WithResetAfterSubmit: Story = {
             toast.success('Form submitted and reset!');
           }}
         >
-          <Grid cols={1} gap={4}>
-            <FormGenerator schema={signInSchema} fieldConfigs={fieldConfigs} />
-          </Grid>
+          <FormGenerator schema={signInSchema} fieldConfigs={fieldConfigs} />
           <div className='mt-6'>
             <Button type='submit'>Submit & Reset</Button>
           </div>
@@ -171,9 +167,7 @@ const WithFormChangeTrackingComponent = () => {
           toast.success('Form submitted successfully!');
         }}
       >
-        <Grid cols={1} gap={4}>
-          <FormGenerator schema={signInSchema} fieldConfigs={fieldConfigs} />
-        </Grid>
+        <FormGenerator schema={signInSchema} fieldConfigs={fieldConfigs} />
         <div className='mt-6'>
           <Button type='submit'>Submit</Button>
         </div>
