@@ -32,6 +32,9 @@
     },
     {
       "path": "./apps/energy"
+    },
+    {
+      "path": "./libs/sso"
     }
   ]
 }
