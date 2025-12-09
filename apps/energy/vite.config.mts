@@ -1,18 +1,18 @@
 /// <reference types='vitest' />
 import { defineConfig } from 'vite';
-import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { lingui } from '@lingui/vite-plugin';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
-  cacheDir: '../../node_modules/.vite/apps/social',
+  cacheDir: '../../node_modules/.vite/apps/energy',
   server: {
-    port: 3001,
+    port: 3002,
     host: 'localhost',
   },
   preview: {
-    port: 3001,
+    port: 3002,
     host: 'localhost',
   },
   plugins: [
@@ -37,7 +37,7 @@ export default defineConfig(() => ({
     },
   },
   test: {
-    name: '@nexsoft-admin/social',
+    name: '@nexsoft-admin/energy',
     watch: false,
     globals: true,
     environment: 'jsdom',

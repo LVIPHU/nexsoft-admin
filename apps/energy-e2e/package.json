@@ -1,0 +1,10 @@
+{
+  "name": "@nexsoft-admin/energy-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@nexsoft-admin/energy"
+    ]
+  }
+}

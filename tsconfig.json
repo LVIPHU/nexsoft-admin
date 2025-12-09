@@ -26,6 +26,12 @@
     },
     {
       "path": "./libs/models"
+    },
+    {
+      "path": "./apps/energy-e2e"
+    },
+    {
+      "path": "./apps/energy"
     }
   ]
 }
