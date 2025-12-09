@@ -18,10 +18,10 @@ export const Horizontal: Story = {
     orientation: 'horizontal',
   },
   render: (args) => (
-    <div className="w-64">
-      <div className="mb-4">Content above</div>
+    <div className='w-64'>
+      <div className='mb-4'>Content above</div>
       <Separator {...args} />
-      <div className="mt-4">Content below</div>
+      <div className='mt-4'>Content below</div>
     </div>
   ),
 };
@@ -31,11 +31,10 @@ export const Vertical: Story = {
     orientation: 'vertical',
   },
   render: (args) => (
-    <div className="flex h-32 items-center">
-      <div className="mr-4">Left</div>
+    <div className='flex h-32 items-center'>
+      <div className='mr-4'>Left</div>
       <Separator {...args} />
-      <div className="ml-4">Right</div>
+      <div className='ml-4'>Right</div>
     </div>
   ),
 };
-

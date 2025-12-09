@@ -1,21 +1,18 @@
-'use client'
+'use client';
 
-import { useFormContext, type FieldPath, type FieldValues } from 'react-hook-form'
-import {
-  NativeSelect,
-  NativeSelectOption,
-} from '../../../atoms/native-select/native-select'
-import { FormField } from '../form-field'
-import { FormFieldSkeleton } from '../form-field-skeleton'
-import type { FieldConfig, FieldOption } from '../generator/field-config'
+import { useFormContext, type FieldPath, type FieldValues } from 'react-hook-form';
+import { NativeSelect, NativeSelectOption } from '../../../atoms/native-select/native-select';
+import { FormField } from '../form-field';
+import { FormFieldSkeleton } from '../form-field-skeleton';
+import type { FieldConfig, FieldOption } from '../generator/field-config';
 
 type FormNativeSelectProps<T extends FieldValues> = {
-  name: FieldPath<T>
-  config?: FieldConfig
-  loading?: boolean
-  className?: string
-  options?: FieldOption[]
-}
+  name: FieldPath<T>;
+  config?: FieldConfig;
+  loading?: boolean;
+  className?: string;
+  options?: FieldOption[];
+};
 
 function FormNativeSelect<T extends FieldValues>({
   name,
@@ -24,10 +21,10 @@ function FormNativeSelect<T extends FieldValues>({
   className,
   options = config?.options || [],
 }: FormNativeSelectProps<T>) {
-  const { control } = useFormContext<T>()
+  const { control } = useFormContext<T>();
 
   if (loading) {
-    return <FormFieldSkeleton type="native-select" orientation={config?.orientation} />
+    return <FormFieldSkeleton type='native-select' orientation={config?.orientation} />;
   }
 
   return (
@@ -52,25 +49,20 @@ function FormNativeSelect<T extends FieldValues>({
           className={className}
         >
           {config?.placeholder && (
-            <NativeSelectOption value="" disabled>
+            <NativeSelectOption value='' disabled>
               {config.placeholder}
             </NativeSelectOption>
           )}
           {options.map((option) => (
-            <NativeSelectOption
-              key={String(option.value)}
-              value={String(option.value)}
-              disabled={option.disabled}
-            >
+            <NativeSelectOption key={String(option.value)} value={String(option.value)} disabled={option.disabled}>
               {option.label}
             </NativeSelectOption>
           ))}
         </NativeSelect>
       )}
     </FormField>
-  )
+  );
 }
 
-export { FormNativeSelect }
-export type { FormNativeSelectProps }
-
+export { FormNativeSelect };
+export type { FormNativeSelectProps };

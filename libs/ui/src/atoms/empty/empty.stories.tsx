@@ -17,11 +17,10 @@ export const Default: Story = {
   render: () => (
     <Empty>
       <EmptyHeader>
-        <EmptyMedia variant="icon">📦</EmptyMedia>
+        <EmptyMedia variant='icon'>📦</EmptyMedia>
         <EmptyTitle>No items found</EmptyTitle>
         <EmptyDescription>Try adjusting your search or filters.</EmptyDescription>
       </EmptyHeader>
     </Empty>
   ),
 };
-

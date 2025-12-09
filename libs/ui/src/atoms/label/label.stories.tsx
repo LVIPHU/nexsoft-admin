@@ -21,15 +21,9 @@ export const Default: Story = {
 
 export const WithInput: Story = {
   render: () => (
-    <div className="space-y-2">
-      <Label htmlFor="email">Email</Label>
-      <input
-        id="email"
-        type="email"
-        placeholder="Enter your email"
-        className="h-9 w-64 rounded-md border px-3"
-      />
+    <div className='space-y-2'>
+      <Label htmlFor='email'>Email</Label>
+      <input id='email' type='email' placeholder='Enter your email' className='h-9 w-64 rounded-md border px-3' />
     </div>
   ),
 };
-

@@ -1,28 +1,23 @@
-'use client'
+'use client';
 
-import { useFormContext, type FieldPath, type FieldValues } from 'react-hook-form'
-import { Switch } from '../../../atoms/switch/switch'
-import { FormField } from '../form-field'
-import { FormFieldSkeleton } from '../form-field-skeleton'
-import type { FieldConfig } from '../generator/field-config'
+import { useFormContext, type FieldPath, type FieldValues } from 'react-hook-form';
+import { Switch } from '../../../atoms/switch/switch';
+import { FormField } from '../form-field';
+import { FormFieldSkeleton } from '../form-field-skeleton';
+import type { FieldConfig } from '../generator/field-config';
 
 type FormSwitchProps<T extends FieldValues> = {
-  name: FieldPath<T>
-  config?: FieldConfig
-  loading?: boolean
-  className?: string
-}
+  name: FieldPath<T>;
+  config?: FieldConfig;
+  loading?: boolean;
+  className?: string;
+};
 
-function FormSwitch<T extends FieldValues>({
-  name,
-  config,
-  loading = false,
-  className,
-}: FormSwitchProps<T>) {
-  const { control } = useFormContext<T>()
+function FormSwitch<T extends FieldValues>({ name, config, loading = false, className }: FormSwitchProps<T>) {
+  const { control } = useFormContext<T>();
 
   if (loading) {
-    return <FormFieldSkeleton type="switch" orientation={config?.orientation} />
+    return <FormFieldSkeleton type='switch' orientation={config?.orientation} />;
   }
 
   return (
@@ -37,7 +32,7 @@ function FormSwitch<T extends FieldValues>({
       className={className}
     >
       {({ value, onChange, onBlur, error, disabled }) => (
-        <div className="flex items-center gap-2">
+        <div className='flex items-center gap-2'>
           <Switch
             id={name}
             checked={value as boolean}
@@ -50,7 +45,7 @@ function FormSwitch<T extends FieldValues>({
           {config?.label && (
             <label
               htmlFor={name}
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              className='text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
             >
               {config.label}
             </label>
@@ -58,9 +53,8 @@ function FormSwitch<T extends FieldValues>({
         </div>
       )}
     </FormField>
-  )
+  );
 }
 
-export { FormSwitch }
-export type { FormSwitchProps }
-
+export { FormSwitch };
+export type { FormSwitchProps };

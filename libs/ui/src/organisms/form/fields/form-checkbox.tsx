@@ -1,18 +1,18 @@
-'use client'
+'use client';
 
-import { useFormContext, type FieldPath, type FieldValues } from 'react-hook-form'
-import { Checkbox } from '../../../atoms/checkbox/checkbox'
-import { FormField } from '../form-field'
-import { FormFieldSkeleton } from '../form-field-skeleton'
-import type { FieldConfig, FieldOption } from '../generator/field-config'
+import { useFormContext, type FieldPath, type FieldValues } from 'react-hook-form';
+import { Checkbox } from '../../../atoms/checkbox/checkbox';
+import { FormField } from '../form-field';
+import { FormFieldSkeleton } from '../form-field-skeleton';
+import type { FieldConfig, FieldOption } from '../generator/field-config';
 
 type FormCheckboxProps<T extends FieldValues> = {
-  name: FieldPath<T>
-  config?: FieldConfig
-  loading?: boolean
-  className?: string
-  options?: FieldOption[] // For checkbox group
-}
+  name: FieldPath<T>;
+  config?: FieldConfig;
+  loading?: boolean;
+  className?: string;
+  options?: FieldOption[]; // For checkbox group
+};
 
 function FormCheckbox<T extends FieldValues>({
   name,
@@ -21,10 +21,10 @@ function FormCheckbox<T extends FieldValues>({
   className,
   options,
 }: FormCheckboxProps<T>) {
-  const { control } = useFormContext<T>()
+  const { control } = useFormContext<T>();
 
   if (loading) {
-    return <FormFieldSkeleton type="checkbox" orientation={config?.orientation} />
+    return <FormFieldSkeleton type='checkbox' orientation={config?.orientation} />;
   }
 
   // Single checkbox
@@ -41,7 +41,7 @@ function FormCheckbox<T extends FieldValues>({
         className={className}
       >
         {({ value, onChange, onBlur, error, disabled }) => (
-          <div className="flex items-center gap-2">
+          <div className='flex items-center gap-2'>
             <Checkbox
               id={name}
               checked={value as boolean}
@@ -54,7 +54,7 @@ function FormCheckbox<T extends FieldValues>({
             {config?.label && (
               <label
                 htmlFor={name}
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className='text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
               >
                 {config.label}
               </label>
@@ -62,7 +62,7 @@ function FormCheckbox<T extends FieldValues>({
           </div>
         )}
       </FormField>
-    )
+    );
   }
 
   // Checkbox group
@@ -78,20 +78,20 @@ function FormCheckbox<T extends FieldValues>({
       className={className}
     >
       {({ value, onChange, onBlur, error, disabled }) => {
-        const selectedValues = (value as (string | number | boolean)[]) || []
+        const selectedValues = (value as (string | number | boolean)[]) || [];
 
         const handleChange = (optionValue: string | number | boolean, checked: boolean) => {
           if (checked) {
-            onChange([...selectedValues, optionValue])
+            onChange([...selectedValues, optionValue]);
           } else {
-            onChange(selectedValues.filter((v) => v !== optionValue))
+            onChange(selectedValues.filter((v) => v !== optionValue));
           }
-        }
+        };
 
         return (
-          <div className="flex flex-col gap-2">
+          <div className='flex flex-col gap-2'>
             {options.map((option) => (
-              <div key={String(option.value)} className="flex items-center gap-2">
+              <div key={String(option.value)} className='flex items-center gap-2'>
                 <Checkbox
                   id={name}
                   checked={selectedValues.includes(option.value)}
@@ -100,18 +100,17 @@ function FormCheckbox<T extends FieldValues>({
                   disabled={disabled || option.disabled}
                   aria-invalid={error ? 'true' : 'false'}
                 />
-                <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                <label className='text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70'>
                   {option.label}
                 </label>
               </div>
             ))}
           </div>
-        )
+        );
       }}
     </FormField>
-  )
+  );
 }
 
-export { FormCheckbox }
-export type { FormCheckboxProps }
-
+export { FormCheckbox };
+export type { FormCheckboxProps };

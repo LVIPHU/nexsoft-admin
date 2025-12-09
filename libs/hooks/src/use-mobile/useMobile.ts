@@ -1,10 +1,10 @@
-import { useMediaQuery } from '../use-media-query'
+import { useMediaQuery } from '../use-media-query';
 
-const MOBILE_BREAKPOINT = 768
+const MOBILE_BREAKPOINT = 768;
 
 export function useIsMobile() {
   return useMediaQuery(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`, {
     defaultValue: false,
     initializeWithValue: false,
-  })
+  });
 }

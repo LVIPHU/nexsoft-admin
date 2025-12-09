@@ -30,10 +30,9 @@ export const Default: Story = {
 
 export const Destructive: Story = {
   render: () => (
-    <Alert variant="destructive">
+    <Alert variant='destructive'>
       <AlertTitle>Error</AlertTitle>
       <AlertDescription>Something went wrong.</AlertDescription>
     </Alert>
   ),
 };
-

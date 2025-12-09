@@ -45,4 +45,3 @@ export const Outline: Story = {
     children: 'Outline',
   },
 };
-

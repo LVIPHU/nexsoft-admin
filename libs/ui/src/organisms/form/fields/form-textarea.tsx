@@ -1,18 +1,18 @@
-'use client'
+'use client';
 
-import * as React from 'react'
-import { useFormContext, type FieldPath, type FieldValues } from 'react-hook-form'
-import { Textarea } from '../../../atoms/textarea/textarea'
-import { FormField } from '../form-field'
-import { FormFieldSkeleton } from '../form-field-skeleton'
-import type { FieldConfig } from '../generator/field-config'
+import * as React from 'react';
+import { useFormContext, type FieldPath, type FieldValues } from 'react-hook-form';
+import { Textarea } from '../../../atoms/textarea/textarea';
+import { FormField } from '../form-field';
+import { FormFieldSkeleton } from '../form-field-skeleton';
+import type { FieldConfig } from '../generator/field-config';
 
 type FormTextareaProps<T extends FieldValues> = {
-  name: FieldPath<T>
-  config?: FieldConfig
-  loading?: boolean
-  className?: string
-} & Omit<React.ComponentProps<typeof Textarea>, 'value' | 'onChange' | 'onBlur' | 'name'>
+  name: FieldPath<T>;
+  config?: FieldConfig;
+  loading?: boolean;
+  className?: string;
+} & Omit<React.ComponentProps<typeof Textarea>, 'value' | 'onChange' | 'onBlur' | 'name'>;
 
 function FormTextarea<T extends FieldValues>({
   name,
@@ -21,10 +21,10 @@ function FormTextarea<T extends FieldValues>({
   className,
   ...textareaProps
 }: FormTextareaProps<T>) {
-  const { control } = useFormContext<T>()
+  const { control } = useFormContext<T>();
 
   if (loading) {
-    return <FormFieldSkeleton type="textarea" orientation={config?.orientation} />
+    return <FormFieldSkeleton type='textarea' orientation={config?.orientation} />;
   }
 
   return (
@@ -52,9 +52,8 @@ function FormTextarea<T extends FieldValues>({
         />
       )}
     </FormField>
-  )
+  );
 }
 
-export { FormTextarea }
-export type { FormTextareaProps }
-
+export { FormTextarea };
+export type { FormTextareaProps };

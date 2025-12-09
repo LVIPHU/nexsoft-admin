@@ -45,4 +45,3 @@ export const Default: Story = {
     </AlertDialog>
   ),
 };
-

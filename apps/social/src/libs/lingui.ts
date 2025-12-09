@@ -1,9 +1,9 @@
-import { i18n } from '@lingui/core'
-import dayjs from 'dayjs'
+import { i18n } from '@lingui/core';
+import dayjs from 'dayjs';
 
-import { defaultLanguage } from '@nexsoft-admin/utils'
+import { defaultLanguage } from '@nexsoft-admin/utils';
 
-import { dayjsLocales } from './dayjs'
+import { dayjsLocales } from './dayjs';
 
 /**
  * Load messages for requested locale and activate it.
@@ -12,19 +12,19 @@ import { dayjsLocales } from './dayjs'
  */
 export async function dynamicActivate(locale: string) {
   try {
-    const { messages } = await import(`../../locales/${locale}/messages.po`)
+    const { messages } = await import(`../../locales/${locale}/messages.po`);
 
     if (messages) {
-      i18n.loadAndActivate({ locale, messages })
+      i18n.loadAndActivate({ locale, messages });
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (dayjsLocales[locale]) {
-      dayjs.locale(await dayjsLocales[locale]())
+      dayjs.locale(await dayjsLocales[locale]());
     }
   } catch (error) {
-    console.error(`Failed to load messages for locale: ${locale}`, error)
-    throw new Error(`Failed to load messages for locale: ${locale}`)
+    console.error(`Failed to load messages for locale: ${locale}`, error);
+    throw new Error(`Failed to load messages for locale: ${locale}`);
   }
 }
 
@@ -33,5 +33,5 @@ export async function dynamicActivate(locale: string) {
  * This should be called before rendering the app to prevent I18nProvider warnings
  */
 export async function initializeLingui() {
-  await dynamicActivate(defaultLanguage)
+  await dynamicActivate(defaultLanguage);
 }

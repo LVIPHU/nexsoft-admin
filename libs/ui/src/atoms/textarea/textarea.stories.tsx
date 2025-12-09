@@ -24,4 +24,3 @@ export const WithValue: Story = {
     defaultValue: 'This is a textarea with some content.',
   },
 };
-

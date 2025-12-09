@@ -1,9 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from './input-otp'
+import type { Meta, StoryObj } from '@storybook/react';
+import { InputOTP, InputOTPGroup, InputOTPSlot } from './input-otp';
 
 const meta: Meta<typeof InputOTP> = {
   title: 'Organisms/InputOTP',
@@ -12,10 +8,10 @@ const meta: Meta<typeof InputOTP> = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-}
+};
 
-export default meta
-type Story = StoryObj<typeof InputOTP>
+export default meta;
+type Story = StoryObj<typeof InputOTP>;
 
 export const Default: Story = {
   render: () => (
@@ -30,5 +26,4 @@ export const Default: Story = {
       </InputOTPGroup>
     </InputOTP>
   ),
-}
-
+};

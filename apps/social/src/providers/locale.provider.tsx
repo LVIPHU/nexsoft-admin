@@ -1,14 +1,14 @@
-import '@/packages/libs/dayjs'
+import '@/packages/libs/dayjs';
 
-import { i18n } from '@lingui/core'
-import { I18nProvider } from '@lingui/react'
-import { useEffect } from 'react'
+import { i18n } from '@lingui/core';
+import { I18nProvider } from '@lingui/react';
+import { useEffect } from 'react';
 
 import { LanguageId } from '@nexsoft-admin/utils';
 
 type Props = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 export const LocaleProvider = ({ children }: Props) => {
   // const userLocale = useAuthStore(
@@ -36,32 +36,32 @@ export const LocaleProvider = ({ children }: Props) => {
         // await dynamicActivate(localeToActivate)
         // await configureZodLocale(localeToActivate)
       } catch (error) {
-        console.error('Failed to activate locale:', error)
+        console.error('Failed to activate locale:', error);
         // Fallback to default locale
         try {
           // await dynamicActivate(defaultLanguage)
           // await configureZodLocale(defaultLanguage)
         } catch (fallbackError) {
-          console.error('Failed to activate default locale:', fallbackError)
+          console.error('Failed to activate default locale:', fallbackError);
         }
       }
     }
 
-    void activateLocale()
-  }, [])
+    void activateLocale();
+  }, []);
 
   // i18n is already initialized in main.tsx, so I18nProvider can render immediately
-  return <I18nProvider i18n={i18n}>{children}</I18nProvider>
-}
+  return <I18nProvider i18n={i18n}>{children}</I18nProvider>;
+};
 
 export const changeLanguage = (locale: LanguageId) => {
   // Update locale in local storage
-  window.localStorage.setItem('locale', locale)
+  window.localStorage.setItem('locale', locale);
 
   // Update locale in user profile, if authenticated
   // const state = useAuthStore.getState()
   // if (state.profile) state.setProfile({ ...state.profile, locale })
 
   // Reload the page for language switch to take effect
-  window.location.reload()
-}
+  window.location.reload();
+};

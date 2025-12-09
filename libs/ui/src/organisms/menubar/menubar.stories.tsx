@@ -1,11 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarTrigger,
-} from './menubar'
+import type { Meta, StoryObj } from '@storybook/react';
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from './menubar';
 
 const meta: Meta<typeof Menubar> = {
   title: 'Organisms/Menubar',
@@ -14,10 +8,10 @@ const meta: Meta<typeof Menubar> = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-}
+};
 
-export default meta
-type Story = StoryObj<typeof Menubar>
+export default meta;
+type Story = StoryObj<typeof Menubar>;
 
 export const Default: Story = {
   render: () => (
@@ -31,5 +25,4 @@ export const Default: Story = {
       </MenubarMenu>
     </Menubar>
   ),
-}
-
+};

@@ -9,7 +9,6 @@ export {
   FieldSet,
   FieldContent,
   FieldTitle,
-} from './field'
-export type { VariantProps } from 'class-variance-authority'
-export { fieldVariants } from './field.variants'
-
+} from './field';
+export type { VariantProps } from 'class-variance-authority';
+export { fieldVariants } from './field.variants';

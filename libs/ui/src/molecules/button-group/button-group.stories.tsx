@@ -26,7 +26,7 @@ export const Horizontal: Story = {
 
 export const Vertical: Story = {
   render: () => (
-    <ButtonGroup orientation="vertical">
+    <ButtonGroup orientation='vertical'>
       <Button>First</Button>
       <Button>Second</Button>
       <Button>Third</Button>
@@ -43,4 +43,3 @@ export const WithSeparator: Story = {
     </ButtonGroup>
   ),
 };
-

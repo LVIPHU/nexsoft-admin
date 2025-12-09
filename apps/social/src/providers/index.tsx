@@ -7,4 +7,4 @@ export const Providers = () => (
     <Outlet />
     <Toaster />
   </LocaleProvider>
-)
+);

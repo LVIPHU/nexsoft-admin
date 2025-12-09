@@ -18,11 +18,9 @@ export const Default: Story = {
     ratio: 16 / 9,
   },
   render: (args) => (
-    <div className="w-96">
+    <div className='w-96'>
       <AspectRatio {...args}>
-        <div className="flex h-full w-full items-center justify-center bg-muted">
-          16:9
-        </div>
+        <div className='bg-muted flex h-full w-full items-center justify-center'>16:9</div>
       </AspectRatio>
     </div>
   ),
@@ -33,13 +31,10 @@ export const Square: Story = {
     ratio: 1,
   },
   render: (args) => (
-    <div className="w-64">
+    <div className='w-64'>
       <AspectRatio {...args}>
-        <div className="flex h-full w-full items-center justify-center bg-muted">
-          1:1
-        </div>
+        <div className='bg-muted flex h-full w-full items-center justify-center'>1:1</div>
       </AspectRatio>
     </div>
   ),
 };
-

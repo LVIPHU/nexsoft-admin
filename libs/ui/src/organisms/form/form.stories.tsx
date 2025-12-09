@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import * as React from 'react'
-import type { Meta, StoryObj } from '@storybook/react'
-import { z } from 'zod'
-import { toast } from 'sonner'
+import * as React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { z } from 'zod';
+import { toast } from 'sonner';
 import {
   Form,
   FormGenerator,
@@ -13,9 +13,9 @@ import {
   FormSwitch,
   FormGroup,
   type FieldConfig,
-} from './index'
-import { Button } from '../../atoms/button/button'
-import { Grid } from '../../atoms/grid/grid'
+} from './index';
+import { Button } from '../../atoms/button/button';
+import { Grid } from '../../atoms/grid/grid';
 
 const meta: Meta<typeof Form> = {
   title: 'Organisms/Form',
@@ -24,16 +24,16 @@ const meta: Meta<typeof Form> = {
     layout: 'padded',
   },
   tags: ['autodocs'],
-}
+};
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 // Basic sign-in schema
 const signInSchema = z.object({
   identifier: z.string().min(3, 'Username must be at least 3 characters'),
   password: z.string().min(8, 'Password must be at least 8 characters'),
-})
+});
 
 // User profile schema
 const userProfileSchema = z.object({
@@ -43,7 +43,7 @@ const userProfileSchema = z.object({
   role: z.enum(['admin', 'user', 'guest']),
   newsletter: z.boolean().default(false),
   active: z.boolean().default(true),
-})
+});
 
 // Complex form schema
 const complexSchema = z.object({
@@ -54,7 +54,7 @@ const complexSchema = z.object({
   message: z.string().min(10, 'Message must be at least 10 characters'),
   country: z.enum(['us', 'uk', 'ca', 'au']),
   terms: z.boolean().refine((val) => val === true, 'You must accept the terms'),
-})
+});
 
 export const BasicForm: Story = {
   render: () => {
@@ -71,33 +71,30 @@ export const BasicForm: Story = {
         type: 'password',
         orientation: 'vertical',
       },
-    ]
+    ];
 
     return (
-      <div className="max-w-md mx-auto p-4">
+      <div className='mx-auto max-w-md p-4'>
         <Form
           schema={signInSchema}
           defaultValues={{ identifier: '', password: '' }}
           fieldConfigs={fieldConfigs}
           onSubmit={(data) => {
-            console.log('Form submitted:', data)
-            toast.success(`Signed in as: ${data.identifier}`)
+            console.log('Form submitted:', data);
+            toast.success(`Signed in as: ${data.identifier}`);
           }}
         >
           <Grid cols={1} gap={4}>
-            <FormGenerator
-              schema={signInSchema}
-              fieldConfigs={fieldConfigs}
-            />
+            <FormGenerator schema={signInSchema} fieldConfigs={fieldConfigs} />
           </Grid>
-          <div className="mt-6">
-            <Button type="submit">Sign In</Button>
+          <div className='mt-6'>
+            <Button type='submit'>Sign In</Button>
           </div>
         </Form>
       </div>
-    )
+    );
   },
-}
+};
 
 export const WithResetAfterSubmit: Story = {
   render: () => {
@@ -114,38 +111,35 @@ export const WithResetAfterSubmit: Story = {
         type: 'password',
         orientation: 'vertical',
       },
-    ]
+    ];
 
     return (
-      <div className="max-w-md mx-auto p-4">
+      <div className='mx-auto max-w-md p-4'>
         <Form
           schema={signInSchema}
           defaultValues={{ identifier: '', password: '' }}
           fieldConfigs={fieldConfigs}
           resetAfterSubmit={true}
           onSubmit={async (data) => {
-            console.log('Form submitted:', data)
-            await new Promise((resolve) => setTimeout(resolve, 500))
-            toast.success('Form submitted and reset!')
+            console.log('Form submitted:', data);
+            await new Promise((resolve) => setTimeout(resolve, 500));
+            toast.success('Form submitted and reset!');
           }}
         >
           <Grid cols={1} gap={4}>
-            <FormGenerator
-              schema={signInSchema}
-              fieldConfigs={fieldConfigs}
-            />
+            <FormGenerator schema={signInSchema} fieldConfigs={fieldConfigs} />
           </Grid>
-          <div className="mt-6">
-            <Button type="submit">Submit & Reset</Button>
+          <div className='mt-6'>
+            <Button type='submit'>Submit & Reset</Button>
           </div>
         </Form>
       </div>
-    )
+    );
   },
-}
+};
 
 const WithFormChangeTrackingComponent = () => {
-  const [changeLog, setChangeLog] = React.useState<string[]>([])
+  const [changeLog, setChangeLog] = React.useState<string[]>([]);
 
   const fieldConfigs: FieldConfig[] = [
     {
@@ -160,50 +154,47 @@ const WithFormChangeTrackingComponent = () => {
       type: 'password',
       orientation: 'vertical',
     },
-  ]
+  ];
 
   return (
-    <div className="max-w-md mx-auto p-4">
+    <div className='mx-auto max-w-md p-4'>
       <Form
         schema={signInSchema}
         defaultValues={{ identifier: '', password: '' }}
         fieldConfigs={fieldConfigs}
         onFormChange={(changeInfo) => {
-          const log = `Changed: ${changeInfo.changedFields.map((f) => String(f.name)).join(', ')} | Dirty: ${changeInfo.isDirty}`
-          setChangeLog((prev) => [log, ...prev].slice(0, 10))
+          const log = `Changed: ${changeInfo.changedFields.map((f) => String(f.name)).join(', ')} | Dirty: ${changeInfo.isDirty}`;
+          setChangeLog((prev) => [log, ...prev].slice(0, 10));
         }}
         onSubmit={(data) => {
-          console.log('Form submitted:', data)
-          toast.success('Form submitted successfully!')
+          console.log('Form submitted:', data);
+          toast.success('Form submitted successfully!');
         }}
       >
         <Grid cols={1} gap={4}>
-          <FormGenerator
-            schema={signInSchema}
-            fieldConfigs={fieldConfigs}
-          />
+          <FormGenerator schema={signInSchema} fieldConfigs={fieldConfigs} />
         </Grid>
-        <div className="mt-6">
-          <Button type="submit">Submit</Button>
+        <div className='mt-6'>
+          <Button type='submit'>Submit</Button>
         </div>
       </Form>
-      <div className="mt-4 p-4 bg-muted rounded-md">
-        <h3 className="text-sm font-semibold mb-2">Change Log:</h3>
-        <div className="text-xs space-y-1">
+      <div className='bg-muted mt-4 rounded-md p-4'>
+        <h3 className='mb-2 text-sm font-semibold'>Change Log:</h3>
+        <div className='space-y-1 text-xs'>
           {changeLog.length === 0 ? (
-            <p className="text-muted-foreground">No changes yet</p>
+            <p className='text-muted-foreground'>No changes yet</p>
           ) : (
             changeLog.map((log, i) => <div key={i}>{log}</div>)
           )}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export const WithFormChangeTracking: Story = {
   render: () => <WithFormChangeTrackingComponent />,
-}
+};
 
 export const TwoColumnLayout: Story = {
   render: () => {
@@ -251,10 +242,10 @@ export const TwoColumnLayout: Story = {
         type: 'switch',
         orientation: 'horizontal',
       },
-    ]
+    ];
 
     return (
-      <div className="max-w-4xl mx-auto p-4">
+      <div className='mx-auto max-w-4xl p-4'>
         <Form
           schema={complexSchema}
           defaultValues={{
@@ -268,31 +259,24 @@ export const TwoColumnLayout: Story = {
           }}
           fieldConfigs={fieldConfigs}
           onSubmit={(data) => {
-            console.log('Form submitted:', data)
-            toast.success('Form submitted!')
+            console.log('Form submitted:', data);
+            toast.success('Form submitted!');
           }}
         >
-          <FormGenerator
-            as={Grid}
-            cols={2}
-            mdCols={2}
-            gap={4}
-            schema={complexSchema}
-            fieldConfigs={fieldConfigs}
-          />
-          <div className="mt-6">
-            <Button type="submit">Submit</Button>
+          <FormGenerator as={Grid} cols={2} mdCols={2} gap={4} schema={complexSchema} fieldConfigs={fieldConfigs} />
+          <div className='mt-6'>
+            <Button type='submit'>Submit</Button>
           </div>
         </Form>
       </div>
-    )
+    );
   },
-}
+};
 
 export const ManualFormFields: Story = {
   render: () => {
     return (
-      <div className="max-w-md mx-auto p-4">
+      <div className='mx-auto max-w-md p-4'>
         <Form
           schema={userProfileSchema}
           defaultValues={{
@@ -304,13 +288,13 @@ export const ManualFormFields: Story = {
             active: true,
           }}
           onSubmit={(data) => {
-            console.log('Form submitted:', data)
-            toast.success('Profile updated!')
+            console.log('Form submitted:', data);
+            toast.success('Profile updated!');
           }}
         >
           <Grid cols={1} gap={4}>
             <FormInput
-              name="name"
+              name='name'
               config={{
                 name: 'name',
                 label: 'Full Name',
@@ -319,8 +303,8 @@ export const ManualFormFields: Story = {
               }}
             />
             <FormInput
-              name="email"
-              type="email"
+              name='email'
+              type='email'
               config={{
                 name: 'email',
                 label: 'Email',
@@ -329,7 +313,7 @@ export const ManualFormFields: Story = {
               }}
             />
             <FormTextarea
-              name="bio"
+              name='bio'
               config={{
                 name: 'bio',
                 label: 'Bio',
@@ -338,7 +322,7 @@ export const ManualFormFields: Story = {
               }}
             />
             <FormSelect
-              name="role"
+              name='role'
               config={{
                 name: 'role',
                 label: 'Role',
@@ -351,7 +335,7 @@ export const ManualFormFields: Story = {
               }}
             />
             <FormSwitch
-              name="newsletter"
+              name='newsletter'
               config={{
                 name: 'newsletter',
                 label: 'Subscribe to newsletter',
@@ -359,7 +343,7 @@ export const ManualFormFields: Story = {
               }}
             />
             <FormSwitch
-              name="active"
+              name='active'
               config={{
                 name: 'active',
                 label: 'Account Active',
@@ -367,14 +351,14 @@ export const ManualFormFields: Story = {
               }}
             />
           </Grid>
-          <div className="mt-6">
-            <Button type="submit">Update Profile</Button>
+          <div className='mt-6'>
+            <Button type='submit'>Update Profile</Button>
           </div>
         </Form>
       </div>
-    )
+    );
   },
-}
+};
 
 export const WithFormGroups: Story = {
   render: () => {
@@ -419,10 +403,10 @@ export const WithFormGroups: Story = {
         type: 'switch',
         orientation: 'horizontal',
       },
-    ]
+    ];
 
     return (
-      <div className="max-w-2xl mx-auto p-4">
+      <div className='mx-auto max-w-2xl p-4'>
         <Form
           schema={userProfileSchema}
           defaultValues={{
@@ -434,53 +418,33 @@ export const WithFormGroups: Story = {
             active: true,
           }}
           onSubmit={(data) => {
-            console.log('Form submitted:', data)
-            toast.success('Profile updated!')
+            console.log('Form submitted:', data);
+            toast.success('Profile updated!');
           }}
         >
-          <FormGroup legend="Personal Information">
-            <p className="text-sm text-muted-foreground mb-4">Update your personal details.</p>
+          <FormGroup legend='Personal Information'>
+            <p className='text-muted-foreground mb-4 text-sm'>Update your personal details.</p>
             <Grid cols={1} gap={4}>
-              <FormInput
-                name="name"
-                config={fieldConfigs.find((f) => f.name === 'name')}
-              />
-              <FormInput
-                name="email"
-                type="email"
-                config={fieldConfigs.find((f) => f.name === 'email')}
-              />
-              <FormTextarea
-                name="bio"
-                config={fieldConfigs.find((f) => f.name === 'bio')}
-              />
+              <FormInput name='name' config={fieldConfigs.find((f) => f.name === 'name')} />
+              <FormInput name='email' type='email' config={fieldConfigs.find((f) => f.name === 'email')} />
+              <FormTextarea name='bio' config={fieldConfigs.find((f) => f.name === 'bio')} />
             </Grid>
           </FormGroup>
 
-          <FormGroup legend="Account Settings">
-            <p className="text-sm text-muted-foreground mb-4">Manage your account preferences.</p>
+          <FormGroup legend='Account Settings'>
+            <p className='text-muted-foreground mb-4 text-sm'>Manage your account preferences.</p>
             <Grid cols={1} gap={4}>
-              <FormSelect
-                name="role"
-                config={fieldConfigs.find((f) => f.name === 'role')}
-              />
-              <FormSwitch
-                name="newsletter"
-                config={fieldConfigs.find((f) => f.name === 'newsletter')}
-              />
-              <FormSwitch
-                name="active"
-                config={fieldConfigs.find((f) => f.name === 'active')}
-              />
+              <FormSelect name='role' config={fieldConfigs.find((f) => f.name === 'role')} />
+              <FormSwitch name='newsletter' config={fieldConfigs.find((f) => f.name === 'newsletter')} />
+              <FormSwitch name='active' config={fieldConfigs.find((f) => f.name === 'active')} />
             </Grid>
           </FormGroup>
 
-          <div className="mt-6">
-            <Button type="submit">Update Profile</Button>
+          <div className='mt-6'>
+            <Button type='submit'>Update Profile</Button>
           </div>
         </Form>
       </div>
-    )
+    );
   },
-}
-
+};

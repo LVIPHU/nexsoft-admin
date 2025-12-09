@@ -42,4 +42,3 @@ export const Pressed: Story = {
     children: 'Toggle',
   },
 };
-

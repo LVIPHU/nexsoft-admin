@@ -31,10 +31,10 @@ export const languages = [
     locale: 'zh-TW',
     currency: 'TWD',
   },
-] as const
+] as const;
 
-export type Language = typeof languages[number]
-export type LanguageId = Language['id']
+export type Language = (typeof languages)[number];
+export type LanguageId = Language['id'];
 
-export const defaultLanguage = languages[0].id
-export const localeIds: LanguageId[] = languages.map(l => l.id)
+export const defaultLanguage = languages[0].id;
+export const localeIds: LanguageId[] = languages.map((l) => l.id);

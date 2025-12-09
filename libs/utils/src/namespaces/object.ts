@@ -1,10 +1,4 @@
-export const exclude = <
-  T extends object,
-  K extends readonly (keyof T)[]
->(
-  obj: T,
-  keys: K,
-): Omit<T, K[number]> => {
+export const exclude = <T extends object, K extends readonly (keyof T)[]>(obj: T, keys: K): Omit<T, K[number]> => {
   const result: any = {};
 
   for (const key in obj) {

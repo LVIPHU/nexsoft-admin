@@ -14,5 +14,4 @@ export {
   DropdownMenuSub,
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
-} from './dropdown-menu'
-
+} from './dropdown-menu';

@@ -9,7 +9,6 @@ export {
   ItemDescription,
   ItemHeader,
   ItemFooter,
-} from './item'
-export type { VariantProps } from 'class-variance-authority'
-export { itemVariants, itemMediaVariants } from './item.variants'
-
+} from './item';
+export type { VariantProps } from 'class-variance-authority';
+export { itemVariants, itemMediaVariants } from './item.variants';

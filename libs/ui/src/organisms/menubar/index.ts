@@ -15,5 +15,4 @@ export {
   MenubarSub,
   MenubarSubTrigger,
   MenubarSubContent,
-} from './menubar'
-
+} from './menubar';

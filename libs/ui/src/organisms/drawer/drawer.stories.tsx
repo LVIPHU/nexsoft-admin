@@ -33,7 +33,7 @@ export const Default: Story = {
           <DrawerTitle>Drawer Title</DrawerTitle>
           <DrawerDescription>Drawer description goes here.</DrawerDescription>
         </DrawerHeader>
-        <div className="p-4">Content</div>
+        <div className='p-4'>Content</div>
         <DrawerFooter>
           <Button>Submit</Button>
         </DrawerFooter>
@@ -41,4 +41,3 @@ export const Default: Story = {
     </Drawer>
   ),
 };
-

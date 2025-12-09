@@ -1,9 +1,8 @@
-export * from './alert-dialog'
-export * from './breadcrumb'
-export * from './button-group'
-export * from './field'
-export * from './input-group'
-export * from './item'
-export * from './pagination'
-export * from './toggle-group'
-
+export * from './alert-dialog';
+export * from './breadcrumb';
+export * from './button-group';
+export * from './field';
+export * from './input-group';
+export * from './item';
+export * from './pagination';
+export * from './toggle-group';

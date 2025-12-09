@@ -1,8 +1,3 @@
-
 export default function RootPage() {
-  return (
-    <div>
-      Auth
-    </div>
-  );
+  return <div>Auth</div>;
 }

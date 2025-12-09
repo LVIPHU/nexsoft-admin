@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,8 +6,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from './dropdown-menu'
-import { Button } from '../../atoms/button'
+} from './dropdown-menu';
+import { Button } from '../../atoms/button';
 
 const meta: Meta<typeof DropdownMenu> = {
   title: 'Organisms/DropdownMenu',
@@ -16,10 +16,10 @@ const meta: Meta<typeof DropdownMenu> = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-}
+};
 
-export default meta
-type Story = StoryObj<typeof DropdownMenu>
+export default meta;
+type Story = StoryObj<typeof DropdownMenu>;
 
 export const Default: Story = {
   render: () => (
@@ -35,5 +35,4 @@ export const Default: Story = {
       </DropdownMenuContent>
     </DropdownMenu>
   ),
-}
-
+};

@@ -19,7 +19,7 @@ export const Default: Story = {
     max: 100,
   },
   render: (args) => (
-    <div className="w-64">
+    <div className='w-64'>
       <Slider {...args} />
     </div>
   ),
@@ -31,9 +31,8 @@ export const Range: Story = {
     max: 100,
   },
   render: (args) => (
-    <div className="w-64">
+    <div className='w-64'>
       <Slider {...args} />
     </div>
   ),
 };
-

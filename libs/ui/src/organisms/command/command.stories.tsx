@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
 import {
   Command,
   CommandDialog,
@@ -8,7 +8,7 @@ import {
   CommandGroup,
   CommandItem,
   CommandShortcut,
-} from './command'
+} from './command';
 
 const meta: Meta<typeof Command> = {
   title: 'Organisms/Command',
@@ -17,18 +17,18 @@ const meta: Meta<typeof Command> = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-}
+};
 
-export default meta
-type Story = StoryObj<typeof Command>
+export default meta;
+type Story = StoryObj<typeof Command>;
 
 export const Default: Story = {
   render: () => (
-    <Command className="rounded-lg border shadow-md max-w-[450px]">
-      <CommandInput placeholder="Type a command or search..." />
+    <Command className='max-w-[450px] rounded-lg border shadow-md'>
+      <CommandInput placeholder='Type a command or search...' />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
-        <CommandGroup heading="Suggestions">
+        <CommandGroup heading='Suggestions'>
           <CommandItem>
             <span>Calendar</span>
           </CommandItem>
@@ -39,7 +39,7 @@ export const Default: Story = {
             <span>Calculator</span>
           </CommandItem>
         </CommandGroup>
-        <CommandGroup heading="Settings">
+        <CommandGroup heading='Settings'>
           <CommandItem>
             <span>Profile</span>
             <CommandShortcut>⌘P</CommandShortcut>
@@ -56,5 +56,4 @@ export const Default: Story = {
       </CommandList>
     </Command>
   ),
-}
-
+};

@@ -1,12 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import {
-  Sheet,
-  SheetTrigger,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetDescription,
-} from './sheet';
+import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription } from './sheet';
 import { Button } from '../../atoms/button';
 
 const meta: Meta<typeof Sheet> = {
@@ -36,4 +29,3 @@ export const Default: Story = {
     </Sheet>
   ),
 };
-

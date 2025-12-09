@@ -18,9 +18,9 @@ export const Default: Story = {
     gap: 4,
     children: (
       <>
-        <div className="bg-primary/10 p-4 rounded-md">Item 1</div>
-        <div className="bg-primary/10 p-4 rounded-md">Item 2</div>
-        <div className="bg-primary/10 p-4 rounded-md">Item 3</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 1</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 2</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 3</div>
       </>
     ),
   },
@@ -32,9 +32,9 @@ export const Column: Story = {
     gap: 4,
     children: (
       <>
-        <div className="bg-primary/10 p-4 rounded-md">Item 1</div>
-        <div className="bg-primary/10 p-4 rounded-md">Item 2</div>
-        <div className="bg-primary/10 p-4 rounded-md">Item 3</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 1</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 2</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 3</div>
       </>
     ),
   },
@@ -46,9 +46,9 @@ export const WithJustify: Story = {
     gap: 4,
     children: (
       <>
-        <div className="bg-primary/10 p-4 rounded-md">Item 1</div>
-        <div className="bg-primary/10 p-4 rounded-md">Item 2</div>
-        <div className="bg-primary/10 p-4 rounded-md">Item 3</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 1</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 2</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 3</div>
       </>
     ),
   },
@@ -61,9 +61,9 @@ export const WithItems: Story = {
     className: 'h-32',
     children: (
       <>
-        <div className="bg-primary/10 p-4 rounded-md">Item 1</div>
-        <div className="bg-primary/10 p-4 rounded-md">Item 2</div>
-        <div className="bg-primary/10 p-4 rounded-md">Item 3</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 1</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 2</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 3</div>
       </>
     ),
   },
@@ -75,10 +75,10 @@ export const WithWrap: Story = {
     gap: 4,
     children: (
       <>
-        <div className="bg-primary/10 p-4 rounded-md w-64">Item 1</div>
-        <div className="bg-primary/10 p-4 rounded-md w-64">Item 2</div>
-        <div className="bg-primary/10 p-4 rounded-md w-64">Item 3</div>
-        <div className="bg-primary/10 p-4 rounded-md w-64">Item 4</div>
+        <div className='bg-primary/10 w-64 rounded-md p-4'>Item 1</div>
+        <div className='bg-primary/10 w-64 rounded-md p-4'>Item 2</div>
+        <div className='bg-primary/10 w-64 rounded-md p-4'>Item 3</div>
+        <div className='bg-primary/10 w-64 rounded-md p-4'>Item 4</div>
       </>
     ),
   },
@@ -89,9 +89,9 @@ export const WithGrow: Story = {
     gap: 4,
     children: (
       <>
-        <div className="bg-primary/10 p-4 rounded-md">Item 1</div>
-        <div className="bg-primary/10 p-4 rounded-md grow">Item 2 (grow)</div>
-        <div className="bg-primary/10 p-4 rounded-md">Item 3</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 1</div>
+        <div className='bg-primary/10 grow rounded-md p-4'>Item 2 (grow)</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 3</div>
       </>
     ),
   },
@@ -102,9 +102,9 @@ export const WithBasis: Story = {
     gap: 4,
     children: (
       <>
-        <div className="bg-primary/10 p-4 rounded-md basis-1/3">Item 1 (basis 1/3)</div>
-        <div className="bg-primary/10 p-4 rounded-md basis-1/3">Item 2 (basis 1/3)</div>
-        <div className="bg-primary/10 p-4 rounded-md basis-1/3">Item 3 (basis 1/3)</div>
+        <div className='bg-primary/10 basis-1/3 rounded-md p-4'>Item 1 (basis 1/3)</div>
+        <div className='bg-primary/10 basis-1/3 rounded-md p-4'>Item 2 (basis 1/3)</div>
+        <div className='bg-primary/10 basis-1/3 rounded-md p-4'>Item 3 (basis 1/3)</div>
       </>
     ),
   },
@@ -116,9 +116,9 @@ export const Reverse: Story = {
     gap: 4,
     children: (
       <>
-        <div className="bg-primary/10 p-4 rounded-md">Item 1</div>
-        <div className="bg-primary/10 p-4 rounded-md">Item 2</div>
-        <div className="bg-primary/10 p-4 rounded-md">Item 3</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 1</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 2</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 3</div>
       </>
     ),
   },
@@ -130,11 +130,9 @@ export const CustomElement: Story = {
     gap: 4,
     children: (
       <>
-        <div className="bg-primary/10 p-4 rounded-md">Item 1</div>
-        <div className="bg-primary/10 p-4 rounded-md">Item 2</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 1</div>
+        <div className='bg-primary/10 rounded-md p-4'>Item 2</div>
       </>
     ),
   },
 };
-
-

@@ -28,4 +28,3 @@ export const Group: Story = {
     </KbdGroup>
   ),
 };
-

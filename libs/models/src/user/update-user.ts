@@ -1,6 +1,6 @@
-import type { z } from 'zod'
+import type { z } from 'zod';
 
-import { userSchema } from './user.js'
+import { userSchema } from './user.js';
 
 export const updateUserSchema = userSchema.partial().pick({
   username: true,
@@ -11,6 +11,6 @@ export const updateUserSchema = userSchema.partial().pick({
   thumbnail_url: true,
   avatar_url: true,
   banner_url: true,
-})
+});
 
-export type UpdateUserDto = z.infer<typeof updateUserSchema>
+export type UpdateUserDto = z.infer<typeof updateUserSchema>;

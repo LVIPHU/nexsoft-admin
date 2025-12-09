@@ -18,7 +18,7 @@ export const Default: Story = {
     value: 50,
   },
   render: (args) => (
-    <div className="w-64">
+    <div className='w-64'>
       <Progress {...args} />
     </div>
   ),
@@ -29,9 +29,8 @@ export const Complete: Story = {
     value: 100,
   },
   render: (args) => (
-    <div className="w-64">
+    <div className='w-64'>
       <Progress {...args} />
     </div>
   ),
 };
-

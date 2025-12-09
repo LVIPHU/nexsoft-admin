@@ -8,5 +8,4 @@ export {
   NavigationMenuIndicator,
   NavigationMenuViewport,
   navigationMenuTriggerStyle,
-} from './navigation-menu'
-
+} from './navigation-menu';

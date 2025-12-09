@@ -26,4 +26,3 @@ export const Small: Story = {
     className: 'size-2',
   },
 };
-

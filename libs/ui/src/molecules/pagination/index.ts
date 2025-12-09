@@ -6,5 +6,4 @@ export {
   PaginationPrevious,
   PaginationNext,
   PaginationEllipsis,
-} from './pagination'
-
+} from './pagination';

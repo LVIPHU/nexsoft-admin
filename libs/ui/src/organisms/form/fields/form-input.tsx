@@ -1,18 +1,18 @@
-'use client'
+'use client';
 
-import * as React from 'react'
-import { useFormContext, type FieldPath, type FieldValues } from 'react-hook-form'
-import { Input } from '../../../atoms/input/input'
-import { FormField } from '../form-field'
-import { FormFieldSkeleton } from '../form-field-skeleton'
-import type { FieldConfig } from '../generator/field-config'
+import * as React from 'react';
+import { useFormContext, type FieldPath, type FieldValues } from 'react-hook-form';
+import { Input } from '../../../atoms/input/input';
+import { FormField } from '../form-field';
+import { FormFieldSkeleton } from '../form-field-skeleton';
+import type { FieldConfig } from '../generator/field-config';
 
 type FormInputProps<T extends FieldValues> = {
-  name: FieldPath<T>
-  config?: FieldConfig
-  loading?: boolean
-  className?: string
-} & Omit<React.ComponentProps<typeof Input>, 'value' | 'onChange' | 'onBlur' | 'name'>
+  name: FieldPath<T>;
+  config?: FieldConfig;
+  loading?: boolean;
+  className?: string;
+} & Omit<React.ComponentProps<typeof Input>, 'value' | 'onChange' | 'onBlur' | 'name'>;
 
 function FormInput<T extends FieldValues>({
   name,
@@ -22,10 +22,10 @@ function FormInput<T extends FieldValues>({
   type = 'text',
   ...inputProps
 }: FormInputProps<T>) {
-  const { control } = useFormContext<T>()
+  const { control } = useFormContext<T>();
 
   if (loading) {
-    return <FormFieldSkeleton type="text" orientation={config?.orientation} />
+    return <FormFieldSkeleton type='text' orientation={config?.orientation} />;
   }
 
   return (
@@ -54,9 +54,8 @@ function FormInput<T extends FieldValues>({
         />
       )}
     </FormField>
-  )
+  );
 }
 
-export { FormInput }
-export type { FormInputProps }
-
+export { FormInput };
+export type { FormInputProps };

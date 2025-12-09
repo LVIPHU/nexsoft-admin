@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { Calendar } from './calendar'
+import type { Meta, StoryObj } from '@storybook/react';
+import { Calendar } from './calendar';
 
 const meta: Meta<typeof Calendar> = {
   title: 'Organisms/Calendar',
@@ -8,21 +8,21 @@ const meta: Meta<typeof Calendar> = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-}
+};
 
-export default meta
-type Story = StoryObj<typeof Calendar>
+export default meta;
+type Story = StoryObj<typeof Calendar>;
 
 export const Default: Story = {
   args: {},
-}
+};
 
 export const WithDateSelected: Story = {
   args: {
     defaultMonth: new Date(2024, 0),
     selected: new Date(2024, 0, 15),
   },
-}
+};
 
 export const WithDateRange: Story = {
   args: {
@@ -33,5 +33,4 @@ export const WithDateRange: Story = {
       to: new Date(2024, 0, 20),
     },
   },
-}
-
+};

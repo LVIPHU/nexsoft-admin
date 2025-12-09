@@ -6,6 +6,4 @@ export default {
   locales: ['en', 'vi', 'zh-Hans', 'zh-Hant'],
   // Base config - catalogs will be overridden by individual apps
   catalogs: [],
-}
-
-
+};

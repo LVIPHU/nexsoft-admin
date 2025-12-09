@@ -8,29 +8,27 @@ import Negotiator from 'negotiator';
 import { localeIds } from '@nexsoft-admin/utils';
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
+  const { pathname } = request.nextUrl;
 
-  const pathnameHasLocale = localeIds.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  )
+  const pathnameHasLocale = localeIds.some((locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`);
 
-  if (pathnameHasLocale) return
+  if (pathnameHasLocale) return;
 
   // Redirect if there is no locale
-  const locale = getRequestLocale(request.headers)
-  request.nextUrl.pathname = `/${locale}${pathname}`
+  const locale = getRequestLocale(request.headers);
+  request.nextUrl.pathname = `/${locale}${pathname}`;
   // e.g. incoming request is /products
   // The new URL is now /en/products
-  return NextResponse.redirect(request.nextUrl)
+  return NextResponse.redirect(request.nextUrl);
 }
 
 function getRequestLocale(requestHeaders: Headers): string {
-  const langHeader = requestHeaders.get('accept-language') || undefined
+  const langHeader = requestHeaders.get('accept-language') || undefined;
   const languages = new Negotiator({
-    headers: { 'accept-language': langHeader }
-  }).languages(localeIds.slice())
+    headers: { 'accept-language': langHeader },
+  }).languages(localeIds.slice());
 
-  return languages[0] || localeIds[0] || 'en'
+  return languages[0] || localeIds[0] || 'en';
 }
 
 export const config = {
@@ -43,6 +41,6 @@ export const config = {
      * - images - .svg, .png, .jpg, .jpeg, .gif, .webp
      * Feel free to modify this pattern to include more paths.
      */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)'
-  ]
-}
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+  ],
+};

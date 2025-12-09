@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react';
 
 /**
  * Custom hook that uses either `useLayoutEffect` or `useEffect` based on the environment (client-side or server-side).
@@ -14,6 +14,6 @@ import { useEffect, useLayoutEffect } from 'react'
  * ```
  */
 
-const IS_SERVER = typeof window === 'undefined'
+const IS_SERVER = typeof window === 'undefined';
 
-export const useIsomorphicLayoutEffect = IS_SERVER ? useEffect : useLayoutEffect
+export const useIsomorphicLayoutEffect = IS_SERVER ? useEffect : useLayoutEffect;

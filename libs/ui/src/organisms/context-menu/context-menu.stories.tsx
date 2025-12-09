@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
 import {
   ContextMenu,
   ContextMenuContent,
@@ -6,7 +6,7 @@ import {
   ContextMenuLabel,
   ContextMenuSeparator,
   ContextMenuTrigger,
-} from './context-menu'
+} from './context-menu';
 
 const meta: Meta<typeof ContextMenu> = {
   title: 'Organisms/ContextMenu',
@@ -15,18 +15,18 @@ const meta: Meta<typeof ContextMenu> = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-}
+};
 
-export default meta
-type Story = StoryObj<typeof ContextMenu>
+export default meta;
+type Story = StoryObj<typeof ContextMenu>;
 
 export const Default: Story = {
   render: () => (
     <ContextMenu>
-      <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+      <ContextMenuTrigger className='flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm'>
         Right click here
       </ContextMenuTrigger>
-      <ContextMenuContent className="w-64">
+      <ContextMenuContent className='w-64'>
         <ContextMenuLabel>My Account</ContextMenuLabel>
         <ContextMenuSeparator />
         <ContextMenuItem>Profile</ContextMenuItem>
@@ -36,5 +36,4 @@ export const Default: Story = {
       </ContextMenuContent>
     </ContextMenu>
   ),
-}
-
+};

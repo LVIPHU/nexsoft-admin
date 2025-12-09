@@ -6,5 +6,4 @@ export {
   BreadcrumbPage,
   BreadcrumbSeparator,
   BreadcrumbEllipsis,
-} from './breadcrumb'
-
+} from './breadcrumb';

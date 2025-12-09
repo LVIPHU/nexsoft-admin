@@ -1,18 +1,18 @@
-'use client'
+'use client';
 
-import { useFormContext, type FieldPath, type FieldValues } from 'react-hook-form'
-import { RadioGroup, RadioGroupItem } from '../../../atoms/radio-group/radio-group'
-import { FormField } from '../form-field'
-import { FormFieldSkeleton } from '../form-field-skeleton'
-import type { FieldConfig, FieldOption } from '../generator/field-config'
+import { useFormContext, type FieldPath, type FieldValues } from 'react-hook-form';
+import { RadioGroup, RadioGroupItem } from '../../../atoms/radio-group/radio-group';
+import { FormField } from '../form-field';
+import { FormFieldSkeleton } from '../form-field-skeleton';
+import type { FieldConfig, FieldOption } from '../generator/field-config';
 
 type FormRadioGroupProps<T extends FieldValues> = {
-  name: FieldPath<T>
-  config?: FieldConfig
-  loading?: boolean
-  className?: string
-  options?: FieldOption[]
-}
+  name: FieldPath<T>;
+  config?: FieldConfig;
+  loading?: boolean;
+  className?: string;
+  options?: FieldOption[];
+};
 
 function FormRadioGroup<T extends FieldValues>({
   name,
@@ -21,10 +21,10 @@ function FormRadioGroup<T extends FieldValues>({
   className,
   options = config?.options || [],
 }: FormRadioGroupProps<T>) {
-  const { control } = useFormContext<T>()
+  const { control } = useFormContext<T>();
 
   if (loading) {
-    return <FormFieldSkeleton type="radio-group" orientation={config?.orientation} />
+    return <FormFieldSkeleton type='radio-group' orientation={config?.orientation} />;
   }
 
   return (
@@ -49,7 +49,7 @@ function FormRadioGroup<T extends FieldValues>({
           className={className}
         >
           {options.map((option) => (
-            <div key={String(option.value)} className="flex items-center gap-2">
+            <div key={String(option.value)} className='flex items-center gap-2'>
               <RadioGroupItem
                 value={String(option.value)}
                 id={`${name}-${option.value}`}
@@ -57,7 +57,7 @@ function FormRadioGroup<T extends FieldValues>({
               />
               <label
                 htmlFor={`${name}-${option.value}`}
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className='text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
               >
                 {option.label}
               </label>
@@ -66,9 +66,8 @@ function FormRadioGroup<T extends FieldValues>({
         </RadioGroup>
       )}
     </FormField>
-  )
+  );
 }
 
-export { FormRadioGroup }
-export type { FormRadioGroupProps }
-
+export { FormRadioGroup };
+export type { FormRadioGroupProps };

@@ -1,12 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from './card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './card';
 import { Button } from '../../atoms/button';
 
 const meta: Meta<typeof Card> = {
@@ -23,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
-    <Card className="w-96">
+    <Card className='w-96'>
       <CardHeader>
         <CardTitle>Card Title</CardTitle>
         <CardDescription>Card description goes here.</CardDescription>
@@ -37,4 +30,3 @@ export const Default: Story = {
     </Card>
   ),
 };
-

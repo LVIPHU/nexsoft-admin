@@ -23,6 +23,5 @@ export {
   SidebarSeparator,
   SidebarTrigger,
   useSidebar,
-} from './sidebar'
-export { sidebarMenuButtonVariants } from './sidebar.variants'
-
+} from './sidebar';
+export { sidebarMenuButtonVariants } from './sidebar.variants';

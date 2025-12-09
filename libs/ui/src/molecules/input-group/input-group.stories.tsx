@@ -17,7 +17,7 @@ export const Default: Story = {
   render: () => (
     <InputGroup>
       <InputGroupAddon>@</InputGroupAddon>
-      <InputGroupInput placeholder="username" />
+      <InputGroupInput placeholder='username' />
     </InputGroup>
   ),
 };
@@ -25,11 +25,10 @@ export const Default: Story = {
 export const WithButton: Story = {
   render: () => (
     <InputGroup>
-      <InputGroupInput placeholder="Search..." />
-      <InputGroupAddon align="inline-end">
-        <button type="button">🔍</button>
+      <InputGroupInput placeholder='Search...' />
+      <InputGroupAddon align='inline-end'>
+        <button type='button'>🔍</button>
       </InputGroupAddon>
     </InputGroup>
   ),
 };
-

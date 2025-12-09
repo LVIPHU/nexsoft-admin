@@ -34,11 +34,10 @@ export const Default: Story = {
           <DialogDescription>Dialog description goes here.</DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button variant="outline">Cancel</Button>
+          <Button variant='outline'>Cancel</Button>
           <Button>Confirm</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   ),
 };
-

@@ -1,5 +1,5 @@
-import type { ControllerRenderProps } from 'react-hook-form'
-import type { ReactNode } from 'react'
+import type { ControllerRenderProps } from 'react-hook-form';
+import type { ReactNode } from 'react';
 
 export type FieldType =
   | 'text'
@@ -15,38 +15,37 @@ export type FieldType =
   | 'radio-group'
   | 'switch'
   | 'date'
-  | 'date-range'
+  | 'date-range';
 
-export type FieldOrientation = 'horizontal' | 'vertical'
+export type FieldOrientation = 'horizontal' | 'vertical';
 
 export type FieldOption = {
-  label: string
-  value: string | number | boolean
-  disabled?: boolean
-}
+  label: string;
+  value: string | number | boolean;
+  disabled?: boolean;
+};
 
 export type FieldConfig = {
-  name: string
-  type?: FieldType
-  label?: string
-  description?: string
-  placeholder?: string
-  options?: FieldOption[]
-  orientation?: FieldOrientation
-  disabled?: boolean
-  hidden?: boolean
-  required?: boolean
-  className?: string
-  render?: (field: ControllerRenderProps) => ReactNode
-}
+  name: string;
+  type?: FieldType;
+  label?: string;
+  description?: string;
+  placeholder?: string;
+  options?: FieldOption[];
+  orientation?: FieldOrientation;
+  disabled?: boolean;
+  hidden?: boolean;
+  required?: boolean;
+  className?: string;
+  render?: (field: ControllerRenderProps) => ReactNode;
+};
 
 export type FormChangeInfo<T> = {
   changedFields: Array<{
-    name: keyof T
-    value: unknown
-    previousValue?: unknown
-  }>
-  formValues: Partial<T>
-  isDirty: boolean
-}
-
+    name: keyof T;
+    value: unknown;
+    previousValue?: unknown;
+  }>;
+  formValues: Partial<T>;
+  isDirty: boolean;
+};

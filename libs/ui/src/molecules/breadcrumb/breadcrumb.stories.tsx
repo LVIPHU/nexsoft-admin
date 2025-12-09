@@ -25,11 +25,11 @@ export const Default: Story = {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href="#">Home</BreadcrumbLink>
+          <BreadcrumbLink href='#'>Home</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href="#">Components</BreadcrumbLink>
+          <BreadcrumbLink href='#'>Components</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
@@ -39,4 +39,3 @@ export const Default: Story = {
     </Breadcrumb>
   ),
 };
-

@@ -19,7 +19,7 @@ export const Default: Story = {
     <Field>
       <FieldLabel>Email</FieldLabel>
       <FieldContent>
-        <Input type="email" placeholder="Enter your email" />
+        <Input type='email' placeholder='Enter your email' />
         <FieldDescription>We'll never share your email.</FieldDescription>
       </FieldContent>
     </Field>
@@ -28,12 +28,11 @@ export const Default: Story = {
 
 export const Horizontal: Story = {
   render: () => (
-    <Field orientation="horizontal">
+    <Field orientation='horizontal'>
       <FieldLabel>Email</FieldLabel>
       <FieldContent>
-        <Input type="email" placeholder="Enter your email" />
+        <Input type='email' placeholder='Enter your email' />
       </FieldContent>
     </Field>
   ),
 };
-

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
 import {
   Sidebar,
   SidebarContent,
@@ -8,7 +8,7 @@ import {
   SidebarMenuButton,
   SidebarProvider,
   SidebarTrigger,
-} from './sidebar'
+} from './sidebar';
 
 const meta: Meta<typeof Sidebar> = {
   title: 'Organisms/Sidebar',
@@ -17,10 +17,10 @@ const meta: Meta<typeof Sidebar> = {
     layout: 'fullscreen',
   },
   tags: ['autodocs'],
-}
+};
 
-export default meta
-type Story = StoryObj<typeof Sidebar>
+export default meta;
+type Story = StoryObj<typeof Sidebar>;
 
 export const Default: Story = {
   render: () => (
@@ -42,5 +42,4 @@ export const Default: Story = {
       </Sidebar>
     </SidebarProvider>
   ),
-}
-
+};

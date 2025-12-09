@@ -4,9 +4,9 @@ export const getInitials = (name: string) => {
   const regex = /(\p{L})\p{L}*/gu;
   const matches = [...name.matchAll(regex)];
 
-  if (matches.length === 0) return "";
+  if (matches.length === 0) return '';
 
-  const first = matches[0]?.[1] ?? "";
+  const first = matches[0]?.[1] ?? '';
   const last = matches[matches.length - 1]?.[1] ?? first;
 
   return (first + last).toUpperCase();
@@ -24,7 +24,7 @@ export const isUrl = (value: string | null | undefined) => {
 };
 
 export const isEmptyString = (value: string) => {
-  return value === "<p></p>" || value.trim().length === 0;
+  return value === '<p></p>' || value.trim().length === 0;
 };
 
 export const extractUrl = (value: string) => {

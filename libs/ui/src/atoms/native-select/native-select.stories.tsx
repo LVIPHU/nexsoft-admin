@@ -16,11 +16,10 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <NativeSelect>
-      <NativeSelectOption value="">Select an option</NativeSelectOption>
-      <NativeSelectOption value="option1">Option 1</NativeSelectOption>
-      <NativeSelectOption value="option2">Option 2</NativeSelectOption>
-      <NativeSelectOption value="option3">Option 3</NativeSelectOption>
+      <NativeSelectOption value=''>Select an option</NativeSelectOption>
+      <NativeSelectOption value='option1'>Option 1</NativeSelectOption>
+      <NativeSelectOption value='option2'>Option 2</NativeSelectOption>
+      <NativeSelectOption value='option3'>Option 3</NativeSelectOption>
     </NativeSelect>
   ),
 };
-

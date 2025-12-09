@@ -31,4 +31,3 @@ export const WithValue: Story = {
     defaultValue: 'Hello World',
   },
 };
-
