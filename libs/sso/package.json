@@ -12,6 +12,24 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./react": {
+      "@nexsoft-admin/source": "./src/react.ts",
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js",
+      "default": "./dist/react.js"
+    },
+    "./core": {
+      "@nexsoft-admin/source": "./src/core.ts",
+      "types": "./dist/core.d.ts",
+      "import": "./dist/core.js",
+      "default": "./dist/core.js"
+    },
+    "./config": {
+      "@nexsoft-admin/source": "./src/config.ts",
+      "types": "./dist/config.d.ts",
+      "import": "./dist/config.js",
+      "default": "./dist/config.js"
     }
   },
   "nx": {
@@ -19,5 +37,9 @@
       "scope:shared",
       "type:util"
     ]
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   }
 }

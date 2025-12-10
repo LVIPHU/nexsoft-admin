@@ -52,6 +52,12 @@
     },
     {
       "path": "../../libs/utils"
+    },
+    {
+      "path": "../../libs/models"
+    },
+    {
+      "path": "../../libs/sso"
     }
   ]
 }

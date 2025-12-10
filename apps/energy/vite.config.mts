@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { lingui } from '@lingui/vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
+import * as path from 'path';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
@@ -12,7 +13,7 @@ export default defineConfig(() => ({
     host: 'localhost',
   },
   preview: {
-    port: 3002,
+    port: 4301,
     host: 'localhost',
   },
   plugins: [
@@ -24,6 +25,11 @@ export default defineConfig(() => ({
     lingui(),
     tailwindcss(),
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(import.meta.dirname, './src'),
+    },
+  },
   // Uncomment this if you are using workers.
   // worker: {
   //  plugins: [],

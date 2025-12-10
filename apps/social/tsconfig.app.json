@@ -6,7 +6,10 @@
     "jsx": "react-jsx",
     "lib": ["dom"],
     "types": ["node", "@nx/react/typings/cssmodule.d.ts", "@nx/react/typings/image.d.ts", "vite/client"],
-    "rootDir": "src"
+    "rootDir": "src",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "exclude": [
     "out-tsc",
@@ -31,6 +34,9 @@
   "references": [
     {
       "path": "../../libs/utils/tsconfig.lib.json"
+    },
+    {
+      "path": "../../libs/sso/tsconfig.lib.json"
     },
     {
       "path": "../../libs/ui/tsconfig.lib.json"

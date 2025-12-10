@@ -2,7 +2,9 @@ import * as React from 'react';
 import { cn } from '@nexsoft-admin/utils';
 
 export type GridTemplateCols = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+export type GridTemplateRows = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export type Gap = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16;
+export type AutoSize = 'auto' | 'min' | 'max' | 'fr';
 
 export type GridProps = {
   children: React.ReactNode;
@@ -14,9 +16,9 @@ export type GridProps = {
   rowGap?: Gap;
   colGap?: Gap;
   flow?: 'row' | 'col' | 'dense' | 'row-dense' | 'col-dense';
-  rows?: number;
-  autoRows?: 'auto' | 'min' | 'max' | 'fr';
-  autoCols?: 'auto' | 'min' | 'max' | 'fr';
+  rows?: GridTemplateRows;
+  autoRows?: AutoSize;
+  autoCols?: AutoSize;
   justify?: 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly';
   items?: 'start' | 'end' | 'center' | 'baseline' | 'stretch';
   as?: React.ElementType;
@@ -134,6 +136,35 @@ const itemsMap: Record<NonNullable<GridProps['items']>, string> = {
   stretch: 'items-stretch',
 };
 
+const rowsMap: Record<NonNullable<GridProps['rows']>, string> = {
+  1: 'grid-rows-1',
+  2: 'grid-rows-2',
+  3: 'grid-rows-3',
+  4: 'grid-rows-4',
+  5: 'grid-rows-5',
+  6: 'grid-rows-6',
+  7: 'grid-rows-7',
+  8: 'grid-rows-8',
+  9: 'grid-rows-9',
+  10: 'grid-rows-10',
+  11: 'grid-rows-11',
+  12: 'grid-rows-12',
+};
+
+const autoRowsMap: Record<NonNullable<GridProps['autoRows']>, string> = {
+  auto: 'auto-rows-auto',
+  min: 'auto-rows-min',
+  max: 'auto-rows-max',
+  fr: 'auto-rows-fr',
+};
+
+const autoColsMap: Record<NonNullable<GridProps['autoCols']>, string> = {
+  auto: 'auto-cols-auto',
+  min: 'auto-cols-min',
+  max: 'auto-cols-max',
+  fr: 'auto-cols-fr',
+};
+
 export const Grid = React.forwardRef<HTMLElement, GridProps & React.ComponentPropsWithoutRef<'div'>>(
   (
     {
@@ -165,9 +196,9 @@ export const Grid = React.forwardRef<HTMLElement, GridProps & React.ComponentPro
       rowGap !== undefined && rowGapMap[rowGap],
       colGap !== undefined && colGapMap[colGap],
       flow && flowMap[flow],
-      rows && `grid-rows-${rows}`,
-      autoRows && `auto-rows-${autoRows}`,
-      autoCols && `auto-cols-${autoCols}`,
+      rows && rowsMap[rows],
+      autoRows && autoRowsMap[autoRows],
+      autoCols && autoColsMap[autoCols],
       justify && justifyMap[justify],
       items && itemsMap[items],
       className,

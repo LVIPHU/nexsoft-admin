@@ -22,12 +22,17 @@ export default defineConfig(() => ({
       transformMixedEsModules: true,
     },
     lib: {
-      // Could also be a dictionary or array of multiple entry points.
-      entry: 'src/index.ts',
-      name: '@nexsoft-admin/sso',
-      fileName: 'index',
-      // Change this to the formats you want to support.
-      // Don't forget to update your package.json as well.
+      // Multiple entry points - each module is a separate entry
+      entry: {
+        // Main export (backward compatibility)
+        index: 'src/index.ts',
+        // React hooks entry
+        react: 'src/react.ts',
+        // Core functionality entry
+        core: 'src/core.ts',
+        // Configuration entry
+        config: 'src/config.ts',
+      },
       formats: ['es' as const],
     },
     rollupOptions: {
