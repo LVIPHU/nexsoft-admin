@@ -13,6 +13,7 @@ import { FormSwitch } from '../fields/form-switch';
 import type { FieldConfig } from './field-config';
 import { FieldGroup } from '../../../molecules';
 import { cn } from '@nexsoft-admin/utils';
+import { FormPassword } from '../fields/form-password';
 
 // Type for Zod string validation checks
 type ZodStringCheck = {
@@ -146,10 +147,10 @@ function FormGenerator<T extends z.ZodType>({
             return <FormRadioGroup key={fieldName} {...commonProps} />;
           case 'switch':
             return <FormSwitch key={fieldName} {...commonProps} />;
+          case 'password':
+            return <FormPassword key={fieldName} {...commonProps} />;
           case 'email':
             return <FormInput key={fieldName} {...commonProps} type='email' />;
-          case 'password':
-            return <FormInput key={fieldName} {...commonProps} type='password' />;
           case 'number':
             return <FormInput key={fieldName} {...commonProps} type='number' />;
           case 'tel':

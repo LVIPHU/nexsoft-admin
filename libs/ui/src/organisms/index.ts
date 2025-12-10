@@ -9,6 +9,7 @@ export * from './context-menu';
 export * from './dialog';
 export * from './drawer';
 export * from './dropdown-menu';
+export * from './form';
 export * from './input-otp';
 export * from './menubar';
 export * from './navigation-menu';

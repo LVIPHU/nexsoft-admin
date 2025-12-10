@@ -1,12 +1,11 @@
 import NxWelcome from './nx-welcome';
 import { Route, Routes, Link } from 'react-router-dom';
 import { Button } from '@nexsoft-admin/ui';
-import { AuthGuard } from '../components/auth/auth-guard';
-import { CallbackPage } from '../pages/callback';
 
 export function App() {
   return (
     <div>
+      <Button>Hello</Button>
       <NxWelcome title='@nexsoft-admin/social' />
 
       {/* START: routes */}
@@ -26,32 +25,6 @@ export function App() {
           </li>
         </ul>
       </div>
-      <Routes>
-        <Route
-          path='/callback'
-          element={<CallbackPage />}
-        />
-        <Route
-          path='/'
-          element={
-            <AuthGuard>
-              <div>
-                This is the generated root route. <Link to='/page-2'>Click here for page 2.</Link>
-              </div>
-            </AuthGuard>
-          }
-        />
-        <Route
-          path='/page-2'
-          element={
-            <AuthGuard>
-              <div>
-                <Link to='/'>Click here to go back to root page.</Link>
-              </div>
-            </AuthGuard>
-          }
-        />
-      </Routes>
       {/* END: routes */}
     </div>
   );
