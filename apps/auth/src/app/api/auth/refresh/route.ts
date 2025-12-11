@@ -40,35 +40,21 @@ export async function POST(request: NextRequest) {
 
       if (!tokenResponse.ok) {
         const error = await tokenResponse.json().catch(() => ({ message: 'Token refresh failed' }));
-        return NextResponse.json(
-          { error: error.message || 'Token refresh failed' },
-          { status: tokenResponse.status }
-        );
+        return NextResponse.json({ error: error.message || 'Token refresh failed' }, { status: tokenResponse.status });
       }
 
       const tokens = (await tokenResponse.json()) as RefreshTokenResponseDto;
       return NextResponse.json(tokens);
     } catch (error) {
       console.error('Error calling external refresh API:', error);
-      return NextResponse.json(
-        { error: 'Failed to refresh token' },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: 'Failed to refresh token' }, { status: 500 });
     }
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: 'Invalid request', details: error.message },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Invalid request', details: error.message }, { status: 400 });
     }
 
     console.error('Error refreshing token:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
-
-

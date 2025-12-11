@@ -47,5 +47,3 @@ export async function deleteAuthCode(code: string): Promise<void> {
   const key = `${AUTH_CODE_PREFIX}${code}`;
   await redis.del(key);
 }
-
-

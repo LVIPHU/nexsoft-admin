@@ -8,5 +8,3 @@ import type { UseSSOReturn } from './use-sso.js';
 export function useAuth(config?: Parameters<typeof useSSO>[0]): UseSSOReturn {
   return useSSO(config);
 }
-
-

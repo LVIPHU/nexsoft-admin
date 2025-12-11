@@ -41,5 +41,3 @@ export interface AuthState {
 }
 
 export type LogoutType = 'local' | 'global';
-
-

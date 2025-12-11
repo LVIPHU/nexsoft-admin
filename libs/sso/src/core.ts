@@ -15,4 +15,3 @@ export type {
   AuthState,
   LogoutType,
 } from './types/sso.types.js';
-

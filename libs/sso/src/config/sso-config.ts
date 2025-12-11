@@ -5,9 +5,9 @@ import type { SSOConfig } from '../types/sso.types.js';
  */
 export function getSSOConfig(): SSOConfig {
   const authServerUrl = process.env.NEXT_PUBLIC_AUTH_SERVER_URL || process.env.AUTH_SERVER_URL || '';
-  const appUrl = 
-    process.env.NEXT_PUBLIC_APP_URL || 
-    process.env.APP_URL || 
+  const appUrl =
+    process.env.NEXT_PUBLIC_APP_URL ||
+    process.env.APP_URL ||
     (typeof window !== 'undefined' ? window.location.origin : '');
   const appId = process.env.NEXT_PUBLIC_APP_ID || process.env.APP_ID || '';
 
@@ -24,7 +24,9 @@ export function getSSOConfig(): SSOConfig {
     appUrl,
     appId,
     callbackPath: process.env.NEXT_PUBLIC_SSO_CALLBACK_PATH || '/callback',
-    tokenStorage: (process.env.NEXT_PUBLIC_TOKEN_STORAGE as 'localStorage' | 'sessionStorage' | 'cookie' | 'memory') || 'localStorage',
+    tokenStorage:
+      (process.env.NEXT_PUBLIC_TOKEN_STORAGE as 'localStorage' | 'sessionStorage' | 'cookie' | 'memory') ||
+      'localStorage',
   };
 }
 
@@ -39,4 +41,3 @@ export function validateRedirectUri(uri: string, allowedOrigins: string[]): bool
     return false;
   }
 }
-

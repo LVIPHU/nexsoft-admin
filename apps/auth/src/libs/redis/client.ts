@@ -11,7 +11,7 @@ export function getRedisClient(): Redis {
   }
 
   const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
-  
+
   redisClient = new Redis(redisUrl, {
     maxRetriesPerRequest: 3,
     retryStrategy: (times) => {
@@ -40,5 +40,3 @@ export async function closeRedisClient(): Promise<void> {
     redisClient = null;
   }
 }
-
-

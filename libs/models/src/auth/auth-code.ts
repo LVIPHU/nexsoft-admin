@@ -13,5 +13,3 @@ export const authCodeResponseSchema = z.object({
 });
 
 export type AuthCodeResponseDto = z.infer<typeof authCodeResponseSchema>;
-
-

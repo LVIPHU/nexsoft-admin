@@ -31,7 +31,10 @@ export class SessionStorage {
   saveSession(session: SessionData): void {
     try {
       const data = JSON.stringify(session);
-      if ((this.storageType === 'localStorage' || this.storageType === 'sessionStorage') && this.storage instanceof Storage) {
+      if (
+        (this.storageType === 'localStorage' || this.storageType === 'sessionStorage') &&
+        this.storage instanceof Storage
+      ) {
         this.storage.setItem(SESSION_KEY, data);
       } else if (this.storage instanceof Map) {
         this.storage.set(SESSION_KEY, data);
@@ -48,7 +51,10 @@ export class SessionStorage {
     try {
       let data: string | null = null;
 
-      if ((this.storageType === 'localStorage' || this.storageType === 'sessionStorage') && this.storage instanceof Storage) {
+      if (
+        (this.storageType === 'localStorage' || this.storageType === 'sessionStorage') &&
+        this.storage instanceof Storage
+      ) {
         data = this.storage.getItem(SESSION_KEY);
       } else if (this.storage instanceof Map) {
         data = this.storage.get(SESSION_KEY) || null;
@@ -78,7 +84,10 @@ export class SessionStorage {
    */
   clearSession(): void {
     try {
-      if ((this.storageType === 'localStorage' || this.storageType === 'sessionStorage') && this.storage instanceof Storage) {
+      if (
+        (this.storageType === 'localStorage' || this.storageType === 'sessionStorage') &&
+        this.storage instanceof Storage
+      ) {
         this.storage.removeItem(SESSION_KEY);
         this.storage.removeItem(TOKEN_KEY);
       } else if (this.storage instanceof Map) {
@@ -98,5 +107,3 @@ export class SessionStorage {
     return session !== null && session.expiresAt > Date.now();
   }
 }
-
-

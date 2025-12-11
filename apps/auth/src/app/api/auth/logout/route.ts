@@ -17,10 +17,7 @@ export async function POST(request: NextRequest) {
     const userId = request.cookies.get('user_id')?.value;
 
     if (!userId && !validated.refresh_token) {
-      return NextResponse.json(
-        { error: 'User not authenticated' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'User not authenticated' }, { status: 401 });
     }
 
     // For now, we'll use a mock userId if not available
@@ -36,7 +33,10 @@ export async function POST(request: NextRequest) {
 
       // TODO: Publish logout event to Redis pub/sub or message queue
       // This would notify all apps to logout the user
-      console.log('Global logout - affected apps:', appSessions.map(s => s.appId));
+      console.log(
+        'Global logout - affected apps:',
+        appSessions.map((s) => s.appId),
+      );
 
       return NextResponse.json({
         success: true,
@@ -48,10 +48,7 @@ export async function POST(request: NextRequest) {
       const appId = request.headers.get('x-app-id') || request.nextUrl.searchParams.get('app_id');
 
       if (!appId) {
-        return NextResponse.json(
-          { error: 'App ID required for local logout' },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'App ID required for local logout' }, { status: 400 });
       }
 
       await revokeAppSession(appId, targetUserId);
@@ -63,18 +60,10 @@ export async function POST(request: NextRequest) {
     }
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: 'Invalid request', details: error.message },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Invalid request', details: error.message }, { status: 400 });
     }
 
     console.error('Error during logout:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
-
-

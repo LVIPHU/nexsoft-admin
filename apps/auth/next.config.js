@@ -2,6 +2,7 @@
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { composePlugins, withNx } = require('@nx/next');
+const { version } = require('./package.json');
 
 /**
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
@@ -10,8 +11,10 @@ const nextConfig = {
   // Use this to set Nx-specific options
   // See: https://nx.dev/recipes/next/next-config-setup
   nx: {},
-  experimental: {
-    swcPlugins: [['@lingui/swc-plugin', {}]],
+  // Configure Turbopack to handle .po files
+  // Note: SWC plugin is disabled due to compatibility issues
+  env: {
+    version: version,
   },
   turbopack: {
     rules: {
@@ -22,6 +25,7 @@ const nextConfig = {
     },
   },
   webpack: (config) => {
+    // Add Lingui loader for .po files (fallback for webpack mode)
     config.module.rules.push({
       test: /\.po$/,
       use: {

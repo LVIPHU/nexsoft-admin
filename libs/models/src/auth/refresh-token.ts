@@ -10,5 +10,3 @@ export type RefreshTokenRequestDto = z.infer<typeof refreshTokenRequestSchema>;
 export const refreshTokenResponseSchema = authResponseSchema;
 
 export type RefreshTokenResponseDto = z.infer<typeof refreshTokenResponseSchema>;
-
-

@@ -108,6 +108,7 @@ export default defineConfig(() => ({
         'lucide-react',
         'cmdk',
         'embla-carousel-react',
+        'framer-motion',
         'react-day-picker',
         'react-resizable-panels',
         'sonner',
@@ -115,7 +116,6 @@ export default defineConfig(() => ({
         'zod',
         'input-otp',
         'date-fns',
-        'motion',
         'next-themes',
         // Utility packages (should be externalized)
         'class-variance-authority',

@@ -35,7 +35,7 @@ export function useSSO(config?: Partial<SSOConfig>): UseSSOReturn {
       try {
         const currentSession = client.getSession();
         const authenticated = client.isAuthenticated();
-        
+
         setSession(currentSession);
         setIsAuthenticated(authenticated);
         setError(null);
@@ -65,7 +65,7 @@ export function useSSO(config?: Partial<SSOConfig>): UseSSOReturn {
         setError(err instanceof Error ? err.message : 'Login failed');
       }
     },
-    [client]
+    [client],
   );
 
   const logout = useCallback(
@@ -79,7 +79,7 @@ export function useSSO(config?: Partial<SSOConfig>): UseSSOReturn {
         setError(err instanceof Error ? err.message : 'Logout failed');
       }
     },
-    [client]
+    [client],
   );
 
   const refreshToken = useCallback(async () => {
@@ -120,5 +120,3 @@ export function useSSO(config?: Partial<SSOConfig>): UseSSOReturn {
     getAccessToken,
   };
 }
-
-

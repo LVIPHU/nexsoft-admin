@@ -20,21 +20,20 @@ type FormPasswordProps<T extends FieldValues> = {
 } & Omit<React.ComponentProps<typeof Input>, 'value' | 'onChange' | 'onBlur' | 'name'>;
 
 function FormPassword<T extends FieldValues>({
-                                            name,
-                                            config,
-                                            loading = false,
-                                            className,
-                                            textHidePassword = 'Hide password',
-                                            textShowPassword = 'Show password',
-                                            ...inputProps
-                                          }: FormPasswordProps<T>) {
+  name,
+  config,
+  loading = false,
+  className,
+  textHidePassword = 'Hide password',
+  textShowPassword = 'Show password',
+  ...inputProps
+}: FormPasswordProps<T>) {
   const { control } = useFormContext<T>();
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
   const togglePasswordVisibility = React.useCallback(() => {
     setShowPassword((prevState) => !prevState);
   }, []);
-
 
   if (loading) {
     return <FormFieldSkeleton type='text' orientation={config?.orientation} />;
@@ -65,27 +64,21 @@ function FormPassword<T extends FieldValues>({
             className={className}
             {...inputProps}
           />
-          <InputGroupAddon align="inline-end">
+          <InputGroupAddon align='inline-end'>
             <Tooltip>
               <TooltipTrigger asChild>
                 <InputGroupButton
-                  variant="ghost"
+                  variant='ghost'
                   aria-label={showPassword ? textHidePassword : textShowPassword}
-                  size="icon-xs"
+                  size='icon-xs'
                   onClick={togglePasswordVisibility}
-                  type="button"
+                  type='button'
                 >
                   {showPassword ? <EyeOffIcon /> : <EyeIcon />}
                 </InputGroupButton>
               </TooltipTrigger>
               <TooltipContent>
-                <p>
-                  {showPassword ? (
-                    textHidePassword
-                  ) : (
-                    textShowPassword
-                  )}
-                </p>
+                <p>{showPassword ? textHidePassword : textShowPassword}</p>
               </TooltipContent>
             </Tooltip>
           </InputGroupAddon>

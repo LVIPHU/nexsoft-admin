@@ -112,15 +112,15 @@ TOKEN_STORAGE=localStorage
 
 ### Common Variables:
 
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `AUTH_SERVER_URL` | URL of the auth server (auth.com) | `http://localhost:3000` |
-| `APP_URL` | URL of the current app | `http://localhost:3001` (social) |
-| `APP_ID` | Unique identifier for the app in SSO | `social`, `energy` |
-| `REDIS_URL` | Connection string for Redis | `redis://localhost:6379` |
-| `AUTH_CODE_EXPIRY` | Auth code expiration time (seconds) | `300` (5 minutes) |
-| `ACCESS_TOKEN_EXPIRY` | Access token expiration time (seconds) | `3600` (1 hour) |
-| `TOKEN_STORAGE` | How to store tokens: localStorage, sessionStorage, cookie, memory | `localStorage` |
+| Variable              | Description                                                       | Example                          |
+| --------------------- | ----------------------------------------------------------------- | -------------------------------- |
+| `AUTH_SERVER_URL`     | URL of the auth server (auth.com)                                 | `http://localhost:3000`          |
+| `APP_URL`             | URL of the current app                                            | `http://localhost:3001` (social) |
+| `APP_ID`              | Unique identifier for the app in SSO                              | `social`, `energy`               |
+| `REDIS_URL`           | Connection string for Redis                                       | `redis://localhost:6379`         |
+| `AUTH_CODE_EXPIRY`    | Auth code expiration time (seconds)                               | `300` (5 minutes)                |
+| `ACCESS_TOKEN_EXPIRY` | Access token expiration time (seconds)                            | `3600` (1 hour)                  |
+| `TOKEN_STORAGE`       | How to store tokens: localStorage, sessionStorage, cookie, memory | `localStorage`                   |
 
 ### Next.js (Auth App):
 
@@ -135,6 +135,7 @@ TOKEN_STORAGE=localStorage
 ## 📝 Quick Setup Steps
 
 1. **Create .env file for Auth app:**
+
    ```bash
    # From root directory
    cd apps/auth
@@ -142,18 +143,21 @@ TOKEN_STORAGE=localStorage
    ```
 
 2. **Create .env file for Social app:**
+
    ```bash
    cd apps/social
    # Copy and edit the template
    ```
 
 3. **Create .env file for Energy app:**
+
    ```bash
    cd apps/energy
    # Copy and edit the template
    ```
 
 4. **Start Redis:**
+
    ```bash
    # In WSL2 terminal
    sudo service redis-server start
@@ -177,6 +181,7 @@ TOKEN_STORAGE=localStorage
 ## 🚀 Production
 
 In production, environment variables should be set via:
+
 - **Vercel/Netlify**: Through dashboard settings
 - **Docker**: Via docker-compose.yml or docker run -e
 - **K8s**: Via ConfigMap/Secrets

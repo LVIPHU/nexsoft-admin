@@ -1,6 +1,14 @@
 // Client
 export { SSOClient } from './client/sso-client.js';
-export type { SSOConfig, TokenResponse, TokenExchangeRequest, RefreshTokenRequest, SessionData, AuthState, LogoutType } from './types/sso.types.js';
+export type {
+  SSOConfig,
+  TokenResponse,
+  TokenExchangeRequest,
+  RefreshTokenRequest,
+  SessionData,
+  AuthState,
+  LogoutType,
+} from './types/sso.types.js';
 
 // Hooks
 export { useSSO } from './hooks/use-sso.js';

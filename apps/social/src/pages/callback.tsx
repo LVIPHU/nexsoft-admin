@@ -17,14 +17,14 @@ export function CallbackPage() {
       try {
         const client = getSSOClient();
         const currentUrl = window.location.href;
-        
+
         // Handle callback
         await client.handleCallback(currentUrl);
-        
+
         // Get the original redirect path from localStorage or default to home
         const redirectPath = localStorage.getItem('sso_redirect_path') || '/';
         localStorage.removeItem('sso_redirect_path');
-        
+
         // Redirect to original page or home
         navigate(redirectPath, { replace: true });
       } catch (err) {
@@ -39,10 +39,10 @@ export function CallbackPage() {
 
   if (isProcessing) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="text-center">
-          <div className="mb-4">Processing authentication...</div>
-          <div className="animate-spin">⏳</div>
+      <div className='flex h-screen items-center justify-center'>
+        <div className='text-center'>
+          <div className='mb-4'>Processing authentication...</div>
+          <div className='animate-spin'>⏳</div>
         </div>
       </div>
     );
@@ -50,16 +50,16 @@ export function CallbackPage() {
 
   if (error) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="text-center">
-          <div className="mb-4 text-red-600">Authentication Error</div>
-          <div className="mb-4">{error}</div>
+      <div className='flex h-screen items-center justify-center'>
+        <div className='text-center'>
+          <div className='mb-4 text-red-600'>Authentication Error</div>
+          <div className='mb-4'>{error}</div>
           <button
             onClick={() => {
               const client = getSSOClient();
               client.initiateLogin();
             }}
-            className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            className='rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600'
           >
             Try Again
           </button>
@@ -70,4 +70,3 @@ export function CallbackPage() {
 
   return null;
 }
-

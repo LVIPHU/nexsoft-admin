@@ -27,10 +27,7 @@ export function App() {
         </ul>
       </div>
       <Routes>
-        <Route
-          path='/callback'
-          element={<CallbackPage />}
-        />
+        <Route path='/callback' element={<CallbackPage />} />
         <Route
           path='/'
           element={

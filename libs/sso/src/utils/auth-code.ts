@@ -42,5 +42,3 @@ export function parseErrorFromUrl(url: string): string | null {
     return null;
   }
 }
-
-

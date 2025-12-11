@@ -125,5 +125,3 @@ export async function getAllAppSessions(userId: string): Promise<Array<{ appId: 
 
   return sessions;
 }
-
-

@@ -15,5 +15,3 @@ export const logoutResponseSchema = z.object({
 });
 
 export type LogoutResponseDto = z.infer<typeof logoutResponseSchema>;
-
-

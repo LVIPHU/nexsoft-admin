@@ -11,5 +11,3 @@ export type TokenExchangeRequestDto = z.infer<typeof tokenExchangeRequestSchema>
 export const tokenExchangeResponseSchema = authResponseSchema;
 
 export type TokenExchangeResponseDto = z.infer<typeof tokenExchangeResponseSchema>;
-
-

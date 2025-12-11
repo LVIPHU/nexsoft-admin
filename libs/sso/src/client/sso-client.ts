@@ -23,7 +23,7 @@ export class SSOClient {
    */
   initiateLogin(redirectUri?: string): void {
     const finalRedirectUri = redirectUri || `${this.config.appUrl}${this.config.callbackPath}`;
-    
+
     // Validate redirect URI
     const allowedOrigins = [this.config.appUrl];
     if (!validateRedirectUri(finalRedirectUri, allowedOrigins)) {
@@ -105,7 +105,7 @@ export class SSOClient {
    */
   private saveSession(tokenResponse: TokenResponse): void {
     const expiresAt = new Date(tokenResponse.expires_in).getTime();
-    
+
     const session: SessionData = {
       accessToken: tokenResponse.access_token,
       refreshToken: tokenResponse.refresh_token,
@@ -134,7 +134,7 @@ export class SSOClient {
    */
   async getAccessToken(): Promise<string | null> {
     const session = this.sessionStorage.getSession();
-    
+
     if (!session) {
       return null;
     }
@@ -161,7 +161,7 @@ export class SSOClient {
    */
   async logout(type: LogoutType = 'local'): Promise<void> {
     const session = this.sessionStorage.getSession();
-    
+
     if (session) {
       try {
         await fetch(`${this.config.authServerUrl}/api/auth/logout`, {
@@ -208,5 +208,3 @@ export class SSOClient {
     return await this.exchangeCode(code, redirectUri);
   }
 }
-
-

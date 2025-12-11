@@ -5,9 +5,9 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
 import Negotiator from 'negotiator';
-import { localeIds } from '@nexsoft-admin/utils';
+import { localeIds, defaultLanguage } from '@nexsoft-admin/utils';
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const pathnameHasLocale = localeIds.some((locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`);
@@ -28,7 +28,7 @@ function getRequestLocale(requestHeaders: Headers): string {
     headers: { 'accept-language': langHeader },
   }).languages(localeIds.slice());
 
-  return languages[0] || localeIds[0] || 'en';
+  return languages[0] || localeIds[0] || defaultLanguage;
 }
 
 export const config = {

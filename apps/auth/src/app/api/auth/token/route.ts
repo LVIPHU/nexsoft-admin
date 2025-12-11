@@ -17,27 +17,18 @@ export async function POST(request: NextRequest) {
     const authCodeData = await getAuthCode(validated.code);
 
     if (!authCodeData) {
-      return NextResponse.json(
-        { error: 'Invalid or expired auth code' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Invalid or expired auth code' }, { status: 400 });
     }
 
     // Validate redirect_uri matches
     if (authCodeData.redirectUri !== validated.redirect_uri) {
-      return NextResponse.json(
-        { error: 'Redirect URI mismatch' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Redirect URI mismatch' }, { status: 400 });
     }
 
     // Check if code is expired
     if (authCodeData.expiresAt < Date.now()) {
       await deleteAuthCode(validated.code);
-      return NextResponse.json(
-        { error: 'Auth code expired' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Auth code expired' }, { status: 400 });
     }
 
     // Call external API to get tokens
@@ -84,25 +75,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(tokens);
     } catch (error) {
       console.error('Error calling external auth API:', error);
-      return NextResponse.json(
-        { error: 'Failed to exchange code for tokens' },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: 'Failed to exchange code for tokens' }, { status: 500 });
     }
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: 'Invalid request', details: error.message },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Invalid request', details: error.message }, { status: 400 });
     }
 
     console.error('Error exchanging token:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
-
-
