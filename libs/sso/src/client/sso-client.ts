@@ -30,7 +30,7 @@ export class SSOClient {
       throw new Error('Invalid redirect URI');
     }
 
-    const loginUrl = new URL(`${this.config.authServerUrl}/login`);
+    const loginUrl = new URL(`${this.config.authServerUrl}/sign-in`);
     loginUrl.searchParams.set('redirect_uri', finalRedirectUri);
     loginUrl.searchParams.set('app_id', this.config.appId);
 

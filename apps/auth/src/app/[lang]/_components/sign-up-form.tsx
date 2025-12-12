@@ -39,7 +39,7 @@ function SignUpForm() {
       fieldConfigs={fieldConfigs}
       onSubmit={(data) => {
         console.log('Form submitted:', data);
-        toast.success(`Signed un as: ${data.username}`);
+        toast.success(`Signed up as: ${data.username}`);
       }}
     >
       <FormGenerator schema={signUpSchema} fieldConfigs={fieldConfigs} />

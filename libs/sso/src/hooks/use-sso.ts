@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { SSOClient } from '../client/sso-client.js';
 import { getSSOConfig } from '../config/sso-config.js';
+import { useSSOContext } from '../provider.js';
 import type { SSOConfig, SessionData, LogoutType } from '../types/sso.types.js';
 
 export interface UseSSOReturn {
@@ -17,10 +18,23 @@ export interface UseSSOReturn {
 
 /**
  * React hook for SSO functionality
+ * Priority order:
+ * 1. Config from Context (if SSOProvider is used)
+ * 2. Config from parameter
+ * 3. Config from getSSOConfig() (backward compatibility)
  */
 export function useSSO(config?: Partial<SSOConfig>): UseSSOReturn {
+  const context = useSSOContext();
+
   const [client] = useState(() => {
-    const fullConfig = config ? { ...getSSOConfig(), ...config } : getSSOConfig();
+    // Priority 1: Use Context config if available
+    let fullConfig: SSOConfig;
+    if (context?.config) {
+      fullConfig = config ? { ...context.config, ...config } : context.config;
+    } else {
+      // Priority 2 & 3: Use parameter or getSSOConfig()
+      fullConfig = config ? { ...getSSOConfig(), ...config } : getSSOConfig();
+    }
     return new SSOClient(fullConfig);
   });
 

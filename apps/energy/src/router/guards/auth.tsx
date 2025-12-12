@@ -1,7 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { Outlet, useLocation } from 'react-router';
 import { useSSO } from '@nexsoft-admin/sso';
-import { getSSOClient } from '@/libs/sso/setup';
 
 interface AuthGuardProps {
   fallback?: ReactNode;
@@ -13,7 +12,7 @@ interface AuthGuardProps {
  */
 function AuthGuard({ fallback }: AuthGuardProps) {
   const location = useLocation();
-  const { isAuthenticated, isLoading } = useSSO();
+  const { isAuthenticated, isLoading, login } = useSSO();
   const [isChecking, setIsChecking] = useState(true);
 
   useEffect(() => {
@@ -24,16 +23,15 @@ function AuthGuard({ fallback }: AuthGuardProps) {
 
       if (!isAuthenticated) {
         // User is not authenticated, redirect to auth server
-        const client = getSSOClient();
         const redirectUri = `${window.location.origin}${location.pathname}`;
-        client.initiateLogin(redirectUri);
+        login(redirectUri);
       } else {
         setIsChecking(false);
       }
     };
 
     checkAuth();
-  }, [isAuthenticated, isLoading, location.pathname]);
+  }, [isAuthenticated, isLoading, location.pathname, login]);
 
   if (isLoading || isChecking) {
     return fallback || <div>Loading...</div>;

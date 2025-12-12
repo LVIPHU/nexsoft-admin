@@ -20,7 +20,7 @@ export const LocaleSwitch = () => {
     const pathNameWithoutLocale = pathname?.split('/')?.slice(2) ?? [];
     const newPath = `/${id}/${pathNameWithoutLocale.join('/')}`;
 
-    setLocale(locale);
+    setLocale(id);
     router.push(`${newPath}${window.location.search}${window.location.hash}`);
   }
 

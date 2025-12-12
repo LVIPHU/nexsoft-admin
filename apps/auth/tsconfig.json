@@ -48,16 +48,16 @@
   ],
   "references": [
     {
-      "path": "../../libs/ui"
+      "path": "../../libs/sso"
     },
     {
       "path": "../../libs/utils"
     },
     {
-      "path": "../../libs/models"
+      "path": "../../libs/ui"
     },
     {
-      "path": "../../libs/sso"
+      "path": "../../libs/models"
     }
   ]
 }
