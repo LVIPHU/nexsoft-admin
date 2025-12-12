@@ -6,7 +6,7 @@ import { initializeLingui } from '@/libs/lingui';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-await initializeLingui()
+await initializeLingui();
 
 root.render(
   <StrictMode>

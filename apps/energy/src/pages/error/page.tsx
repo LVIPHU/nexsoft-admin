@@ -1,7 +1,7 @@
-import { t } from "@lingui/macro";
-import { Button } from "@nexsoft-admin/ui";
-import { Link, useRouteError } from "react-router";
-import { LocaleProvider } from "@/providers/locale.provider";
+import { t } from '@lingui/macro';
+import { Button } from '@nexsoft-admin/ui';
+import { Link, useRouteError } from 'react-router';
+import { LocaleProvider } from '@/providers/locale.provider';
 
 type RouterError = {
   statusText?: string;
@@ -39,19 +39,19 @@ export const ErrorPage = () => {
 
   return (
     <LocaleProvider>
-      <main className="flex min-h-screen items-center justify-center p-4">
-        <div className="w-full max-w-sm space-y-6">
-          <h4 className="flex flex-col text-4xl font-bold text-white">
+      <main className='flex min-h-screen items-center justify-center p-4'>
+        <div className='w-full max-w-sm space-y-6'>
+          <h4 className='flex flex-col text-4xl font-bold text-white'>
             <span>{t`Error ${statusCode}`}</span>
-            {error.statusText && <span className="text-base font-normal">{error.statusText}</span>}
+            {error.statusText && <span className='text-base font-normal'>{error.statusText}</span>}
           </h4>
 
-          <p className="break-words text-sm text-gray-500">
+          <p className='text-sm break-words text-gray-500'>
             {error.data || error.message || getErrorMessage(statusCode)}
           </p>
 
-          <Button asChild className="inline-block pt-2">
-            <Link to="/">{t`Go to home`}</Link>
+          <Button asChild className='inline-block pt-2'>
+            <Link to='/'>{t`Go to home`}</Link>
           </Button>
         </div>
       </main>

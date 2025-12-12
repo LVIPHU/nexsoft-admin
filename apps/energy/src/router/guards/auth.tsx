@@ -46,6 +46,4 @@ function AuthGuard({ fallback }: AuthGuardProps) {
   return <Outlet />;
 }
 
-export {
-  AuthGuard
-}
+export { AuthGuard };

@@ -136,5 +136,3 @@ export const CustomElement: Story = {
     ),
   },
 };
-
-

@@ -1,5 +1,5 @@
 import { i18n } from '@lingui/core';
-import { detect, fromStorage, fromUrl } from "@lingui/detect-locale";
+import { detect, fromStorage, fromUrl } from '@lingui/detect-locale';
 import { I18nProvider } from '@lingui/react';
 import { useEffect } from 'react';
 
@@ -11,32 +11,20 @@ type Props = {
 };
 
 export const LocaleProvider = ({ children }: Props) => {
-
   useEffect(() => {
-
-
     async function activateLocale() {
-      const detectedLocale =
-        detect(
-          fromUrl('locale'),
-          fromStorage('locale'),
-          defaultLanguage,
-        ) ?? defaultLanguage
+      const detectedLocale = detect(fromUrl('locale'), fromStorage('locale'), defaultLanguage) ?? defaultLanguage;
 
       // Activate the locale only if it's supported
-      const localeToActivate = languages.some(
-        (lang) => lang.id === detectedLocale,
-      )
-        ? detectedLocale
-        : defaultLanguage
+      const localeToActivate = languages.some((lang) => lang.id === detectedLocale) ? detectedLocale : defaultLanguage;
 
       try {
-        await dynamicActivate(localeToActivate)
+        await dynamicActivate(localeToActivate);
       } catch (error) {
         console.error('Failed to activate locale:', error);
         // Fallback to default locale
         try {
-          await dynamicActivate(defaultLanguage)
+          await dynamicActivate(defaultLanguage);
         } catch (fallbackError) {
           console.error('Failed to activate default locale:', fallbackError);
         }
