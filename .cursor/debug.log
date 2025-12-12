@@ -1,0 +1,14 @@
+{"location":"locale.provider.tsx:16","message":"activateLocale entry","data":{"windowExists":true,"localStorageExists":true},"timestamp":1765450354298,"sessionId":"debug-session","runId":"run1","hypothesisId":"B"}
+{"location":"locale.provider.tsx:28","message":"localStorage accessibility test","data":{"accessible":true,"error":null},"timestamp":1765450354372,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"locale.provider.tsx:40","message":"fromUrl result","data":{"result":null,"error":null},"timestamp":1765450354373,"sessionId":"debug-session","runId":"run1","hypothesisId":"D"}
+{"location":"locale.provider.tsx:52","message":"fromStorage result","data":{"result":null,"error":null,"errorType":"Other"},"timestamp":1765450354373,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"locale.provider.tsx:72","message":"detectedLocale","data":{"detectedLocale":"en"},"timestamp":1765450354374,"sessionId":"debug-session","runId":"run1","hypothesisId":"D"}
+{"location":"locale.provider.tsx:85","message":"localeToActivate","data":{"localeToActivate":"en"},"timestamp":1765450354374,"sessionId":"debug-session","runId":"run1","hypothesisId":"D"}
+{"location":"locale.provider.tsx:16","message":"activateLocale entry","data":{"windowExists":true,"localStorageExists":true},"timestamp":1765450354376,"sessionId":"debug-session","runId":"run1","hypothesisId":"B"}
+{"location":"locale.provider.tsx:28","message":"localStorage accessibility test","data":{"accessible":true,"error":null},"timestamp":1765450354377,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"locale.provider.tsx:40","message":"fromUrl result","data":{"result":null,"error":null},"timestamp":1765450354377,"sessionId":"debug-session","runId":"run1","hypothesisId":"D"}
+{"location":"locale.provider.tsx:52","message":"fromStorage result","data":{"result":null,"error":null,"errorType":"Other"},"timestamp":1765450354378,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"locale.provider.tsx:72","message":"detectedLocale","data":{"detectedLocale":"en"},"timestamp":1765450354378,"sessionId":"debug-session","runId":"run1","hypothesisId":"D"}
+{"location":"locale.provider.tsx:85","message":"localeToActivate","data":{"localeToActivate":"en"},"timestamp":1765450354378,"sessionId":"debug-session","runId":"run1","hypothesisId":"D"}
+{"location":"locale.provider.tsx:93","message":"dynamicActivate error","data":{"error":"Failed to load messages for locale: en","locale":"en"},"timestamp":1765450354379,"sessionId":"debug-session","runId":"run1","hypothesisId":"D"}
+{"location":"locale.provider.tsx:93","message":"dynamicActivate error","data":{"error":"Failed to load messages for locale: en","locale":"en"},"timestamp":1765450354379,"sessionId":"debug-session","runId":"run1","hypothesisId":"D"}

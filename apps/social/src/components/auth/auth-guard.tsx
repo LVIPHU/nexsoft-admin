@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import { useSSO } from '@nexsoft-admin/sso';
 import { getSSOClient } from '../../libs/sso/setup';
 

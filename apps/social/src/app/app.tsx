@@ -1,5 +1,5 @@
 import NxWelcome from './nx-welcome';
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes, Link } from 'react-router';
 import { Button } from '@nexsoft-admin/ui';
 
 export function App() {

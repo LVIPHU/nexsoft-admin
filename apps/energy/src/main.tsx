@@ -1,14 +1,15 @@
 import { StrictMode } from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import * as ReactDOM from 'react-dom/client';
-import App from './app/app';
+import { RouterProvider } from 'react-router';
+import { router } from '@/router';
+import { initializeLingui } from '@/libs/lingui';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
+await initializeLingui()
+
 root.render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <RouterProvider router={router} />
   </StrictMode>,
 );
