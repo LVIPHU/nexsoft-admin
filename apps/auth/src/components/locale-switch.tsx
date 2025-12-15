@@ -12,15 +12,11 @@ export const LocaleSwitch = () => {
   const { i18n } = useLingui();
   const pathname = usePathname();
   const router = useRouter();
-
   const [open, setOpen] = useState<boolean>(false);
-  const [locale, setLocale] = useState<LanguageId>(pathname?.split('/')[1] as LanguageId);
 
   function changeLanguage(id: LanguageId) {
     const pathNameWithoutLocale = pathname?.split('/')?.slice(2) ?? [];
     const newPath = `/${id}/${pathNameWithoutLocale.join('/')}`;
-
-    setLocale(id);
     router.push(`${newPath}${window.location.search}${window.location.hash}`);
   }
 

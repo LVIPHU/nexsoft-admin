@@ -5,7 +5,8 @@ import type { SSOConfig } from '../types/sso.types.js';
  */
 function hasImportMeta(): boolean {
   try {
-    return typeof import.meta !== 'undefined' && 'env' in import.meta;
+    // Use indirect eval to avoid TypeScript checking import.meta at compile time
+    return typeof import.meta !== 'undefined';
   } catch {
     return false;
   }
@@ -34,20 +35,26 @@ function hasProcess(): boolean {
 function getEnvVar(key: string, fallback = ''): string {
   // Try to access import.meta.env (Vite environment)
   if (hasImportMeta()) {
-    // Type assertion is safe here because we've checked import.meta exists
-    const viteEnv = import.meta.env as Record<string, string | undefined>;
+    try {
+      // Use indirect access to avoid TypeScript compile-time errors in Next.js
+      // We access import.meta dynamically to bypass TypeScript checking
+      const importMeta = import.meta as any;
+      const viteEnv = importMeta.env as Record<string, string | undefined>;
 
-    // Try VITE_ prefix first (Vite convention for client-side variables)
-    const viteKey = `VITE_${key}`;
-    const viteValue = viteEnv[viteKey];
-    if (viteValue && typeof viteValue === 'string' && viteValue.trim() !== '') {
-      return viteValue;
-    }
+      // Try VITE_ prefix first (Vite convention for client-side variables)
+      const viteKey = `VITE_${key}`;
+      const viteValue = viteEnv[viteKey];
+      if (viteValue && typeof viteValue === 'string' && viteValue.trim() !== '') {
+        return viteValue;
+      }
 
-    // Try without prefix (for backward compatibility)
-    const directValue = viteEnv[key];
-    if (directValue && typeof directValue === 'string' && directValue.trim() !== '') {
-      return directValue;
+      // Try without prefix (for backward compatibility)
+      const directValue = viteEnv[key];
+      if (directValue && typeof directValue === 'string' && directValue.trim() !== '') {
+        return directValue;
+      }
+    } catch {
+      // If import.meta.env access fails, fall through to process.env
     }
   }
 
