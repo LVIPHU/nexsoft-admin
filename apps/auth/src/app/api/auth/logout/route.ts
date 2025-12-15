@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { logoutRequestSchema } from '@nexsoft-admin/models';
 import { revokeAllSessions, revokeAppSession, getAllAppSessions } from '@/libs/redis';
+import { getUserIdFromToken } from '@/libs/jwt';
 import { z } from 'zod';
 
 /**
@@ -13,16 +14,25 @@ export async function POST(request: NextRequest) {
     const validated = logoutRequestSchema.parse(body);
 
     // Get userId from session/cookie or from refresh_token
-    // In a real implementation, you'd decode the refresh_token or get from session
-    const userId = request.cookies.get('user_id')?.value;
+    let userId = request.cookies.get('user_id')?.value;
 
-    if (!userId && !validated.refresh_token) {
+    // If no userId from cookie, decode refresh_token to get userId
+    if (!userId && validated.refresh_token) {
+      try {
+        // MOCK: getUserIdFromToken returns sub (username) as userId
+        // TODO: In the future, this can be changed to lookup actual userId from database
+        userId = getUserIdFromToken(validated.refresh_token);
+      } catch (error) {
+        console.error('Failed to decode refresh token:', error);
+        return NextResponse.json({ error: 'Invalid refresh token' }, { status: 401 });
+      }
+    }
+
+    if (!userId) {
       return NextResponse.json({ error: 'User not authenticated' }, { status: 401 });
     }
 
-    // For now, we'll use a mock userId if not available
-    // In production, decode refresh_token to get userId
-    const targetUserId = userId || 'mock_user_id';
+    const targetUserId = userId;
 
     if (validated.type === 'global') {
       // Global logout: Revoke all sessions

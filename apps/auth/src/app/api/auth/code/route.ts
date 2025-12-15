@@ -33,6 +33,7 @@ export async function POST(request: NextRequest) {
       userId,
       redirectUri: validated.redirect_uri,
       expiresAt,
+      appId: validated.app_id,
     });
 
     return NextResponse.json({

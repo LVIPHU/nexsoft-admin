@@ -9,6 +9,8 @@
     "build:auth": "npx nx build auth",
     "build:social": "npx nx build social",
     "build:energy": "npx nx build energy",
+    "test:hooks": "npx nx test hooks",
+    "test:coverage:hooks": "npx nx test hooks --coverage",
     "i18n:extract": "lingui extract",
     "i18n:extract:auth": "lingui extract --config apps/auth/lingui.config.mjs",
     "i18n:extract:social": "lingui extract --config apps/social/lingui.config.mjs",

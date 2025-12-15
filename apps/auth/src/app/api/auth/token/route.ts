@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAuthCode, deleteAuthCode } from '@/libs/redis';
+import { storeSession, storeAppSession } from '@/libs/redis';
 import { tokenExchangeRequestSchema, type TokenExchangeResponseDto } from '@nexsoft-admin/models';
 import { z } from 'zod';
 
@@ -36,6 +37,10 @@ export async function POST(request: NextRequest) {
     // For now, we'll simulate it
     const externalApiUrl = process.env.EXTERNAL_AUTH_API_URL || '';
 
+    // Get userId and appId from auth code data
+    const userId = authCodeData.userId;
+    const appId = authCodeData.appId;
+
     if (!externalApiUrl) {
       // Fallback: Return mock tokens (in production, always call external API)
       const expiresIn = new Date(Date.now() + 3600 * 1000).toISOString();
@@ -44,6 +49,25 @@ export async function POST(request: NextRequest) {
         refresh_token: `mock_refresh_token_${Date.now()}`,
         expires_in: expiresIn,
       };
+
+      // Convert expires_in (ISO 8601 string) to timestamp (milliseconds)
+      const expiresAt = new Date(expiresIn).getTime();
+
+      // Store session in Redis
+      const sessionData = {
+        accessToken: response.access_token,
+        refreshToken: response.refresh_token,
+        expiresAt,
+        appId,
+      };
+
+      // Store for global logout
+      await storeSession(userId, sessionData);
+
+      // Store for local logout (if appId exists)
+      if (appId) {
+        await storeAppSession(appId, userId, sessionData);
+      }
 
       // Delete auth code (one-time use)
       await deleteAuthCode(validated.code);
@@ -68,6 +92,25 @@ export async function POST(request: NextRequest) {
       }
 
       const tokens = (await tokenResponse.json()) as TokenExchangeResponseDto;
+
+      // Convert expires_in (ISO 8601 string) to timestamp (milliseconds)
+      const expiresAt = new Date(tokens.expires_in).getTime();
+
+      // Store session in Redis
+      const sessionData = {
+        accessToken: tokens.access_token,
+        refreshToken: tokens.refresh_token,
+        expiresAt,
+        appId,
+      };
+
+      // Store for global logout
+      await storeSession(userId, sessionData);
+
+      // Store for local logout (if appId exists)
+      if (appId) {
+        await storeAppSession(appId, userId, sessionData);
+      }
 
       // Delete auth code (one-time use)
       await deleteAuthCode(validated.code);
