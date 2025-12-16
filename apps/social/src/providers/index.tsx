@@ -1,13 +1,9 @@
-import { type ReactNode } from 'react';
 import { LocaleProvider } from './locale.provider';
 import { Toaster } from 'sonner';
 import { SSOProvider, createSSOConfig } from '@nexsoft-admin/sso';
+import { Outlet } from 'react-router';
 
-interface ProvidersProps {
-  children: ReactNode;
-}
-
-export const Providers = ({ children }: ProvidersProps) => {
+export const Providers = () => {
   const ssoConfig = createSSOConfig({
     defaultAuthServerUrl: 'http://localhost:3000',
     defaultAppId: 'social',
@@ -17,7 +13,7 @@ export const Providers = ({ children }: ProvidersProps) => {
   return (
     <SSOProvider config={ssoConfig}>
       <LocaleProvider>
-        {children}
+        <Outlet />
         <Toaster />
       </LocaleProvider>
     </SSOProvider>
