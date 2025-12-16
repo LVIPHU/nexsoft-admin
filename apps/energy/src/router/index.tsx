@@ -9,10 +9,11 @@ import { CallbackPage } from '@/pages/callback/page';
 export const routes = createRoutesFromElements(
   <Route element={<Providers />}>
     <Route errorElement={<ErrorPage />}>
-      <Route path='callback' element={<CallbackPage />} />
+      <Route path='/callback' element={<CallbackPage />} />
       {/*<Route element={<AuthGuard />}>*/}
         <Route element={<RootLayout />}>
-          <Route path='dashboard' element={<DashboardPage />} />
+          <Route path='/dashboard' element={<DashboardPage />} />
+          <Route index element={<Navigate replace to='/dashboard' />} />
           <Route path="*" element={<Navigate replace to='/dashboard' />} />
         </Route>
       {/*</Route>*/}
