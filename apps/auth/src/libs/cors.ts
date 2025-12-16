@@ -3,10 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 /**
  * Allowed origins for CORS
  */
-const ALLOWED_ORIGINS = [
-  process.env.NEXT_PUBLIC_SOCIAL_CLIENT_URL,
-  process.env.NEXT_PUBLIC_ENERGY_CLIENT_URL,
-];
+const ALLOWED_ORIGINS = [process.env.NEXT_PUBLIC_SOCIAL_CLIENT_URL, process.env.NEXT_PUBLIC_ENERGY_CLIENT_URL];
 
 /**
  * Check if origin is allowed
