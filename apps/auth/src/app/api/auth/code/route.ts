@@ -2,7 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import { generateAuthCode } from '@nexsoft-admin/sso/core';
 import { storeAuthCode } from '@/libs/redis';
 import { authCodeRequestSchema } from '@nexsoft-admin/models';
+import { addCorsHeaders, createCorsPreflightResponse } from '@/libs/cors';
 import { z } from 'zod';
+
+/**
+ * OPTIONS /api/auth/code
+ * Handle CORS preflight request
+ */
+export async function OPTIONS(request: NextRequest) {
+  const response = createCorsPreflightResponse(request);
+  return response || new NextResponse(null, { status: 204 });
+}
 
 /**
  * POST /api/auth/code
@@ -22,7 +32,8 @@ export async function POST(request: NextRequest) {
     const userId = request.cookies.get('user_id')?.value;
 
     if (!userId) {
-      return NextResponse.json({ error: 'User not authenticated' }, { status: 401 });
+      const response = NextResponse.json({ error: 'User not authenticated' }, { status: 401 });
+      return addCorsHeaders(request, response);
     }
 
     // Calculate expiry time (5 minutes from now)
@@ -36,16 +47,19 @@ export async function POST(request: NextRequest) {
       appId: validated.app_id,
     });
 
-    return NextResponse.json({
+    const jsonResponse = NextResponse.json({
       code,
       redirect_uri: validated.redirect_uri,
     });
+    return addCorsHeaders(request, jsonResponse);
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid request', details: error.message }, { status: 400 });
+      const response = NextResponse.json({ error: 'Invalid request', details: error.message }, { status: 400 });
+      return addCorsHeaders(request, response);
     }
 
     console.error('Error creating auth code:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    const response = NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return addCorsHeaders(request, response);
   }
 }

@@ -1,6 +1,6 @@
-import { useCallback, useRef } from 'react'
+import { useCallback, useRef } from 'react';
 
-import { useIsomorphicLayoutEffect } from '../use-isomorphic-layout-effect'
+import { useIsomorphicLayoutEffect } from '../use-isomorphic-layout-effect';
 
 /**
  * Custom hook that creates a memoized event callback.
@@ -19,22 +19,20 @@ import { useIsomorphicLayoutEffect } from '../use-isomorphic-layout-effect'
  */
 export function useEventCallback<TArgs extends Array<unknown>, TReturn>(
   fn: (...args: TArgs) => TReturn,
-): (...args: TArgs) => TReturn
+): (...args: TArgs) => TReturn;
 export function useEventCallback<TArgs extends Array<unknown>, TReturn>(
   fn: ((...args: TArgs) => TReturn) | undefined,
-): ((...args: TArgs) => TReturn) | undefined
+): ((...args: TArgs) => TReturn) | undefined;
 export function useEventCallback<TArgs extends Array<unknown>, TReturn>(
   fn: ((...args: TArgs) => TReturn) | undefined,
 ): ((...args: TArgs) => TReturn) | undefined {
   const ref = useRef<typeof fn>(() => {
-    throw new Error('Cannot call an event handler while rendering.')
-  })
+    throw new Error('Cannot call an event handler while rendering.');
+  });
 
   useIsomorphicLayoutEffect(() => {
-    ref.current = fn
-  }, [fn])
+    ref.current = fn;
+  }, [fn]);
 
-  return useCallback((...args: TArgs) => ref.current?.(...args), [ref]) as (
-    ...args: TArgs
-  ) => TReturn
+  return useCallback((...args: TArgs) => ref.current?.(...args), [ref]) as (...args: TArgs) => TReturn;
 }

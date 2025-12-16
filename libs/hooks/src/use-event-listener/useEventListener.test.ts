@@ -1,169 +1,135 @@
-import { fireEvent, renderHook } from '@testing-library/react'
+import { fireEvent, renderHook } from '@testing-library/react';
 
-import { useEventListener } from './useEventListener'
+import { useEventListener } from './useEventListener';
 
 declare global {
   interface WindowEventMap {
-    'test-event': CustomEvent
+    'test-event': CustomEvent;
   }
 
   interface HTMLElementEventMap {
-    'test-event': CustomEvent
+    'test-event': CustomEvent;
   }
 
   interface SVGElementEventMap {
-    'test-event': CustomEvent
+    'test-event': CustomEvent;
   }
 
   interface DocumentEventMap {
-    'test-event': CustomEvent
+    'test-event': CustomEvent;
   }
 }
 
-const windowAddEventListenerSpy = vitest.spyOn(window, 'addEventListener')
-const windowRemoveEventListenerSpy = vitest.spyOn(window, 'removeEventListener')
+const windowAddEventListenerSpy = vitest.spyOn(window, 'addEventListener');
+const windowRemoveEventListenerSpy = vitest.spyOn(window, 'removeEventListener');
 
-const ref = { current: document.createElement('div') }
-const refAddEventListenerSpy = vitest.spyOn(ref.current, 'addEventListener')
-const refRemoveEventListenerSpy = vitest.spyOn(
-  ref.current,
-  'removeEventListener',
-)
+const ref = { current: document.createElement('div') };
+const refAddEventListenerSpy = vitest.spyOn(ref.current, 'addEventListener');
+const refRemoveEventListenerSpy = vitest.spyOn(ref.current, 'removeEventListener');
 
-const docRef = { current: window.document }
-const docAddEventListenerSpy = vitest.spyOn(docRef.current, 'addEventListener')
-const docRemoveEventListenerSpy = vitest.spyOn(
-  docRef.current,
-  'removeEventListener',
-)
+const docRef = { current: window.document };
+const docAddEventListenerSpy = vitest.spyOn(docRef.current, 'addEventListener');
+const docRemoveEventListenerSpy = vitest.spyOn(docRef.current, 'removeEventListener');
 
 describe('useEventListener()', () => {
   afterEach(() => {
-    vitest.clearAllMocks()
-  })
+    vitest.clearAllMocks();
+  });
 
   it('should bind/unbind the event listener to the window when element is not provided', () => {
-    const eventName = 'test-event'
-    const handler = vitest.fn()
-    const options = undefined
+    const eventName = 'test-event';
+    const handler = vitest.fn();
+    const options = undefined;
 
     const { unmount } = renderHook(() => {
-      useEventListener(eventName, handler)
-    })
+      useEventListener(eventName, handler);
+    });
 
-    expect(windowAddEventListenerSpy).toHaveBeenCalledWith(
-      eventName,
-      expect.any(Function),
-      options,
-    )
+    expect(windowAddEventListenerSpy).toHaveBeenCalledWith(eventName, expect.any(Function), options);
 
-    unmount()
+    unmount();
 
-    expect(windowRemoveEventListenerSpy).toHaveBeenCalledWith(
-      eventName,
-      expect.any(Function),
-      options,
-    )
-  })
+    expect(windowRemoveEventListenerSpy).toHaveBeenCalledWith(eventName, expect.any(Function), options);
+  });
 
   it('should bind/unbind the event listener to the element when element is provided', () => {
-    const eventName = 'test-event'
-    const handler = vitest.fn()
-    const options = undefined
+    const eventName = 'test-event';
+    const handler = vitest.fn();
+    const options = undefined;
 
     const { unmount } = renderHook(() => {
-      useEventListener(eventName, handler, ref, options)
-    })
+      useEventListener(eventName, handler, ref, options);
+    });
 
-    expect(refAddEventListenerSpy).toHaveBeenCalledTimes(1)
-    expect(refAddEventListenerSpy).toHaveBeenCalledWith(
-      eventName,
-      expect.any(Function),
-      options,
-    )
+    expect(refAddEventListenerSpy).toHaveBeenCalledTimes(1);
+    expect(refAddEventListenerSpy).toHaveBeenCalledWith(eventName, expect.any(Function), options);
 
-    unmount()
+    unmount();
 
-    expect(refRemoveEventListenerSpy).toHaveBeenCalledWith(
-      eventName,
-      expect.any(Function),
-      options,
-    )
-  })
+    expect(refRemoveEventListenerSpy).toHaveBeenCalledWith(eventName, expect.any(Function), options);
+  });
 
   it('should bind/unbind the event listener to the document when document is provided', () => {
-    const eventName = 'test-event'
-    const handler = vitest.fn()
-    const options = undefined
+    const eventName = 'test-event';
+    const handler = vitest.fn();
+    const options = undefined;
 
     const { unmount } = renderHook(() => {
-      useEventListener(eventName, handler, docRef, options)
-    })
+      useEventListener(eventName, handler, docRef, options);
+    });
 
-    expect(docAddEventListenerSpy).toHaveBeenCalledTimes(1)
-    expect(docAddEventListenerSpy).toHaveBeenCalledWith(
-      eventName,
-      expect.any(Function),
-      options,
-    )
+    expect(docAddEventListenerSpy).toHaveBeenCalledTimes(1);
+    expect(docAddEventListenerSpy).toHaveBeenCalledWith(eventName, expect.any(Function), options);
 
-    unmount()
+    unmount();
 
-    expect(docRemoveEventListenerSpy).toHaveBeenCalledWith(
-      eventName,
-      expect.any(Function),
-      options,
-    )
-  })
+    expect(docRemoveEventListenerSpy).toHaveBeenCalledWith(eventName, expect.any(Function), options);
+  });
 
   it('should pass the options to the event listener', () => {
-    const eventName = 'test-event'
-    const handler = vitest.fn()
+    const eventName = 'test-event';
+    const handler = vitest.fn();
     const options = {
       passive: true,
       once: true,
       capture: true,
-    }
+    };
 
     renderHook(() => {
-      useEventListener(eventName, handler, undefined, options)
-    })
+      useEventListener(eventName, handler, undefined, options);
+    });
 
-    expect(windowAddEventListenerSpy).toHaveBeenCalledWith(
-      eventName,
-      expect.any(Function),
-      options,
-    )
-  })
+    expect(windowAddEventListenerSpy).toHaveBeenCalledWith(eventName, expect.any(Function), options);
+  });
 
   it('should call the event listener handler when the event is triggered', () => {
-    const eventName = 'click'
-    const handler = vitest.fn()
+    const eventName = 'click';
+    const handler = vitest.fn();
 
     renderHook(() => {
-      useEventListener(eventName, handler, ref)
-    })
+      useEventListener(eventName, handler, ref);
+    });
 
-    fireEvent.click(ref.current)
+    fireEvent.click(ref.current);
 
-    expect(handler).toHaveBeenCalledTimes(1)
-  })
+    expect(handler).toHaveBeenCalledTimes(1);
+  });
 
   it('should have the correct event type', () => {
-    const clickHandler = vitest.fn()
-    const keydownHandler = vitest.fn()
+    const clickHandler = vitest.fn();
+    const keydownHandler = vitest.fn();
 
     renderHook(() => {
-      useEventListener('click', clickHandler, ref)
-    })
+      useEventListener('click', clickHandler, ref);
+    });
     renderHook(() => {
-      useEventListener('keydown', keydownHandler, ref)
-    })
+      useEventListener('keydown', keydownHandler, ref);
+    });
 
-    fireEvent.click(ref.current)
-    fireEvent.keyDown(ref.current)
+    fireEvent.click(ref.current);
+    fireEvent.keyDown(ref.current);
 
-    expect(clickHandler).toHaveBeenCalledWith(expect.any(MouseEvent))
-    expect(keydownHandler).toHaveBeenCalledWith(expect.any(KeyboardEvent))
-  })
-})
+    expect(clickHandler).toHaveBeenCalledWith(expect.any(MouseEvent));
+    expect(keydownHandler).toHaveBeenCalledWith(expect.any(KeyboardEvent));
+  });
+});

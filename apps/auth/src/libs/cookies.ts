@@ -24,5 +24,3 @@ export function setUserIdCookie(response: NextResponse, userId: string): void {
 export function getUserIdCookie(request: NextRequest): string | null {
   return request.cookies.get(USER_ID_COOKIE_NAME)?.value || null;
 }
-
-

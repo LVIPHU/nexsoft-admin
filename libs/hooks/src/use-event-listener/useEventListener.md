@@ -15,7 +15,7 @@ Then declare your custom event:
 ```ts
 declare global {
   interface DocumentEventMap {
-    'my-custom-event': CustomEvent<{ exampleArg: string }>
+    'my-custom-event': CustomEvent<{ exampleArg: string }>;
   }
 }
 ```

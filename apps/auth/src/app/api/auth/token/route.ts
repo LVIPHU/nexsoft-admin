@@ -2,7 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getAuthCode, deleteAuthCode } from '@/libs/redis';
 import { storeSession, storeAppSession } from '@/libs/redis';
 import { tokenExchangeRequestSchema, type TokenExchangeResponseDto } from '@nexsoft-admin/models';
+import { addCorsHeaders, createCorsPreflightResponse } from '@/libs/cors';
 import { z } from 'zod';
+
+/**
+ * OPTIONS /api/auth/token
+ * Handle CORS preflight request
+ */
+export async function OPTIONS(request: NextRequest) {
+  const response = createCorsPreflightResponse(request);
+  return response || new NextResponse(null, { status: 204 });
+}
 
 /**
  * POST /api/auth/token
@@ -18,18 +28,21 @@ export async function POST(request: NextRequest) {
     const authCodeData = await getAuthCode(validated.code);
 
     if (!authCodeData) {
-      return NextResponse.json({ error: 'Invalid or expired auth code' }, { status: 400 });
+      const response = NextResponse.json({ error: 'Invalid or expired auth code' }, { status: 400 });
+      return addCorsHeaders(request, response);
     }
 
     // Validate redirect_uri matches
     if (authCodeData.redirectUri !== validated.redirect_uri) {
-      return NextResponse.json({ error: 'Redirect URI mismatch' }, { status: 400 });
+      const response = NextResponse.json({ error: 'Redirect URI mismatch' }, { status: 400 });
+      return addCorsHeaders(request, response);
     }
 
     // Check if code is expired
     if (authCodeData.expiresAt < Date.now()) {
       await deleteAuthCode(validated.code);
-      return NextResponse.json({ error: 'Auth code expired' }, { status: 400 });
+      const response = NextResponse.json({ error: 'Auth code expired' }, { status: 400 });
+      return addCorsHeaders(request, response);
     }
 
     // Call external API to get tokens
@@ -72,7 +85,8 @@ export async function POST(request: NextRequest) {
       // Delete auth code (one-time use)
       await deleteAuthCode(validated.code);
 
-      return NextResponse.json(response);
+      const jsonResponse = NextResponse.json(response);
+      return addCorsHeaders(request, jsonResponse);
     }
 
     // Call external API to get tokens
@@ -115,17 +129,21 @@ export async function POST(request: NextRequest) {
       // Delete auth code (one-time use)
       await deleteAuthCode(validated.code);
 
-      return NextResponse.json(tokens);
+      const jsonResponse = NextResponse.json(tokens);
+      return addCorsHeaders(request, jsonResponse);
     } catch (error) {
       console.error('Error calling external auth API:', error);
-      return NextResponse.json({ error: 'Failed to exchange code for tokens' }, { status: 500 });
+      const response = NextResponse.json({ error: 'Failed to exchange code for tokens' }, { status: 500 });
+      return addCorsHeaders(request, response);
     }
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid request', details: error.message }, { status: 400 });
+      const response = NextResponse.json({ error: 'Invalid request', details: error.message }, { status: 400 });
+      return addCorsHeaders(request, response);
     }
 
     console.error('Error exchanging token:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    const response = NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return addCorsHeaders(request, response);
   }
 }

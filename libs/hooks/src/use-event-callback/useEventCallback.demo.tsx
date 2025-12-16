@@ -1,10 +1,10 @@
-import { useEventCallback } from './useEventCallback'
+import { useEventCallback } from './useEventCallback';
 
 export default function Component() {
   const handleClick = useEventCallback((event) => {
     // Handle the event here
-    console.log('Clicked', event)
-  })
+    console.log('Clicked', event);
+  });
 
-  return <button onClick={handleClick}>Click me</button>
+  return <button onClick={handleClick}>Click me</button>;
 }

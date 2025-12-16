@@ -1,1 +1,1 @@
-export * from './useEventCallback'
+export * from './useEventCallback';

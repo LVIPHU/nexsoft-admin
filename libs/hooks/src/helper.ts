@@ -1,4 +1,4 @@
-import { vitest } from 'vitest'
+import { vitest } from 'vitest';
 
 /**
  * Mocks the matchMedia API
@@ -17,8 +17,8 @@ export const mockMatchMedia = (matches: boolean): void => {
       removeEventListener: vitest.fn(),
       dispatchEvent: vitest.fn(),
     })),
-  })
-}
+  });
+};
 
 /**
  * Mocks the Storage API
@@ -29,26 +29,26 @@ export const mockMatchMedia = (matches: boolean): void => {
  */
 export const mockStorage = (name: 'localStorage' | 'sessionStorage'): void => {
   class StorageMock implements Omit<Storage, 'key' | 'length'> {
-    store: Record<string, string> = {}
+    store: Record<string, string> = {};
 
     clear() {
-      this.store = {}
+      this.store = {};
     }
 
     getItem(key: string) {
-      return this.store[key] || null
+      return this.store[key] || null;
     }
 
     setItem(key: string, value: unknown) {
-      this.store[key] = value + ''
+      this.store[key] = value + '';
     }
 
     removeItem(key: string) {
-      delete this.store[key]
+      delete this.store[key];
     }
   }
 
   Object.defineProperty(window, name, {
     value: new StorageMock(),
-  })
-}
+  });
+};

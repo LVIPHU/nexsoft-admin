@@ -34,6 +34,8 @@ export class SSOClient {
     loginUrl.searchParams.set('redirect_uri', finalRedirectUri);
     loginUrl.searchParams.set('app_id', this.config.appId);
 
+    console.log('loginUrl', loginUrl.toString());
+
     // Redirect to auth server
     if (typeof window !== 'undefined') {
       window.location.href = loginUrl.toString();

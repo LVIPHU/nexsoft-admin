@@ -41,10 +41,10 @@ export function decodeJWT(token: string): JWTPayload {
 
 /**
  * Get userId from JWT token
- * 
+ *
  * Currently MOCK: Returns `sub` (username) as userId
  * TODO: In the future, this can be changed to lookup userId from database using `sub`
- * 
+ *
  * @param token - JWT token string
  * @returns userId (currently returns sub/username)
  */
@@ -54,5 +54,3 @@ export function getUserIdFromToken(token: string): string {
   // TODO: Lookup actual userId from database/API using sub
   return payload.sub;
 }
-
-

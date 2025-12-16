@@ -36,8 +36,19 @@ function SignInForm({ redirectUri, appId }: SignInFormProps) {
   const handleSubmit = async (data: { identifier: string; password: string }) => {
     setIsLoading(true);
     try {
-      // Step 1: Call login API
-      const loginResponse = await fetch('/api/auth/login', {
+      // Build login URL with redirect_uri and app_id as query params (for SSO flow)
+      const loginUrl = new URL('/api/auth/login', window.location.origin);
+      if (redirectUri) {
+        loginUrl.searchParams.set('redirect_uri', redirectUri);
+      }
+      if (appId) {
+        loginUrl.searchParams.set('app_id', appId);
+      }
+
+      // Call login API
+      // If redirect_uri and app_id are provided, the server will automatically
+      // create auth code and redirect to callback URL
+      const loginResponse = await fetch(loginUrl.toString(), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,45 +63,20 @@ function SignInForm({ redirectUri, appId }: SignInFormProps) {
         return;
       }
 
-      // Step 2: If redirectUri is provided, create auth code and redirect
-      if (redirectUri) {
-        // app_id is required by schema, use appId or default to empty string
-        // In practice, appId should always be provided from query params
-        if (!appId) {
-          toast.error('App ID is required');
-          setIsLoading(false);
-          return;
-        }
+      const result = await loginResponse.json();
 
-        const codeResponse = await fetch('/api/auth/code', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            redirect_uri: redirectUri,
-            app_id: appId,
-          }),
-        });
-
-        if (!codeResponse.ok) {
-          const errorData = await codeResponse.json().catch(() => ({ error: 'Failed to create auth code' }));
-          toast.error(errorData.error || 'Failed to create auth code');
-          setIsLoading(false);
-          return;
-        }
-
-        const codeData = (await codeResponse.json()) as { code: string; redirect_uri: string };
-
-        // Step 3: Redirect to app with code
-        const redirectUrl = new URL(codeData.redirect_uri);
-        redirectUrl.searchParams.set('code', codeData.code);
-        window.location.href = redirectUrl.toString();
-      } else {
-        // No redirect URI, just show success
-        toast.success('Signed in successfully');
-        setIsLoading(false);
+      // If redirect_url is provided, redirect to callback URL
+      if (result.redirect_url) {
+        // Redirect to callback URL with auth code
+        window.location.href = result.redirect_url;
+        return; // Don't set loading to false, page will redirect
       }
+
+      // No redirect URI, just show success
+      if (result.success) {
+        toast.success('Signed in successfully');
+      }
+      setIsLoading(false);
     } catch (error) {
       console.error('Login error:', error);
       toast.error('An error occurred during login');

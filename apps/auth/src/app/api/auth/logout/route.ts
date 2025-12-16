@@ -2,7 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import { logoutRequestSchema } from '@nexsoft-admin/models';
 import { revokeAllSessions, revokeAppSession, getAllAppSessions } from '@/libs/redis';
 import { getUserIdFromToken } from '@/libs/jwt';
+import { addCorsHeaders, createCorsPreflightResponse } from '@/libs/cors';
 import { z } from 'zod';
+
+/**
+ * OPTIONS /api/auth/logout
+ * Handle CORS preflight request
+ */
+export async function OPTIONS(request: NextRequest) {
+  const response = createCorsPreflightResponse(request);
+  return response || new NextResponse(null, { status: 204 });
+}
 
 /**
  * POST /api/auth/logout
@@ -24,12 +34,14 @@ export async function POST(request: NextRequest) {
         userId = getUserIdFromToken(validated.refresh_token);
       } catch (error) {
         console.error('Failed to decode refresh token:', error);
-        return NextResponse.json({ error: 'Invalid refresh token' }, { status: 401 });
+        const response = NextResponse.json({ error: 'Invalid refresh token' }, { status: 401 });
+        return addCorsHeaders(request, response);
       }
     }
 
     if (!userId) {
-      return NextResponse.json({ error: 'User not authenticated' }, { status: 401 });
+      const response = NextResponse.json({ error: 'User not authenticated' }, { status: 401 });
+      return addCorsHeaders(request, response);
     }
 
     const targetUserId = userId;
@@ -48,32 +60,37 @@ export async function POST(request: NextRequest) {
         appSessions.map((s) => s.appId),
       );
 
-      return NextResponse.json({
+      const response = NextResponse.json({
         success: true,
         message: 'Logged out from all applications',
       });
+      return addCorsHeaders(request, response);
     } else {
       // Local logout: Revoke only this app's session
       // Get app_id from request header or query
       const appId = request.headers.get('x-app-id') || request.nextUrl.searchParams.get('app_id');
 
       if (!appId) {
-        return NextResponse.json({ error: 'App ID required for local logout' }, { status: 400 });
+        const response = NextResponse.json({ error: 'App ID required for local logout' }, { status: 400 });
+        return addCorsHeaders(request, response);
       }
 
       await revokeAppSession(appId, targetUserId);
 
-      return NextResponse.json({
+      const response = NextResponse.json({
         success: true,
         message: 'Logged out from this application',
       });
+      return addCorsHeaders(request, response);
     }
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid request', details: error.message }, { status: 400 });
+      const response = NextResponse.json({ error: 'Invalid request', details: error.message }, { status: 400 });
+      return addCorsHeaders(request, response);
     }
 
     console.error('Error during logout:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    const response = NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return addCorsHeaders(request, response);
   }
 }

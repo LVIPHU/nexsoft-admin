@@ -1,6 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { refreshTokenRequestSchema, type RefreshTokenResponseDto } from '@nexsoft-admin/models';
+import { addCorsHeaders, createCorsPreflightResponse } from '@/libs/cors';
 import { z } from 'zod';
+
+/**
+ * OPTIONS /api/auth/refresh
+ * Handle CORS preflight request
+ */
+export async function OPTIONS(request: NextRequest) {
+  const response = createCorsPreflightResponse(request);
+  return response || new NextResponse(null, { status: 204 });
+}
 
 /**
  * POST /api/auth/refresh
@@ -23,7 +33,8 @@ export async function POST(request: NextRequest) {
         expires_in: expiresIn,
       };
 
-      return NextResponse.json(response);
+      const jsonResponse = NextResponse.json(response);
+      return addCorsHeaders(request, jsonResponse);
     }
 
     // Call external API to refresh tokens
@@ -40,21 +51,29 @@ export async function POST(request: NextRequest) {
 
       if (!tokenResponse.ok) {
         const error = await tokenResponse.json().catch(() => ({ message: 'Token refresh failed' }));
-        return NextResponse.json({ error: error.message || 'Token refresh failed' }, { status: tokenResponse.status });
+        const response = NextResponse.json(
+          { error: error.message || 'Token refresh failed' },
+          { status: tokenResponse.status },
+        );
+        return addCorsHeaders(request, response);
       }
 
       const tokens = (await tokenResponse.json()) as RefreshTokenResponseDto;
-      return NextResponse.json(tokens);
+      const jsonResponse = NextResponse.json(tokens);
+      return addCorsHeaders(request, jsonResponse);
     } catch (error) {
       console.error('Error calling external refresh API:', error);
-      return NextResponse.json({ error: 'Failed to refresh token' }, { status: 500 });
+      const response = NextResponse.json({ error: 'Failed to refresh token' }, { status: 500 });
+      return addCorsHeaders(request, response);
     }
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid request', details: error.message }, { status: 400 });
+      const response = NextResponse.json({ error: 'Invalid request', details: error.message }, { status: 400 });
+      return addCorsHeaders(request, response);
     }
 
     console.error('Error refreshing token:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    const response = NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return addCorsHeaders(request, response);
   }
 }
