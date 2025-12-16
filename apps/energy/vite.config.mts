@@ -4,27 +4,28 @@ import react from '@vitejs/plugin-react';
 import { lingui } from '@lingui/vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
 import * as path from 'path';
-import { copyFileSync, existsSync } from 'fs';
+import * as fs from 'fs';
 
 // Plugin to copy vercel.json to dist
-const copyVercelConfig = () => ({
-  name: 'copy-vercel-config',
-  closeBundle() {
-    try {
-      const vercelJsonPath = path.resolve(import.meta.dirname, 'vercel.json');
-      const distPath = path.resolve(import.meta.dirname, 'dist/vercel.json');
-      
-      if (existsSync(vercelJsonPath)) {
-        copyFileSync(vercelJsonPath, distPath);
-        console.log('✓ Copied vercel.json to dist/');
-      } else {
-        console.warn('⚠ vercel.json not found, skipping copy');
+function copyVercelConfig() {
+  const rootDir = import.meta.dirname;
+  return {
+    name: 'copy-vercel-config',
+    writeBundle() {
+      try {
+        const vercelJsonPath = path.join(rootDir, 'vercel.json');
+        const distPath = path.join(rootDir, 'dist');
+        
+        if (fs.existsSync(vercelJsonPath) && fs.existsSync(distPath)) {
+          fs.copyFileSync(vercelJsonPath, path.join(distPath, 'vercel.json'));
+          console.log('✓ Copied vercel.json to dist');
+        }
+      } catch (error) {
+        console.warn('Failed to copy vercel.json:', error);
       }
-    } catch (error) {
-      console.warn('Failed to copy vercel.json:', error);
-    }
-  },
-});
+    },
+  };
+}
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
