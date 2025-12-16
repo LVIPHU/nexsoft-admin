@@ -10,9 +10,9 @@ async function initApp() {
     <StrictMode>
       <BrowserRouter>
         <Routes>
-          <Route path='/callback' element={<Test1 />} />
+          <Route path='/' element={<Test1 />} />
           <Route path='/dashboard' element={<Test1 />} />
-          <Route index element={<Navigate replace to='/dashboard' />} />
+          <Route index element={<Navigate replace to='/' />} />
         </Routes>
       </BrowserRouter>
     </StrictMode>,
