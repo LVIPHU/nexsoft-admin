@@ -4,11 +4,8 @@ import { NextRequest, NextResponse } from 'next/server';
  * Allowed origins for CORS
  */
 const ALLOWED_ORIGINS = [
-  'http://localhost:3001', // social app
-  'http://localhost:3002', // energy app
-  // Add production origins here when deploying
-  // 'https://social.example.com',
-  // 'https://energy.example.com',
+  process.env.NEXT_PUBLIC_SOCIAL_CLIENT_URL,
+  process.env.NEXT_PUBLIC_ENERGY_CLIENT_URL,
 ];
 
 /**
