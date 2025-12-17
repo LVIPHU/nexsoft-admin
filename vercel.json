@@ -1,7 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/((?!api|_next|.*\\..*|vi/|en/|zh-Hans/|zh-Hant/).*)",
       "destination": "/index.html"
     }
   ]
