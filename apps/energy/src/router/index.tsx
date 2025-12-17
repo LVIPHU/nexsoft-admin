@@ -4,7 +4,7 @@ import { ErrorPage } from '@/pages/error/page';
 import { RootLayout } from '@/pages/layout';
 import { DashboardPage } from '@/pages/dashboard/page';
 import { CallbackPage } from '@/pages/callback/page';
-import { AuthGuard } from '@/router/guards/auth';
+import { AuthGuard } from '@/router/guards/auth.guard';
 
 export const routes = createRoutesFromElements(
   <Route element={<Providers />}>
