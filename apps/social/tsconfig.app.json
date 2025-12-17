@@ -37,9 +37,6 @@
     },
     {
       "path": "../../libs/sso/tsconfig.lib.json"
-    },
-    {
-      "path": "../../libs/ui/tsconfig.lib.json"
     }
   ]
 }

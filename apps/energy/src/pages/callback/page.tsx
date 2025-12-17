@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { getSSOClient } from '@/libs/sso/setup';
+import { getSSOClient } from '@/libs/sso';
 
 /**
  * Callback page to handle SSO redirect from auth server
