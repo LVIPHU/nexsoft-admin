@@ -1,7 +1,11 @@
 import { Toaster } from 'sonner';
 import { Outlet } from 'react-router';
-import { LocaleProvider } from '@/providers/locale.provider';
+import { TooltipProvider } from '@nexsoft-admin/ui/tooltip';
 import { SSOProvider, createSSOConfig } from '@nexsoft-admin/sso';
+import { LocaleProvider } from '@/providers/locale.provider';
+import { ThemeProvider } from '@/providers/theme.provider';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from '@/libs/query-client';
 
 export const Providers = () => {
   const ssoConfig = createSSOConfig({
@@ -12,10 +16,16 @@ export const Providers = () => {
 
   return (
     <SSOProvider config={ssoConfig}>
-      <LocaleProvider>
-        <Outlet />
-        <Toaster />
-      </LocaleProvider>
+      <QueryClientProvider client={queryClient}>
+        <LocaleProvider>
+          <ThemeProvider>
+            <TooltipProvider>
+              <Outlet />
+              <Toaster />
+            </TooltipProvider>
+          </ThemeProvider>
+        </LocaleProvider>
+      </QueryClientProvider>
     </SSOProvider>
   );
 };

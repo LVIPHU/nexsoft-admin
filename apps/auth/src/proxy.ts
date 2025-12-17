@@ -31,17 +31,15 @@ function handleCORS(request: NextRequest) {
  * Handle i18n locale redirect for page routes
  */
 function handleLocaleRedirect(request: NextRequest) {
-  const { pathname } = request.nextUrl
+  const { pathname } = request.nextUrl;
 
-  const pathnameHasLocale = localeIds.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  )
+  const pathnameHasLocale = localeIds.some((locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`);
 
-  if (pathnameHasLocale) return
+  if (pathnameHasLocale) return;
 
-  const locale = getRequestLocale(request.headers)
-  request.nextUrl.pathname = `/${locale}${pathname}`
-  return NextResponse.redirect(request.nextUrl)
+  const locale = getRequestLocale(request.headers);
+  request.nextUrl.pathname = `/${locale}${pathname}`;
+  return NextResponse.redirect(request.nextUrl);
 }
 
 function getRequestLocale(requestHeaders: Headers): string {
