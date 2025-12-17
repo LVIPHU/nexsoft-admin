@@ -9,65 +9,22 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import Negotiator from 'negotiator';
 import { localeIds, defaultLanguage } from '@nexsoft-admin/utils';
-
-/**
- * Allowed origins for CORS
- */
-const ALLOWED_ORIGINS = [
-  'http://localhost:3001', // social app
-  'http://localhost:3002', // energy app
-  // Add production origins here when deploying
-  // 'https://social.example.com',
-  // 'https://energy.example.com',
-];
-
-/**
- * Check if origin is allowed
- */
-function isAllowedOrigin(origin: string | null): boolean {
-  if (!origin) {
-    return false;
-  }
-  return ALLOWED_ORIGINS.includes(origin) || origin.startsWith('http://localhost:');
-}
+import { addCorsHeaders, createCorsPreflightResponse } from './libs/cors';
 
 /**
  * Handle CORS for API routes
  * Allows cross-origin requests from client apps (social, energy)
  */
 function handleCORS(request: NextRequest) {
-  // Get origin from request
-  const origin = request.headers.get('origin');
-
-  // Check if origin is allowed
-  const allowed = isAllowedOrigin(origin);
-
   // Handle preflight OPTIONS request
   if (request.method === 'OPTIONS') {
-    const response = new NextResponse(null, { status: 200 });
-
-    if (allowed) {
-      response.headers.set('Access-Control-Allow-Origin', origin!);
-      response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-      response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-app-id');
-      response.headers.set('Access-Control-Allow-Credentials', 'true');
-      response.headers.set('Access-Control-Max-Age', '86400'); // 24 hours
-    }
-
-    return response;
+    const response = createCorsPreflightResponse(request);
+    return response || new NextResponse(null, { status: 204 });
   }
 
   // For actual requests, add CORS headers to response
   const response = NextResponse.next();
-
-  if (allowed) {
-    response.headers.set('Access-Control-Allow-Origin', origin!);
-    response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-app-id');
-    response.headers.set('Access-Control-Allow-Credentials', 'true');
-  }
-
-  return response;
+  return addCorsHeaders(request, response);
 }
 
 /**

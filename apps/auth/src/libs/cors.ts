@@ -2,8 +2,23 @@ import { NextRequest, NextResponse } from 'next/server';
 
 /**
  * Allowed origins for CORS
+ * Supports both environment variables and hardcoded production URLs
  */
-const ALLOWED_ORIGINS = [process.env.NEXT_PUBLIC_SOCIAL_CLIENT_URL, process.env.NEXT_PUBLIC_ENERGY_CLIENT_URL];
+const getAllowedOrigins = (): string[] => {
+  const origins: string[] = [];
+
+  // Add origins from environment variables (filter out undefined/null)
+  const envOrigins = [
+    process.env.NEXT_PUBLIC_SOCIAL_CLIENT_URL,
+    process.env.NEXT_PUBLIC_ENERGY_CLIENT_URL,
+    process.env.SOCIAL_CLIENT_URL,
+    process.env.ENERGY_CLIENT_URL,
+  ].filter((origin): origin is string => Boolean(origin));
+
+  origins.push(...envOrigins);
+
+  return origins;
+};
 
 /**
  * Check if origin is allowed
@@ -12,7 +27,16 @@ function isAllowedOrigin(origin: string | null): boolean {
   if (!origin) {
     return false;
   }
-  return ALLOWED_ORIGINS.includes(origin) || origin.startsWith('http://localhost:');
+
+  const allowedOrigins = getAllowedOrigins();
+
+  // Allow localhost for development
+  if (origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
+    return true;
+  }
+
+  // Check against allowed origins
+  return allowedOrigins.includes(origin);
 }
 
 /**
