@@ -1,12 +1,46 @@
 msgid ""
 msgstr ""
+"POT-Creation-Date: 2025-12-11 17:56+0700\n"
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
-"Language: \n"
 "Language-Team: \n"
-"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#: src/pages/error/page.tsx:22
+msgid "An internal server error occurred."
+msgstr "An internal server error occurred."
+
+#: src/pages/error/page.tsx:31
+msgid "An unexpected error occurred."
+msgstr "An unexpected error occurred."
+
+#: src/pages/error/page.tsx:45
+msgid "Error {statusCode}"
+msgstr "Error {statusCode}"
+
+#: src/pages/error/page.tsx:54
+msgid "Go to home"
+msgstr "Go to home"
+
+#: src/pages/error/page.tsx:16
+msgid "The page you're looking for doesn't exist."
+msgstr "The page you're looking for doesn't exist."
+
+#: src/pages/error/page.tsx:28
+msgid "The request was invalid."
+msgstr "The request was invalid."
+
+#: src/pages/error/page.tsx:25
+msgid "You are not authorized to access this page."
+msgstr "You are not authorized to access this page."
+
+#: src/pages/error/page.tsx:19
+msgid "You don't have permission to access this page."
+msgstr "You don't have permission to access this page."

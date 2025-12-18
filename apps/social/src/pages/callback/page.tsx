@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { getSSOClient } from '../libs/sso/setup';
+import { getSSOClient } from '@/libs/sso';
 
 /**
  * Callback page to handle SSO redirect from auth server
@@ -8,6 +8,7 @@ import { getSSOClient } from '../libs/sso/setup';
  */
 export function CallbackPage() {
   const navigate = useNavigate();
+  // const [searchParams] = useSearchParams();
   const [error, setError] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(true);
 

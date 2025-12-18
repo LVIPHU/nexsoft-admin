@@ -1,9 +1,9 @@
 import { useEffect, useState, type ReactNode } from 'react';
-import { useLocation } from 'react-router';
+import { Outlet, useLocation } from 'react-router';
 import { useSSO } from '@nexsoft-admin/sso';
+import { Loading } from '@/components/loading';
 
 interface AuthGuardProps {
-  children: ReactNode;
   fallback?: ReactNode;
 }
 
@@ -11,7 +11,7 @@ interface AuthGuardProps {
  * AuthGuard component - Protects routes that require authentication
  * Redirects to auth server if user is not authenticated
  */
-export function AuthGuard({ children, fallback }: AuthGuardProps) {
+function AuthGuard({ fallback }: AuthGuardProps) {
   const location = useLocation();
   const { isAuthenticated, isLoading, login } = useSSO();
   const [isChecking, setIsChecking] = useState(true);
@@ -24,8 +24,7 @@ export function AuthGuard({ children, fallback }: AuthGuardProps) {
 
       if (!isAuthenticated) {
         // User is not authenticated, redirect to auth server
-        const redirectUri = `${window.location.origin}${location.pathname}`;
-        login(redirectUri);
+        login();
       } else {
         setIsChecking(false);
       }
@@ -35,12 +34,14 @@ export function AuthGuard({ children, fallback }: AuthGuardProps) {
   }, [isAuthenticated, isLoading, location.pathname, login]);
 
   if (isLoading || isChecking) {
-    return fallback || <div>Loading...</div>;
+    return fallback || <Loading />;
   }
 
   if (!isAuthenticated) {
     return fallback || <div>Redirecting to login...</div>;
   }
 
-  return children;
+  return <Outlet />;
 }
+
+export { AuthGuard };
