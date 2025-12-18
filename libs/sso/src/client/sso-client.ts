@@ -34,8 +34,6 @@ export class SSOClient {
     loginUrl.searchParams.set('redirect_uri', finalRedirectUri);
     loginUrl.searchParams.set('app_id', this.config.appId);
 
-    console.log('loginUrl', loginUrl.toString());
-
     // Redirect to auth server
     if (typeof window !== 'undefined') {
       window.location.href = loginUrl.toString();
@@ -55,6 +53,7 @@ export class SSOClient {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'x-app-id': this.config.appId,
       },
       body: JSON.stringify(request),
     });
@@ -87,6 +86,7 @@ export class SSOClient {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'x-app-id': this.config.appId,
       },
       body: JSON.stringify(request),
     });
@@ -150,7 +150,7 @@ export class SSOClient {
         return newSession?.accessToken || null;
       } catch (error) {
         console.error('Failed to refresh token:', error);
-        this.logout('local');
+        await this.logout('local');
         return null;
       }
     }
@@ -170,6 +170,7 @@ export class SSOClient {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'x-app-id': this.config.appId,
           },
           body: JSON.stringify({
             type,

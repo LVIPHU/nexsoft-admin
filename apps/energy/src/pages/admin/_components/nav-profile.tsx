@@ -2,7 +2,7 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { Link } from 'react-router';
 import { ChevronsUpDownIcon, LogOutIcon } from 'lucide-react';
-
+import { useAuth } from '@nexsoft-admin/sso';
 import { Avatar, AvatarFallback, AvatarImage } from '@nexsoft-admin/ui/avatar';
 import {
   DropdownMenu,
@@ -14,7 +14,6 @@ import {
   DropdownMenuTrigger,
 } from '@nexsoft-admin/ui/dropdown-menu';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@nexsoft-admin/ui/sidebar';
-import { useSignOut } from '@/services/auth/sign-out';
 import type { ProfileDto } from '@nexsoft-admin/models';
 import type { NavItem } from '@/types/navigation.type';
 
@@ -25,10 +24,12 @@ interface NavProfileProps {
 
 function NavProfile({ profile, items }: NavProfileProps) {
   const { i18n } = useLingui();
+  const { logout } = useAuth();
   const { isMobile } = useSidebar();
-  const { signOut } = useSignOut();
 
-  const onSignOut = () => signOut();
+  const onSignOut = () => {
+    logout().then(() => window.location.reload());
+  };
 
   return (
     <SidebarMenu>

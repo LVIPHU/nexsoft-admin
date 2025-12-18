@@ -1,0 +1,148 @@
+{
+  "pagination": {
+    "total_rows": 5,
+    "total_pages": 1,
+    "limit": 10,
+    "page": 1,
+    "sort": {
+      "created_at": "ASC"
+    }
+  },
+  "data": [
+    {
+      "id": 1,
+      "username": "admin",
+      "name": "admin",
+      "thumbnail_url": null,
+      "avatar_url": null,
+      "password": "$2a$10$B03aJRuLMWaztleyXKJBkeQmJcLEZskLS/U9rpc4.MPzQzqA1spCy",
+      "status": "ACTIVE",
+      "created_by": "system",
+      "updated_by": "system",
+      "deleted_by": null,
+      "created_at": "2025-11-13T15:36:05.5583+07:00",
+      "updated_at": "2025-11-13T15:36:05.5583+07:00",
+      "deleted_at": null,
+      "last_login_at": null,
+      "roles": [
+        {
+          "id": 1,
+          "name": "Super Admin",
+          "description": "Has full access to all system features and settings.",
+          "created_by": "system",
+          "updated_by": "system",
+          "created_at": "2025-11-13T15:36:05.5583+07:00",
+          "updated_at": "2025-11-13T15:36:05.5583+07:00"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "username": "foden_ngo",
+      "name": "hehe2",
+      "thumbnail_url": null,
+      "avatar_url": null,
+      "password": "$2a$10$toIcqnItl07MaPsm.uXZ/eTXKqBjYcYtNB6O1fKNYHE5gSq8LVHEC",
+      "status": "ACTIVE",
+      "created_by": "system",
+      "updated_by": "foden_ngo",
+      "deleted_by": null,
+      "created_at": "2025-11-13T15:36:42.449457+07:00",
+      "updated_at": "2025-11-14T17:38:40.780975+07:00",
+      "deleted_at": null,
+      "last_login_at": null,
+      "roles": [
+        {
+          "id": 1,
+          "name": "Super Admin",
+          "description": "Has full access to all system features and settings.",
+          "created_by": "system",
+          "updated_by": "system",
+          "created_at": "2025-11-13T15:36:05.5583+07:00",
+          "updated_at": "2025-11-13T15:36:05.5583+07:00"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "username": "foden",
+      "name": "foden",
+      "thumbnail_url": null,
+      "avatar_url": null,
+      "password": "$2a$10$LwZygZaXBnznjUAQatgszeRQ4L5VE2WZNfT5IwqpfFYnOWuDcjuAS",
+      "status": "ACTIVE",
+      "created_by": "system",
+      "updated_by": "system",
+      "deleted_by": null,
+      "created_at": "2025-11-13T16:27:15.779238+07:00",
+      "updated_at": "2025-11-13T16:27:15.779238+07:00",
+      "deleted_at": null,
+      "last_login_at": null,
+      "roles": [
+        {
+          "id": 3,
+          "name": "Viewer",
+          "description": "Can view content but cannot make changes.",
+          "created_by": "system",
+          "updated_by": "system",
+          "created_at": "2025-11-13T15:36:05.5583+07:00",
+          "updated_at": "2025-11-13T15:36:05.5583+07:00"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "username": "foden123456",
+      "name": "Foden 1234",
+      "thumbnail_url": "https://picsum.photos/200/200?random=7",
+      "avatar_url": "https://picsum.photos/400/400?random=8",
+      "password": "$2a$10$NMQAedodrH8qZU.RYkM30O5gXy1ZZ2elAiYQUAlTQkhS.kWp5qXjm",
+      "status": "ACTIVE",
+      "created_by": "foden_ngo",
+      "updated_by": "foden_ngo",
+      "deleted_by": null,
+      "created_at": "2025-11-14T11:53:07.824222+07:00",
+      "updated_at": "2025-11-14T16:28:23.623299+07:00",
+      "deleted_at": null,
+      "last_login_at": null,
+      "roles": [
+        {
+          "id": 1,
+          "name": "Super Admin",
+          "description": "Has full access to all system features and settings.",
+          "created_by": "system",
+          "updated_by": "system",
+          "created_at": "2025-11-13T15:36:05.5583+07:00",
+          "updated_at": "2025-11-13T15:36:05.5583+07:00"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "username": "foden1234",
+      "name": "Foden 1234",
+      "thumbnail_url": "https://picsum.photos/200/200?random=9",
+      "avatar_url": "https://picsum.photos/400/400?random=10",
+      "password": "$2a$10$tbji3QdLppiHvWgZvG3wwepYN35gHcgSKL1szQsCQeDCsEwIP/2JG",
+      "status": "ACTIVE",
+      "created_by": "foden_ngo",
+      "updated_by": "foden_ngo",
+      "deleted_by": null,
+      "created_at": "2025-11-14T15:44:19.954673+07:00",
+      "updated_at": "2025-11-14T15:44:19.954673+07:00",
+      "deleted_at": null,
+      "last_login_at": null,
+      "roles": [
+        {
+          "id": 1,
+          "name": "Super Admin",
+          "description": "Has full access to all system features and settings.",
+          "created_by": "system",
+          "updated_by": "system",
+          "created_at": "2025-11-13T15:36:05.5583+07:00",
+          "updated_at": "2025-11-13T15:36:05.5583+07:00"
+        }
+      ]
+    }
+  ]
+}

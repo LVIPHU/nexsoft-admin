@@ -1,0 +1,31 @@
+{
+  "id": 0,
+  "username": "a_foden_4",
+  "name": "A Foden 4",
+  "bio": "Software Engineer",
+  "location": "HCM,City",
+  "website_url": "https://foden.blog.com",
+  "thumbnail_url": "https://picsum.photos/200/200?random=1",
+  "avatar_url": "https://picsum.photos/400/400?random=2",
+  "banner_url": "https://picsum.photos/1200/400?random=3",
+  "roles": [
+    {
+      "id": 1,
+      "name": "Super Admin",
+      "description": "Has full access to all system features and settings.",
+      "created_by": "system",
+      "updated_by": "system",
+      "created_at": "2025-11-13T15:36:05.5583+07:00",
+      "updated_at": "2025-11-13T15:36:05.5583+07:00"
+    }
+  ],
+  "user_stat": {},
+  "created_at": {
+    "seconds": 1763020748,
+    "nanos": 797539000
+  },
+  "updated_at": {
+    "seconds": 1763020748,
+    "nanos": 797227000
+  }
+}

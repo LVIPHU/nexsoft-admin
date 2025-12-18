@@ -9,8 +9,8 @@ import { queryClient } from '@/libs/query-client';
 
 export const Providers = () => {
   const ssoConfig = createSSOConfig({
-    defaultAuthServerUrl: 'http://localhost:3000',
     defaultAppId: 'energy',
+    defaultAuthServerUrl: 'http://localhost:3000',
     defaultAppUrl: typeof window !== 'undefined' ? window.location.origin : '',
   });
 

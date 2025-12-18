@@ -1,0 +1,20 @@
+{
+  "user_id": "ELQfzt3BhekiCoa861jpDSetRn9q853hrdBb39qY55obO",
+  "username": "a_foden_4",
+  "name": "A Foden 4",
+  "bio": "Software Engineer",
+  "location": "HCM,City",
+  "website_url": "https://foden.blog.com",
+  "thumbnail_url": "https://picsum.photos/200/200?random=4",
+  "avatar_url": "https://picsum.photos/400/400?random=5",
+  "banner_url": "https://picsum.photos/1200/400?random=6",
+  "user_stat": {},
+  "created_at": {
+    "seconds": 1763020748,
+    "nanos": 797539000
+  },
+  "updated_at": {
+    "seconds": 1763020748,
+    "nanos": 797227000
+  }
+}
