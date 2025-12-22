@@ -42,7 +42,7 @@ export const USER_NAVIGATION_ITEMS: Array<NavItem> = [
 export const SETTINGS_NAVIGATION_ITEMS: Array<NavItem> = [
   {
     id: 'general',
-    href: '/settings',
+    href: '/settings/general',
     title: msg`General`,
     icon: WrenchIcon,
   },

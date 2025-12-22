@@ -31,7 +31,7 @@ function Sidebar({ ...props }: React.ComponentProps<typeof SidebarComponent>) {
                 <Logo />
                 <div className='grid flex-1 text-left text-sm leading-tight'>
                   <span className='truncate font-medium'>TBC Admin</span>
-                  <span className='truncate text-xs'>Energy</span>
+                  <span className='truncate text-xs'>Social Network</span>
                 </div>
               </Link>
             </SidebarMenuButton>

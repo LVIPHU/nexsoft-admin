@@ -1,0 +1,74 @@
+{
+  "data": [
+    {
+      "month": {
+        "seconds": "1735689600",
+        "nanos": 0
+      },
+      "new_users": "100"
+    },
+    {
+      "month": {
+        "seconds": "1738368000",
+        "nanos": 0
+      },
+      "new_users": "100"
+    },
+    {
+      "month": {
+        "seconds": "1740787200",
+        "nanos": 0
+      },
+      "new_users": "100"
+    },
+    {
+      "month": {
+        "seconds": "1743465600",
+        "nanos": 0
+      },
+      "new_users": "100"
+    },
+    {
+      "month": {
+        "seconds": "1746057600",
+        "nanos": 0
+      },
+      "new_users": "100"
+    },
+    {
+      "month": {
+        "seconds": "1748736000",
+        "nanos": 0
+      },
+      "new_users": "100"
+    },
+    {
+      "month": {
+        "seconds": "1751328000",
+        "nanos": 0
+      },
+      "new_users": "100"
+    },
+    {
+      "month": {
+        "seconds": "1754006400",
+        "nanos": 0
+      },
+      "new_users": "100"
+    },
+    {
+      "month": {
+        "seconds": "1756684800",
+        "nanos": 0
+      },
+      "new_users": "100"
+    },
+    {
+      "month": {
+        "seconds": "1759276800",
+        "nanos": 0
+      },
+      "new_users": "150"
+    }
+  ]
+}

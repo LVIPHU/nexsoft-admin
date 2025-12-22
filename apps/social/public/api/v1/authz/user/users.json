@@ -1,0 +1,93 @@
+{
+  "pagination": {
+    "total_rows": 11,
+    "total_pages": 2,
+    "limit": 10,
+    "page": 1,
+    "sort": {
+      "created_at": "DESC"
+    }
+  },
+  "data": [
+    {
+      "user_id": "ELQfzt3BhekiCoa861jpDSetRn9q853hrdBb39qY10obO",
+      "username": "foden_10",
+      "name": "Foden Ngo 10",
+      "status": "ACTIVE",
+      "stat": {},
+      "thumbnail_url": "https://picsum.photos/200/200?random=10"
+    },
+    {
+      "user_id": "ELQfzt3BhekiCoa861jpDSetRn9q853hrdBb39qY55obO",
+      "username": "a_foden_4",
+      "name": "A Foden 4",
+      "status": "ACTIVE",
+      "stat": {},
+      "thumbnail_url": "https://picsum.photos/200/200?random=10"
+    },
+    {
+      "user_id": "ELQfzt3BhekiCoa861jpDSetRn9q853hrdBb39qY45obO",
+      "username": "foden_4",
+      "name": "Foden 4",
+      "status": "ACTIVE",
+      "stat": {},
+      "thumbnail_url": "https://picsum.photos/200/200?random=10"
+    },
+    {
+      "user_id": "ELQfzt3BhekiCoa861jpDSetRn9q853hrdBb39qY35obO",
+      "username": "foden_3",
+      "name": "Foden 3",
+      "status": "ACTIVE",
+      "stat": {},
+      "thumbnail_url": "https://picsum.photos/200/200?random=10"
+    },
+    {
+      "user_id": "ELQfzt3BhekiCoa861jpDSetRn9q853hrdBb39qY25obO",
+      "username": "foden_2",
+      "name": "Foden 2",
+      "status": "ACTIVE",
+      "stat": {},
+      "thumbnail_url": "https://picsum.photos/200/200?random=10"
+    },
+    {
+      "user_id": "ELQfzt3BhekiCoa861jpDSetRn9q853hrdBb39qY15obO",
+      "username": "foden_1",
+      "name": "Foden 1",
+      "status": "ACTIVE",
+      "stat": {},
+      "thumbnail_url": "https://picsum.photos/200/200?random=10"
+    },
+    {
+      "user_id": "ELQfzt3BhekiCoa861jpDSetRn9q853hrdBb39qY5obO",
+      "username": "moom_5",
+      "name": "Moom 5",
+      "status": "ACTIVE",
+      "stat": {},
+      "thumbnail_url": "https://picsum.photos/200/200?random=10"
+    },
+    {
+      "user_id": "ELQfzt3BhekiCoa861jpDSetRn9q853hrdBb39qY4obO",
+      "username": "moom_4",
+      "name": "Moom 4",
+      "status": "ACTIVE",
+      "stat": {},
+      "thumbnail_url": "https://picsum.photos/200/200?random=10"
+    },
+    {
+      "user_id": "ELQfzt3BhekiCoa861jpDSetRn9q853hrdBb39qY3obO",
+      "username": "moom_3",
+      "name": "Moom 3",
+      "status": "ACTIVE",
+      "stat": {},
+      "thumbnail_url": "https://picsum.photos/200/200?random=10"
+    },
+    {
+      "user_id": "ELQfzt3BhekiCoa861jpDSetRn9q853hrdBb39qY2obO",
+      "username": "moom_2",
+      "name": "Moom 2",
+      "status": "ACTIVE",
+      "stat": {},
+      "thumbnail_url": "https://picsum.photos/200/200?random=10"
+    }
+  ]
+}
