@@ -442,3 +442,73 @@ export const WithFormGroups: Story = {
     );
   },
 };
+
+export const WithFormHorizontal: Story = {
+  render: () => {
+    const fieldConfigs: FieldConfig[] = [
+      {
+        name: 'name',
+        label: 'Full Name',
+        description: 'Enter your full name',
+        orientation: 'horizontal',
+      },
+      {
+        name: 'email',
+        label: 'Email',
+        description: 'Enter your email',
+        type: 'email',
+        orientation: 'horizontal',
+      },
+      {
+        name: 'bio',
+        label: 'Bio',
+        description: 'Enter your bio',
+        type: 'textarea',
+        orientation: 'horizontal',
+      },
+      {
+        name: 'role',
+        label: 'Role',
+        type: 'select',
+        orientation: 'horizontal',
+        options: [
+          { label: 'Admin', value: 'admin' },
+          { label: 'User', value: 'user' },
+          { label: 'Guest', value: 'guest' },
+        ],
+      }
+    ];
+
+    return (
+      <div className='mx-auto max-w-2xl p-4'>
+        <Form
+          schema={userProfileSchema}
+          defaultValues={{
+            name: '',
+            email: '',
+            bio: '',
+            role: 'user',
+            newsletter: false,
+            active: true,
+          }}
+          onSubmit={(data) => {
+            console.log('Form submitted:', data);
+            toast.success('Profile updated!');
+          }}
+        >
+          <FormGroup legend='Personal Information'>
+            <p className='text-muted-foreground mb-4 text-sm'>Update your personal details.</p>
+            <Grid cols={1} gap={4}>
+              <FormInput name='name' config={fieldConfigs.find((f) => f.name === 'name')} />
+              <FormInput name='email' type='email' config={fieldConfigs.find((f) => f.name === 'email')} />
+              <FormTextarea name='bio' config={fieldConfigs.find((f) => f.name === 'bio')} />
+            </Grid>
+          </FormGroup>
+          <div className='mt-6'>
+            <Button type='submit'>Update Profile</Button>
+          </div>
+        </Form>
+      </div>
+    );
+  },
+};

@@ -23,7 +23,7 @@ export function SettingsLayout() {
         <H1>
           <Trans>Setting</Trans>
         </H1>
-        <p className='text-gray-600'>
+        <p className='text-muted-foreground'>
           <Trans>Update account preferences and manage integrations.</Trans>
         </p>
       </div>

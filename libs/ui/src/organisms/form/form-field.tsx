@@ -24,12 +24,14 @@ type FormFieldProps<T extends FieldValues> = {
   }) => React.ReactNode;
 };
 
+const defaultOrientation = 'vertical';
+
 function FormField<T extends FieldValues>({
   name,
   control,
   label,
   description,
-  orientation = 'vertical',
+  orientation = defaultOrientation,
   className,
   disabled,
   required,
@@ -44,6 +46,8 @@ function FormField<T extends FieldValues>({
     disabled,
   });
 
+  const isVertical = orientation === defaultOrientation;
+
   const fieldProps = {
     value: field.value,
     onChange: field.onChange,
@@ -55,13 +59,16 @@ function FormField<T extends FieldValues>({
   return (
     <Field orientation={orientation} className={cn(className)} data-invalid={invalid} data-disabled={disabled}>
       {label && (
-        <FieldLabel htmlFor={name}>
-          {label}
-          {required && <span className='text-destructive ml-1'>*</span>}
-        </FieldLabel>
+        <div data-slot='field-label' className='flex flex-col justify-between'>
+          <FieldLabel htmlFor={name}>
+            {label}
+            {required && <span className='text-destructive ml-1'>*</span>}
+          </FieldLabel>
+          {description && !isVertical && <FieldDescription>{description}</FieldDescription>}
+        </div>
       )}
-      <FieldContent>
-        {description && <FieldDescription>{description}</FieldDescription>}
+      <FieldContent className='items-end'>
+        {description && isVertical && <FieldDescription>{description}</FieldDescription>}
         {children(fieldProps)}
         {error && <FieldError>{error.message}</FieldError>}
       </FieldContent>
