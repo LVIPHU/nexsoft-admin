@@ -38,7 +38,7 @@ export function SettingsLayout() {
 
         <SelectItems items={SETTINGS_NAVIGATION_ITEMS} />
 
-        <div className='flex w-full flex-1 gap-4 px-4 md:gap-6 md:px-6'>
+        <div className='flex flex-1 gap-4 px-4 md:gap-6 md:px-6'>
           <Outlet />
         </div>
       </div>
