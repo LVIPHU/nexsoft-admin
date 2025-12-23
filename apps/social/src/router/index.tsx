@@ -24,6 +24,8 @@ export const routes = createRoutesFromElements(
               <Route index element={<Navigate replace to='/settings/general' />} />
             </Route>
             <Route index element={<Navigate replace to='/dashboard' />} />
+            {/* Catch-all route for 404 - must be inside AuthGuard to check auth first */}
+            <Route path='*' element={<ErrorPage />} />
           </Route>
         </Route>
       </Route>

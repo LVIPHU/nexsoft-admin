@@ -28,6 +28,7 @@ function GeneralPage() {
           <Trans>Settings and options for your application</Trans>
         </p>
       </div>
+      <Separator />
       <div className='flex flex-col'>
         <div className='flex flex-col lg:flex-row gap-y-4 justify-between'>
           <div>

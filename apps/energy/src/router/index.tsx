@@ -11,13 +11,14 @@ export const routes = createRoutesFromElements(
   <Route element={<Providers />}>
     <Route element={<RootLayout />}>
       <Route errorElement={<ErrorPage />}>
-        <Route path='callback' element={<CallbackPage />} />
         <Route element={<AuthGuard />}>
           <Route element={<AdminLayout />}>
             <Route path='dashboard' element={<DashboardPage />} />
             <Route index element={<Navigate replace to='/dashboard' />} />
           </Route>
         </Route>
+
+        <Route path='callback' element={<CallbackPage />} />
       </Route>
     </Route>
   </Route>,
