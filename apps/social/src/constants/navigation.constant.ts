@@ -1,5 +1,5 @@
 import { msg } from '@lingui/core/macro';
-import { BellIcon, LayoutDashboardIcon, LeafIcon, SettingsIcon, UserIcon, WrenchIcon } from 'lucide-react';
+import { BellIcon, LayoutDashboardIcon, UsersIcon, SettingsIcon, UserIcon, WrenchIcon } from 'lucide-react';
 
 import type { NavItem, Navigation } from '@/types/navigation.type';
 
@@ -11,10 +11,10 @@ export const NAVIGATION_ITEMS: Navigation = [
     icon: LayoutDashboardIcon,
   },
   {
-    id: 'energy-management',
-    href: '/energy',
-    title: msg`Energy Management`,
-    icon: LeafIcon,
+    id: 'users-management',
+    href: '/users',
+    title: msg`Users Management`,
+    icon: UsersIcon,
   },
   {
     id: 'settings',

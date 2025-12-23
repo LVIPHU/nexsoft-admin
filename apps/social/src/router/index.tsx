@@ -9,6 +9,7 @@ import { AuthGuard } from '@/router/guards/auth.guard';
 import { SettingsLayout } from '@/pages/admin/settings/layout';
 import { GeneralPage } from '@/pages/admin/settings/general/page';
 import { ProfilePage } from '@/pages/admin/settings/profile/page';
+import { UsersPage } from '@/pages/admin/users/page';
 
 export const routes = createRoutesFromElements(
   <Route element={<Providers />}>
@@ -18,6 +19,7 @@ export const routes = createRoutesFromElements(
         <Route element={<AuthGuard />}>
           <Route element={<AdminLayout />}>
             <Route path='dashboard' element={<DashboardPage />} />
+            <Route path='users' element={<UsersPage />} />
             <Route path='settings' element={<SettingsLayout />}>
               <Route path='general' element={<GeneralPage />} />
               <Route path='profile' element={<ProfilePage />} />
