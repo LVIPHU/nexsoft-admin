@@ -32,7 +32,7 @@ export default defineConfig(() => ({
       entry: {
         // Main export (backward compatibility)
         index: 'src/index.ts',
-        // Atoms (22 components)
+        // Atoms (23 components)
         alert: 'src/atoms/alert/index.ts',
         'aspect-ratio': 'src/atoms/aspect-ratio/index.ts',
         avatar: 'src/atoms/avatar/index.ts',
@@ -53,6 +53,7 @@ export default defineConfig(() => ({
         slider: 'src/atoms/slider/index.ts',
         spinner: 'src/atoms/spinner/index.ts',
         switch: 'src/atoms/switch/index.ts',
+        table: 'src/atoms/table/index.ts',
         textarea: 'src/atoms/textarea/index.ts',
         toggle: 'src/atoms/toggle/index.ts',
         // Molecules (8 components)
@@ -73,6 +74,7 @@ export default defineConfig(() => ({
         collapsible: 'src/organisms/collapsible/index.ts',
         command: 'src/organisms/command/index.ts',
         'context-menu': 'src/organisms/context-menu/index.ts',
+        'data-table': 'src/organisms/data-table/index.ts',
         dialog: 'src/organisms/dialog/index.ts',
         drawer: 'src/organisms/drawer/index.ts',
         'dropdown-menu': 'src/organisms/dropdown-menu/index.ts',
@@ -86,7 +88,6 @@ export default defineConfig(() => ({
         sheet: 'src/organisms/sheet/index.ts',
         sidebar: 'src/organisms/sidebar/index.ts',
         sonner: 'src/organisms/sonner/index.ts',
-        table: 'src/organisms/table/index.ts',
         tabs: 'src/organisms/tabs/index.ts',
         tooltip: 'src/organisms/tooltip/index.ts',
         form: 'src/organisms/form/index.ts',
@@ -101,6 +102,10 @@ export default defineConfig(() => ({
         'react-hook-form',
         'react/jsx-runtime',
         /^@hookform\/resolvers/,
+        // Dnd-kit packages
+        /^@dnd-kit\/.*/,
+        // Tanstack packages
+        /^@tanstack\/.*/,
         // Radix UI packages
         /^@radix-ui\/.*/,
         // Heavy dependencies

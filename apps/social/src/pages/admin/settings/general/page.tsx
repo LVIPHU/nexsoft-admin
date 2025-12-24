@@ -30,15 +30,13 @@ function GeneralPage() {
       </div>
       <Separator />
       <div className='flex flex-col'>
-        <div className='flex flex-col lg:flex-row gap-y-4 justify-between'>
+        <div className='flex flex-col justify-between gap-y-4 lg:flex-row'>
           <div>
             <Label className='font-medium'>
               <Trans>Sidebar Variant</Trans>
             </Label>
             <p className='text-muted-foreground text-[0.8rem]'>
-              <Trans>
-                Set the sidebar variant you want to use in the dashboard.
-              </Trans>
+              <Trans>Set the sidebar variant you want to use in the dashboard.</Trans>
             </p>
           </div>
           <ToggleGroup
@@ -60,16 +58,14 @@ function GeneralPage() {
             ))}
           </ToggleGroup>
         </div>
-        <Separator className="my-6" />
-        <div className='flex flex-col lg:flex-row gap-y-4 justify-between'>
+        <Separator className='my-6' />
+        <div className='flex flex-col justify-between gap-y-4 lg:flex-row'>
           <div>
             <Label className='font-medium'>
               <Trans>Navbar Style</Trans>
             </Label>
             <p className='text-muted-foreground text-[0.8rem]'>
-              <Trans>
-                Set the navbar style you want to use in the dashboard.
-              </Trans>
+              <Trans>Set the navbar style you want to use in the dashboard.</Trans>
             </p>
           </div>
           <ToggleGroup
@@ -91,16 +87,14 @@ function GeneralPage() {
             ))}
           </ToggleGroup>
         </div>
-        <Separator className="my-6" />
-        <div className='flex flex-col lg:flex-row gap-y-4 justify-between'>
+        <Separator className='my-6' />
+        <div className='flex flex-col justify-between gap-y-4 lg:flex-row'>
           <div>
             <Label className='font-medium'>
               <Trans>Sidebar Collapsible</Trans>
             </Label>
             <p className='text-muted-foreground text-[0.8rem]'>
-              <Trans>
-                Set the sidebar collapsible you want to use in the dashboard.
-              </Trans>
+              <Trans>Set the sidebar collapsible you want to use in the dashboard.</Trans>
             </p>
           </div>
           <ToggleGroup

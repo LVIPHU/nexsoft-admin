@@ -1,0 +1,448 @@
+'use client';
+
+import * as React from 'react';
+import {
+  KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+  DndContext,
+  closestCenter,
+  type UniqueIdentifier,
+  type DragEndEvent,
+} from '@dnd-kit/core';
+import { CSS } from '@dnd-kit/utilities';
+import { useSortable, SortableContext, verticalListSortingStrategy, arrayMove } from '@dnd-kit/sortable';
+import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
+import {
+  Column,
+  ColumnDef,
+  ColumnFiltersState,
+  Row,
+  SortingState,
+  VisibilityState,
+  flexRender,
+  getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+  type Table as TanStackTable,
+} from '@tanstack/react-table';
+import {
+  ArrowDown,
+  ArrowUp,
+  ChevronRight,
+  ChevronsRight,
+  ChevronLeft,
+  ChevronsLeft,
+  ChevronsUpDown,
+  EyeOff,
+  GripVertical,
+  Settings2,
+} from 'lucide-react';
+import { cn } from '@nexsoft-admin/utils';
+import { Button } from '../../atoms/button';
+import { Label } from '../../atoms/label';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../atoms/table';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuItem,
+  DropdownMenuCheckboxItem,
+  DropdownMenuSeparator,
+} from '../dropdown-menu/dropdown-menu';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../select/select';
+
+interface UseDataTableInstanceProps<TData, TValue> {
+  data: TData[];
+  columns: ColumnDef<TData, TValue>[];
+  enableRowSelection?: boolean;
+  defaultPageIndex?: number;
+  defaultPageSize?: number;
+  getRowId?: (row: TData, index: number) => string;
+}
+
+function useDataTableInstance<TData, TValue>({
+  data,
+  columns,
+  enableRowSelection = true,
+  defaultPageIndex,
+  defaultPageSize,
+  getRowId,
+}: UseDataTableInstanceProps<TData, TValue>) {
+  const [rowSelection, setRowSelection] = React.useState({});
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [pagination, setPagination] = React.useState({
+    pageIndex: defaultPageIndex ?? 0,
+    pageSize: defaultPageSize ?? 10,
+  });
+
+  return useReactTable({
+    data,
+    columns,
+    state: {
+      sorting,
+      columnVisibility,
+      rowSelection,
+      columnFilters,
+      pagination,
+    },
+    enableRowSelection,
+    getRowId: getRowId ?? ((row) => (row as any).id.toString()),
+    onRowSelectionChange: setRowSelection,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    onColumnVisibilityChange: setColumnVisibility,
+    onPaginationChange: setPagination,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+  });
+}
+
+function getSortIcon(sort: 'asc' | 'desc' | false | undefined) {
+  switch (sort) {
+    case 'desc':
+      return <ArrowDown />;
+    case 'asc':
+      return <ArrowUp />;
+    default:
+      return <ChevronsUpDown />;
+  }
+}
+
+interface DataTableColumnHeaderProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {
+  column: Column<TData, TValue>;
+  title: string;
+}
+
+function DataTableColumnHeader<TData, TValue>({ column, title, className }: DataTableColumnHeaderProps<TData, TValue>) {
+  if (!column.getCanSort()) {
+    return <div className={cn(className)}>{title}</div>;
+  }
+  return (
+    <div className={cn('flex items-center space-x-2', className)}>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant='ghost' size='sm' className='data-[state=open]:bg-accent -ml-3 h-8'>
+            <span>{title}</span>
+            {getSortIcon(column.getIsSorted())}
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align='start'>
+          <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
+            <ArrowUp className='text-muted-foreground/70 h-3.5 w-3.5' />
+            Asc
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
+            <ArrowDown className='text-muted-foreground/70 h-3.5 w-3.5' />
+            Desc
+          </DropdownMenuItem>
+          {column.columnDef.enableHiding !== false && (
+            <>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
+                <EyeOff className='text-muted-foreground/70 h-3.5 w-3.5' />
+                Hide
+              </DropdownMenuItem>
+            </>
+          )}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  );
+}
+
+function DataTableDragHandle({ id }: { id: number }) {
+  const { attributes, listeners } = useSortable({
+    id,
+  });
+
+  return (
+    <Button
+      {...attributes}
+      {...listeners}
+      variant='ghost'
+      size='icon'
+      className='text-muted-foreground size-7 hover:bg-transparent'
+    >
+      <GripVertical className='text-muted-foreground size-3' />
+      <span className='sr-only'>Drag to reorder</span>
+    </Button>
+  );
+}
+
+const DataTableDragColumn: ColumnDef<any> = {
+  id: 'drag',
+  header: () => null,
+  cell: ({ row }) => <DataTableDragHandle id={row.original.id} />,
+  enableSorting: false,
+  enableHiding: false,
+};
+
+function withDndColumn<T>(columns: ColumnDef<T>[]): ColumnDef<T>[] {
+  return [DataTableDragColumn as ColumnDef<T>, ...columns];
+}
+
+interface DataTablePaginationProps<TData> {
+  table: TanStackTable<TData>;
+}
+
+function DataTablePagination<TData>({ table }: DataTablePaginationProps<TData>) {
+  return (
+    <div className='flex items-center justify-between px-4'>
+      <div className='text-muted-foreground hidden flex-1 text-sm lg:flex'>
+        {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} row(s) selected.
+      </div>
+      <div className='flex w-full items-center gap-8 lg:w-fit'>
+        <div className='hidden items-center gap-2 lg:flex'>
+          <Label htmlFor='rows-per-page' className='text-sm font-medium'>
+            Rows per page
+          </Label>
+          <Select
+            value={`${table.getState().pagination.pageSize}`}
+            onValueChange={(value) => {
+              table.setPageSize(Number(value));
+            }}
+          >
+            <SelectTrigger size='sm' className='w-20' id='rows-per-page'>
+              <SelectValue placeholder={table.getState().pagination.pageSize} />
+            </SelectTrigger>
+            <SelectContent side='top'>
+              {[10, 20, 30, 40, 50].map((pageSize) => (
+                <SelectItem key={pageSize} value={`${pageSize}`}>
+                  {pageSize}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        <div className='flex w-fit items-center justify-center text-sm font-medium'>
+          Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+        </div>
+        <div className='ml-auto flex items-center gap-2 lg:ml-0'>
+          <Button
+            variant='outline'
+            className='hidden h-8 w-8 p-0 lg:flex'
+            onClick={() => table.setPageIndex(0)}
+            disabled={!table.getCanPreviousPage()}
+          >
+            <span className='sr-only'>Go to first page</span>
+            <ChevronsLeft />
+          </Button>
+          <Button
+            variant='outline'
+            className='size-8'
+            size='icon'
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            <span className='sr-only'>Go to previous page</span>
+            <ChevronLeft />
+          </Button>
+          <Button
+            variant='outline'
+            className='size-8'
+            size='icon'
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            <span className='sr-only'>Go to next page</span>
+            <ChevronRight />
+          </Button>
+          <Button
+            variant='outline'
+            className='hidden size-8 lg:flex'
+            size='icon'
+            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+            disabled={!table.getCanNextPage()}
+          >
+            <span className='sr-only'>Go to last page</span>
+            <ChevronsRight />
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DataTableDraggableRow<TData>({ row }: { row: Row<TData> }) {
+  const { transform, transition, setNodeRef, isDragging } = useSortable({
+    id: (row.original as { id: number }).id,
+  });
+  return (
+    <TableRow
+      data-state={row.getIsSelected() && 'selected'}
+      data-dragging={isDragging}
+      ref={setNodeRef}
+      className='relative z-0 data-[dragging=true]:z-10 data-[dragging=true]:opacity-80'
+      style={{
+        transform: CSS.Transform.toString(transform),
+        transition: transition,
+      }}
+    >
+      {row.getVisibleCells().map((cell) => (
+        <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+      ))}
+    </TableRow>
+  );
+}
+
+interface DataTableViewOptionsProps<TData> {
+  table: TanStackTable<TData>;
+}
+
+function DataTableViewOptions<TData>({ table }: DataTableViewOptionsProps<TData>) {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant='outline' size='sm' className='ml-auto hidden h-8 lg:flex'>
+          <Settings2 />
+          View
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align='end' className='w-[150px]'>
+        <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {table
+          .getAllColumns()
+          .filter((column) => typeof column.accessorFn !== 'undefined' && column.getCanHide())
+          .map((column) => {
+            return (
+              <DropdownMenuCheckboxItem
+                key={column.id}
+                className='capitalize'
+                checked={column.getIsVisible()}
+                onCheckedChange={(value) => column.toggleVisibility(!!value)}
+              >
+                {column.id}
+              </DropdownMenuCheckboxItem>
+            );
+          })}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+function DataTableBody<TData, TValue>({
+  table,
+  columns,
+  dndEnabled,
+  dataIds,
+}: {
+  table: TanStackTable<TData>;
+  columns: ColumnDef<TData, TValue>[];
+  dndEnabled: boolean;
+  dataIds: UniqueIdentifier[];
+}) {
+  if (!table.getRowModel().rows.length) {
+    return (
+      <TableRow>
+        <TableCell colSpan={columns.length} className='h-24 text-center'>
+          No results.
+        </TableCell>
+      </TableRow>
+    );
+  }
+  if (dndEnabled) {
+    return (
+      <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
+        {table.getRowModel().rows.map((row) => (
+          <DataTableDraggableRow key={row.id} row={row} />
+        ))}
+      </SortableContext>
+    );
+  }
+  return table.getRowModel().rows.map((row) => (
+    <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+      {row.getVisibleCells().map((cell) => (
+        <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+      ))}
+    </TableRow>
+  ));
+}
+
+interface DataTableProps<TData, TValue> {
+  table: TanStackTable<TData>;
+  columns: ColumnDef<TData, TValue>[];
+  dndEnabled?: boolean;
+  onReorder?: (newData: TData[]) => void;
+}
+
+function DataTable<TData, TValue>({ table, columns, dndEnabled = false, onReorder }: DataTableProps<TData, TValue>) {
+  const dataIds: UniqueIdentifier[] = table.getRowModel().rows.map((row) => Number(row.id) as UniqueIdentifier);
+  const sortableId = React.useId();
+  const sensors = useSensors(useSensor(MouseSensor, {}), useSensor(TouchSensor, {}), useSensor(KeyboardSensor, {}));
+
+  function handleDragEnd(event: DragEndEvent) {
+    const { active, over } = event;
+    if (active && over && active.id !== over.id && onReorder) {
+      const oldIndex = dataIds.indexOf(active.id);
+      const newIndex = dataIds.indexOf(over.id);
+
+      // Call parent with new data order (parent manages state)
+      const newData = arrayMove(table.options.data, oldIndex, newIndex);
+      onReorder(newData);
+    }
+  }
+
+  const tableContent = (
+    <Table>
+      <TableHeader className='bg-muted sticky top-0 z-10'>
+        {table.getHeaderGroups().map((headerGroup) => (
+          <TableRow key={headerGroup.id}>
+            {headerGroup.headers.map((header) => {
+              return (
+                <TableHead key={header.id} colSpan={header.colSpan}>
+                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                </TableHead>
+              );
+            })}
+          </TableRow>
+        ))}
+      </TableHeader>
+      <TableBody className='**:data-[slot=table-cell]:first:w-8'>
+        {DataTableBody({ table, columns, dndEnabled, dataIds })}
+      </TableBody>
+    </Table>
+  );
+
+  if (dndEnabled) {
+    return (
+      <DndContext
+        collisionDetection={closestCenter}
+        modifiers={[restrictToVerticalAxis]}
+        onDragEnd={handleDragEnd}
+        sensors={sensors}
+        id={sortableId}
+      >
+        {tableContent}
+      </DndContext>
+    );
+  }
+
+  return tableContent;
+}
+
+export {
+  useDataTableInstance,
+  DataTableDragColumn,
+  withDndColumn,
+  DataTable,
+  DataTableBody,
+  DataTableColumnHeader,
+  DataTablePagination,
+  DataTableDraggableRow,
+  DataTableViewOptions,
+};

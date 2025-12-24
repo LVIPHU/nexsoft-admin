@@ -24,7 +24,7 @@
     "lingui:compile:auth": "lingui compile --config apps/auth/lingui.config.mjs",
     "lingui:compile:social": "lingui compile --config apps/social/lingui.config.mjs",
     "lingui:compile:energy": "lingui compile --config apps/energy/lingui.config.mjs",
-    "storybook:ui": "npx nx storybook ui",
+    "storybook:ui": "npx nx storybook ui --port=3003",
     "storybook:ui:build": "npx nx build-storybook ui",
     "format:check": "prettier --check --ignore-path .gitignore .",
     "format:write": "prettier --write --ignore-path .gitignore ."
@@ -35,11 +35,15 @@
     "url": "https://luongviphu.vercel.app"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/modifiers": "^9.0.0",
+    "@dnd-kit/sortable": "^10.0.0",
     "@lingui/core": "^5.6.1",
     "@lingui/detect-locale": "^5.6.1",
     "@lingui/macro": "^5.6.1",
     "@lingui/react": "^5.6.1",
     "@tanstack/react-query": "^5.90.12",
+    "@tanstack/react-table": "^8.21.3",
     "axios-auth-refresh": "^3.3.6",
     "dayjs": "^1.11.19",
     "dotenv": "^17.2.3",

@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "resolveJsonModule": true,
     "outDir": "out-tsc/storybook",
     "module": "esnext",
     "moduleResolution": "bundler",
@@ -17,6 +18,7 @@
     "src/**/*.test.js"
   ],
   "include": [
+    "src/**/*.json",
     "src/**/*.stories.ts",
     "src/**/*.stories.js",
     "src/**/*.stories.jsx",

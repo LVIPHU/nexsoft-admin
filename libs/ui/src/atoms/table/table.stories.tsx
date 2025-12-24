@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption } from './table';
 
 const meta: Meta<typeof Table> = {
-  title: 'Organisms/Table',
+  title: 'Atoms/Table',
   component: Table,
   parameters: {
     layout: 'padded',

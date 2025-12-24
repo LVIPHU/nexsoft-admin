@@ -476,7 +476,7 @@ export const WithFormHorizontal: Story = {
           { label: 'User', value: 'user' },
           { label: 'Guest', value: 'guest' },
         ],
-      }
+      },
     ];
 
     return (
