@@ -211,7 +211,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
 const TempDataTable = ({ data: initialData }: { data: z.infer<typeof schema>[] }) => {
   const [data, setData] = React.useState(() => initialData);
   const cols = withDndColumn(columns);
-  const table = useDataTableInstance({ data, columns, getRowId: (row: any) => row.id.toString() });
+  const table = useDataTableInstance({ data, columns: cols, getRowId: (row: any) => row.id.toString() });
   return <ComponentDataTable dndEnabled table={table} columns={cols} onReorder={setData} />;
 };
 
