@@ -10,5 +10,4 @@ export {
   FieldContent,
   FieldTitle,
 } from './field';
-export type { VariantProps } from 'class-variance-authority';
 export { fieldVariants } from './field.variants';

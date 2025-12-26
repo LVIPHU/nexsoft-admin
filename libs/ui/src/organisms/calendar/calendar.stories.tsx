@@ -20,6 +20,7 @@ export const Default: Story = {
 export const WithDateSelected: Story = {
   args: {
     defaultMonth: new Date(2024, 0),
+    mode: 'single',
     selected: new Date(2024, 0, 15),
   },
 };
