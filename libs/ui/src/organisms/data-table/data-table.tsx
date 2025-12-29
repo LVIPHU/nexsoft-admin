@@ -16,12 +16,6 @@ import { CSS } from '@dnd-kit/utilities';
 import { useSortable, SortableContext, verticalListSortingStrategy, arrayMove } from '@dnd-kit/sortable';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import {
-  Column,
-  ColumnDef,
-  ColumnFiltersState,
-  Row,
-  SortingState,
-  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFacetedRowModel,
@@ -30,6 +24,16 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
+  Column,
+  ColumnDef,
+  ColumnFiltersState,
+  Row,
+  SortingState,
+  VisibilityState,
+  PaginationState,
+  ColumnOrderState,
+  RowSelectionState,
+  OnChangeFn,
   type Table as TanStackTable,
 } from '@tanstack/react-table';
 import {
@@ -59,49 +63,79 @@ import {
 } from '../dropdown-menu/dropdown-menu';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../select/select';
 
+interface DataTableState {
+  sorting?: SortingState;
+  pagination?: PaginationState;
+  columnFilters?: ColumnFiltersState;
+  columnVisibility?: VisibilityState;
+  columnOrder?: ColumnOrderState;
+  rowSelection?: RowSelectionState;
+}
+
+interface DataTableStateHandlers {
+  onSortingChange?: OnChangeFn<SortingState>;
+  onPaginationChange?: OnChangeFn<PaginationState>;
+  onColumnFiltersChange?: OnChangeFn<ColumnFiltersState>;
+  onColumnVisibilityChange?: OnChangeFn<VisibilityState>;
+  onColumnOrderChange?: OnChangeFn<ColumnOrderState>;
+  onRowSelectionChange?: OnChangeFn<RowSelectionState>;
+}
+
 interface UseDataTableInstanceProps<TData, TValue> {
   data: TData[];
   columns: ColumnDef<TData, TValue>[];
+
   enableRowSelection?: boolean;
-  defaultPageIndex?: number;
-  defaultPageSize?: number;
   getRowId?: (row: TData, index: number) => string;
+
+  state?: DataTableState;
+  handlers?: DataTableStateHandlers;
+
+  manualPagination?: boolean;
+  manualSorting?: boolean;
+  manualFiltering?: boolean;
 }
 
 function useDataTableInstance<TData, TValue>({
   data,
   columns,
   enableRowSelection = true,
-  defaultPageIndex,
-  defaultPageSize,
   getRowId,
-}: UseDataTableInstanceProps<TData, TValue>) {
-  const [rowSelection, setRowSelection] = React.useState({});
-  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [pagination, setPagination] = React.useState({
-    pageIndex: defaultPageIndex ?? 0,
-    pageSize: defaultPageSize ?? 10,
-  });
 
+  state,
+  handlers,
+
+  manualFiltering,
+  manualPagination,
+  manualSorting,
+}: UseDataTableInstanceProps<TData, TValue>) {
   return useReactTable({
     data,
     columns,
-    state: {
-      sorting,
-      columnVisibility,
-      rowSelection,
-      columnFilters,
-      pagination,
-    },
     enableRowSelection,
+
+    state: {
+      sorting: state?.sorting,
+      columnOrder: state?.columnOrder,
+      columnFilters: state?.columnFilters,
+      columnVisibility: state?.columnVisibility,
+      rowSelection: state?.rowSelection,
+      pagination: state?.pagination,
+    },
+
+    manualFiltering,
+    manualPagination,
+    manualSorting,
+
     getRowId: getRowId ?? ((row) => (row as any).id.toString()),
-    onRowSelectionChange: setRowSelection,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    onColumnVisibilityChange: setColumnVisibility,
-    onPaginationChange: setPagination,
+
+    onRowSelectionChange: handlers?.onRowSelectionChange,
+    onSortingChange: handlers?.onSortingChange,
+    onColumnFiltersChange: handlers?.onColumnFiltersChange,
+    onColumnVisibilityChange: handlers?.onColumnVisibilityChange,
+    onPaginationChange: handlers?.onPaginationChange,
+    onColumnOrderChange: handlers?.onColumnOrderChange,
+
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -164,8 +198,8 @@ function DataTableColumnHeader<TData, TValue>({ column, title, className }: Data
   );
 }
 
-function DataTableDragHandle({ id }: { id: number }) {
-  const { attributes, listeners } = useSortable({
+function DataTableDragHandle({ id }: { id: string | number }) {
+  const { attributes, listeners, isDragging } = useSortable({
     id,
   });
 
@@ -173,9 +207,10 @@ function DataTableDragHandle({ id }: { id: number }) {
     <Button
       {...attributes}
       {...listeners}
-      variant='ghost'
       size='icon'
-      className='text-muted-foreground size-7 hover:bg-transparent'
+      variant='ghost'
+      data-dragging={isDragging}
+      className='text-muted-foreground size-7 cursor-grab hover:bg-transparent data-[dragging=true]:cursor-grabbing'
     >
       <GripVertical className='text-muted-foreground size-3' />
       <span className='sr-only'>Drag to reorder</span>
@@ -279,7 +314,7 @@ function DataTablePagination<TData>({ table }: DataTablePaginationProps<TData>) 
 
 function DataTableDraggableRow<TData>({ row }: { row: Row<TData> }) {
   const { transform, transition, setNodeRef, isDragging } = useSortable({
-    id: (row.original as { id: number }).id,
+    id: (row.original as { id: string | number }).id,
   });
   return (
     <TableRow
@@ -324,7 +359,7 @@ function DataTableViewOptions<TData>({ table }: DataTableViewOptionsProps<TData>
                 key={column.id}
                 className='capitalize'
                 checked={column.getIsVisible()}
-                onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                onCheckedChange={(value) => column.toggleVisibility(value)}
               >
                 {column.id}
               </DropdownMenuCheckboxItem>
@@ -381,12 +416,13 @@ interface DataTableProps<TData, TValue> {
 }
 
 function DataTable<TData, TValue>({ table, columns, dndEnabled = false, onReorder }: DataTableProps<TData, TValue>) {
-  const dataIds: UniqueIdentifier[] = table.getRowModel().rows.map((row) => Number(row.id) as UniqueIdentifier);
+  const dataIds: UniqueIdentifier[] = table.getRowModel().rows.map((row) => row.id as UniqueIdentifier);
   const sortableId = React.useId();
   const sensors = useSensors(useSensor(MouseSensor, {}), useSensor(TouchSensor, {}), useSensor(KeyboardSensor, {}));
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
+    console.log('active: ', active, '\n over: ', over);
     if (active && over && active.id !== over.id && onReorder) {
       const oldIndex = dataIds.indexOf(active.id);
       const newIndex = dataIds.indexOf(over.id);
@@ -442,7 +478,10 @@ export {
   DataTable,
   DataTableBody,
   DataTableColumnHeader,
-  DataTablePagination,
+  DataTableDragHandle,
   DataTableDraggableRow,
+  DataTablePagination,
   DataTableViewOptions,
+  type DataTableState,
+  type DataTableStateHandlers,
 };

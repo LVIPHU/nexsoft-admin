@@ -5,7 +5,10 @@ export {
   DataTable,
   DataTableBody,
   DataTableColumnHeader,
-  DataTablePagination,
+  DataTableDragHandle,
   DataTableDraggableRow,
+  DataTablePagination,
   DataTableViewOptions,
+  type DataTableState,
+  type DataTableStateHandlers,
 } from './data-table';

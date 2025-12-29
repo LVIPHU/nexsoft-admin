@@ -22,7 +22,7 @@ export function CallbackPage() {
         await client.handleCallback(currentUrl);
 
         // Get the original redirect path from localStorage or default to home
-        const redirectPath = localStorage.getItem('sso_redirect_path') || '/';
+        const redirectPath = localStorage.getItem('sso_redirect_path') || '/dashboard';
         localStorage.removeItem('sso_redirect_path');
 
         // Redirect to original page or home

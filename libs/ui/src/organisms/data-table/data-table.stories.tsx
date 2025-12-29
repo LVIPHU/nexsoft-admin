@@ -6,10 +6,12 @@ import { CircleCheckIcon, EllipsisVerticalIcon, LoaderIcon } from 'lucide-react'
 import {
   DataTable as ComponentDataTable,
   DataTableColumnHeader,
+  DataTableState,
+  DataTableStateHandlers,
   useDataTableInstance,
   withDndColumn,
 } from './data-table';
-import { ColumnDef } from '@tanstack/react-table';
+import { ColumnDef, ColumnFiltersState, ColumnOrderState, SortingState, VisibilityState } from '@tanstack/react-table';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { Badge } from '../../atoms/badge';
@@ -49,7 +51,7 @@ const schema = z.object({
   reviewer: z.string(),
 });
 
-const columns: ColumnDef<z.infer<typeof schema>>[] = [
+const columnDef: ColumnDef<z.infer<typeof schema>>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -210,9 +212,35 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
 
 const TempDataTable = ({ data: initialData }: { data: z.infer<typeof schema>[] }) => {
   const [data, setData] = React.useState(() => initialData);
-  const cols = withDndColumn(columns);
-  const table = useDataTableInstance({ data, columns: cols, getRowId: (row: any) => row.id.toString() });
-  return <ComponentDataTable dndEnabled table={table} columns={cols} onReorder={setData} />;
+  const [rowSelection, setRowSelection] = React.useState({});
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+  const [columnOrder, setColumnOrder] = React.useState<ColumnOrderState>([]);
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [pagination, setPagination] = React.useState({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+  const state: DataTableState = {
+    rowSelection,
+    columnVisibility,
+    columnFilters,
+    columnOrder,
+    sorting,
+    pagination,
+  };
+  const handlers: DataTableStateHandlers = {
+    onRowSelectionChange: setRowSelection,
+    onColumnVisibilityChange: setColumnVisibility,
+    onColumnFiltersChange: setColumnFilters,
+    onColumnOrderChange: setColumnOrder,
+    onSortingChange: setSorting,
+    onPaginationChange: setPagination,
+  };
+
+  const columns = withDndColumn(columnDef);
+  const table = useDataTableInstance({ data, columns, state, handlers, getRowId: (row: any) => row.id.toString() });
+  return <ComponentDataTable dndEnabled table={table} columns={columns} onReorder={setData} />;
 };
 
 export const BasicDataTable: Story = {
