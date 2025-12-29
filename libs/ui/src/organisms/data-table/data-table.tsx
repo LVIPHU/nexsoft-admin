@@ -314,7 +314,7 @@ function DataTablePagination<TData>({ table }: DataTablePaginationProps<TData>) 
 
 function DataTableDraggableRow<TData>({ row }: { row: Row<TData> }) {
   const { transform, transition, setNodeRef, isDragging } = useSortable({
-    id: (row.original as { id: string | number }).id,
+    id: (row.original as { id: string | number }).id || row.id,
   });
   return (
     <TableRow
@@ -422,7 +422,6 @@ function DataTable<TData, TValue>({ table, columns, dndEnabled = false, onReorde
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
-    console.log('active: ', active, '\n over: ', over);
     if (active && over && active.id !== over.id && onReorder) {
       const oldIndex = dataIds.indexOf(active.id);
       const newIndex = dataIds.indexOf(over.id);
