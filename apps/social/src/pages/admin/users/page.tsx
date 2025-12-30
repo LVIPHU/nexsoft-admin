@@ -14,6 +14,8 @@ import {
   DropdownMenuSeparator,
   DataTableDragHandle,
   DataTableColumnHeader,
+  DataTableViewOptions,
+  DataTablePagination,
   useDataTableInstance,
 } from '@nexsoft-admin/ui';
 import { useTableAdapter } from '@/hooks/useTableAdapter';
@@ -156,8 +158,14 @@ function UsersPage() {
   });
 
   return (
-    <div>
-      <DataTable dndEnabled table={table} columns={columns} onReorder={setList} />
+    <div className='flex flex-col gap-6'>
+      <div className='flex justify-end'>
+        <DataTableViewOptions table={table} />
+      </div>
+      <div className='overflow-hidden rounded-lg border'>
+        <DataTable dndEnabled table={table} columns={columns} onReorder={setList} />
+      </div>
+      <DataTablePagination table={table} />
     </div>
   );
 }

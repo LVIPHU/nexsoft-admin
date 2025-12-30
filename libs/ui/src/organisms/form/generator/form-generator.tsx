@@ -23,6 +23,7 @@ type ZodStringCheck = {
 type FormGeneratorProps<T extends z.ZodType> = {
   schema: T;
   fieldConfigs?: FieldConfig[];
+  loading?: boolean;
   className?: string;
   as?: React.ElementType;
 } & Omit<React.ComponentPropsWithoutRef<'div'>, 'className' | 'as'> &
@@ -87,6 +88,7 @@ function FormGenerator<T extends z.ZodType>({
   schema,
   fieldConfigs = [],
   className,
+  loading = false,
   as: Component = FieldGroup,
   ...props
 }: FormGeneratorProps<T>) {
@@ -132,6 +134,7 @@ function FormGenerator<T extends z.ZodType>({
         const commonProps = {
           name: fieldName as unknown as FieldPath<z.infer<T> & Record<string, unknown>>,
           config,
+          loading,
         };
 
         switch (fieldType) {

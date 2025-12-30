@@ -3,17 +3,22 @@
 import * as React from 'react';
 import {
   KeyboardSensor,
-  MouseSensor,
-  TouchSensor,
   useSensor,
   useSensors,
   DndContext,
   closestCenter,
   type UniqueIdentifier,
   type DragEndEvent,
+  PointerSensor,
 } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
-import { useSortable, SortableContext, verticalListSortingStrategy, arrayMove } from '@dnd-kit/sortable';
+import {
+  useSortable,
+  SortableContext,
+  verticalListSortingStrategy,
+  arrayMove,
+  sortableKeyboardCoordinates,
+} from '@dnd-kit/sortable';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import {
   flexRender,
@@ -45,10 +50,10 @@ import {
   ChevronsLeft,
   ChevronsUpDown,
   EyeOff,
-  GripVertical,
   Settings2,
+  GripVerticalIcon,
 } from 'lucide-react';
-import { cn } from '@nexsoft-admin/utils';
+import { cn, isDefined } from '@nexsoft-admin/utils';
 import { Button } from '../../atoms/button';
 import { Label } from '../../atoms/label';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../atoms/table';
@@ -210,9 +215,9 @@ function DataTableDragHandle({ id }: { id: string | number }) {
       size='icon'
       variant='ghost'
       data-dragging={isDragging}
-      className='text-muted-foreground size-7 cursor-grab hover:bg-transparent data-[dragging=true]:cursor-grabbing'
+      className='text-muted-foreground size-7 cursor-grab hover:bg-transparent active:cursor-grabbing'
     >
-      <GripVertical className='text-muted-foreground size-3' />
+      <GripVerticalIcon className='text-muted-foreground size-3' />
       <span className='sr-only'>Drag to reorder</span>
     </Button>
   );
@@ -221,7 +226,7 @@ function DataTableDragHandle({ id }: { id: string | number }) {
 const DataTableDragColumn: ColumnDef<any> = {
   id: 'drag',
   header: () => null,
-  cell: ({ row }) => <DataTableDragHandle id={row.original.id} />,
+  cell: ({ row }) => <DataTableDragHandle id={row.original.id.toString()} />,
   enableSorting: false,
   enableHiding: false,
 };
@@ -236,7 +241,7 @@ interface DataTablePaginationProps<TData> {
 
 function DataTablePagination<TData>({ table }: DataTablePaginationProps<TData>) {
   return (
-    <div className='flex items-center justify-between px-4'>
+    <div className='flex items-center justify-between'>
       <div className='text-muted-foreground hidden flex-1 text-sm lg:flex'>
         {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} row(s) selected.
       </div>
@@ -314,7 +319,7 @@ function DataTablePagination<TData>({ table }: DataTablePaginationProps<TData>) 
 
 function DataTableDraggableRow<TData>({ row }: { row: Row<TData> }) {
   const { transform, transition, setNodeRef, isDragging } = useSortable({
-    id: (row.original as { id: string | number }).id || row.id,
+    id: (row.original as { id: string | number }).id.toString() || row.id.toString(),
   });
   return (
     <TableRow
@@ -334,11 +339,92 @@ function DataTableDraggableRow<TData>({ row }: { row: Row<TData> }) {
   );
 }
 
-interface DataTableViewOptionsProps<TData> {
-  table: TanStackTable<TData>;
+function SortableColumnItem({
+  id,
+  label,
+  disabled,
+  checked,
+  onCheckedChange,
+  enableColumnVisibility,
+}: {
+  id: string;
+  label: string;
+  disabled?: boolean;
+  checked: boolean;
+  onCheckedChange: (value: boolean) => void;
+  enableColumnVisibility: boolean;
+}) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id, disabled });
+  return (
+    <div
+      ref={setNodeRef}
+      {...attributes}
+      style={{
+        transform: CSS.Transform.toString(transform),
+        transition,
+      }}
+      data-dragging={isDragging}
+      className='flex items-center justify-between rounded px-2 py-1 text-sm data-[dragging=true]:z-10 data-[dragging=true]:opacity-80'
+    >
+      {!disabled && (
+        <div {...listeners} className='text-muted-foreground cursor-grab active:cursor-grabbing'>
+          <GripVerticalIcon className='size-4' />
+        </div>
+      )}
+      {enableColumnVisibility ? (
+        <DropdownMenuCheckboxItem className='flex-1 capitalize' checked={checked} onCheckedChange={onCheckedChange}>
+          {label}
+        </DropdownMenuCheckboxItem>
+      ) : (
+        <span className='flex-1 capitalize'>{label}</span>
+      )}
+    </div>
+  );
 }
 
-function DataTableViewOptions<TData>({ table }: DataTableViewOptionsProps<TData>) {
+interface DataTableViewOptionsProps<TData> {
+  table: TanStackTable<TData>;
+  enableColumnVisibility?: boolean;
+  enableColumnOrder?: boolean;
+}
+
+function DataTableViewOptions<TData>({
+  table,
+  enableColumnOrder = false,
+  enableColumnVisibility = true,
+}: DataTableViewOptionsProps<TData>) {
+  const columns = table.getAllColumns();
+  // .filter((column) => typeof column.accessorFn !== 'undefined' && column.getCanHide());
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  );
+
+  const columnOrder = table.getState().columnOrder ?? [];
+
+  const orderedColumns =
+    columnOrder.length > 0 ? columnOrder.map((id) => columns.find((c) => c.id === id)).filter(isDefined) : columns;
+
+  function handleDragEnd(event: DragEndEvent) {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = orderedColumns.findIndex((col) => col?.id === active.id);
+    const newIndex = orderedColumns.findIndex((col) => col?.id === over.id);
+
+    if (oldIndex !== -1 && newIndex !== -1) {
+      const newOrder = arrayMove(
+        orderedColumns.map((col) => col?.id),
+        oldIndex,
+        newIndex,
+      );
+      table.setColumnOrder(newOrder);
+    }
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -347,13 +433,26 @@ function DataTableViewOptions<TData>({ table }: DataTableViewOptionsProps<TData>
           View
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='end' className='w-[150px]'>
+      <DropdownMenuContent align='end' className='w-3xs'>
         <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {table
-          .getAllColumns()
-          .filter((column) => typeof column.accessorFn !== 'undefined' && column.getCanHide())
-          .map((column) => {
+        {enableColumnOrder ? (
+          <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+            <SortableContext items={orderedColumns.map((col) => col.id)} strategy={verticalListSortingStrategy}>
+              {orderedColumns.map((column) => (
+                <SortableColumnItem
+                  id={column.id}
+                  key={column.id}
+                  label={column.id}
+                  checked={column.getIsVisible()}
+                  onCheckedChange={(value) => column.toggleVisibility(value)}
+                  enableColumnVisibility={enableColumnVisibility}
+                />
+              ))}
+            </SortableContext>
+          </DndContext>
+        ) : (
+          columns.map((column) => {
             return (
               <DropdownMenuCheckboxItem
                 key={column.id}
@@ -364,7 +463,8 @@ function DataTableViewOptions<TData>({ table }: DataTableViewOptionsProps<TData>
                 {column.id}
               </DropdownMenuCheckboxItem>
             );
-          })}
+          })
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -416,15 +516,26 @@ interface DataTableProps<TData, TValue> {
 }
 
 function DataTable<TData, TValue>({ table, columns, dndEnabled = false, onReorder }: DataTableProps<TData, TValue>) {
-  const dataIds: UniqueIdentifier[] = table.getRowModel().rows.map((row) => row.id as UniqueIdentifier);
+  const dataIds: UniqueIdentifier[] = table.getRowModel().rows.map((row) => row.id.toString() as UniqueIdentifier);
   const sortableId = React.useId();
-  const sensors = useSensors(useSensor(MouseSensor, {}), useSensor(TouchSensor, {}), useSensor(KeyboardSensor, {}));
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  );
+
+  console.log('dataIds:', dataIds);
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
     if (active && over && active.id !== over.id && onReorder) {
-      const oldIndex = dataIds.indexOf(active.id);
-      const newIndex = dataIds.indexOf(over.id);
+      const oldIndex = dataIds.indexOf(active.id.toString());
+      const newIndex = dataIds.indexOf(over.id.toString());
 
       // Call parent with new data order (parent manages state)
       const newData = arrayMove(table.options.data, oldIndex, newIndex);

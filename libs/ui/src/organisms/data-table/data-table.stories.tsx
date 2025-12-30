@@ -6,8 +6,10 @@ import { CircleCheckIcon, EllipsisVerticalIcon, LoaderIcon } from 'lucide-react'
 import {
   DataTable as ComponentDataTable,
   DataTableColumnHeader,
+  DataTablePagination,
   DataTableState,
   DataTableStateHandlers,
+  DataTableViewOptions,
   useDataTableInstance,
   withDndColumn,
 } from './data-table';
@@ -207,6 +209,7 @@ const columnDef: ColumnDef<z.infer<typeof schema>>[] = [
       </DropdownMenu>
     ),
     enableSorting: false,
+    enableHiding: false,
   },
 ];
 
@@ -240,7 +243,18 @@ const TempDataTable = ({ data: initialData }: { data: z.infer<typeof schema>[] }
 
   const columns = withDndColumn(columnDef);
   const table = useDataTableInstance({ data, columns, state, handlers, getRowId: (row: any) => row.id.toString() });
-  return <ComponentDataTable dndEnabled table={table} columns={columns} onReorder={setData} />;
+
+  return (
+    <div className='flex flex-col gap-6'>
+      <div className='flex justify-end'>
+        <DataTableViewOptions table={table} enableColumnVisibility enableColumnOrder />
+      </div>
+      <div className='overflow-hidden rounded-lg border'>
+        <ComponentDataTable dndEnabled table={table} columns={columns} onReorder={setData} />
+      </div>
+      <DataTablePagination table={table} />
+    </div>
+  );
 };
 
 export const BasicDataTable: Story = {
