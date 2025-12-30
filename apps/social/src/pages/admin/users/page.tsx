@@ -160,7 +160,7 @@ function UsersPage() {
   return (
     <div className='flex flex-col gap-6'>
       <div className='flex justify-end'>
-        <DataTableViewOptions table={table} />
+        <DataTableViewOptions table={table} enableColumnOrder/>
       </div>
       <div className='overflow-hidden rounded-lg border'>
         <DataTable dndEnabled table={table} columns={columns} onReorder={setList} />

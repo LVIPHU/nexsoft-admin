@@ -318,9 +318,17 @@ function DataTablePagination<TData>({ table }: DataTablePaginationProps<TData>) 
 }
 
 function DataTableDraggableRow<TData>({ row }: { row: Row<TData> }) {
+  const getId = ():UniqueIdentifier => {
+    const originalId = (row.original as { id?: string | number }).id
+    if (!originalId) return row.id
+    if (typeof originalId === 'string') return originalId
+    else return originalId.toString()
+  }
+
   const { transform, transition, setNodeRef, isDragging } = useSortable({
-    id: (row.original as { id: string | number }).id.toString() || row.id.toString(),
+    id: getId(),
   });
+
   return (
     <TableRow
       data-state={row.getIsSelected() && 'selected'}
@@ -564,11 +572,7 @@ function DataTable<TData, TValue>({ table, columns, dndEnabled = false, onReorde
   const dataIds: UniqueIdentifier[] = table.getRowModel().rows.map((row) => row.id.toString() as UniqueIdentifier);
   const sortableId = React.useId();
   const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 8,
-      },
-    }),
+    useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     }),
