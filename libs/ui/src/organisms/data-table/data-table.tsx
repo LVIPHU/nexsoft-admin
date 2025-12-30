@@ -215,7 +215,7 @@ function DataTableDragHandle({ id }: { id: string | number }) {
       size='icon'
       variant='ghost'
       data-dragging={isDragging}
-      className='text-muted-foreground size-7 cursor-grab hover:bg-transparent active:cursor-grabbing'
+      className='text-muted-foreground size-7 cursor-grab hover:bg-transparent active:cursor-grabbing data-[dragging=true]:cursor-grabbing'
     >
       <GripVerticalIcon className='text-muted-foreground size-3' />
       <span className='sr-only'>Drag to reorder</span>
@@ -364,20 +364,26 @@ function SortableColumnItem({
         transition,
       }}
       data-dragging={isDragging}
-      className='flex items-center justify-between rounded px-2 py-1 text-sm data-[dragging=true]:z-10 data-[dragging=true]:opacity-80'
+      className='z-0 flex items-center justify-between rounded px-2 py-1 data-[dragging=true]:z-10 data-[dragging=true]:opacity-80'
     >
       {!disabled && (
-        <div {...listeners} className='text-muted-foreground cursor-grab active:cursor-grabbing'>
+        <div
+          {...listeners}
+          data-dragging={isDragging}
+          className='text-muted-foreground cursor-grab active:cursor-grabbing data-[dragging=true]:cursor-grabbing'
+        >
           <GripVerticalIcon className='size-4' />
         </div>
       )}
-      {enableColumnVisibility ? (
-        <DropdownMenuCheckboxItem className='flex-1 capitalize' checked={checked} onCheckedChange={onCheckedChange}>
-          {label}
-        </DropdownMenuCheckboxItem>
-      ) : (
-        <span className='flex-1 capitalize'>{label}</span>
-      )}
+      <div className='flex-1 text-sm'>
+        {enableColumnVisibility ? (
+          <DropdownMenuCheckboxItem className='capitalize' checked={checked} onCheckedChange={onCheckedChange}>
+            {label}
+          </DropdownMenuCheckboxItem>
+        ) : (
+          <span className='capitalize'>{label}</span>
+        )}
+      </div>
     </div>
   );
 }
@@ -393,8 +399,19 @@ function DataTableViewOptions<TData>({
   enableColumnOrder = false,
   enableColumnVisibility = true,
 }: DataTableViewOptionsProps<TData>) {
-  const columns = table.getAllColumns();
-  // .filter((column) => typeof column.accessorFn !== 'undefined' && column.getCanHide());
+  const allColumns = table.getAllColumns();
+
+  // Split columns into 2 groups: special columns (cannot be hidden) and data columns (can be hidden)
+  const specialColumns = allColumns.filter(
+    (column) => column.columnDef.enableHiding === false || typeof column.accessorFn === 'undefined',
+  );
+  const dataColumns = allColumns.filter(
+    (column) =>
+      column.columnDef.enableHiding !== false && typeof column.accessorFn !== 'undefined' && column.getCanHide(),
+  );
+
+  // Only show data columns in dropdown
+  const columns = dataColumns;
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -404,6 +421,7 @@ function DataTableViewOptions<TData>({
   );
 
   const columnOrder = table.getState().columnOrder ?? [];
+  const currentFullOrder = columnOrder.length > 0 ? columnOrder : allColumns.map((col) => col.id);
 
   const orderedColumns =
     columnOrder.length > 0 ? columnOrder.map((id) => columns.find((c) => c.id === id)).filter(isDefined) : columns;
@@ -416,11 +434,33 @@ function DataTableViewOptions<TData>({
     const newIndex = orderedColumns.findIndex((col) => col?.id === over.id);
 
     if (oldIndex !== -1 && newIndex !== -1) {
-      const newOrder = arrayMove(
+      // Reorder only data columns
+      const newDataColumnOrder = arrayMove(
         orderedColumns.map((col) => col?.id),
         oldIndex,
         newIndex,
       );
+
+      // Merge back with special columns: preserve special columns' positions in current order
+      const specialColumnIds = new Set(specialColumns.map((col) => col.id));
+      const dataColumnSet = new Set(newDataColumnOrder);
+      const newOrder: string[] = [];
+      let dataColumnIndex = 0;
+
+      // Iterate through current order and rebuild
+      for (const columnId of currentFullOrder) {
+        if (specialColumnIds.has(columnId)) {
+          // Preserve special column position
+          newOrder.push(columnId);
+        } else if (dataColumnSet.has(columnId)) {
+          // Replace it with new order of data columns
+          if (dataColumnIndex < newDataColumnOrder.length) {
+            newOrder.push(newDataColumnOrder[dataColumnIndex]);
+            dataColumnIndex++;
+          }
+        }
+      }
+
       table.setColumnOrder(newOrder);
     }
   }
@@ -433,11 +473,16 @@ function DataTableViewOptions<TData>({
           View
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='end' className='w-3xs'>
+      <DropdownMenuContent align='end'>
         <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {enableColumnOrder ? (
-          <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+          <DndContext
+            sensors={sensors}
+            onDragEnd={handleDragEnd}
+            collisionDetection={closestCenter}
+            modifiers={[restrictToVerticalAxis]}
+          >
             <SortableContext items={orderedColumns.map((col) => col.id)} strategy={verticalListSortingStrategy}>
               {orderedColumns.map((column) => (
                 <SortableColumnItem
@@ -528,8 +573,6 @@ function DataTable<TData, TValue>({ table, columns, dndEnabled = false, onReorde
       coordinateGetter: sortableKeyboardCoordinates,
     }),
   );
-
-  console.log('dataIds:', dataIds);
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
