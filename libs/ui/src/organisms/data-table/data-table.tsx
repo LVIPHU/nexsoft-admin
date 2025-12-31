@@ -52,6 +52,7 @@ import {
   EyeOff,
   Settings2,
   GripVerticalIcon,
+  DatabaseIcon,
 } from 'lucide-react';
 import { cn, isDefined } from '@nexsoft-admin/utils';
 import { Button } from '../../atoms/button';
@@ -66,7 +67,11 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuSeparator,
 } from '../dropdown-menu/dropdown-menu';
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '../../atoms/empty';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../select/select';
+import { Skeleton } from '../../atoms';
+
+const PAGE_SIZE_OPTIONS = [10, 20, 30, 40, 50];
 
 interface DataTableState {
   sorting?: SortingState;
@@ -181,18 +186,18 @@ function DataTableColumnHeader<TData, TValue>({ column, title, className }: Data
         </DropdownMenuTrigger>
         <DropdownMenuContent align='start'>
           <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
-            <ArrowUp className='text-muted-foreground/70 h-3.5 w-3.5' />
+            <ArrowUp className='text-muted-foreground/70 size-4' />
             Asc
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
-            <ArrowDown className='text-muted-foreground/70 h-3.5 w-3.5' />
+            <ArrowDown className='text-muted-foreground/70 size-4' />
             Desc
           </DropdownMenuItem>
           {column.columnDef.enableHiding !== false && (
             <>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
-                <EyeOff className='text-muted-foreground/70 h-3.5 w-3.5' />
+                <EyeOff className='text-muted-foreground/70 size-4' />
                 Hide
               </DropdownMenuItem>
             </>
@@ -237,9 +242,10 @@ function withDndColumn<T>(columns: ColumnDef<T>[]): ColumnDef<T>[] {
 
 interface DataTablePaginationProps<TData> {
   table: TanStackTable<TData>;
+  pageSideOptions?: number[];
 }
 
-function DataTablePagination<TData>({ table }: DataTablePaginationProps<TData>) {
+function DataTablePagination<TData>({ table, pageSideOptions = PAGE_SIZE_OPTIONS }: DataTablePaginationProps<TData>) {
   return (
     <div className='flex items-center justify-between'>
       <div className='text-muted-foreground hidden flex-1 text-sm lg:flex'>
@@ -260,7 +266,7 @@ function DataTablePagination<TData>({ table }: DataTablePaginationProps<TData>) 
               <SelectValue placeholder={table.getState().pagination.pageSize} />
             </SelectTrigger>
             <SelectContent side='top'>
-              {[10, 20, 30, 40, 50].map((pageSize) => (
+              {pageSideOptions.map((pageSize) => (
                 <SelectItem key={pageSize} value={`${pageSize}`}>
                   {pageSize}
                 </SelectItem>
@@ -318,12 +324,12 @@ function DataTablePagination<TData>({ table }: DataTablePaginationProps<TData>) 
 }
 
 function DataTableDraggableRow<TData>({ row }: { row: Row<TData> }) {
-  const getId = ():UniqueIdentifier => {
-    const originalId = (row.original as { id?: string | number }).id
-    if (!originalId) return row.id
-    if (typeof originalId === 'string') return originalId
-    else return originalId.toString()
-  }
+  const getId = (): UniqueIdentifier => {
+    const originalId = (row.original as { id?: string | number }).id;
+    if (!originalId) return row.id;
+    if (typeof originalId === 'string') return originalId;
+    else return originalId.toString();
+  };
 
   const { transform, transition, setNodeRef, isDragging } = useSortable({
     id: getId(),
@@ -523,25 +529,51 @@ function DataTableViewOptions<TData>({
   );
 }
 
+function DataTableEmptyState<TData, TValue>({ columns }: { columns: ColumnDef<TData, TValue>[] }) {
+  return (
+    <TableRow>
+      <TableCell colSpan={columns.length}>
+        <Empty className='from-muted/50 to-background h-full bg-gradient-to-b from-30%'>
+          <EmptyHeader>
+            <EmptyMedia variant='icon'>
+              <DatabaseIcon />
+            </EmptyMedia>
+            <EmptyTitle>No data to show</EmptyTitle>
+            <EmptyDescription>This log will automatically be updated when new data is available.</EmptyDescription>
+          </EmptyHeader>
+        </Empty>
+      </TableCell>
+    </TableRow>
+  );
+}
+
 function DataTableBody<TData, TValue>({
   table,
   columns,
   dndEnabled,
   dataIds,
+  loading,
 }: {
   table: TanStackTable<TData>;
   columns: ColumnDef<TData, TValue>[];
+  loading: boolean;
   dndEnabled: boolean;
   dataIds: UniqueIdentifier[];
 }) {
-  if (!table.getRowModel().rows.length) {
-    return (
-      <TableRow>
-        <TableCell colSpan={columns.length} className='h-24 text-center'>
-          No results.
-        </TableCell>
+  if (loading) {
+    const pageSize = table.getState().pagination.pageSize;
+    return Array.from({ length: pageSize }, (_, index) => (
+      <TableRow key={`loading-row-${index}`}>
+        {Array.from({ length: columns.length }, (_, index) => (
+          <TableCell key={`loading-cell-${index}`}>
+            <Skeleton className={'h-6'} />
+          </TableCell>
+        ))}
       </TableRow>
-    );
+    ));
+  }
+  if (!table.getRowModel().rows.length) {
+    return <DataTableEmptyState columns={columns} />;
   }
   if (dndEnabled) {
     return (
@@ -564,11 +596,18 @@ function DataTableBody<TData, TValue>({
 interface DataTableProps<TData, TValue> {
   table: TanStackTable<TData>;
   columns: ColumnDef<TData, TValue>[];
+  loading?: boolean;
   dndEnabled?: boolean;
   onReorder?: (newData: TData[]) => void;
 }
 
-function DataTable<TData, TValue>({ table, columns, dndEnabled = false, onReorder }: DataTableProps<TData, TValue>) {
+function DataTable<TData, TValue>({
+  table,
+  columns,
+  dndEnabled = false,
+  loading = false,
+  onReorder,
+}: DataTableProps<TData, TValue>) {
   const dataIds: UniqueIdentifier[] = table.getRowModel().rows.map((row) => row.id.toString() as UniqueIdentifier);
   const sortableId = React.useId();
   const sensors = useSensors(
@@ -606,7 +645,7 @@ function DataTable<TData, TValue>({ table, columns, dndEnabled = false, onReorde
         ))}
       </TableHeader>
       <TableBody className='**:data-[slot=table-cell]:first:w-8'>
-        {DataTableBody({ table, columns, dndEnabled, dataIds })}
+        {DataTableBody({ table, columns, dndEnabled, dataIds, loading })}
       </TableBody>
     </Table>
   );
@@ -637,6 +676,7 @@ export {
   DataTableColumnHeader,
   DataTableDragHandle,
   DataTableDraggableRow,
+  DataTableEmptyState,
   DataTablePagination,
   DataTableViewOptions,
   type DataTableState,

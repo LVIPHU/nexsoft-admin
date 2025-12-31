@@ -53,7 +53,9 @@ const schema = z.object({
   reviewer: z.string(),
 });
 
-const columnDef: ColumnDef<z.infer<typeof schema>>[] = [
+type Row = z.infer<typeof schema>;
+
+const columnDef: ColumnDef<Row>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -213,8 +215,8 @@ const columnDef: ColumnDef<z.infer<typeof schema>>[] = [
   },
 ];
 
-const TempDataTable = ({ data: initialData }: { data: z.infer<typeof schema>[] }) => {
-  const [data, setData] = React.useState(() => initialData);
+const TempDataTable = ({ data: initialData }: { data: Row[] }) => {
+  const [data, setData] = React.useState<Row[]>(() => initialData);
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
