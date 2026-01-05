@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { LIST_USER } from '@/constants/query-keys.constant';
+import { LIST_USER_KEY } from '@/constants/query-keys.constant';
 import { axios } from '@/libs/axios';
 import type { Pagination } from '@/types/pagination.type';
 import type { UserDto } from '@nexsoft-admin/models';
@@ -27,7 +27,7 @@ export const useUsers = (params: GetUsersParams) => {
     isPending: loading,
     data,
   } = useQuery({
-    queryKey: [LIST_USER, params],
+    queryKey: [LIST_USER_KEY, params],
     queryFn: () => getUsers(params),
   });
 

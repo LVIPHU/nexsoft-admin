@@ -1,2 +1,2 @@
-export * from './profile.ts';
-export * from './update-profile.ts';
+export * from './profile';
+export * from './update-profile';

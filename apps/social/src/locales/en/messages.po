@@ -17,6 +17,10 @@ msgstr ""
 msgid "A user with this email address and/or username already exists."
 msgstr "A user with this email address and/or username already exists."
 
+#: src/pages/admin/users/page.tsx:138
+msgid "Add user"
+msgstr "Add user"
+
 #: src/pages/error/page.tsx:22
 msgid "An internal server error occurred."
 msgstr "An internal server error occurred."
@@ -25,17 +29,57 @@ msgstr "An internal server error occurred."
 msgid "An unexpected error occurred."
 msgstr "An unexpected error occurred."
 
+#: src/components/overlay.tsx:55
+msgid "Are you absolutely sure you want to delete this item?"
+msgstr "Are you absolutely sure you want to delete this item?"
+
+#: src/components/overlay.tsx:108
+#: src/components/overlay.tsx:151
+#: src/components/overlay.tsx:174
+msgid "Cancel"
+msgstr "Cancel"
+
 #: src/components/theme-switch.tsx:33
 msgid "Change Theme"
 msgstr "Change Theme"
+
+#: src/components/overlay.tsx:143
+#: src/components/overlay.tsx:180
+msgid "Create"
+msgstr "Create"
+
+#: src/components/overlay.tsx:52
+msgid "Create a new item"
+msgstr "Create a new item"
 
 #: src/constants/navigation.constant.ts:10
 msgid "Dashboard"
 msgstr "Dashboard"
 
+#: src/components/overlay.tsx:110
+msgid "Delete"
+msgstr "Delete"
+
+#: src/components/overlay.tsx:147
+#: src/components/overlay.tsx:184
+msgid "Duplicate"
+msgstr "Duplicate"
+
+#: src/components/overlay.tsx:54
+msgid "Duplicate an existing item"
+msgstr "Duplicate an existing item"
+
 #: src/constants/navigation.constant.ts:16
-msgid "Energy Management"
-msgstr "Energy Management"
+#~ msgid "Energy Management"
+#~ msgstr "Energy Management"
+
+#: src/pages/admin/users/_components/user-form.tsx:27
+msgid "Enter your name"
+msgstr "Enter your name"
+
+#: src/pages/admin/users/_components/user-form.tsx:21
+msgid "Enter your username"
+msgstr "Enter your username"
 
 #: src/pages/error/page.tsx:45
 msgid "Error {statusCode}"
@@ -46,6 +90,7 @@ msgid "Floating"
 msgstr "Floating"
 
 #: src/constants/navigation.constant.ts:46
+#: src/pages/admin/settings/general/page.tsx:25
 msgid "General"
 msgstr "General"
 
@@ -77,6 +122,18 @@ msgstr "It looks like the verification token you provided is invalid. Please try
 msgid "It looks like your email address has already been verified."
 msgstr "It looks like your email address has already been verified."
 
+#: src/pages/admin/users/page.tsx:132
+msgid "Manage all users in the system."
+msgstr "Manage all users in the system."
+
+#: src/pages/admin/users/_components/user-form.tsx:26
+msgid "Name"
+msgstr "Name"
+
+#: src/pages/admin/settings/general/page.tsx:65
+msgid "Navbar Style"
+msgstr "Navbar Style"
+
 #: src/constants/navigation.constant.ts:37
 msgid "Notifications"
 msgstr "Notifications"
@@ -94,17 +151,54 @@ msgstr "Oops, the server returned an error."
 msgid "Profile"
 msgstr "Profile"
 
+#: src/components/overlay.tsx:145
+#: src/components/overlay.tsx:182
+msgid "Save Changes"
+msgstr "Save Changes"
+
 #: src/constants/layout.constant.ts:23
 msgid "Scroll"
 msgstr "Scroll"
+
+#: src/pages/admin/settings/layout.tsx:88
+msgid "Select a section"
+msgstr "Select a section"
+
+#: src/pages/admin/settings/general/page.tsx:68
+msgid "Set the navbar style you want to use in the dashboard."
+msgstr "Set the navbar style you want to use in the dashboard."
+
+#: src/pages/admin/settings/general/page.tsx:97
+msgid "Set the sidebar collapsible you want to use in the dashboard."
+msgstr "Set the sidebar collapsible you want to use in the dashboard."
+
+#: src/pages/admin/settings/general/page.tsx:39
+msgid "Set the sidebar variant you want to use in the dashboard."
+msgstr "Set the sidebar variant you want to use in the dashboard."
+
+#: src/pages/admin/settings/layout.tsx:24
+msgid "Setting"
+msgstr "Setting"
 
 #: src/constants/navigation.constant.ts:22
 msgid "Settings"
 msgstr "Settings"
 
+#: src/pages/admin/settings/general/page.tsx:28
+msgid "Settings and options for your application"
+msgstr "Settings and options for your application"
+
 #: src/constants/layout.constant.ts:6
 msgid "Sidebar"
 msgstr "Sidebar"
+
+#: src/pages/admin/settings/general/page.tsx:94
+msgid "Sidebar Collapsible"
+msgstr "Sidebar Collapsible"
+
+#: src/pages/admin/settings/general/page.tsx:36
+msgid "Sidebar Variant"
+msgstr "Sidebar Variant"
 
 #: src/pages/admin/_components/nav-profile.tsx:85
 msgid "Sign out"
@@ -134,9 +228,21 @@ msgstr "The page you're looking for doesn't exist."
 msgid "The request was invalid."
 msgstr "The request was invalid."
 
+#: src/components/overlay.tsx:62
+msgid "This action cannot be undone."
+msgstr "This action cannot be undone."
+
 #: src/services/errors/translate-error.ts:16
 msgid "This email address is associated with an OAuth account. Please sign in with your OAuth provider."
 msgstr "This email address is associated with an OAuth account. Please sign in with your OAuth provider."
+
+#: src/pages/admin/settings/layout.tsx:27
+msgid "Update account preferences and manage integrations."
+msgstr "Update account preferences and manage integrations."
+
+#: src/components/overlay.tsx:53
+msgid "Update an existing item"
+msgstr "Update an existing item"
 
 #: src/components/theme-switch.tsx:38
 msgid "Use System Theme"
@@ -145,6 +251,18 @@ msgstr "Use System Theme"
 #: src/services/errors/translate-error.ts:13
 msgid "User does not have an associated 'secrets' record. Please report this issue on GitHub."
 msgstr "User does not have an associated 'secrets' record. Please report this issue on GitHub."
+
+#: src/pages/admin/users/page.tsx:129
+msgid "User Management"
+msgstr "User Management"
+
+#: src/pages/admin/users/_components/user-form.tsx:20
+msgid "Username"
+msgstr "Username"
+
+#: src/constants/navigation.constant.ts:16
+msgid "Users Management"
+msgstr "Users Management"
 
 #: src/pages/error/page.tsx:25
 msgid "You are not authorized to access this page."

@@ -35,10 +35,8 @@ function Overlay({
   title,
   description,
   children,
-  beforeSubmit,
   onSubmit,
-  afterSubmit,
-  onCancel,
+  onClose,
   cancelLabel,
   confirmLabel,
 }: OverlayProps) {
@@ -74,9 +72,8 @@ function Overlay({
   };
 
   const handleClose = async () => {
-    console.log('Overlay closed:', 'with mode:', mode);
-    if (onCancel) {
-      await onCancel(mode);
+    if (onClose) {
+      await onClose(mode);
     }
     close(id);
   };
@@ -85,18 +82,7 @@ function Overlay({
     if (!onSubmit || !mode) return;
 
     try {
-      // Call beforeSubmit
-      if (beforeSubmit) {
-        await beforeSubmit(mode);
-      }
-
-      // Call onSubmit
       await onSubmit(mode);
-
-      // Call afterSubmit
-      if (afterSubmit) {
-        await afterSubmit(mode);
-      }
 
       close(id);
     } catch (error) {
@@ -130,7 +116,7 @@ function Overlay({
   }
 
   const content = (
-    <ScrollArea className='max-h-[60vh] lg:max-h-fit'>
+    <ScrollArea className='h-full'>
       <div className='space-y-6 p-1'>{children}</div>
     </ScrollArea>
   );
@@ -138,8 +124,8 @@ function Overlay({
   if (kind === 'sheet') {
     return (
       <Sheet open={isTop} onOpenChange={handleClose}>
-        <SheetContent side='right'>
-          <SheetHeader>
+        <SheetContent side='right' className='flex flex-col'>
+          <SheetHeader className='flex-shrink-0'>
             <SheetTitle>
               <div className='flex items-center gap-2.5'>
                 {getActionIcon()}
@@ -148,8 +134,8 @@ function Overlay({
             </SheetTitle>
             {description && <SheetDescription>{description}</SheetDescription>}
           </SheetHeader>
-          {content}
-          <SheetFooter>
+          <div className='min-h-0 flex-1 overflow-hidden'>{content}</div>
+          <SheetFooter className='mt-auto flex-shrink-0'>
             <Button type='submit' form={formId} onClick={handleSubmit}>
               {confirmLabel ? (
                 confirmLabel
@@ -172,8 +158,8 @@ function Overlay({
 
   return (
     <Dialog open={isTop} onOpenChange={handleClose}>
-      <DialogContent>
-        <DialogHeader>
+      <DialogContent className='!grid max-h-[90vh] grid-rows-[auto_1fr_auto] overflow-hidden p-0'>
+        <DialogHeader className='px-6 pt-6'>
           <DialogTitle>
             <div className='flex items-center gap-2.5'>
               {getActionIcon()}
@@ -182,8 +168,8 @@ function Overlay({
           </DialogTitle>
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
-        {content}
-        <DialogFooter>
+        <div className='min-h-0 overflow-hidden px-6'>{content}</div>
+        <DialogFooter className='px-6 pb-6'>
           <Button type='button' variant='ghost' onClick={handleClose}>
             {cancelLabel ? cancelLabel : <Trans>Cancel</Trans>}
           </Button>

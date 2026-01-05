@@ -1,29 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
-import dayjs from 'dayjs';
 import { ColumnDef } from '@tanstack/react-table';
 import { UserDto } from '@nexsoft-admin/models';
-import {
-  Badge,
-  Button,
-  Checkbox,
-  DataTable,
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DataTableDragHandle,
-  DataTableColumnHeader,
-  DataTableViewOptions,
-  DataTablePagination,
-  useDataTableInstance,
-} from '@nexsoft-admin/ui';
+import { DataTable, DataTableViewOptions, DataTablePagination, useDataTableInstance } from '@nexsoft-admin/ui';
 import { useTableAdapter } from '@/hooks/useTableAdapter';
-import { EllipsisVerticalIcon } from 'lucide-react';
 import { PAGE_INDEX, PAGE_SIZE } from '@/constants/table.constant';
-import { useUsers } from '@/services/users';
+import { useUsers } from '@/services/user';
 
-function UsersTable() {
+function UsersTable({ columns }: { columns: Array<ColumnDef<UserDto>> }) {
   const { state, handlers } = useTableAdapter('users');
 
   const data = useMemo(
@@ -46,109 +29,6 @@ function UsersTable() {
     }
   }, [users]);
 
-  const columns = useMemo<Array<ColumnDef<UserDto>>>(
-    () => [
-      {
-        id: 'drag',
-        header: () => null,
-        cell: ({ row }) => <DataTableDragHandle id={row.original.user_id} />,
-        enableSorting: false,
-        enableHiding: false,
-      },
-      {
-        id: 'select',
-        header: ({ table }) => (
-          <div className='flex items-center justify-center'>
-            <Checkbox
-              checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
-              onCheckedChange={(value) => table.toggleAllPageRowsSelected(Boolean(value))}
-              aria-label='Select all'
-            />
-          </div>
-        ),
-        cell: ({ row }) => (
-          <div className='flex items-center justify-center'>
-            <Checkbox
-              checked={row.getIsSelected()}
-              onCheckedChange={(value) => row.toggleSelected(Boolean(value))}
-              aria-label='Select row'
-            />
-          </div>
-        ),
-        enableSorting: false,
-        enableHiding: false,
-      },
-      {
-        id: 'user_id',
-        accessorKey: 'user_id',
-        header: ({ column }) => <DataTableColumnHeader column={column} title='User ID' />,
-        cell: ({ row }) => <div className='max-w-[200px] truncate'>{row.getValue('user_id')}</div>,
-      },
-      {
-        id: 'username',
-        accessorKey: 'username',
-        header: ({ column }) => <DataTableColumnHeader column={column} title='Username' />,
-        cell: ({ row }) => <div className='max-w-[150px] truncate'>{row.getValue('username')}</div>,
-      },
-      {
-        id: 'name',
-        accessorKey: 'name',
-        header: ({ column }) => <DataTableColumnHeader column={column} title='Name' />,
-        cell: ({ row }) => <div className='max-w-[200px] truncate'>{row.getValue('name')}</div>,
-      },
-      {
-        id: 'status',
-        accessorKey: 'status',
-        header: ({ column }) => <DataTableColumnHeader column={column} title='Status' />,
-        cell: () => {
-          return (
-            <Badge variant='outline' className='text-muted-foreground px-1.5'>
-              N/A
-            </Badge>
-          );
-        },
-      },
-      {
-        id: 'created_at',
-        accessorKey: 'created_at',
-        header: ({ column }) => <DataTableColumnHeader column={column} title='Created At' />,
-        cell: ({ row }) => {
-          const date = row.getValue('created_at');
-          return date && date instanceof Date ? (
-            <div className='max-w-[150px]'>{dayjs(date).format('MMM DD, YYYY')}</div>
-          ) : (
-            <span className='text-muted-foreground'>N/A</span>
-          );
-        },
-      },
-      {
-        id: 'actions',
-        cell: () => (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant='ghost'
-                className='data-[state=open]:bg-muted text-muted-foreground flex size-8'
-                size='icon'
-              >
-                <EllipsisVerticalIcon />
-                <span className='sr-only'>Open menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align='end' className='w-32'>
-              <DropdownMenuItem>Edit</DropdownMenuItem>
-              <DropdownMenuItem>Make a copy</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem className='text-destructive'>Delete</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        ),
-        enableSorting: false,
-        enableHiding: false,
-      },
-    ],
-    [],
-  );
   const table = useDataTableInstance({
     data: list,
     columns,
@@ -156,6 +36,17 @@ function UsersTable() {
     handlers,
     getRowId: (row: any) => row.user_id.toString(),
   });
+
+  if (error) {
+    return (
+      <div className='flex h-screen items-center justify-center'>
+        <div className='text-center'>
+          <div className='mb-4 text-red-600'>Error fetching users</div>
+          <div className='mb-4'>{error.message}</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className='flex flex-col gap-6'>
