@@ -40,7 +40,7 @@ function FormSelect<T extends FieldValues>({
     >
       {({ value, onChange, onBlur, error, disabled }) => (
         <Select
-          value={value as string}
+          value={(value as string) ?? ''}
           onValueChange={(val) => onChange(val)}
           onOpenChange={(open) => {
             if (!open) onBlur();

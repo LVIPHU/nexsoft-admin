@@ -1,6 +1,6 @@
 import { axios } from '@/libs/axios';
 import type { UserDto } from '@nexsoft-admin/models';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
 import { USER_KEY } from '@/constants/query-keys.constant';
 
 interface GetUserParams {
@@ -12,7 +12,7 @@ export const getUser = async (params: GetUserParams) => {
   return response.data;
 };
 
-export const useUser = (params: GetUserParams) => {
+export const useUser = (params: GetUserParams, options?: Omit<UseQueryOptions<UserDto>, 'queryKey' | 'queryFn'>) => {
   const {
     error,
     isPending: loading,
@@ -20,6 +20,7 @@ export const useUser = (params: GetUserParams) => {
   } = useQuery({
     queryKey: [USER_KEY, params],
     queryFn: () => getUser(params),
+    ...options,
   });
 
   return { user: data, loading, error };

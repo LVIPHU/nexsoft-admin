@@ -25,4 +25,5 @@ export interface OverlayItem<T extends Record<string, any> = Record<string, any>
 > {
   name: string;
   props?: T;
+  onBeforeOpen?: () => Promise<void>;
 }

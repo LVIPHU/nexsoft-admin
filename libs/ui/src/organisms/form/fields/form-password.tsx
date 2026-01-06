@@ -55,7 +55,7 @@ function FormPassword<T extends FieldValues>({
           <InputGroupInput
             id={name}
             type={showPassword ? 'text' : 'password'}
-            value={value as string}
+            value={(value as string) ?? ''}
             onChange={(e) => onChange(e.target.value)}
             onBlur={onBlur}
             disabled={disabled}

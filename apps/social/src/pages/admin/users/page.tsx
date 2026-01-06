@@ -19,6 +19,9 @@ import { UserDto } from '@nexsoft-admin/models';
 import { ColumnDef } from '@tanstack/react-table';
 import { useOverlayStore } from '@/stores/overlay.store';
 import { OverlayMode } from '@/types/overlay.type';
+import { queryClient } from '@/libs/query-client';
+import { getUser } from '@/services/user';
+import { USER_KEY } from '@/constants/query-keys.constant';
 
 function UsersPage() {
   const openUserOverlay = ({ mode, props }: { mode: OverlayMode; props?: Record<string, any> }) => {
@@ -28,6 +31,15 @@ function UsersPage() {
       name: 'user',
       mode: mode,
       props: props,
+      // Prefetch user data trước khi mở overlay nếu có id
+      onBeforeOpen: async () => {
+        if (mode !== 'create' && props?.id) {
+          await queryClient.prefetchQuery({
+            queryKey: [USER_KEY, { id: props.id }],
+            queryFn: () => getUser({ id: props.id }),
+          });
+        }
+      },
     });
   };
 

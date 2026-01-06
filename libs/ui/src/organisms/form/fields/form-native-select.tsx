@@ -41,7 +41,7 @@ function FormNativeSelect<T extends FieldValues>({
       {({ value, onChange, onBlur, error, disabled }) => (
         <NativeSelect
           id={name}
-          value={value as string}
+          value={(value as string) ?? ''}
           onChange={(e) => onChange(e.target.value)}
           onBlur={onBlur}
           disabled={disabled}

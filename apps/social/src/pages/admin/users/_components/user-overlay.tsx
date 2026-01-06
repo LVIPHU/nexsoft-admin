@@ -8,7 +8,13 @@ import { updateUserSchema } from '@nexsoft-admin/models';
 import { useMemo } from 'react';
 
 function UserOverlay({ isTop, mode, props, ...rest }: OverlayItem & { isTop: boolean }) {
-  const { user, loading, error } = useUser({ id: props?.id });
+  const shouldFetchUser = mode !== 'create' && Boolean(props?.id);
+  const { user, loading, error } = useUser(
+    { id: props?.id || '' },
+    {
+      enabled: shouldFetchUser,
+    },
+  );
 
   const schema = useMemo(() => {
     if (mode === 'update') return updateUserSchema;
@@ -30,20 +36,26 @@ function UserOverlay({ isTop, mode, props, ...rest }: OverlayItem & { isTop: boo
     },
   ];
 
+  const canRenderForm = mode === 'create' || (shouldFetchUser && user !== undefined);
+
   return (
     <Overlay isTop={isTop} mode={mode} {...rest}>
       {error && <div>{error.message}</div>}
-      <Form
-        schema={schema}
-        resetValues={user}
-        fieldConfigs={fieldConfigs}
-        onSubmit={(data) => {
-          console.log('Form submitted:', data);
-          toast.success('Form submitted!');
-        }}
-      >
-        <FormGenerator loading={loading} schema={schema} fieldConfigs={fieldConfigs} />
-      </Form>
+      {canRenderForm ? (
+        <Form
+          schema={schema}
+          resetValues={mode === 'create' ? undefined : user}
+          fieldConfigs={fieldConfigs}
+          onSubmit={(data) => {
+            console.log('Form submitted:', data);
+            toast.success('Form submitted!');
+          }}
+        >
+          <FormGenerator loading={shouldFetchUser && loading} schema={schema} fieldConfigs={fieldConfigs} />
+        </Form>
+      ) : (
+        <div>Loading...</div>
+      )}
     </Overlay>
   );
 }
