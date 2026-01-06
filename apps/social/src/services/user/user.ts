@@ -8,7 +8,7 @@ interface GetUserParams {
 }
 
 export const getUser = async (params: GetUserParams) => {
-  const response = await axios.get<UserDto>(`/api/user/user-profile/${params.id}.json`);
+  const response = await axios.get<UserDto>(`/v1/authz/user/user-profile/${params.id}.json`);
   return response.data;
 };
 

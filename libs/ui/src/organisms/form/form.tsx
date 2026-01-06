@@ -10,6 +10,7 @@ import type { FormChangeInfo, FieldConfig } from './generator/field-config';
 type FormProps<T extends z.ZodType<any, any, any>> = {
   schema: T;
   defaultValues?: Partial<z.infer<T>>;
+  resetValues?: Partial<z.infer<T>>;
   fieldConfigs?: FieldConfig[];
   onSubmit: (data: z.infer<T>) => void | Promise<void>;
   resetAfterSubmit?: boolean;
@@ -22,6 +23,7 @@ type FormProps<T extends z.ZodType<any, any, any>> = {
 function Form<T extends z.ZodType<any, any, any>>({
   schema,
   defaultValues,
+  resetValues,
   fieldConfigs,
   onSubmit,
   resetAfterSubmit = false,
@@ -106,6 +108,12 @@ function Form<T extends z.ZodType<any, any, any>>({
       }
     };
   }, [form, onFormChange, onFormChangeDebounce]);
+
+  // Handle form reset value
+  React.useEffect(() => {
+    if (!resetValues) return;
+    form.reset(resetValues as z.infer<T> & FieldValues);
+  }, [form, resetValues]);
 
   // Handle form submit
   const handleSubmit = form.handleSubmit(async (data) => {

@@ -117,7 +117,7 @@ function Overlay({
 
   const content = (
     <ScrollArea className='h-full'>
-      <div className='space-y-6 p-1'>{children}</div>
+      <div className='space-y-6 px-6 py-1'>{children}</div>
     </ScrollArea>
   );
 
@@ -125,7 +125,7 @@ function Overlay({
     return (
       <Sheet open={isTop} onOpenChange={handleClose}>
         <SheetContent side='right' className='flex flex-col'>
-          <SheetHeader className='flex-shrink-0'>
+          <SheetHeader className='flex-shrink-0 px-6 pt-6'>
             <SheetTitle>
               <div className='flex items-center gap-2.5'>
                 {getActionIcon()}
@@ -135,7 +135,7 @@ function Overlay({
             {description && <SheetDescription>{description}</SheetDescription>}
           </SheetHeader>
           <div className='min-h-0 flex-1 overflow-hidden'>{content}</div>
-          <SheetFooter className='mt-auto flex-shrink-0'>
+          <SheetFooter className='mt-auto flex-shrink-0 px-6 pb-6'>
             <Button type='submit' form={formId} onClick={handleSubmit}>
               {confirmLabel ? (
                 confirmLabel
@@ -168,7 +168,7 @@ function Overlay({
           </DialogTitle>
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
-        <div className='min-h-0 overflow-hidden px-6'>{content}</div>
+        <div className='min-h-0 overflow-hidden'>{content}</div>
         <DialogFooter className='px-6 pb-6'>
           <Button type='button' variant='ghost' onClick={handleClose}>
             {cancelLabel ? cancelLabel : <Trans>Cancel</Trans>}
