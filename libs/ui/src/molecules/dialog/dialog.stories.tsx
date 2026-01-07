@@ -11,7 +11,7 @@ import {
 import { Button } from '../../atoms/button';
 
 const meta: Meta<typeof Dialog> = {
-  title: 'Organisms/Dialog',
+  title: 'Molecules/Dialog',
   component: Dialog,
   parameters: {
     layout: 'centered',

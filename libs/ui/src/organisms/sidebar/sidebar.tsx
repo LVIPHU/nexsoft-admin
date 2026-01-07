@@ -12,7 +12,7 @@ import { Input } from '../../atoms/input';
 import { Separator } from '../../atoms/separator';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '../sheet/sheet';
 import { Skeleton } from '../../atoms/skeleton';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../tooltip/tooltip';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../molecules/tooltip';
 import { sidebarMenuButtonVariants } from './sidebar.variants';
 
 const SIDEBAR_COOKIE_NAME = 'sidebar_state';

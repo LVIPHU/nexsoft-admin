@@ -143,6 +143,16 @@
       "import": "./dist/button-group.js",
       "default": "./dist/button-group.js"
     },
+    "./card": {
+      "types": "./dist/molecules/card/index.d.ts",
+      "import": "./dist/card.js",
+      "default": "./dist/card.js"
+    },
+    "./dialog": {
+      "types": "./dist/molecules/dialog/index.d.ts",
+      "import": "./dist/dialog.js",
+      "default": "./dist/dialog.js"
+    },
     "./field": {
       "types": "./dist/molecules/field/index.d.ts",
       "import": "./dist/field.js",
@@ -168,6 +178,11 @@
       "import": "./dist/toggle-group.js",
       "default": "./dist/toggle-group.js"
     },
+    "./tooltip": {
+      "types": "./dist/molecules/tooltip/index.d.ts",
+      "import": "./dist/tooltip.js",
+      "default": "./dist/tooltip.js"
+    },
     "./accordion": {
       "types": "./dist/organisms/accordion/index.d.ts",
       "import": "./dist/accordion.js",
@@ -177,11 +192,6 @@
       "types": "./dist/organisms/calendar/index.d.ts",
       "import": "./dist/calendar.js",
       "default": "./dist/calendar.js"
-    },
-    "./card": {
-      "types": "./dist/organisms/card/index.d.ts",
-      "import": "./dist/card.js",
-      "default": "./dist/card.js"
     },
     "./carousel": {
       "types": "./dist/organisms/carousel/index.d.ts",
@@ -213,11 +223,6 @@
       "import": "./dist/data-table.js",
       "default": "./dist/data-table.js"
     },
-    "./dialog": {
-      "types": "./dist/organisms/dialog/index.d.ts",
-      "import": "./dist/dialog.js",
-      "default": "./dist/dialog.js"
-    },
     "./drawer": {
       "types": "./dist/organisms/drawer/index.d.ts",
       "import": "./dist/drawer.js",
@@ -227,6 +232,11 @@
       "types": "./dist/organisms/dropdown-menu/index.d.ts",
       "import": "./dist/dropdown-menu.js",
       "default": "./dist/dropdown-menu.js"
+    },
+    "./form": {
+      "types": "./dist/organisms/form/index.d.ts",
+      "import": "./dist/form.js",
+      "default": "./dist/form.js"
     },
     "./input-otp": {
       "types": "./dist/organisms/input-otp/index.d.ts",
@@ -282,16 +292,6 @@
       "types": "./dist/organisms/tabs/index.d.ts",
       "import": "./dist/tabs.js",
       "default": "./dist/tabs.js"
-    },
-    "./tooltip": {
-      "types": "./dist/organisms/tooltip/index.d.ts",
-      "import": "./dist/tooltip.js",
-      "default": "./dist/tooltip.js"
-    },
-    "./form": {
-      "types": "./dist/organisms/form/index.d.ts",
-      "import": "./dist/form.js",
-      "default": "./dist/form.js"
     }
   },
   "nx": {
@@ -302,11 +302,12 @@
     ]
   },
   "peerDependencies": {
-    "@nexsoft-admin/utils": "0.0.1",
-    "@nexsoft-admin/hooks": "0.0.1",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/modifiers": "^9.0.0",
     "@dnd-kit/sortable": "^10.0.0",
+    "@hookform/resolvers": "^5.2.2",
+    "@nexsoft-admin/hooks": "0.0.1",
+    "@nexsoft-admin/utils": "0.0.1",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",
     "@radix-ui/react-aspect-ratio": "^1.1.8",
@@ -342,10 +343,9 @@
     "lucide-react": "^0.555.0",
     "next-themes": "^0.4.6",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "react-day-picker": "^9.11.3",
+    "react-dom": "^19.0.0",
     "react-hook-form": "^7.68.0",
-    "@hookform/resolvers": "^5.2.2",
     "react-resizable-panels": "^3.0.6",
     "recharts": "^2.15.4",
     "sonner": "^2.0.7",
@@ -356,6 +356,7 @@
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/modifiers": "^9.0.0",
     "@dnd-kit/sortable": "^10.0.0",
+    "@hookform/resolvers": "^5.2.2",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",
     "@radix-ui/react-aspect-ratio": "^1.1.8",
@@ -393,10 +394,10 @@
     "lucide-react": "^0.555.0",
     "next-themes": "^0.4.6",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "react-day-picker": "^9.11.3",
+    "react-dom": "^19.0.0",
+    "react-easy-crop": "^5.5.6",
     "react-hook-form": "^7.68.0",
-    "@hookform/resolvers": "^5.2.2",
     "react-resizable-panels": "^3.0.6",
     "recharts": "^2.15.4",
     "sonner": "^2.0.7",

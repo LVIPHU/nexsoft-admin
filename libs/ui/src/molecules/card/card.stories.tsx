@@ -3,7 +3,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Button } from '../../atoms/button';
 
 const meta: Meta<typeof Card> = {
-  title: 'Organisms/Card',
+  title: 'Molecules/Card',
   component: Card,
   parameters: {
     layout: 'centered',

@@ -3,7 +3,7 @@ import { Tooltip, TooltipTrigger, TooltipContent } from './tooltip';
 import { Button } from '../../atoms/button';
 
 const meta: Meta<typeof Tooltip> = {
-  title: 'Organisms/Tooltip',
+  title: 'Molecules/Tooltip',
   component: Tooltip,
   parameters: {
     layout: 'centered',

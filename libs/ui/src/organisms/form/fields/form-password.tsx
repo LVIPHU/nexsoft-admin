@@ -7,7 +7,7 @@ import { FormField } from '../form-field';
 import { FormFieldSkeleton } from '../form-field-skeleton';
 import type { FieldConfig } from '../generator/field-config';
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from '../../../molecules';
-import { Tooltip, TooltipContent, TooltipTrigger } from '../../tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '../../../molecules/tooltip/tooltip';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 
 type FormPasswordProps<T extends FieldValues> = {
