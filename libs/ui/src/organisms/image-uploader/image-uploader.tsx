@@ -1,31 +1,24 @@
 'use client';
 
 import { useCallback, useRef, useState } from 'react';
+import Cropper, { Area, Point } from 'react-easy-crop';
+import { RotateCcwIcon, RotateCwIcon, Trash2Icon, UploadIcon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 import { cn } from '@nexsoft-admin/utils';
-import Cropper from 'react-easy-crop';
-import { CheckIcon, CopyIcon, Trash2Icon, UploadIcon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 import { Button } from '../../atoms/button/button';
 import { Slider } from '../../atoms/slider/slider';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../../molecules/card/card';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../../molecules/dialog';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../molecules/tooltip';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../../molecules/dialog/dialog';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../molecules/tooltip/tooltip';
+import { getCroppedImg, getRotatedImage, readFile } from './image-uploader.helper';
+import { getOrientation } from 'get-orientation/browser';
 
-interface Point {
-  x: number;
-  y: number;
-}
+const ORIENTATION_TO_ANGLE: Record<string, number> = {
+  '3': 180,
+  '6': 90,
+  '8': -90,
+};
 
-interface Area {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}
-
-/**
- * Props for the ImageUploader component
- */
-interface ImageUploaderProps {
+export interface ImageUploaderProps {
   /**
    * The aspect ratio of the cropped image (width / height)
    * @default 1 (square)
@@ -55,10 +48,7 @@ interface ImageUploaderProps {
   onImageCropped?: (blob: Blob) => void;
 }
 
-/**
- * A reusable image uploader component with drag & drop, preview, and crop functionality
- */
-function ImageUploader({
+export function ImageUploader({
   aspectRatio = 1,
   maxSize = 5 * 1024 * 1024, // 5MB
   acceptedFileTypes = ['image/jpeg', 'image/png', 'image/webp'],
@@ -68,17 +58,17 @@ function ImageUploader({
   const [image, setImage] = useState<string | null>(null);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
+  const [rotation, setRotation] = useState(0);
   const [zoom, setZoom] = useState(1);
   const [error, setError] = useState<string | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [isCropDialogOpen, setIsCropDialogOpen] = useState(false);
-  const [isCopied, setIsCopied] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   // We're not using a drop library like react-dropzone, so this is handled manually with DOM events
 
-  const handleFileSelect = (file: File | null) => {
+  const handleFileSelect = async (file: File | null) => {
     if (!file) return;
 
     setError(null);
@@ -95,12 +85,20 @@ function ImageUploader({
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImage(reader.result as string);
-      setIsCropDialogOpen(true);
-    };
-    reader.readAsDataURL(file);
+    let imageDataUrl = await readFile(file);
+
+    try {
+      const orientation = await getOrientation(file);
+      const rotation = ORIENTATION_TO_ANGLE[orientation];
+      if (rotation) {
+        imageDataUrl = await getRotatedImage(imageDataUrl, rotation);
+      }
+    } catch {
+      console.warn('failed to detect the orientation');
+    }
+
+    setImage(imageDataUrl);
+    setIsCropDialogOpen(true);
   };
 
   const onCropComplete = useCallback((_: Area, croppedAreaPixels: Area) => {
@@ -110,70 +108,21 @@ function ImageUploader({
   const cropImage = useCallback(async () => {
     if (!image || !croppedAreaPixels) return;
 
-    const canvas = document.createElement('canvas');
-    const img = new Image();
-    img.src = image;
+    try {
+      const croppedImage = await getCroppedImg(image, croppedAreaPixels, rotation);
+      setPreviewImage(croppedImage);
+      setIsCropDialogOpen(false);
 
-    await new Promise((resolve) => {
-      img.onload = resolve;
-    });
-
-    const scaleX = img.naturalWidth / img.width;
-    const scaleY = img.naturalHeight / img.height;
-
-    canvas.width = croppedAreaPixels.width;
-    canvas.height = croppedAreaPixels.height;
-
-    const ctx = canvas.getContext('2d');
-
-    if (ctx) {
-      ctx.drawImage(
-        img,
-        croppedAreaPixels.x * scaleX,
-        croppedAreaPixels.y * scaleY,
-        croppedAreaPixels.width * scaleX,
-        croppedAreaPixels.height * scaleY,
-        0,
-        0,
-        croppedAreaPixels.width,
-        croppedAreaPixels.height,
-      );
-
-      canvas.toBlob((blob) => {
-        if (blob) {
-          const previewUrl = URL.createObjectURL(blob);
-          setPreviewImage(previewUrl);
-          if (onImageCropped) {
-            onImageCropped(blob);
-          }
-          setIsCropDialogOpen(false);
-        }
-      }, 'image/jpeg');
+      // Convert data URL to Blob and call callback
+      if (onImageCropped && croppedImage) {
+        const response = await fetch(croppedImage);
+        const blob = await response.blob();
+        onImageCropped(blob);
+      }
+    } catch (e) {
+      console.error(e);
     }
-  }, [image, croppedAreaPixels]);
-
-  const copyComponentCode = () => {
-    const code = `import { ImageUploader } from "@/components/ImageUploader";
-
-// Basic usage
-<ImageUploader onImageCropped={(blob) => console.log(blob)} />
-
-// With options
-<ImageUploader
-  aspectRatio={16/9}
-  maxSize={10 * 1024 * 1024} // 10MB
-  acceptedFileTypes={['image/jpeg', 'image/png']}
-  onImageCropped={(blob) => {
-    // Do something with the blob
-    console.log(blob);
-  }}
-/>`;
-
-    navigator.clipboard.writeText(code).then(() => {
-      setIsCopied(true);
-      setTimeout(() => setIsCopied(false), 2000);
-    });
-  };
+  }, [image, croppedAreaPixels, rotation, onImageCropped]);
 
   const clearImage = () => {
     setPreviewImage(null);
@@ -181,6 +130,7 @@ function ImageUploader({
     setCroppedAreaPixels(null);
     setCrop({ x: 0, y: 0 });
     setZoom(1);
+    setRotation(0);
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -198,33 +148,22 @@ function ImageUploader({
     e.stopPropagation();
   };
 
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+  const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      handleFileSelect(e.dataTransfer.files[0]);
+      await handleFileSelect(e.dataTransfer.files[0]);
     }
   };
 
   return (
-    <div className={cn('w-full', className)}>
+    <div data-slot='image-uploader' className={cn('w-full', className)}>
       <Card className='w-full'>
         <CardHeader>
           <CardTitle className='flex items-center justify-between'>
             Image Uploader
-            <div className='flex gap-2'>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button size='icon' variant='outline' onClick={copyComponentCode}>
-                      {isCopied ? <CheckIcon size={16} /> : <CopyIcon size={16} />}
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>{isCopied ? 'Copied!' : 'Copy component code'}</TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-
+            <div>
               {previewImage && (
                 <TooltipProvider>
                   <Tooltip>
@@ -243,6 +182,7 @@ function ImageUploader({
         <CardContent>
           {!previewImage ? (
             <div
+              data-slot='image-uploader-dropzone'
               className='hover:bg-muted/20 cursor-pointer rounded-lg border-2 border-dashed p-8 text-center transition-colors'
               onDragOver={handleDragOver}
               onDragEnter={handleDragEnter}
@@ -266,7 +206,7 @@ function ImageUploader({
               {error && <p className='text-destructive mt-2 text-sm'>{error}</p>}
             </div>
           ) : (
-            <div className='relative overflow-hidden rounded-lg'>
+            <div data-slot='image-uploader-preview' className='relative overflow-hidden rounded-lg'>
               <img
                 src={previewImage}
                 alt='Cropped preview'
@@ -293,19 +233,40 @@ function ImageUploader({
             <>
               <div className='relative h-80 w-full'>
                 <Cropper
-                  image={image}
                   crop={crop}
                   zoom={zoom}
+                  image={image}
+                  rotation={rotation}
                   aspect={aspectRatio}
                   onCropChange={setCrop}
+                  onRotationChange={setRotation}
                   onCropComplete={onCropComplete}
                   onZoomChange={setZoom}
                 />
               </div>
               <div className='flex items-center gap-4'>
                 <ZoomOutIcon className='size-4' />
-                <Slider value={[zoom]} min={1} max={3} step={0.1} onValueChange={(value) => setZoom(value[0])} />
+                <Slider
+                  value={[zoom]}
+                  min={1}
+                  max={3}
+                  step={0.1}
+                  aria-labelledby='Zoom'
+                  onValueChange={(value) => setZoom(value[0])}
+                />
                 <ZoomInIcon className='size-4' />
+              </div>
+              <div className='flex items-center gap-4'>
+                <RotateCcwIcon className='size-4' />
+                <Slider
+                  value={[rotation]}
+                  min={-180}
+                  max={180}
+                  step={1}
+                  aria-labelledby='Rotation'
+                  onValueChange={(value) => setRotation(value[0])}
+                />
+                <RotateCwIcon className='size-4' />
               </div>
               <div className='flex justify-end gap-2'>
                 <Button variant='outline' onClick={() => setIsCropDialogOpen(false)}>
@@ -320,5 +281,3 @@ function ImageUploader({
     </div>
   );
 }
-
-export { ImageUploader };

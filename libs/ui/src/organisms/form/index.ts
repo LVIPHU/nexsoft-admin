@@ -30,6 +30,9 @@ export type { FormRadioGroupProps } from './fields/form-radio-group';
 export { FormSwitch } from './fields/form-switch';
 export type { FormSwitchProps } from './fields/form-switch';
 
+export { FormImageUploader } from './fields/form-image-uploader';
+export type { FormImageUploaderProps } from './fields/form-image-uploader';
+
 // Layout components
 export { FormGroup } from './layout/form-group';
 export type { FormGroupProps } from './layout/form-group';

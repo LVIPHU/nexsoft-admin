@@ -9,6 +9,7 @@ export * from './data-table';
 export * from './drawer';
 export * from './dropdown-menu';
 export * from './form';
+export * from './image-uploader';
 export * from './input-otp';
 export * from './menubar';
 export * from './navigation-menu';

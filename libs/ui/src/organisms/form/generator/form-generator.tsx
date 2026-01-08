@@ -10,6 +10,7 @@ import { FormNativeSelect } from '../fields/form-native-select';
 import { FormCheckbox } from '../fields/form-checkbox';
 import { FormRadioGroup } from '../fields/form-radio-group';
 import { FormSwitch } from '../fields/form-switch';
+import { FormImageUploader } from '../fields/form-image-uploader';
 import type { FieldConfig } from './field-config';
 import { FieldGroup } from '../../../molecules';
 import { cn } from '@nexsoft-admin/utils';
@@ -160,6 +161,16 @@ function FormGenerator<T extends z.ZodType>({
             return <FormInput key={fieldName} {...commonProps} type='tel' />;
           case 'url':
             return <FormInput key={fieldName} {...commonProps} type='url' />;
+          case 'image-uploader':
+            return (
+              <FormImageUploader
+                key={fieldName}
+                {...commonProps}
+                aspectRatio={config.aspectRatio}
+                maxSize={config.maxSize}
+                acceptedFileTypes={config.acceptedFileTypes}
+              />
+            );
           default:
             return <FormInput key={fieldName} {...commonProps} type='text' />;
         }

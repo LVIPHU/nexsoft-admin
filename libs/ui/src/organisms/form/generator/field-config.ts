@@ -15,7 +15,8 @@ export type FieldType =
   | 'radio-group'
   | 'switch'
   | 'date'
-  | 'date-range';
+  | 'date-range'
+  | 'image-uploader';
 
 export type FieldOrientation = 'horizontal' | 'vertical';
 
@@ -38,7 +39,11 @@ export type FieldConfig = {
   required?: boolean;
   className?: string;
   render?: (field: ControllerRenderProps) => ReactNode;
-};
+  // Image uploader specific props
+  aspectRatio?: number;
+  maxSize?: number;
+  acceptedFileTypes?: string[];
+} & Record<string, unknown>;
 
 export type FormChangeInfo<T> = {
   changedFields: Array<{

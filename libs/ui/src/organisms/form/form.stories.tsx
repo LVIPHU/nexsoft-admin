@@ -12,6 +12,7 @@ import {
   FormSelect,
   FormSwitch,
   FormGroup,
+  FormImageUploader,
   type FieldConfig,
 } from './index';
 import { Button } from '../../atoms/button/button';
@@ -506,6 +507,180 @@ export const WithFormHorizontal: Story = {
           </FormGroup>
           <div className='mt-6'>
             <Button type='submit'>Update Profile</Button>
+          </div>
+        </Form>
+      </div>
+    );
+  },
+};
+
+// Profile with image upload schema
+const profileWithImageSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  email: z.string().email('Invalid email address'),
+  bio: z.string().max(255, 'Bio must be less than 255 characters').optional(),
+  avatar: z.instanceof(File).optional(),
+  coverImage: z.instanceof(File).optional(),
+});
+
+export const WithImageUploader: Story = {
+  render: () => {
+    const fieldConfigs: FieldConfig[] = [
+      {
+        name: 'name',
+        label: 'Full Name',
+        placeholder: 'Enter your name',
+        orientation: 'vertical',
+      },
+      {
+        name: 'email',
+        label: 'Email',
+        type: 'email',
+        placeholder: 'Enter your email',
+        orientation: 'vertical',
+      },
+      {
+        name: 'bio',
+        label: 'Bio',
+        type: 'textarea',
+        placeholder: 'Tell us about yourself',
+        orientation: 'vertical',
+      },
+      {
+        name: 'avatar',
+        label: 'Profile Picture',
+        type: 'image-uploader',
+        description: 'Upload a square profile picture (recommended: 400x400px)',
+        orientation: 'vertical',
+        aspectRatio: 1,
+        maxSize: 5 * 1024 * 1024, // 5MB
+        acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
+        required: false,
+      },
+      {
+        name: 'coverImage',
+        label: 'Cover Image',
+        type: 'image-uploader',
+        description: 'Upload a cover image (recommended: 16:9 aspect ratio)',
+        orientation: 'vertical',
+        aspectRatio: 16 / 9,
+        maxSize: 10 * 1024 * 1024, // 10MB
+        acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
+        required: false,
+      },
+    ];
+
+    return (
+      <div className='mx-auto max-w-2xl p-4'>
+        <Form
+          schema={profileWithImageSchema}
+          defaultValues={{
+            name: '',
+            email: '',
+            bio: '',
+          }}
+          onSubmit={(data) => {
+            console.log('Form submitted:', data);
+            if (data.avatar) {
+              console.log('Avatar file:', data.avatar.name, data.avatar.size, 'bytes');
+            }
+            if (data.coverImage) {
+              console.log('Cover image file:', data.coverImage.name, data.coverImage.size, 'bytes');
+            }
+            toast.success('Profile with images submitted!');
+          }}
+        >
+          <FormGenerator schema={profileWithImageSchema} fieldConfigs={fieldConfigs} />
+          <div className='mt-6'>
+            <Button type='submit'>Save Profile</Button>
+          </div>
+        </Form>
+      </div>
+    );
+  },
+};
+
+export const WithImageUploaderManual: Story = {
+  render: () => {
+    return (
+      <div className='mx-auto max-w-2xl p-4'>
+        <Form
+          schema={profileWithImageSchema}
+          defaultValues={{
+            name: '',
+            email: '',
+            bio: '',
+          }}
+          onSubmit={(data) => {
+            console.log('Form submitted:', data);
+            if (data.avatar) {
+              toast.success(`Avatar uploaded: ${data.avatar.name} (${(data.avatar.size / 1024).toFixed(2)} KB)`);
+            }
+            if (data.coverImage) {
+              toast.success(
+                `Cover image uploaded: ${data.coverImage.name} (${(data.coverImage.size / 1024).toFixed(2)} KB)`,
+              );
+            }
+          }}
+        >
+          <Grid cols={1} gap={4}>
+            <FormInput
+              name='name'
+              config={{
+                name: 'name',
+                label: 'Full Name',
+                placeholder: 'Enter your name',
+                orientation: 'vertical',
+              }}
+            />
+            <FormInput
+              name='email'
+              type='email'
+              config={{
+                name: 'email',
+                label: 'Email',
+                placeholder: 'Enter your email',
+                orientation: 'vertical',
+              }}
+            />
+            <FormTextarea
+              name='bio'
+              config={{
+                name: 'bio',
+                label: 'Bio',
+                placeholder: 'Tell us about yourself',
+                orientation: 'vertical',
+              }}
+            />
+            <FormImageUploader
+              name='avatar'
+              config={{
+                name: 'avatar',
+                label: 'Profile Picture',
+                description: 'Upload a square profile picture',
+                orientation: 'vertical',
+                required: false,
+              }}
+              aspectRatio={1}
+              maxSize={5 * 1024 * 1024}
+              acceptedFileTypes={['image/jpeg', 'image/png', 'image/webp']}
+            />
+            <FormImageUploader
+              name='coverImage'
+              config={{
+                name: 'coverImage',
+                label: 'Cover Image',
+                description: 'Upload a wide cover image (16:9)',
+                orientation: 'vertical',
+                required: false,
+              }}
+              aspectRatio={16 / 9}
+              maxSize={10 * 1024 * 1024}
+              acceptedFileTypes={['image/jpeg', 'image/png', 'image/webp']}
+            />
+          </Grid>
+          <div className='mt-6'>
+            <Button type='submit'>Save Profile</Button>
           </div>
         </Form>
       </div>
