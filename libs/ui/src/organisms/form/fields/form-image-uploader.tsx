@@ -52,9 +52,18 @@ function FormImageUploader<T extends FieldValues>({
           onBlur();
         };
 
+        // Type-safe conversion: form value can be string (URL), File, or null
+        const imageValue: string | File | null | undefined =
+          value === null || value === undefined
+            ? null
+            : typeof value === 'string' || value instanceof File
+              ? value
+              : null;
+
         return (
           <div data-slot='form-image-uploader-wrapper' className={cn('w-full', className)}>
             <ImageUploader
+              value={imageValue}
               aspectRatio={aspectRatio}
               maxSize={maxSize}
               acceptedFileTypes={acceptedFileTypes}

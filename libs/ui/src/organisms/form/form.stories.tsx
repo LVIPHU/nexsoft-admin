@@ -519,8 +519,8 @@ const profileWithImageSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   email: z.string().email('Invalid email address'),
   bio: z.string().max(255, 'Bio must be less than 255 characters').optional(),
-  avatar: z.instanceof(File).optional(),
-  coverImage: z.instanceof(File).optional(),
+  avatar: z.union([z.instanceof(File), z.string().url()]).optional(),
+  coverImage: z.union([z.instanceof(File), z.string().url()]).optional(),
 });
 
 export const WithImageUploader: Story = {
@@ -578,13 +578,14 @@ export const WithImageUploader: Story = {
             name: '',
             email: '',
             bio: '',
+            avatar: 'https://picsum.photos/400/400?random=5',
           }}
           onSubmit={(data) => {
             console.log('Form submitted:', data);
-            if (data.avatar) {
+            if (data.avatar && typeof data.avatar !== 'string') {
               console.log('Avatar file:', data.avatar.name, data.avatar.size, 'bytes');
             }
-            if (data.coverImage) {
+            if (data.coverImage && typeof data.coverImage !== 'string') {
               console.log('Cover image file:', data.coverImage.name, data.coverImage.size, 'bytes');
             }
             toast.success('Profile with images submitted!');
@@ -610,13 +611,14 @@ export const WithImageUploaderManual: Story = {
             name: '',
             email: '',
             bio: '',
+            avatar: 'https://picsum.photos/400/400?random=5',
           }}
           onSubmit={(data) => {
             console.log('Form submitted:', data);
-            if (data.avatar) {
+            if (data.avatar && typeof data.avatar !== 'string') {
               toast.success(`Avatar uploaded: ${data.avatar.name} (${(data.avatar.size / 1024).toFixed(2)} KB)`);
             }
-            if (data.coverImage) {
+            if (data.coverImage && typeof data.coverImage !== 'string') {
               toast.success(
                 `Cover image uploaded: ${data.coverImage.name} (${(data.coverImage.size / 1024).toFixed(2)} KB)`,
               );
