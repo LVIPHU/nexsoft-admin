@@ -11,6 +11,7 @@ import { FormCheckbox } from '../fields/form-checkbox';
 import { FormRadioGroup } from '../fields/form-radio-group';
 import { FormSwitch } from '../fields/form-switch';
 import { FormImageUploader } from '../fields/form-image-uploader';
+import { FormMultiSelect } from '../fields/form-multi-select';
 import type { FieldConfig } from './field-config';
 import { FieldGroup } from '../../../molecules';
 import { cn } from '@nexsoft-admin/utils';
@@ -112,7 +113,7 @@ function FormGenerator<T extends z.ZodType>({
         placeholder: customConfig?.placeholder,
         options:
           customConfig?.options ||
-          (fieldType === 'select' || fieldType === 'radio-group'
+          (fieldType === 'select' || fieldType === 'radio-group' || fieldType === 'multi-select'
             ? getEnumOptions(fieldSchema as z.ZodTypeAny)
             : undefined),
         orientation: customConfig?.orientation || 'vertical',
@@ -171,6 +172,8 @@ function FormGenerator<T extends z.ZodType>({
                 acceptedFileTypes={config.acceptedFileTypes}
               />
             );
+          case 'multi-select':
+            return <FormMultiSelect key={fieldName} {...commonProps} />;
           default:
             return <FormInput key={fieldName} {...commonProps} type='text' />;
         }

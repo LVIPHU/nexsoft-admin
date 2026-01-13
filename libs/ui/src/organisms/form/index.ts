@@ -33,6 +33,9 @@ export type { FormSwitchProps } from './fields/form-switch';
 export { FormImageUploader } from './fields/form-image-uploader';
 export type { FormImageUploaderProps } from './fields/form-image-uploader';
 
+export { FormMultiSelect } from './fields/form-multi-select';
+export type { FormMultiSelectProps } from './fields/form-multi-select';
+
 // Layout components
 export { FormGroup } from './layout/form-group';
 export type { FormGroupProps } from './layout/form-group';

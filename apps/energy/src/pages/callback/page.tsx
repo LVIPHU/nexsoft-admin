@@ -42,7 +42,7 @@ export function CallbackPage() {
       <div className='flex h-screen items-center justify-center'>
         <div className='text-center'>
           <div className='mb-4'>Processing authentication...</div>
-          <div className='animate-spin'>⏳</div>
+          <span className='animate-spin'>⏳</span>
         </div>
       </div>
     );

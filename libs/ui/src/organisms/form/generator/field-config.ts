@@ -16,7 +16,8 @@ export type FieldType =
   | 'switch'
   | 'date'
   | 'date-range'
-  | 'image-uploader';
+  | 'image-uploader'
+  | 'multi-select';
 
 export type FieldOrientation = 'horizontal' | 'vertical';
 
@@ -43,6 +44,12 @@ export type FieldConfig = {
   aspectRatio?: number;
   maxSize?: number;
   acceptedFileTypes?: string[];
+  // Multi-select specific props
+  maxCount?: number;
+  searchable?: boolean;
+  hideSelectAll?: boolean;
+  singleLine?: boolean;
+  closeOnSelect?: boolean;
 } & Record<string, unknown>;
 
 export type FormChangeInfo<T> = {

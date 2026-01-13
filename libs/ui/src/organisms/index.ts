@@ -12,6 +12,7 @@ export * from './form';
 export * from './image-uploader';
 export * from './input-otp';
 export * from './menubar';
+export * from './multi-select';
 export * from './navigation-menu';
 export * from './popover';
 export * from './resizable';

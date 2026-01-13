@@ -82,6 +82,7 @@ export default defineConfig(() => ({
         form: 'src/organisms/form/index.ts',
         'input-otp': 'src/organisms/input-otp/index.ts',
         menubar: 'src/organisms/menubar/index.ts',
+        'multi-select': 'src/organisms/multi-select/index.ts',
         'navigation-menu': 'src/organisms/navigation-menu/index.ts',
         popover: 'src/organisms/popover/index.ts',
         resizable: 'src/organisms/resizable/index.ts',

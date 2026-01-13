@@ -152,7 +152,7 @@ function UsersPage() {
 
   return (
     <div className='flex flex-1 flex-col gap-4 md:gap-6'>
-      <div className='flex w-full flex-col items-start justify-between gap-4 @xl/main:flex-row'>
+      <div className='flex w-full flex-col items-start justify-between gap-4 @xl/main:flex-row @xl/main:items-center'>
         <div>
           <H1>
             <Trans>User Management</Trans>

@@ -248,6 +248,11 @@
       "import": "./dist/menubar.js",
       "default": "./dist/menubar.js"
     },
+    "./multi-select": {
+      "types": "./dist/organisms/multi-select/index.d.ts",
+      "import": "./dist/multi-select.js",
+      "default": "./dist/multi-select.js"
+    },
     "./navigation-menu": {
       "types": "./dist/organisms/navigation-menu/index.d.ts",
       "import": "./dist/navigation-menu.js",
