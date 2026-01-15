@@ -28,10 +28,26 @@ export const NAVIGATION_ITEMS: Navigation = [
     ],
   },
   {
-    id: 'settings',
-    href: '/settings',
-    title: msg`Settings`,
+    id: 'account-management',
+    title: msg`Account Management`,
     icon: SettingsIcon,
+    items: [
+      {
+        id: 'my-account',
+        href: '/my-account',
+        title: msg`My Account`,
+      },
+      {
+        id: 'admin-management',
+        href: '/admin-management',
+        title: msg`Admin Management`,
+      },
+      {
+        id: 'roles-permissions',
+        href: '/roles-permissions',
+        title: msg`Roles & Permissions`,
+      },
+    ],
   },
 ];
 

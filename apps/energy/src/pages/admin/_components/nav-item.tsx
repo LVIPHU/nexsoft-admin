@@ -27,10 +27,9 @@ function NavItem({ data }: NavItemProps) {
   const pathname = location.pathname;
 
   const isActive =
-    (!isNavParent(data) && pathname.startsWith(data.href)) ||
+    (!isNavParent(data) && pathname.endsWith(data.href)) ||
     (isNavParent(data) && data.items.some((x) => pathname.startsWith(x.href)));
 
-  console.log('data:', data, isNavParent(data));
   const defaultOpen = isNavParent(data) ? (isActive ? true : !data.isCollapsed) : undefined;
 
   if (!isNavParent(data)) {
@@ -39,7 +38,7 @@ function NavItem({ data }: NavItemProps) {
         <SidebarMenuButton
           asChild
           tooltip={i18n._(data.title)}
-          className={cn('h-10 px-4 py-3 font-medium', isActive && 'bg-sidebar-accent text-sidebar-accent-foreground')}
+          className={cn('h-10 px-4 py-3 font-medium', isActive && 'bg-primary/12 text-primary')}
         >
           <Link to={data.href}>
             {data.icon ? <data.icon /> : null}
