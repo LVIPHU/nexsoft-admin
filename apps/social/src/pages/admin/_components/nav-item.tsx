@@ -13,10 +13,10 @@ import {
   SidebarMenuSubItem,
 } from '@nexsoft-admin/ui/sidebar';
 import ActiveIndicator from './active-indicator';
-import type { NavItem as NavItemType, NavSection } from '@/types/navigation.type.ts';
+import type { NavItem as NavItemType, NavParent } from '@/types/navigation.type.ts';
 
 interface NavItemProps {
-  data: NavSection;
+  data: NavParent;
 }
 
 function NavItem({ data }: NavItemProps) {

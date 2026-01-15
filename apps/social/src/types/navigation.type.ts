@@ -18,9 +18,9 @@ export interface NavItem {
   readonly description?: MessageDescriptor;
 }
 
-export interface NavSection extends Omit<NavItem, 'description'> {
+export interface NavParent extends Omit<NavItem, 'description'> {
   readonly isCollapsed?: boolean;
   readonly items?: ReadonlyArray<NavItem>;
 }
 
-export type Navigation = ReadonlyArray<NavSection>;
+export type Navigation = ReadonlyArray<NavParent>;

@@ -14,15 +14,11 @@ import { useProfile } from '@/services/profile';
 import { NavMain } from './nav-main';
 import { NavProfile } from './nav-profile';
 import { Link } from 'react-router';
-import { useLayoutStore } from '@/stores/layout.store';
 
 function Sidebar({ ...props }: React.ComponentProps<typeof SidebarComponent>) {
   const { profile } = useProfile();
-  const sidebarVariant = useLayoutStore((state) => state.sidebarVariant);
-  const sidebarCollapsible = useLayoutStore((state) => state.sidebarCollapsible);
-
   return (
-    <SidebarComponent collapsible={sidebarCollapsible} variant={sidebarVariant} {...props}>
+    <SidebarComponent collapsible='offcanvas' variant={'sidebar'} {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>

@@ -13,9 +13,9 @@ import {
 } from '@nexsoft-admin/ui';
 import { useEventListener } from '@nexsoft-admin/hooks';
 import { NAVIGATION_ITEMS } from '@/constants/navigation.constant';
-import type { NavSection } from '@/types/navigation.type.ts';
+import type { NavParent } from '@/types/navigation.type.ts';
 
-interface SearchItem extends NavSection {
+interface SearchItem extends NavParent {
   group: string;
   disabled?: boolean;
 }
