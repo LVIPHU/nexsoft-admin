@@ -17,12 +17,12 @@ export const NAVIGATION_ITEMS: Navigation = [
     items: [
       {
         id: 'report-metrics',
-        href: '/report-metrics',
+        href: '/gas-management/report-metrics',
         title: msg`Report Metrics`,
       },
       {
         id: 'activity-history',
-        href: '/activity-history',
+        href: '/gas-management/activity-history',
         title: msg`Activity History`,
       },
     ],
@@ -34,17 +34,17 @@ export const NAVIGATION_ITEMS: Navigation = [
     items: [
       {
         id: 'my-account',
-        href: '/my-account',
+        href: '/account-management/my-account',
         title: msg`My Account`,
       },
       {
         id: 'admin-management',
-        href: '/admin-management',
+        href: '/account-management/admin-management',
         title: msg`Admin Management`,
       },
       {
-        id: 'roles-permissions',
-        href: '/roles-permissions',
+        id: 'roles-and-permissions',
+        href: '/account-management/roles-and-permissions',
         title: msg`Roles & Permissions`,
       },
     ],

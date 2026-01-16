@@ -28,7 +28,7 @@ function NavItem({ data }: NavItemProps) {
 
   const isActive =
     (!isNavParent(data) && pathname.endsWith(data.href)) ||
-    (isNavParent(data) && data.items.some((x) => pathname.startsWith(x.href)));
+    (isNavParent(data) && data.items.some((x) => pathname.endsWith(x.href)));
 
   const defaultOpen = isNavParent(data) ? (isActive ? true : !data.isCollapsed) : undefined;
 
@@ -38,7 +38,10 @@ function NavItem({ data }: NavItemProps) {
         <SidebarMenuButton
           asChild
           tooltip={i18n._(data.title)}
-          className={cn('h-10 px-4 py-3 font-medium', isActive && 'bg-primary/12 text-primary')}
+          className={cn(
+            'h-10 px-4 py-3 font-medium',
+            isActive && 'bg-primary/12 text-primary hover:bg-primary/12 hover:text-primary',
+          )}
         >
           <Link to={data.href}>
             {data.icon ? <data.icon /> : null}
@@ -63,10 +66,17 @@ function NavItem({ data }: NavItemProps) {
           <SidebarMenuSub className='ml-0 border-0 pl-0'>
             {data.items.map((subItem, idx) => {
               const isLast = idx === data.items.length - 1;
+              const isActive = pathname.endsWith(subItem.href);
               return (
                 <SidebarMenuSubItem key={subItem.id} className='flex'>
                   <TreeLeafLine isLast={isLast} />
-                  <SidebarMenuSubButton asChild className='h-11 w-full px-4 py-3 font-medium'>
+                  <SidebarMenuSubButton
+                    asChild
+                    className={cn(
+                      'h-11 w-full px-4 py-3 font-medium',
+                      isActive && 'bg-primary/12 text-primary hover:bg-primary/12 hover:text-primary',
+                    )}
+                  >
                     <Link to={subItem.href}>
                       <span>{i18n._(subItem.title)}</span>
                     </Link>
