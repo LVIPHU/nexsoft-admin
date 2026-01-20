@@ -11,7 +11,7 @@ function NavMain({ items }: NavMainProps) {
     <SidebarGroup>
       <SidebarMenu className='gap-y-2'>
         {items.map((item) => (
-          <div className='border-b border-gray-200 pb-2 last:border-0' key={item.id}>
+          <div className='border-b border-neutral-700 pb-2 last:border-0' key={item.id}>
             <NavItem data={item} />
           </div>
         ))}

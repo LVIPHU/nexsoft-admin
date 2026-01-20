@@ -1,29 +1,23 @@
 import { cn } from '@nexsoft-admin/utils';
-import { Separator } from '@nexsoft-admin/ui/separator';
-import { SidebarTrigger } from '@nexsoft-admin/ui/sidebar';
-import { ThemeSwitch } from '@/components/theme-switch';
-import SearchDialog from '@/components/search-dialog';
-import { useLayoutStore } from '@/stores/layout.store';
+import { H1 } from './heading';
+import { useProfile } from '@/services/profile';
 
 function Header() {
-  const navbarStyle = useLayoutStore((state) => state.navbarStyle);
+  const { profile } = useProfile();
+
+  console.log('profile:', profile);
 
   return (
-    <header
-      data-navbar-style={navbarStyle}
-      className={cn(
-        'flex h-12 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12',
-        // Handle sticky navbar style with conditional classes so blur, background, z-index, and rounded corners remain consistent across all SidebarVariant layouts.
-        'data-[navbar-style=sticky]:bg-background/50 data-[navbar-style=sticky]:sticky data-[navbar-style=sticky]:top-0 data-[navbar-style=sticky]:z-50 data-[navbar-style=sticky]:overflow-hidden data-[navbar-style=sticky]:rounded-t-[inherit] data-[navbar-style=sticky]:backdrop-blur-md',
-      )}
-    >
-      <div className='flex flex-1 items-center gap-2 px-4'>
-        <SidebarTrigger className='-ml-1' />
-        <Separator orientation='vertical' className='mr-2 data-[orientation=vertical]:h-4' />
-        <SearchDialog />
+    <header className={cn('mt-10 flex h-16 shrink-0 items-center gap-2 px-8')}>
+      <div className='flex flex-1 flex-col gap-2'>
+        <H1>Welcome to Gas Management</H1>
+        <p>Monitor and manage your gas metrics and transactions</p>
       </div>
       <div className='px-4'>
-        <ThemeSwitch />
+        <div className='grid flex-1 text-left'>
+          <span className='truncate'>{profile?.name}</span>
+          <span className='truncate text-xs text-neutral-400'>UID {profile?.id}</span>
+        </div>
       </div>
     </header>
   );

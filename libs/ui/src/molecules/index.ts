@@ -1,6 +1,7 @@
 export * from './alert-dialog';
 export * from './breadcrumb';
 export * from './button-group';
+export * from './calendar';
 export * from './card';
 export * from './dialog';
 export * from './field';

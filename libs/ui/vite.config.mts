@@ -56,10 +56,11 @@ export default defineConfig(() => ({
         table: 'src/atoms/table/index.ts',
         textarea: 'src/atoms/textarea/index.ts',
         toggle: 'src/atoms/toggle/index.ts',
-        // Molecules (11 components)
+        // Molecules (12 components)
         'alert-dialog': 'src/molecules/alert-dialog/index.ts',
         breadcrumb: 'src/molecules/breadcrumb/index.ts',
         'button-group': 'src/molecules/button-group/index.ts',
+        calendar: 'src/molecules/calendar/index.ts',
         card: 'src/molecules/card/index.ts',
         dialog: 'src/molecules/dialog/index.ts',
         field: 'src/molecules/field/index.ts',
@@ -68,9 +69,8 @@ export default defineConfig(() => ({
         pagination: 'src/molecules/pagination/index.ts',
         'toggle-group': 'src/molecules/toggle-group/index.ts',
         tooltip: 'src/molecules/tooltip/index.ts',
-        // Organisms (22 components)
+        // Organisms (21 components)
         accordion: 'src/organisms/accordion/index.ts',
-        calendar: 'src/organisms/calendar/index.ts',
         carousel: 'src/organisms/carousel/index.ts',
         chart: 'src/organisms/chart/index.ts',
         collapsible: 'src/organisms/collapsible/index.ts',

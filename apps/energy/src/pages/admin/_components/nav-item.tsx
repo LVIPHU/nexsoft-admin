@@ -39,8 +39,8 @@ function NavItem({ data }: NavItemProps) {
           asChild
           tooltip={i18n._(data.title)}
           className={cn(
-            'h-10 px-4 py-3 font-medium',
-            isActive && 'bg-primary/12 text-primary hover:bg-primary/12 hover:text-primary',
+            'h-10 px-4 py-3 font-medium dark:text-neutral-400',
+            isActive && 'bg-primary/12 text-primary! hover:bg-primary/12 hover:text-primary',
           )}
         >
           <Link to={data.href}>
@@ -55,7 +55,7 @@ function NavItem({ data }: NavItemProps) {
   return (
     <Collapsible defaultOpen={defaultOpen} className='group/collapsible'>
       <CollapsibleTrigger asChild>
-        <SidebarMenuButton className='h-10 px-4 py-3 font-medium'>
+        <SidebarMenuButton className='h-10 px-4 py-3 font-medium dark:text-neutral-400 dark:hover:text-neutral-400'>
           {data.icon ? <data.icon /> : null}
           {i18n._(data.title)}{' '}
           <ChevronRight className='ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90' />
@@ -73,8 +73,8 @@ function NavItem({ data }: NavItemProps) {
                   <SidebarMenuSubButton
                     asChild
                     className={cn(
-                      'h-11 w-full px-4 py-3 font-medium',
-                      isActive && 'bg-primary/12 text-primary hover:bg-primary/12 hover:text-primary',
+                      'h-11 w-full px-4 py-3 font-medium dark:text-neutral-400',
+                      isActive && 'bg-primary/12 text-primary! hover:bg-primary/12 hover:text-primary',
                     )}
                   >
                     <Link to={subItem.href}>

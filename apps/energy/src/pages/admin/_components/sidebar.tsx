@@ -8,15 +8,22 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@nexsoft-admin/ui/sidebar';
+import { useSSO } from '@nexsoft-admin/sso';
+import { Button } from '@nexsoft-admin/ui/button';
 import { Logo } from '@/components/logo';
-import { NAVIGATION_ITEMS, USER_NAVIGATION_ITEMS } from '@/constants/navigation.constant';
-import { useProfile } from '@/services/profile';
+import { NAVIGATION_ITEMS } from '@/constants/navigation.constant';
 import { NavMain } from './nav-main';
-import { NavProfile } from './nav-profile';
 import { Link } from 'react-router';
+import { Trans } from '@lingui/react/macro';
+import { LogOutIcon } from 'lucide-react';
 
 function Sidebar({ ...props }: React.ComponentProps<typeof SidebarComponent>) {
-  const { profile } = useProfile();
+  const { logout } = useSSO();
+
+  const onSignOut = () => {
+    logout().then(() => window.location.reload());
+  };
+
   return (
     <SidebarComponent collapsible='offcanvas' variant={'sidebar'} {...props}>
       <SidebarHeader>
@@ -33,7 +40,12 @@ function Sidebar({ ...props }: React.ComponentProps<typeof SidebarComponent>) {
       <SidebarContent>
         <NavMain items={NAVIGATION_ITEMS} />
       </SidebarContent>
-      <SidebarFooter>{profile && <NavProfile profile={profile} items={USER_NAVIGATION_ITEMS} />}</SidebarFooter>
+      <SidebarFooter>
+        <Button variant={'outline'} className='rounded-full' onClick={onSignOut} aria-label='Logout'>
+          <LogOutIcon />
+          <Trans>Logout</Trans>
+        </Button>
+      </SidebarFooter>
     </SidebarComponent>
   );
 }

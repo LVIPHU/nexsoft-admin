@@ -143,6 +143,11 @@
       "import": "./dist/button-group.js",
       "default": "./dist/button-group.js"
     },
+    "./calendar": {
+      "types": "./dist/molecules/calendar/index.d.ts",
+      "import": "./dist/calendar.js",
+      "default": "./dist/calendar.js"
+    },
     "./card": {
       "types": "./dist/molecules/card/index.d.ts",
       "import": "./dist/card.js",
@@ -187,11 +192,6 @@
       "types": "./dist/organisms/accordion/index.d.ts",
       "import": "./dist/accordion.js",
       "default": "./dist/accordion.js"
-    },
-    "./calendar": {
-      "types": "./dist/organisms/calendar/index.d.ts",
-      "import": "./dist/calendar.js",
-      "default": "./dist/calendar.js"
     },
     "./carousel": {
       "types": "./dist/organisms/carousel/index.d.ts",
