@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { lingui } from '@lingui/vite-plugin';
 import * as path from 'path';
+import svgr from 'vite-plugin-svgr';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
@@ -24,6 +25,14 @@ export default defineConfig(() => ({
     }),
     lingui(),
     tailwindcss(),
+    svgr({
+      svgrOptions: {
+        plugins: ["@svgr/plugin-svgo", "@svgr/plugin-jsx"],
+        svgoConfig: {
+          floatPrecision: 2,
+        },
+      },
+    })
   ],
   resolve: {
     alias: {
