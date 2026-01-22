@@ -1,4 +1,3 @@
-import { Label } from '@nexsoft-admin/ui/label';
 import { Popover, PopoverTrigger, PopoverContent } from '@nexsoft-admin/ui/popover';
 import { Button } from '@nexsoft-admin/ui/button';
 import { Calendar } from '@nexsoft-admin/ui/calendar';
@@ -28,11 +27,7 @@ function DateRangePicker({
   const displayRange = selected ?? range;
 
   return (
-    <div className='w-full max-w-xs space-y-2'>
-      <Label htmlFor='dates' className='px-1'>
-        Date picker with short date
-      </Label>
-
+    <div className='w-full max-w-3xs space-y-2'>
       <Popover>
         <PopoverTrigger asChild>
           <Button variant='outline' id='dates' className='w-full justify-between font-normal'>

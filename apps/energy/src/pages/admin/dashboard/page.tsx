@@ -1,5 +1,6 @@
-import { SectionCard } from '@/pages/admin/_components/section-card';
+import { SectionCard } from '@/components/section-card';
 import { DateRangePicker } from '@/components/date-range-picker';
+import { HeaderCard } from '@/components/header-card';
 
 function DashboardPage() {
   return (
@@ -9,9 +10,10 @@ function DashboardPage() {
         title={'TOTAL TOKEN VALUE RECEIVED'}
         value={2023874.11}
         description={'sadasdasd'}
-        logo={'https://github.com/shadcn.png'}
+        icon='PieChartRadiant'
         addonStart={'$'}
       />
+      <HeaderCard title={'Overall Statistics'} icon={'PieChartRadiant'} tooltip={'tooltip'} />
     </div>
   );
 }

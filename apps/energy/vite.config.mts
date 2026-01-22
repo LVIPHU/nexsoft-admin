@@ -1,10 +1,12 @@
 /// <reference types='vitest' />
+/// <reference types="vite-plugin-svgr/client" />
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { lingui } from '@lingui/vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
 import * as path from 'path';
-import svgr from "vite-plugin-svgr";
+import svgr from 'vite-plugin-svgr';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
@@ -26,13 +28,24 @@ export default defineConfig(() => ({
     lingui(),
     tailwindcss(),
     svgr({
+      include: '**/*.svg?react',
       svgrOptions: {
-        plugins: ["@svgr/plugin-svgo", "@svgr/plugin-jsx"],
+        icon: true,
+        svgo: true,
         svgoConfig: {
-          floatPrecision: 2,
+          plugins: [
+            {
+              name: 'preset-default',
+              params: {
+                overrides: {
+                  removeViewBox: false,
+                },
+              },
+            },
+          ],
         },
       },
-    })
+    }),
   ],
   resolve: {
     alias: {

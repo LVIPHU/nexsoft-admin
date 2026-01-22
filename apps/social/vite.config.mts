@@ -26,13 +26,24 @@ export default defineConfig(() => ({
     lingui(),
     tailwindcss(),
     svgr({
+      include: '**/*.svg?react',
       svgrOptions: {
-        plugins: ["@svgr/plugin-svgo", "@svgr/plugin-jsx"],
+        icon: true,
+        svgo: true,
         svgoConfig: {
-          floatPrecision: 2,
+          plugins: [
+            {
+              name: 'preset-default',
+              params: {
+                overrides: {
+                  removeViewBox: false,
+                },
+              },
+            },
+          ],
         },
       },
-    })
+    }),
   ],
   resolve: {
     alias: {

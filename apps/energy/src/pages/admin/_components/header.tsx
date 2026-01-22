@@ -4,11 +4,8 @@ import { useProfile } from '@/services/profile';
 
 function Header() {
   const { profile } = useProfile();
-
-  console.log('profile:', profile);
-
   return (
-    <header className={cn('mt-10 flex h-16 shrink-0 items-center gap-2 px-8')}>
+    <header className={cn('mt-10 flex min-h-16 shrink-0 items-center gap-2 px-8')}>
       <div className='flex flex-1 flex-col gap-2'>
         <H1>Welcome to Gas Management</H1>
         <p>Monitor and manage your gas metrics and transactions</p>
