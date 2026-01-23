@@ -43,6 +43,11 @@
       "import": "./dist/checkbox.js",
       "default": "./dist/checkbox.js"
     },
+    "./count-up": {
+      "types": "./dist/atoms/count-up/index.d.ts",
+      "import": "./dist/count-up.js",
+      "default": "./dist/count-up.js"
+    },
     "./empty": {
       "types": "./dist/atoms/empty/index.d.ts",
       "import": "./dist/empty.js",

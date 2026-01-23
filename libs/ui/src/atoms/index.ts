@@ -4,6 +4,7 @@ export * from './avatar';
 export * from './badge';
 export * from './button';
 export * from './checkbox';
+export * from './count-up';
 export * from './empty';
 export * from './flex';
 export * from './grid';
