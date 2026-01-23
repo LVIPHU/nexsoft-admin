@@ -2,6 +2,7 @@ import { ResourceSummary } from './_components/resource-summary';
 import { OverallStatistics } from './_components/overall-statistics';
 import { ProfitOverview } from './_components/profit-overview';
 import { Statistics } from '@/pages/admin/gas-management/report-metrics/_components/statistics';
+import { TopPerformers } from '@/pages/admin/gas-management/report-metrics/_components/top-performers';
 
 function ReportMetricsPage() {
   return (
@@ -10,6 +11,7 @@ function ReportMetricsPage() {
       <ResourceSummary className={'@5xl/main:col-span-2'} />
       <ProfitOverview />
       <Statistics className={'@5xl/main:col-span-2'} />
+      <TopPerformers className={'@5xl/main:col-span-3'} />
     </div>
   );
 }

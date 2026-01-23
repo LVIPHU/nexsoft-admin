@@ -23,7 +23,7 @@ function SectionCard({ title, value, description, icon, addonStart, addonEnd, cl
           {formatNumber(value)}
           {addonEnd}
         </p>
-        {description && <p className='text-xs font-medium text-zinc-400'>description</p>}
+        {description && <p className='text-xs font-medium text-zinc-400'>{description}</p>}
       </div>
     </div>
   );

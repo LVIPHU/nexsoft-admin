@@ -16,11 +16,11 @@ function ProfitOverview({ className }: ProfitOverviewProps) {
         <CardHeader>
           <HeaderCard title={i18n._(msg`Profit Overview`)} icon={'PieChartRadiant'} />
         </CardHeader>
-        <CardContent className='p-0'>
-          <div className='grid grid-cols-1'>
-            <SectionCard title={i18n._(msg`Total Energy System earned`)} value={10890000000} />
-            <SectionCard title={i18n._(msg`Total Energy System earned`)} value={10890000000} />
-            <SectionCard title={i18n._(msg`Total Energy System earned`)} value={10890000000} />
+        <CardContent className='p-0 h-full'>
+          <div className='flex h-full flex-col justify-between'>
+            <SectionCard title={i18n._(msg`Total Energy System earned`)} value={10890000000} icon={'SigmaSolid'}/>
+            <SectionCard title={i18n._(msg`Total Energy System earned`)} value={10890000000} description={'≈ $1,799,999'} icon={'Tether'}/>
+            <SectionCard title={i18n._(msg`Total Energy System earned`)} value={10890000000} description={'≈ $1,799,999'} icon={'Tron'}/>
           </div>
         </CardContent>
       </Card>

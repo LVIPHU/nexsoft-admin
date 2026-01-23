@@ -17,7 +17,7 @@ import dayjs from 'dayjs';
 
 const chartData = [
   { day: '06/13/2023', usdt: 186, trx: 180 },
-  { day: '04/27/2023', usdt: 305, trx: 300 },
+  { day: '04/27/2023', usdt: 100, trx: 300 },
   { day: '03/18/2024', usdt: 237, trx: 220 },
   { day: '11/23/2023', usdt: 73, trx: 190 },
   { day: '03/29/2022', usdt: 209, trx: 130 },
@@ -62,8 +62,8 @@ function Statistics({ className }: StatisticsProps) {
               <YAxis tickLine={false} axisLine={false} tickMargin={8} />
               <ChartTooltip content={<ChartTooltipContent />} />
               <ChartLegend content={<ChartLegendContent />} />
-              <Bar dataKey='usdt' stackId='a' barSize={66} fill='var(--color-usdt)' />
-              <Bar dataKey='trx' stackId='a' barSize={66} fill='var(--color-trx)' radius={[16, 16, 0, 0]} />
+              <Bar dataKey='trx' stackId='a' barSize={66} fill='var(--color-trx)' />
+              <Bar dataKey='usdt' stackId='a' barSize={66} fill='var(--color-usdt)' radius={[16, 16, 0, 0]} />
             </BarChart>
           </ChartContainer>
         </CardContent>
