@@ -7,13 +7,14 @@ import { DateRangePicker } from '@/components/date-range-picker';
 
 interface HeaderCardProps {
   title: string;
+  description?: string;
   icon?: keyof typeof IconsMap;
   tooltip?: React.ReactNode;
   selectedDateRanger?: DateRange;
   onSelectDateRanger?: (range: DateRange | undefined) => void;
 }
 
-function HeaderCard({ title, icon, tooltip, selectedDateRanger, onSelectDateRanger }: HeaderCardProps) {
+function HeaderCard({ title, description, icon, tooltip, selectedDateRanger, onSelectDateRanger }: HeaderCardProps) {
   return (
     <div className='flex justify-between'>
       <div className='flex items-center gap-3'>
@@ -22,7 +23,10 @@ function HeaderCard({ title, icon, tooltip, selectedDateRanger, onSelectDateRang
             <Icon name={icon} className='size-8' />
           </div>
         )}
-        <p className='truncate text-lg font-semibold'>{title}</p>
+        <div className='flex flex-col'>
+          <p className='truncate text-lg font-semibold'>{title}</p>
+          {description && <p className='truncate text-sm text-zinc-400'>{description}</p>}
+        </div>
         {tooltip && (
           <Tooltip>
             <TooltipTrigger>

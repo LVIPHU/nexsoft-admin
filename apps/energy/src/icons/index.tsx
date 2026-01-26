@@ -1,5 +1,6 @@
 export { default as AwardRadiant } from './award-radiant.svg?react';
 export { default as BarChartRadiant } from './bar-chart-radiant.svg?react';
+export { default as ClockRadiant } from './clock-radiant.svg?react';
 export { default as GaugeSolid } from './gauge-solid.svg?react';
 export { default as PieChartRadiant } from './pie-chart-radiant.svg?react';
 export { default as SigmaSolid } from './sigma-solid.svg?react';
