@@ -1,12 +1,5 @@
 import { Card, CardHeader, CardContent } from '@nexsoft-admin/ui/card';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@nexsoft-admin/ui/table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@nexsoft-admin/ui/table';
 import { Button } from '@nexsoft-admin/ui/button';
 import { HeaderCard } from '@/components/header-card';
 import { i18n } from '@lingui/core';
@@ -66,7 +59,7 @@ interface TopPerformersProps {
 }
 
 function TopPerformers({ className }: TopPerformersProps) {
-  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange>(() => ({
+  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(() => ({
     from: dayjs().subtract(7, 'day').toDate(),
     to: dayjs().toDate(),
   }));
@@ -82,18 +75,16 @@ function TopPerformers({ className }: TopPerformersProps) {
             onSelectDateRanger={setSelectedDateRanger}
           />
         </CardHeader>
-        <CardContent className='py-0 px-4'>
-          <div className='rounded-2xl overflow-hidden'>
+        <CardContent className='px-6 pt-0'>
+          <div className='overflow-hidden rounded-2xl'>
             <Table>
               <TableHeader>
-                <TableRow className='h-13 dark:bg-black/70 *:data-[slot=table-head]:uppercase'>
+                <TableRow className='h-13 *:data-[slot=table-head]:uppercase dark:bg-black/70'>
                   <TableHead>{i18n._(msg`Top User`)}</TableHead>
                   <TableHead>{i18n._(msg`Total Transactions`)}</TableHead>
                   <TableHead>{i18n._(msg`Total Energy Used`)}</TableHead>
                   <TableHead>{i18n._(msg`Total Bandwidth Used`)}</TableHead>
-                  <TableHead className='bg-[#0DCC6114] text-white'>
-                    {i18n._(msg`Total Transaction Value`)}
-                  </TableHead>
+                  <TableHead className='bg-[#0DCC6114] text-white'>{i18n._(msg`Total Transaction Value`)}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -108,7 +99,7 @@ function TopPerformers({ className }: TopPerformersProps) {
                     <TableCell>{formatNumber(row.totalTransactions, { noDecimals: true })}</TableCell>
                     <TableCell>{formatNumber(row.totalEnergyUsed, { noDecimals: true })}</TableCell>
                     <TableCell>{formatNumber(row.totalBandwidthUsed, { noDecimals: true })}</TableCell>
-                    <TableCell className='group-odd:bg-[#25342C] group-even:bg-[#0DCC6114] text-white font-medium'>
+                    <TableCell className='font-medium text-white group-odd:bg-[#25342C] group-even:bg-[#0DCC6114]'>
                       {formatCurrency(row.totalTransactionValue)}
                     </TableCell>
                   </TableRow>
@@ -116,7 +107,7 @@ function TopPerformers({ className }: TopPerformersProps) {
               </TableBody>
             </Table>
           </div>
-          <div className='flex justify-end'>
+          <div className='mb-4 flex justify-end'>
             <Button variant='link' className='text-green-600 dark:text-green-500' asChild>
               <Link to='/gas-management/activity-history'>{i18n._(msg`View all`)}</Link>
             </Button>

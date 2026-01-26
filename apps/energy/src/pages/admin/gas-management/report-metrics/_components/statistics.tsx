@@ -39,7 +39,7 @@ interface StatisticsProps {
 }
 
 function Statistics({ className }: StatisticsProps) {
-  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange>(() => ({
+  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(() => ({
     from: dayjs().subtract(7, 'day').toDate(),
     to: dayjs().toDate(),
   }));
@@ -49,12 +49,12 @@ function Statistics({ className }: StatisticsProps) {
       <Card className='gap-4 pb-0'>
         <CardHeader>
           <HeaderCard
-            title={i18n._(msg`Resource Summary`)}
+            title={i18n._(msg`Statistics`)}
             selectedDateRanger={selectedDateRanger}
             onSelectDateRanger={setSelectedDateRanger}
           />
         </CardHeader>
-        <CardContent className='p-0'>
+        <CardContent className='spy-0 px-5'>
           <ChartContainer config={chartConfig}>
             <BarChart accessibilityLayer data={chartData}>
               <CartesianGrid vertical={false} />

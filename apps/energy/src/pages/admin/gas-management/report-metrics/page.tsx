@@ -3,6 +3,7 @@ import { OverallStatistics } from './_components/overall-statistics';
 import { ProfitOverview } from './_components/profit-overview';
 import { Statistics } from '@/pages/admin/gas-management/report-metrics/_components/statistics';
 import { TopPerformers } from '@/pages/admin/gas-management/report-metrics/_components/top-performers';
+import { ConsumptionGraph } from '@/pages/admin/gas-management/report-metrics/_components/consumption-graph';
 
 function ReportMetricsPage() {
   return (
@@ -12,6 +13,7 @@ function ReportMetricsPage() {
       <ProfitOverview />
       <Statistics className={'@5xl/main:col-span-2'} />
       <TopPerformers className={'@5xl/main:col-span-3'} />
+      <ConsumptionGraph className={'@5xl/main:col-span-3'} />
     </div>
   );
 }

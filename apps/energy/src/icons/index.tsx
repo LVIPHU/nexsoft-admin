@@ -5,4 +5,5 @@ export { default as PieChartRadiant } from './pie-chart-radiant.svg?react';
 export { default as SigmaSolid } from './sigma-solid.svg?react';
 export { default as Tether } from './tether.svg?react';
 export { default as Tron } from './tron.svg?react';
+export { default as ZapRadiant } from './zap-radiant.svg?react';
 export { default as ZapSolid } from './zap-solid.svg?react';

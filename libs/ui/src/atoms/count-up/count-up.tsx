@@ -90,11 +90,14 @@ function CountUp({
         motionValue.set(direction === 'down' ? from : to);
       }, delay * 1000);
 
-      const durationTimeoutId = setTimeout(() => {
-        if (typeof onEnd === 'function') {
-          onEnd();
-        }
-      }, delay * 1000 + duration * 1000);
+      const durationTimeoutId = setTimeout(
+        () => {
+          if (typeof onEnd === 'function') {
+            onEnd();
+          }
+        },
+        delay * 1000 + duration * 1000,
+      );
 
       return () => {
         clearTimeout(timeoutId);

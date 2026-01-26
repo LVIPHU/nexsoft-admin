@@ -10,13 +10,10 @@ interface HeaderCardProps {
   icon?: keyof typeof IconsMap;
   tooltip?: React.ReactNode;
   selectedDateRanger?: DateRange;
-  onSelectDateRanger?: (range: DateRange) => void;
+  onSelectDateRanger?: (range: DateRange | undefined) => void;
 }
 
 function HeaderCard({ title, icon, tooltip, selectedDateRanger, onSelectDateRanger }: HeaderCardProps) {
-  console.log('selectedDateRanger', selectedDateRanger);
-  console.log('onSelectDateRanger', onSelectDateRanger);
-
   return (
     <div className='flex justify-between'>
       <div className='flex items-center gap-3'>
