@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { SignInForm } from '../_components/sign-in-form';
 import { Trans } from '@lingui/react/macro';
 import { initLingui, PageLangParam } from '@/libs/initLingui';
@@ -24,15 +23,6 @@ export default async function SignInPage(props: SignInPageProps) {
           </p>
         </div>
         <SignInForm redirectUri={searchParams.redirect_uri} appId={searchParams.app_id} />
-      </div>
-
-      <div className='absolute top-5 flex w-full justify-center px-6 lg:justify-end lg:px-10'>
-        <div className='text-muted-foreground text-sm'>
-          <Trans>Don&apos;t have an account</Trans>?{' '}
-          <Link className='text-foreground' href='/sign-up' aria-label='Sign up for an account'>
-            <Trans>Sign Up</Trans>
-          </Link>
-        </div>
       </div>
     </>
   );

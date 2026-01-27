@@ -11,7 +11,7 @@ export default async function Provider({ children, params }: Readonly<PropsWithC
 
   return (
     <LocaleProvider initialLocale={lang} initialMessages={allMessages[lang]!}>
-      <ThemeProvider attribute='class' defaultTheme='light' enableColorScheme enableSystem disableTransitionOnChange>
+      <ThemeProvider attribute='class' defaultTheme='dark' enableColorScheme enableSystem disableTransitionOnChange>
         {children}
         <Toaster />
       </ThemeProvider>
