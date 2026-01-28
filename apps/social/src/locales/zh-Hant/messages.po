@@ -17,7 +17,7 @@ msgstr ""
 msgid "A user with this email address and/or username already exists."
 msgstr ""
 
-#: src/pages/admin/users/page.tsx:138
+#: src/pages/admin/users/page.tsx:167
 msgid "Add user"
 msgstr ""
 
@@ -31,6 +31,18 @@ msgstr ""
 
 #: src/components/overlay.tsx:55
 msgid "Are you absolutely sure you want to delete this item?"
+msgstr ""
+
+#: src/pages/admin/users/_components/user-overlay.tsx:74
+msgid "Avatar"
+msgstr ""
+
+#: src/pages/admin/users/_components/user-overlay.tsx:84
+msgid "Banner"
+msgstr ""
+
+#: src/pages/admin/users/_components/user-overlay.tsx:44
+msgid "Bio"
 msgstr ""
 
 #: src/components/overlay.tsx:108
@@ -73,16 +85,33 @@ msgstr ""
 #~ msgid "Energy Management"
 #~ msgstr ""
 
-#: src/pages/admin/users/_components/user-form.tsx:27
+#: src/pages/admin/users/_components/user-overlay.tsx:45
+msgid "Enter your bio"
+msgstr ""
+
+#: src/pages/admin/users/_components/user-overlay.tsx:52
+msgid "Enter your location"
+msgstr ""
+
+#: src/pages/admin/users/_components/user-overlay.tsx:38
 msgid "Enter your name"
 msgstr ""
 
-#: src/pages/admin/users/_components/user-form.tsx:21
+#: src/pages/admin/users/_components/user-overlay.tsx:31
 msgid "Enter your username"
 msgstr ""
 
 #: src/pages/error/page.tsx:45
 msgid "Error {statusCode}"
+msgstr ""
+
+#. placeholder {0}: mode === 'create' ? 'create' : mode === 'duplicate' ? 'duplicate' : 'update'
+#: src/pages/admin/users/_components/user-overlay.tsx:119
+msgid "Failed to {0} user"
+msgstr ""
+
+#: src/pages/admin/users/_components/users-table.tsx:83
+msgid "Filter"
 msgstr ""
 
 #: src/constants/layout.constant.ts:7
@@ -96,6 +125,10 @@ msgstr ""
 
 #: src/pages/error/page.tsx:54
 msgid "Go to home"
+msgstr ""
+
+#: src/pages/admin/users/_components/user-overlay.tsx:58
+msgid "https://example.com"
 msgstr ""
 
 #: src/constants/layout.constant.ts:14
@@ -122,11 +155,15 @@ msgstr ""
 msgid "It looks like your email address has already been verified."
 msgstr ""
 
-#: src/pages/admin/users/page.tsx:132
+#: src/pages/admin/users/_components/user-overlay.tsx:51
+msgid "Location"
+msgstr ""
+
+#: src/pages/admin/users/page.tsx:161
 msgid "Manage all users in the system."
 msgstr ""
 
-#: src/pages/admin/users/_components/user-form.tsx:26
+#: src/pages/admin/users/_components/user-overlay.tsx:37
 msgid "Name"
 msgstr ""
 
@@ -236,6 +273,10 @@ msgstr ""
 msgid "This email address is associated with an OAuth account. Please sign in with your OAuth provider."
 msgstr ""
 
+#: src/pages/admin/users/_components/user-overlay.tsx:64
+msgid "Thumbnail"
+msgstr ""
+
 #: src/pages/admin/settings/layout.tsx:27
 msgid "Update account preferences and manage integrations."
 msgstr ""
@@ -244,24 +285,52 @@ msgstr ""
 msgid "Update an existing item"
 msgstr ""
 
+#: src/pages/admin/users/_components/user-overlay.tsx:85
+msgid "Upload a banner image (recommended: 16:9 aspect ratio)"
+msgstr ""
+
+#: src/pages/admin/users/_components/user-overlay.tsx:75
+msgid "Upload a profile picture (recommended: square format, 400x400px)"
+msgstr ""
+
+#: src/pages/admin/users/_components/user-overlay.tsx:65
+msgid "Upload a thumbnail image (recommended: square format)"
+msgstr ""
+
 #: src/components/theme-switch.tsx:38
 msgid "Use System Theme"
+msgstr ""
+
+#: src/pages/admin/users/_components/user-overlay.tsx:112
+msgid "User created successfully"
 msgstr ""
 
 #: src/services/errors/translate-error.ts:13
 msgid "User does not have an associated 'secrets' record. Please report this issue on GitHub."
 msgstr ""
 
-#: src/pages/admin/users/page.tsx:129
+#: src/pages/admin/users/_components/user-overlay.tsx:114
+msgid "User duplicated successfully"
+msgstr ""
+
+#: src/pages/admin/users/page.tsx:158
 msgid "User Management"
 msgstr ""
 
-#: src/pages/admin/users/_components/user-form.tsx:20
+#: src/pages/admin/users/_components/user-overlay.tsx:115
+msgid "User updated successfully"
+msgstr ""
+
+#: src/pages/admin/users/_components/user-overlay.tsx:30
 msgid "Username"
 msgstr ""
 
 #: src/constants/navigation.constant.ts:16
 msgid "Users Management"
+msgstr ""
+
+#: src/pages/admin/users/_components/user-overlay.tsx:57
+msgid "Website URL"
 msgstr ""
 
 #: src/pages/error/page.tsx:25

@@ -17,12 +17,33 @@ msgstr ""
 msgid "A user with this email address and/or username already exists."
 msgstr ""
 
+#: src/constants/navigation.constant.ts:32
+msgid "Account Management"
+msgstr ""
+
+#: src/constants/navigation.constant.ts:26
+#: src/pages/admin/gas-management/activity-history/_components/activity-history.tsx:25
+msgid "Activity History"
+msgstr ""
+
+#: src/constants/navigation.constant.ts:43
+msgid "Admin Management"
+msgstr ""
+
 #: src/pages/error/page.tsx:22
 msgid "An internal server error occurred."
 msgstr ""
 
 #: src/pages/error/page.tsx:31
 msgid "An unexpected error occurred."
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:120
+msgid "Bandwidth earned"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:121
+msgid "Bandwidth used"
 msgstr ""
 
 #: src/components/theme-switch.tsx:33
@@ -34,18 +55,34 @@ msgid "Dashboard"
 msgstr ""
 
 #: src/constants/navigation.constant.ts:16
-msgid "Energy Management"
+#~ msgid "Energy Management"
+#~ msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:170
+msgid "Energy System consumption graph"
 msgstr ""
 
 #: src/pages/error/page.tsx:45
 msgid "Error {statusCode}"
 msgstr ""
 
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:120
+msgid "ES earned"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:121
+msgid "ES used"
+msgstr ""
+
 #: src/constants/layout.constant.ts:7
 msgid "Floating"
 msgstr ""
 
-#: src/constants/navigation.constant.ts:46
+#: src/constants/navigation.constant.ts:15
+msgid "Gas Management"
+msgstr ""
+
+#: src/constants/navigation.constant.ts:73
 msgid "General"
 msgstr ""
 
@@ -77,7 +114,19 @@ msgstr ""
 msgid "It looks like your email address has already been verified."
 msgstr ""
 
-#: src/constants/navigation.constant.ts:37
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:156
+msgid "Last 7 days"
+msgstr ""
+
+#: src/pages/admin/_components/sidebar.tsx:46
+msgid "Logout"
+msgstr ""
+
+#: src/constants/navigation.constant.ts:38
+msgid "My Account"
+msgstr ""
+
+#: src/constants/navigation.constant.ts:64
 msgid "Notifications"
 msgstr ""
 
@@ -89,9 +138,37 @@ msgstr ""
 msgid "Oops, the server returned an error."
 msgstr ""
 
-#: src/constants/navigation.constant.ts:31
-#: src/constants/navigation.constant.ts:52
+#: src/pages/admin/gas-management/report-metrics/_components/overall-statistics.tsx:16
+msgid "Overall Statistics"
+msgstr ""
+
+#: src/pages/admin/gas-management/activity-history/_components/overview.tsx:33
+msgid "Overview"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:160
+msgid "Previous Week"
+msgstr ""
+
+#: src/constants/navigation.constant.ts:58
+#: src/constants/navigation.constant.ts:79
 msgid "Profile"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/profit-overview.tsx:17
+msgid "Profit Overview"
+msgstr ""
+
+#: src/constants/navigation.constant.ts:21
+msgid "Report Metrics"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/resource-summary.tsx:25
+msgid "Resource Summary"
+msgstr ""
+
+#: src/constants/navigation.constant.ts:48
+msgid "Roles & Permissions"
 msgstr ""
 
 #: src/constants/layout.constant.ts:23
@@ -99,19 +176,23 @@ msgid "Scroll"
 msgstr ""
 
 #: src/constants/navigation.constant.ts:22
-msgid "Settings"
-msgstr ""
+#~ msgid "Settings"
+#~ msgstr ""
 
 #: src/constants/layout.constant.ts:6
 msgid "Sidebar"
 msgstr ""
 
 #: src/pages/admin/_components/nav-profile.tsx:85
-msgid "Sign out"
-msgstr ""
+#~ msgid "Sign out"
+#~ msgstr ""
 
 #: src/services/errors/translate-error.ts:28
 msgid "Something went wrong while processing your request. Please try again later or raise an issue on GitHub."
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/statistics.tsx:52
+msgid "Statistics"
 msgstr ""
 
 #: src/constants/layout.constant.ts:22
@@ -138,12 +219,74 @@ msgstr ""
 msgid "This email address is associated with an OAuth account. Please sign in with your OAuth provider."
 msgstr ""
 
+#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:72
+msgid "Top Performers"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:83
+msgid "Top User"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:187
+msgid "TOTAL BANDWIDTH BURN"
+msgstr ""
+
+#: src/pages/admin/gas-management/activity-history/_components/overview.tsx:42
+#: src/pages/admin/gas-management/activity-history/_components/overview.tsx:43
+#: src/pages/admin/gas-management/activity-history/_components/overview.tsx:44
+msgid "TOTAL BANDWIDTH EARNED"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:86
+msgid "Total Bandwidth Used"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:180
+msgid "TOTAL ENERGY BURN"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/overall-statistics.tsx:20
+#: src/pages/admin/gas-management/report-metrics/_components/overall-statistics.tsx:21
+#: src/pages/admin/gas-management/report-metrics/_components/profit-overview.tsx:21
+#: src/pages/admin/gas-management/report-metrics/_components/profit-overview.tsx:23
+#: src/pages/admin/gas-management/report-metrics/_components/profit-overview.tsx:29
+#: src/pages/admin/gas-management/report-metrics/_components/resource-summary.tsx:33
+#: src/pages/admin/gas-management/report-metrics/_components/resource-summary.tsx:34
+#: src/pages/admin/gas-management/report-metrics/_components/resource-summary.tsx:35
+#: src/pages/admin/gas-management/report-metrics/_components/resource-summary.tsx:36
+msgid "Total Energy System earned"
+msgstr ""
+
+#: src/pages/admin/gas-management/activity-history/_components/overview.tsx:41
+msgid "TOTAL ENERGY SYSTEM EARNED"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:85
+msgid "Total Energy Used"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:87
+msgid "Total Transaction Value"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:84
+msgid "Total Transactions"
+msgstr ""
+
 #: src/components/theme-switch.tsx:38
 msgid "Use System Theme"
 msgstr ""
 
 #: src/services/errors/translate-error.ts:13
 msgid "User does not have an associated 'secrets' record. Please report this issue on GitHub."
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:112
+msgid "View all"
+msgstr ""
+
+#: src/pages/admin/gas-management/activity-history/_components/activity-history.tsx:26
+msgid "View and manage all energy system transactions"
 msgstr ""
 
 #: src/pages/error/page.tsx:25

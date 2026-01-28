@@ -26,37 +26,59 @@ msgid "Change Theme"
 msgstr ""
 
 #: src/app/[lang]/layout.tsx:69
-msgid "Check out the docs or open an issue on GitHub, community support is just a click away"
-msgstr ""
+#~ msgid "Check out the docs or open an issue on GitHub, community support is just a click away"
+#~ msgstr ""
 
 #: src/app/[lang]/layout.tsx:60
-msgid "Clone the repo, install dependencies, and your dashboard is live in minutes"
-msgstr ""
+#~ msgid "Clone the repo, install dependencies, and your dashboard is live in minutes"
+#~ msgstr ""
 
 #: src/app/[lang]/sign-up/page.tsx:15
 msgid "Create your account"
 msgstr ""
 
 #: src/app/[lang]/layout.tsx:50
-msgid "Design. Build. Launch. Repeat."
-msgstr ""
+#~ msgid "Design. Build. Launch. Repeat."
+#~ msgstr ""
 
 #: src/app/[lang]/sign-in/page.tsx:31
-msgid "Don't have an account"
+#~ msgid "Don't have an account"
+#~ msgstr ""
+
+#: src/app/[lang]/_components/sign-in-form.tsx:23
+msgid "Email/username"
 msgstr ""
 
 #: src/app/[lang]/_components/sign-up-form.tsx:17
 msgid "Enter your name"
 msgstr ""
 
-#: src/app/[lang]/_components/sign-in-form.tsx:31
 #: src/app/[lang]/_components/sign-up-form.tsx:30
 msgid "Enter your password"
 msgstr ""
 
-#: src/app/[lang]/_components/sign-in-form.tsx:24
 #: src/app/[lang]/_components/sign-up-form.tsx:23
 msgid "Enter your username"
+msgstr ""
+
+#: src/app/[lang]/_components/sign-in-form.tsx:32
+msgid "ex: Admintbc123"
+msgstr ""
+
+#: src/app/[lang]/_components/sign-in-form.tsx:24
+msgid "ex: Admintbc123@gmail.com"
+msgstr ""
+
+#: src/app/[lang]/_components/sign-in-form.tsx:99
+msgid "Login"
+msgstr ""
+
+#: src/app/[lang]/sign-in/page.tsx:19
+msgid "Login to your account"
+msgstr ""
+
+#: src/app/[lang]/sign-in/page.tsx:22
+msgid "Monitor and manageAccess your dashboard and manage your system your gas metrics and transactions"
 msgstr ""
 
 #: src/app/[lang]/_components/sign-up-form.tsx:16
@@ -64,52 +86,51 @@ msgid "Name"
 msgstr ""
 
 #: src/app/[lang]/layout.tsx:66
-msgid "Need help?"
-msgstr ""
+#~ msgid "Need help?"
+#~ msgstr ""
 
 #: src/components/locale-combobox.tsx:43
 msgid "No results found"
 msgstr ""
 
-#: src/app/[lang]/_components/sign-in-form.tsx:29
+#: src/app/[lang]/_components/sign-in-form.tsx:30
 #: src/app/[lang]/_components/sign-up-form.tsx:28
 msgid "Password"
 msgstr ""
 
 #: src/app/[lang]/sign-in/page.tsx:23
-msgid "Please enter your details to sign in"
-msgstr ""
+#~ msgid "Please enter your details to sign in"
+#~ msgstr ""
 
 #: src/app/[lang]/sign-up/page.tsx:18
 msgid "Please enter your details to sign up"
 msgstr ""
 
 #: src/app/[lang]/layout.tsx:57
-msgid "Ready to launch"
-msgstr ""
+#~ msgid "Ready to launch"
+#~ msgstr ""
 
 #: src/components/locale-combobox.tsx:40
 msgid "Search for a language"
 msgstr ""
 
-#: src/app/[lang]/_components/sign-in-form.tsx:97
 #: src/app/[lang]/sign-up/page.tsx:28
 msgid "Sign In"
 msgstr ""
 
 #: src/app/[lang]/sign-in/page.tsx:20
-msgid "Sign in to your account"
-msgstr ""
+#~ msgid "Sign in to your account"
+#~ msgstr ""
 
 #: src/app/[lang]/_components/sign-up-form.tsx:48
 msgid "Sign up"
 msgstr ""
 
 #: src/app/[lang]/sign-in/page.tsx:33
-msgid "Sign Up"
-msgstr ""
+#~ msgid "Sign Up"
+#~ msgstr ""
 
-#: src/app/[lang]/_components/sign-in-form.tsx:97
+#: src/app/[lang]/_components/sign-in-form.tsx:99
 msgid "Signing in..."
 msgstr ""
 
@@ -121,7 +142,7 @@ msgstr ""
 msgid "Switch to Light Mode"
 msgstr ""
 
-#: src/app/[lang]/layout.tsx:34
+#: src/app/[lang]/layout.tsx:32
 msgid "TBC Auth"
 msgstr ""
 
@@ -129,7 +150,6 @@ msgstr ""
 msgid "Use System Theme"
 msgstr ""
 
-#: src/app/[lang]/_components/sign-in-form.tsx:23
 #: src/app/[lang]/_components/sign-up-form.tsx:22
 msgid "Username"
 msgstr ""
