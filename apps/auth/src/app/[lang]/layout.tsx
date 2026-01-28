@@ -53,15 +53,14 @@ export default async function RootLayout({ children, params }: PropsWithChildren
                   height={100}
                   squares={[8, 12]}
                 />
-                <div className='absolute inset-0 flex flex-col gap-13 justify-center items-center pointer-events-none'>
+                <div className='absolute inset-0 flex flex-col gap-13 justify-center items-center pointer-events-none p-4 sm:p-6 md:p-8 lg:p-10'>
                   <HoverCard className='pointer-events-auto'>
-                    <div className='mx-auto w-fit'>
+                    <div className='mx-auto w-fit max-w-full'>
                       <Image src={'/screen.png'} alt={'screen'} width={482} height={330} priority className='h-full max-h-full w-full object-center' />
                     </div>
-
                   </HoverCard>
 
-                  <div className='flex flex-col gap-2 text-center'>
+                  <div className='flex flex-col gap-2 text-center px-4 sm:px-6 md:px-8 lg:px-10'>
                     <p className='text-3xl font-semibold'>
                       Secure, Simple and Powerful
                     </p>

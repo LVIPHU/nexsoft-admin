@@ -20,16 +20,18 @@ function SignInForm({ redirectUri, appId }: SignInFormProps) {
   const fieldConfigs: FieldConfig[] = [
     {
       name: 'identifier',
-      label: i18n._(msg`Username`),
-      placeholder: i18n._(msg`Enter your username`),
+      label: i18n._(msg`Email/username`),
+      placeholder: i18n._(msg`ex: Admintbc123@gmail.com`),
       orientation: 'vertical',
+      required: true
     },
     {
       name: 'password',
       label: i18n._(msg`Password`),
       type: 'password',
-      placeholder: i18n._(msg`Enter your password`),
+      placeholder: i18n._(msg`ex: Admintbc123`),
       orientation: 'vertical',
+      required: true
     },
   ];
 
@@ -93,8 +95,8 @@ function SignInForm({ redirectUri, appId }: SignInFormProps) {
     >
       <FormGenerator schema={signInSchema} fieldConfigs={fieldConfigs} />
       <div className='mt-7 w-full'>
-        <Button type='submit' size='lg' className='w-full' disabled={isLoading}>
-          {isLoading ? <Trans>Signing in...</Trans> : <Trans>Sign In</Trans>}
+        <Button type='submit' size='lg' className='w-full rounded-full' disabled={isLoading}>
+          {isLoading ? <Trans>Signing in...</Trans> : <Trans>Login</Trans>}
         </Button>
       </div>
     </Form>
