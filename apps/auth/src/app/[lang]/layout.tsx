@@ -10,6 +10,7 @@ import Provider from '@/providers';
 import Image from 'next/image';
 import { InteractiveGridPattern } from '@/components/interactive-grid-pattern';
 import { HoverCard } from '@/components/hover-card';
+import { LightRaysBackground } from '@/components/light-rays-background';
 
 const geistSans = Geist({
   variable: '--font-sans',
@@ -42,6 +43,7 @@ export default async function RootLayout({ children, params }: PropsWithChildren
           <main>
             <div className='grid h-dvh justify-center p-2 lg:grid-cols-12'>
               <div className='relative hidden h-full rounded-3xl bg-[#00170A] lg:col-span-5 lg:flex'>
+                <LightRaysBackground/>
                 <div className='absolute top-4 px-4'>
                   <Image src={'/TBChat-app-logo.svg'} alt={'logo'} width={40} height={40} />
                 </div>
