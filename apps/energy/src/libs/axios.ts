@@ -9,9 +9,10 @@ import { translateError } from '@/services/errors/translate-error';
 import type { ErrorMessage } from '@nexsoft-admin/utils';
 import { queryClient } from './query-client';
 import { getSSOClient } from '@/libs/sso';
+import { API_BASE } from '@/constants/api.constant';
 
 export const axios = _axios.create({
-  baseURL: '/api',
+  baseURL: API_BASE,
   withCredentials: true,
   timeout: 10000,
 });
@@ -51,7 +52,7 @@ axios.interceptors.response.use(
 // Create another instance to handle failed refresh tokens
 // Reference: https://github.com/Flyrell/axios-auth-refresh/issues/191
 const axiosForRefresh = _axios.create({
-  baseURL: '/api',
+  baseURL: API_BASE,
   withCredentials: true,
   timeout: 10000,
 });

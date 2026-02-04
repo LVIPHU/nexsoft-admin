@@ -14,6 +14,13 @@ export default defineConfig(() => ({
   server: {
     port: 3002,
     host: 'localhost',
+    proxy: {
+      '/indexer-api': {
+        target: 'https://dev-indexer.tbchat.io',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/indexer-api/, ''),
+      },
+    },
   },
   preview: {
     port: 3002,
