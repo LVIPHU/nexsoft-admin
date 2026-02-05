@@ -22,9 +22,13 @@ function OverallStatistics({ className }: OverallStatisticsProps) {
   }));
 
   const from_date =
-    selectedDateRanger?.from != null ? dayjs(selectedDateRanger.from).utc().toISOString() : '';
+    selectedDateRanger?.from != null
+      ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z'
+      : '';
   const to_date =
-    selectedDateRanger?.to != null ? dayjs(selectedDateRanger.to).utc().toISOString() : '';
+    selectedDateRanger?.to != null
+      ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z'
+      : '';
 
   const { data, isPending: loading, error } = useStatisticOverview(
     { from_date, to_date },

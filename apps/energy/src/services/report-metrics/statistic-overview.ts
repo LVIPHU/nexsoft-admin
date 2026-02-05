@@ -18,14 +18,12 @@ export async function getStatisticOverview(
   params: GetStatisticOverviewParams
 ): Promise<StatisticOverviewDto> {
 
-
-  const response = await axios.get<unknown>(`${INDEXER_BASE}${PATH}` , {
+  const response = await axios.get<unknown>(`${INDEXER_BASE}${PATH}`, {
     params: {
       from_date: params.from_date,
       to_date: params.to_date,
     },
   });
-  console.log(response.data);
   return statisticOverviewSchema.parse(response.data);
 }
 
