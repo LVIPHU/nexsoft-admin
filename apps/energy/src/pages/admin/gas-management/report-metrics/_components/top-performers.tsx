@@ -18,8 +18,8 @@ interface TopPerformersProps {
 
 function TopPerformers({ className }: TopPerformersProps) {
   const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(() => ({
-    from: dayjs().subtract(7, 'day').toDate(),
-    to: dayjs().toDate(),
+    from: dayjs().subtract(8, 'day').toDate(),
+    to: dayjs().subtract(1, 'day').toDate(),
   }));
 
   const from_date =

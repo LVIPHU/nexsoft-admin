@@ -14,7 +14,7 @@ export interface GetPerformersParams {
 }
 
 export async function getPerformers(params: GetPerformersParams): Promise<PerformersResponseDto> {
-  const response = await axios.get<unknown>(`https://dev-indexer.tbchat.io${PATH}`, {
+  const response = await axios.get<unknown>(`${INDEXER_BASE}${PATH}`, {
     params: {
       from_date: params.from_date,
       to_date: params.to_date,
