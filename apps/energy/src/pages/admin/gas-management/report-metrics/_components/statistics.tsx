@@ -1,8 +1,9 @@
 import { Card, CardHeader, CardContent } from '@nexsoft-admin/ui/card';
+import { Skeleton } from '@nexsoft-admin/ui/skeleton';
 import { HeaderCard } from '@/components/header-card';
 import { msg } from '@lingui/core/macro';
 import { i18n } from '@lingui/core';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { DateRange } from 'react-day-picker';
 import {
   ChartContainer,
@@ -14,14 +15,7 @@ import {
 } from '@nexsoft-admin/ui/chart';
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 import dayjs from 'dayjs';
-
-const chartData = [
-  { day: '06/13/2023', usdt: 186, trx: 180 },
-  { day: '04/27/2023', usdt: 100, trx: 300 },
-  { day: '03/18/2024', usdt: 237, trx: 220 },
-  { day: '11/23/2023', usdt: 73, trx: 190 },
-  { day: '03/29/2022', usdt: 209, trx: 130 },
-];
+import { useStatistics } from '@/services/report-metrics';
 
 const chartConfig = {
   usdt: {
@@ -40,9 +34,33 @@ interface StatisticsProps {
 
 function Statistics({ className }: StatisticsProps) {
   const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(() => ({
-    from: dayjs().subtract(7, 'day').toDate(),
-    to: dayjs().toDate(),
+    from: dayjs().subtract(8, 'day').toDate(),
+    to: dayjs().subtract(1, 'day').toDate(),
   }));
+
+  const from_date =
+    selectedDateRanger?.from != null ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
+  const to_date =
+    selectedDateRanger?.to != null ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
+
+  const {
+    data,
+    isPending: loading,
+    error,
+  } = useStatistics({ from_date, to_date }, { enabled: Boolean(from_date && to_date) });
+
+  const chartData = useMemo(() => {
+    const viewData = data?.view_data ?? [];
+    return [...viewData]
+      .sort((a, b) => dayjs(a.date).valueOf() - dayjs(b.date).valueOf())
+      .map((item) => ({
+        day: dayjs(item.date).format('MM/DD/YYYY'),
+        usdt: item.total_usdt_revenue,
+        trx: item.total_trx_revenue,
+      }));
+  }, [data?.view_data]);
+
+  const isEmpty = !loading && !error && chartData.length === 0;
 
   return (
     <div className={className}>
@@ -55,17 +73,24 @@ function Statistics({ className }: StatisticsProps) {
           />
         </CardHeader>
         <CardContent className='spy-0 px-5'>
-          <ChartContainer config={chartConfig}>
-            <BarChart accessibilityLayer data={chartData}>
-              <CartesianGrid vertical={false} />
-              <XAxis dataKey='day' tickLine={false} tickMargin={10} axisLine={false} />
-              <YAxis tickLine={false} axisLine={false} tickMargin={8} />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <ChartLegend content={<ChartLegendContent />} />
-              <Bar dataKey='trx' stackId='a' barSize={66} fill='var(--color-trx)' />
-              <Bar dataKey='usdt' stackId='a' barSize={66} fill='var(--color-usdt)' radius={[16, 16, 0, 0]} />
-            </BarChart>
-          </ChartContainer>
+          {loading && <Skeleton className='h-[300px] w-full rounded-lg' />}
+          {error && <p className='text-destructive py-6 text-center text-sm'>{error.message}</p>}
+          {isEmpty && (
+            <p className='text-muted-foreground py-12 text-center text-sm'>{i18n._(msg`No data in this period`)}</p>
+          )}
+          {!loading && !error && chartData.length > 0 && (
+            <ChartContainer config={chartConfig}>
+              <BarChart accessibilityLayer data={chartData}>
+                <CartesianGrid vertical={false} />
+                <XAxis dataKey='day' tickLine={false} tickMargin={10} axisLine={false} />
+                <YAxis tickLine={false} axisLine={false} tickMargin={8} />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <ChartLegend content={<ChartLegendContent />} />
+                <Bar dataKey='trx' stackId='a' barSize={66} fill='var(--color-trx)' />
+                <Bar dataKey='usdt' stackId='a' barSize={66} fill='var(--color-usdt)' radius={[16, 16, 0, 0]} />
+              </BarChart>
+            </ChartContainer>
+          )}
         </CardContent>
       </Card>
     </div>

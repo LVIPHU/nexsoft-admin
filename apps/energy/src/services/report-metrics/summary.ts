@@ -11,9 +11,7 @@ export interface GetSummaryParams {
   to_date: string;
 }
 
-export async function getSummary(
-  params: GetSummaryParams
-): Promise<SummaryDto> {
+export async function getSummary(params: GetSummaryParams): Promise<SummaryDto> {
   const response = await axios.get<unknown>(`${INDEXER_BASE}${PATH}`, {
     params: {
       from_date: params.from_date,
@@ -25,14 +23,9 @@ export async function getSummary(
 
 export function useSummary(
   params: GetSummaryParams,
-  options?: Omit<
-    UseQueryOptions<SummaryDto, Error, SummaryDto>,
-    'queryKey' | 'queryFn'
-  >
+  options?: Omit<UseQueryOptions<SummaryDto, Error, SummaryDto>, 'queryKey' | 'queryFn'>,
 ) {
-  const enabled =
-    options?.enabled !== false &&
-    Boolean(params.from_date && params.to_date);
+  const enabled = options?.enabled !== false && Boolean(params.from_date && params.to_date);
 
   return useQuery({
     queryKey: [SUMMARY_KEY, params],

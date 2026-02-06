@@ -41,7 +41,7 @@ export default async function RootLayout({ children, params }: PropsWithChildren
         <Provider params={params}>
           <main>
             <div className='grid h-dvh justify-center p-2 lg:grid-cols-12'>
-              <div className='bg-[#00170A] relative hidden h-full rounded-3xl lg:col-span-5 lg:flex'>
+              <div className='relative hidden h-full rounded-3xl bg-[#00170A] lg:col-span-5 lg:flex'>
                 <div className='absolute top-4 px-4'>
                   <Image src={'/TBChat-app-logo.svg'} alt={'logo'} width={40} height={40} />
                 </div>
@@ -69,9 +69,7 @@ export default async function RootLayout({ children, params }: PropsWithChildren
                   </div>
                 </div>
               </div>
-              <div className='relative flex h-full lg:col-span-7'>
-                {children}
-              </div>
+              <div className='relative flex h-full lg:col-span-7'>{children}</div>
             </div>
           </main>
         </Provider>

@@ -32,18 +32,15 @@ function ResourceSummary({ className }: ResourceSummaryProps) {
   }));
 
   const from_date =
-    selectedDateRanger?.from != null
-      ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z'
-      : '';
+    selectedDateRanger?.from != null ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
   const to_date =
-    selectedDateRanger?.to != null
-      ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z'
-      : '';
+    selectedDateRanger?.to != null ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
 
-  const { data, isPending: loading, error } = useSummary(
-    { from_date, to_date },
-    { enabled: Boolean(from_date && to_date) }
-  );
+  const {
+    data,
+    isPending: loading,
+    error,
+  } = useSummary({ from_date, to_date }, { enabled: Boolean(from_date && to_date) });
 
   return (
     <div className={className}>

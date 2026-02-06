@@ -1,41 +1,41 @@
-'use client'
-import type React from 'react'
-import { useCallback, useEffect, useRef, useState } from 'react'
+'use client';
+import type React from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { cn } from '@nexsoft-admin/utils';
 
 interface HoverCardProps {
-  children?: React.ReactNode
-  className?: string
+  children?: React.ReactNode;
+  className?: string;
 }
 
 export function HoverCard({ children, className }: HoverCardProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [style, setStyle] = useState<React.CSSProperties>({})
+  const ref = useRef<HTMLDivElement>(null);
+  const [style, setStyle] = useState<React.CSSProperties>({});
 
   const onMouseMove = useCallback((e: MouseEvent) => {
-    if (!ref.current || window.innerWidth < 1280) return
+    if (!ref.current || window.innerWidth < 1280) return;
 
-    const { clientX, clientY } = e
-    const { width, height, x, y } = ref.current.getBoundingClientRect()
-    const mouseX = Math.abs(clientX - x)
-    const mouseY = Math.abs(clientY - y)
-    const rotateMin = -15
-    const rotateMax = 15
-    const rotateRange = rotateMax - rotateMin
+    const { clientX, clientY } = e;
+    const { width, height, x, y } = ref.current.getBoundingClientRect();
+    const mouseX = Math.abs(clientX - x);
+    const mouseY = Math.abs(clientY - y);
+    const rotateMin = -15;
+    const rotateMax = 15;
+    const rotateRange = rotateMax - rotateMin;
 
     const rotate = {
       x: rotateMax - (mouseY / height) * rotateRange,
       y: rotateMin + (mouseX / width) * rotateRange,
-    }
+    };
 
     setStyle({
       transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
-    })
-  }, [])
+    });
+  }, []);
 
   const onMouseLeave = useCallback(() => {
-    setStyle({ transform: 'rotateX(0deg) rotateY(0deg)' })
-  }, [])
+    setStyle({ transform: 'rotateX(0deg) rotateY(0deg)' });
+  }, []);
 
   useEffect(() => {
     const { current } = ref;
@@ -51,7 +51,10 @@ export function HoverCard({ children, className }: HoverCardProps) {
 
   return (
     <div
-      className={cn('z-10 mb-8 scale-100 transition-all duration-200 ease-out hover:z-50 md:mb-0 md:hover:scale-[1.15]', className)}
+      className={cn(
+        'z-10 mb-8 scale-100 transition-all duration-200 ease-out hover:z-50 md:mb-0 md:hover:scale-[1.15]',
+        className,
+      )}
       style={{ perspective: '600px' }}
       ref={ref}
     >

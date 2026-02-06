@@ -1,12 +1,5 @@
 import { Card, CardHeader, CardContent } from '@nexsoft-admin/ui/card';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@nexsoft-admin/ui/table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@nexsoft-admin/ui/table';
 import { Button } from '@nexsoft-admin/ui/button';
 import { Skeleton } from '@nexsoft-admin/ui/skeleton';
 import { HeaderCard } from '@/components/header-card';
@@ -24,26 +17,21 @@ interface TopPerformersProps {
 }
 
 function TopPerformers({ className }: TopPerformersProps) {
-  const [selectedDateRanger, setSelectedDateRanger] = useState<
-    DateRange | undefined
-  >(() => ({
+  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(() => ({
     from: dayjs().subtract(7, 'day').toDate(),
     to: dayjs().toDate(),
   }));
 
   const from_date =
-    selectedDateRanger?.from != null
-      ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z'
-      : '';
+    selectedDateRanger?.from != null ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
   const to_date =
-    selectedDateRanger?.to != null
-      ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z'
-      : '';
+    selectedDateRanger?.to != null ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
 
-  const { data, isPending: loading, error } = usePerformers(
-    { from_date, to_date },
-    { enabled: Boolean(from_date && to_date) }
-  );
+  const {
+    data,
+    isPending: loading,
+    error,
+  } = usePerformers({ from_date, to_date }, { enabled: Boolean(from_date && to_date) });
 
   const rows = data?.pagination?.Data ?? [];
   const isEmpty = !loading && !error && rows.length === 0;
@@ -68,9 +56,7 @@ function TopPerformers({ className }: TopPerformersProps) {
                   <TableHead>{i18n._(msg`Total Transactions`)}</TableHead>
                   <TableHead>{i18n._(msg`Total Energy Used`)}</TableHead>
                   <TableHead>{i18n._(msg`Total Bandwidth Used`)}</TableHead>
-                  <TableHead className='bg-[#0DCC6114] text-white'>
-                    {i18n._(msg`Total Transaction Value`)}
-                  </TableHead>
+                  <TableHead className='bg-[#0DCC6114] text-white'>{i18n._(msg`Total Transaction Value`)}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -84,30 +70,23 @@ function TopPerformers({ className }: TopPerformersProps) {
                   ))}
                 {error && (
                   <TableRow>
-                    <TableCell
-                      colSpan={5}
-                      className='text-destructive py-6 text-center text-sm'
-                    >
+                    <TableCell colSpan={5} className='text-destructive py-6 text-center text-sm'>
                       {error.message}
                     </TableCell>
                   </TableRow>
                 )}
                 {isEmpty && (
                   <TableRow>
-                    <TableCell
-                      colSpan={5}
-                      className='text-muted-foreground py-8 text-center text-sm'
-                    >
+                    <TableCell colSpan={5} className='text-muted-foreground py-8 text-center text-sm'>
                       {i18n._(msg`No performers in this period`)}
                     </TableCell>
                   </TableRow>
                 )}
-                {!loading && !error && rows.length > 0 &&
+                {!loading &&
+                  !error &&
+                  rows.length > 0 &&
                   rows.map((row) => (
-                    <TableRow
-                      key={row.user_address}
-                      className='even:bg-muted/30 group h-20'
-                    >
+                    <TableRow key={row.user_address} className='even:bg-muted/30 group h-20'>
                       <TableCell>
                         <div className='flex flex-col'>
                           <span className='font-mono text-sm font-medium'>
@@ -115,14 +94,10 @@ function TopPerformers({ className }: TopPerformersProps) {
                               ? `${row.user_address.slice(0, 8)}...${row.user_address.slice(-8)}`
                               : row.user_address}
                           </span>
-                          <span className='text-muted-foreground text-xs'>
-                            {row.user_address}
-                          </span>
+                          <span className='text-muted-foreground text-xs'>{row.user_address}</span>
                         </div>
                       </TableCell>
-                      <TableCell>
-                        {formatNumber(row.total_orders, { noDecimals: true })}
-                      </TableCell>
+                      <TableCell>{formatNumber(row.total_orders, { noDecimals: true })}</TableCell>
                       <TableCell>
                         {formatNumber(row.total_delegated_energy, {
                           noDecimals: true,
@@ -143,9 +118,7 @@ function TopPerformers({ className }: TopPerformersProps) {
           </div>
           <div className='mb-4 flex justify-end'>
             <Button variant='link' className='text-green-600 dark:text-green-500' asChild>
-              <Link to='/gas-management/activity-history'>
-                {i18n._(msg`View all`)}
-              </Link>
+              <Link to='/gas-management/activity-history'>{i18n._(msg`View all`)}</Link>
             </Button>
           </div>
         </CardContent>

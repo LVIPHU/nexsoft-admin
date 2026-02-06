@@ -2,10 +2,7 @@ import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
 import { INDEXER_BASE } from '@/constants/api.constant';
 import { PERFORMERS_KEY } from '@/constants/query-keys.constant';
 import { axios } from '@/libs/axios';
-import {
-  performersResponseSchema,
-  type PerformersResponseDto,
-} from '@nexsoft-admin/models';
+import { performersResponseSchema, type PerformersResponseDto } from '@nexsoft-admin/models';
 
 const PATH = '/v1/admin/x402/tron/report-metrics/performers';
 
@@ -16,10 +13,8 @@ export interface GetPerformersParams {
   page?: number;
 }
 
-export async function getPerformers(
-  params: GetPerformersParams
-): Promise<PerformersResponseDto> {
-  const response = await axios.get<unknown>(`${INDEXER_BASE}${PATH}`, {
+export async function getPerformers(params: GetPerformersParams): Promise<PerformersResponseDto> {
+  const response = await axios.get<unknown>(`https://dev-indexer.tbchat.io${PATH}`, {
     params: {
       from_date: params.from_date,
       to_date: params.to_date,
@@ -32,14 +27,9 @@ export async function getPerformers(
 
 export function usePerformers(
   params: GetPerformersParams,
-  options?: Omit<
-    UseQueryOptions<PerformersResponseDto, Error, PerformersResponseDto>,
-    'queryKey' | 'queryFn'
-  >
+  options?: Omit<UseQueryOptions<PerformersResponseDto, Error, PerformersResponseDto>, 'queryKey' | 'queryFn'>,
 ) {
-  const enabled =
-    options?.enabled !== false &&
-    Boolean(params.from_date && params.to_date);
+  const enabled = options?.enabled !== false && Boolean(params.from_date && params.to_date);
 
   return useQuery({
     queryKey: [PERFORMERS_KEY, params],

@@ -22,18 +22,15 @@ function OverallStatistics({ className }: OverallStatisticsProps) {
   }));
 
   const from_date =
-    selectedDateRanger?.from != null
-      ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z'
-      : '';
+    selectedDateRanger?.from != null ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
   const to_date =
-    selectedDateRanger?.to != null
-      ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z'
-      : '';
+    selectedDateRanger?.to != null ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
 
-  const { data, isPending: loading, error } = useStatisticOverview(
-    { from_date, to_date },
-    { enabled: Boolean(from_date && to_date) }
-  );
+  const {
+    data,
+    isPending: loading,
+    error,
+  } = useStatisticOverview({ from_date, to_date }, { enabled: Boolean(from_date && to_date) });
 
   return (
     <div className={className}>
@@ -81,12 +78,8 @@ function OverallStatistics({ className }: OverallStatisticsProps) {
                   }
                 />
                 <div data-slot='card' className='flex flex-col gap-4 p-6'>
-                  <p className='truncate text-sm font-medium uppercase'>
-                    {i18n._(msg`Total Income`)}
-                  </p>
-                  <p className='truncate text-2xl font-semibold'>
-                    {formatCurrency(data.total_income)}
-                  </p>
+                  <p className='truncate text-sm font-medium uppercase'>{i18n._(msg`Total Income`)}</p>
+                  <p className='truncate text-2xl font-semibold'>{formatCurrency(data.total_income)}</p>
                 </div>
               </>
             )}
