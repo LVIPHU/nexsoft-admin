@@ -2,10 +2,7 @@ import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
 import { INDEXER_BASE } from '@/constants/api.constant';
 import { ACTIVITY_OVERVIEW_KEY } from '@/constants/query-keys.constant';
 import { axios } from '@/libs/axios';
-import {
-  activityOverviewSchema,
-  type ActivityOverviewDto,
-} from '@nexsoft-admin/models';
+import { activityOverviewSchema, type ActivityOverviewDto } from '@nexsoft-admin/models';
 
 const PATH = '/v1/admin/x402/tron/activity/overview';
 
@@ -14,9 +11,7 @@ export interface GetActivityOverviewParams {
   to_date: string;
 }
 
-export async function getActivityOverview(
-  params: GetActivityOverviewParams
-): Promise<ActivityOverviewDto> {
+export async function getActivityOverview(params: GetActivityOverviewParams): Promise<ActivityOverviewDto> {
   const response = await axios.get<unknown>(`${INDEXER_BASE}${PATH}`, {
     params: {
       from_date: params.from_date,
@@ -28,14 +23,9 @@ export async function getActivityOverview(
 
 export function useActivityOverview(
   params: GetActivityOverviewParams,
-  options?: Omit<
-    UseQueryOptions<ActivityOverviewDto, Error, ActivityOverviewDto>,
-    'queryKey' | 'queryFn'
-  >
+  options?: Omit<UseQueryOptions<ActivityOverviewDto, Error, ActivityOverviewDto>, 'queryKey' | 'queryFn'>,
 ) {
-  const enabled =
-    options?.enabled !== false &&
-    Boolean(params.from_date && params.to_date);
+  const enabled = options?.enabled !== false && Boolean(params.from_date && params.to_date);
 
   return useQuery({
     queryKey: [ACTIVITY_OVERVIEW_KEY, params],

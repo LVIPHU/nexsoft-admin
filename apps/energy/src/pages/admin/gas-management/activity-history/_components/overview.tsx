@@ -37,24 +37,18 @@ function Overview({ className }: OverviewProps) {
   }));
 
   const from_date =
-    selectedDateRanger?.from != null
-      ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z'
-      : '';
+    selectedDateRanger?.from != null ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
   const to_date =
-    selectedDateRanger?.to != null
-      ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z'
-      : '';
+    selectedDateRanger?.to != null ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
 
-  const { data, isPending: loading, error } = useActivityOverview(
-    { from_date, to_date },
-    { enabled: Boolean(from_date && to_date) }
-  );
+  const {
+    data,
+    isPending: loading,
+    error,
+  } = useActivityOverview({ from_date, to_date }, { enabled: Boolean(from_date && to_date) });
 
   const totalSuccess = data ? getStatusTotal(data, 'COMPLETED') : 0;
-  const totalProcessing =
-    data
-      ? getStatusTotal(data, 'PROCESSING') + getStatusTotal(data, 'PENDING')
-      : 0;
+  const totalProcessing = data ? getStatusTotal(data, 'PROCESSING') + getStatusTotal(data, 'PENDING') : 0;
   const totalError = data ? getStatusTotal(data, 'FAILED') : 0;
 
   return (
@@ -70,8 +64,7 @@ function Overview({ className }: OverviewProps) {
         </CardHeader>
         <CardContent className='p-0'>
           <div className='grid grid-cols-1 *:data-[slot=card]:border-t @5xl/main:grid-cols-2 @5xl/main:*:data-[slot=card]:even:border-l @7xl/main:grid-cols-4 @7xl/main:*:data-[slot=card]:border-l @7xl/main:*:data-[slot=card]:first:border-l-0'>
-            {loading &&
-              Array.from({ length: 4 }, (_, i) => <SkeletonCard key={i} />)}
+            {loading && Array.from({ length: 4 }, (_, i) => <SkeletonCard key={i} />)}
             {error && (
               <div data-slot='card' className='p-6'>
                 <p className='text-destructive text-sm'>{error.message}</p>
@@ -79,22 +72,10 @@ function Overview({ className }: OverviewProps) {
             )}
             {!loading && !error && data && (
               <>
-                <SectionCard
-                  title={i18n._(msg`TOTAL REQUEST`)}
-                  value={data.total_request}
-                />
-                <SectionCard
-                  title={i18n._(msg`TOTAL REQUEST SUCCESS`)}
-                  value={totalSuccess}
-                />
-                <SectionCard
-                  title={i18n._(msg`TOTAL REQUEST PROCESSING`)}
-                  value={totalProcessing}
-                />
-                <SectionCard
-                  title={i18n._(msg`TOTAL REQUEST ERROR`)}
-                  value={totalError}
-                />
+                <SectionCard title={i18n._(msg`TOTAL REQUEST`)} value={data.total_request} />
+                <SectionCard title={i18n._(msg`TOTAL REQUEST SUCCESS`)} value={totalSuccess} />
+                <SectionCard title={i18n._(msg`TOTAL REQUEST PROCESSING`)} value={totalProcessing} />
+                <SectionCard title={i18n._(msg`TOTAL REQUEST ERROR`)} value={totalError} />
               </>
             )}
           </div>

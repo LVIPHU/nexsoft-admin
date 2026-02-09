@@ -104,6 +104,9 @@ interface UseDataTableInstanceProps<TData, TValue> {
   manualPagination?: boolean;
   manualSorting?: boolean;
   manualFiltering?: boolean;
+
+  /** Total page count when using manualPagination (e.g. from API pagination) */
+  pageCount?: number;
 }
 
 function useDataTableInstance<TData, TValue>({
@@ -118,6 +121,7 @@ function useDataTableInstance<TData, TValue>({
   manualFiltering,
   manualPagination,
   manualSorting,
+  pageCount,
 }: UseDataTableInstanceProps<TData, TValue>) {
   return useReactTable({
     data,
@@ -129,13 +133,14 @@ function useDataTableInstance<TData, TValue>({
       columnOrder: state?.columnOrder,
       columnFilters: state?.columnFilters,
       columnVisibility: state?.columnVisibility,
-      rowSelection: state?.rowSelection,
+      rowSelection: state?.rowSelection ?? {},
       pagination: state?.pagination,
     },
 
     manualFiltering,
     manualPagination,
     manualSorting,
+    ...(manualPagination && pageCount != null && { pageCount }),
 
     getRowId: getRowId ?? ((row) => (row as any).id.toString()),
 

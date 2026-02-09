@@ -117,19 +117,16 @@ function ConsumptionGraph({ className }: ConsumptionGraphProps) {
   const [activeTab, setActiveTab] = useState<ChartType>('energy');
 
   const from_date =
-    selectedDateRanger?.from != null
-      ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z'
-      : '';
+    selectedDateRanger?.from != null ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
 
   const to_date =
-    selectedDateRanger?.to != null
-      ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z'
-      : '';
+    selectedDateRanger?.to != null ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
 
-  const { data, isPending: loading, error } = useConsumption(
-    { from_date, to_date },
-    { enabled: Boolean(from_date && to_date) }
-  );
+  const {
+    data,
+    isPending: loading,
+    error,
+  } = useConsumption({ from_date, to_date }, { enabled: Boolean(from_date && to_date) });
 
   const chartData = useMemo((): ChartDataPoint[] => {
     const viewData = data?.view_data ?? [];
@@ -208,13 +205,9 @@ function ConsumptionGraph({ className }: ConsumptionGraphProps) {
 
           {/* Line Chart */}
           {loading && <Skeleton className='h-[400px] w-full rounded-lg' />}
-          {error && (
-            <p className='text-destructive py-6 text-center text-sm'>{error.message}</p>
-          )}
+          {error && <p className='text-destructive py-6 text-center text-sm'>{error.message}</p>}
           {isEmpty && (
-            <p className='text-muted-foreground py-12 text-center text-sm'>
-              {i18n._(msg`No data in this period`)}
-            </p>
+            <p className='text-muted-foreground py-12 text-center text-sm'>{i18n._(msg`No data in this period`)}</p>
           )}
           {!loading && !error && chartData.length > 0 && (
             <ChartContainer config={chartConfig} className='h-[400px] w-full'>
