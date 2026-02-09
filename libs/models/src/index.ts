@@ -1,3 +1,4 @@
+export * from './activity/index.js';
 export * from './admin/index.js';
 export * from './auth/index.js';
 export * from './profile/index.js';

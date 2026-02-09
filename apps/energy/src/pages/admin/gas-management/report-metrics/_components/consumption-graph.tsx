@@ -120,6 +120,7 @@ function ConsumptionGraph({ className }: ConsumptionGraphProps) {
     selectedDateRanger?.from != null
       ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z'
       : '';
+
   const to_date =
     selectedDateRanger?.to != null
       ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z'

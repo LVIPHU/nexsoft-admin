@@ -1,5 +1,6 @@
 export const PROFILE_KEY = 'profile' as const;
 
+export const ACTIVITY_OVERVIEW_KEY = 'activity/overview' as const;
 export const CONSUMPTION_KEY = 'report-metrics/consumption' as const;
 export const PERFORMERS_KEY = 'report-metrics/performers' as const;
 export const STATISTIC_OVERVIEW_KEY = 'report-metrics/statistic-overview' as const;
