@@ -191,7 +191,7 @@ function ActivityHistory({ className }: ActivityHistoryProps) {
             onSelectDateRanger={setSelectedDateRanger}
           />
         </CardHeader>
-        <CardContent className='p-0'>
+        <CardContent className='pb-6'>
           {error && (
             <div className='p-6'>
               <p className='text-destructive text-sm'>{error.message}</p>
