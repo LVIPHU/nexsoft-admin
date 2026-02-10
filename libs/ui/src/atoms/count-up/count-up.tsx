@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useInView, useMotionValue, useSpring } from 'framer-motion';
-
 import { cn } from '@nexsoft-admin/utils';
 
 interface CountUpProps extends React.ComponentProps<'span'> {
@@ -104,6 +103,7 @@ function CountUp({
         clearTimeout(durationTimeoutId);
       };
     }
+    return undefined;
   }, [isInView, startWhen, motionValue, direction, from, to, delay, onStart, onEnd, duration]);
 
   React.useEffect(() => {
