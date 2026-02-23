@@ -25,6 +25,11 @@ export const NAVIGATION_ITEMS: Navigation = [
         href: '/gas-management/activity-history',
         title: msg`Activity History`,
       },
+      {
+        id: 'setting',
+        href: '/gas-management/setting',
+        title: msg`Setting`,
+      },
     ],
   },
   {

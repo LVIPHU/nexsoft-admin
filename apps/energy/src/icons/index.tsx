@@ -3,6 +3,7 @@ export { default as BarChartRadiant } from './bar-chart-radiant.svg?react';
 export { default as ClockRadiant } from './clock-radiant.svg?react';
 export { default as GaugeSolid } from './gauge-solid.svg?react';
 export { default as PieChartRadiant } from './pie-chart-radiant.svg?react';
+export { default as SettingBoldRadiant } from './setting-bold-radiant.svg?react';
 export { default as SigmaSolid } from './sigma-solid.svg?react';
 export { default as Tether } from './tether.svg?react';
 export { default as Tron } from './tron.svg?react';

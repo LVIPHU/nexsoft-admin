@@ -13,6 +13,7 @@ import { RolesAndPermissionsPage } from '@/pages/admin/account-management/roles-
 import { GasManagementLayout } from '@/pages/admin/gas-management/layout';
 import { ReportMetricsPage } from '@/pages/admin/gas-management/report-metrics/page';
 import { ActivityHistoryPage } from '@/pages/admin/gas-management/activity-history/page';
+import { SettingPage } from '@/pages/admin/gas-management/setting/page';
 
 export const routes = createRoutesFromElements(
   <Route element={<Providers />}>
@@ -26,6 +27,7 @@ export const routes = createRoutesFromElements(
             <Route path='gas-management' element={<GasManagementLayout />}>
               <Route path='report-metrics' element={<ReportMetricsPage />} />
               <Route path='activity-history' element={<ActivityHistoryPage />} />
+              <Route path='setting' element={<SettingPage />} />
               <Route index element={<Navigate replace to='/gas-management/report-metrics' />} />
             </Route>
 

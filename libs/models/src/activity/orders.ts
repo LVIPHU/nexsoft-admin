@@ -38,7 +38,7 @@ export const ordersPaginationSchema = z.object({
   total_pages: z.number(),
   limit: z.number(),
   page: z.number(),
-  data: z.array(orderSchema),
+  data: z.array(orderSchema).optional(),
   sort: z.union([z.string(), z.null()]),
 });
 
