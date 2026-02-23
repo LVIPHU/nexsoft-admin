@@ -13,7 +13,7 @@ export async function getConfig(): Promise<ConfigResponseDto> {
 }
 
 export async function updateConfig(payload: ConfigPayloadDto): Promise<void> {
-  await axios.put<unknown>(`${INDEXER_BASE}${PATH}`, payload);
+  await axios.post<unknown>(`${INDEXER_BASE}${PATH}`, payload);
 }
 
 export function useConfig(

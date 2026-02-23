@@ -13,7 +13,8 @@ import { useConfig, useUpdateConfig } from '@/services/setting';
 interface FeeItem {
   id: string;
   label: string;
-  value: string;
+  value: number;
+  unit: string;
 }
 
 function configToFeeItems(config: ConfigResponseDto['Config']): FeeItem[] {
@@ -21,30 +22,28 @@ function configToFeeItems(config: ConfigResponseDto['Config']): FeeItem[] {
     {
       id: 'usdt-basic',
       label: 'USDT transfer fee (Basic)',
-      value: `${config.transfer_usdt.usdt_payment.basic_fee_usdt} USDT`,
+      value: config.transfer_usdt.usdt_payment.basic_fee_usdt,
+      unit: 'USDT',
     },
     {
       id: 'usdt-additional',
       label: 'USDT transfer fee (Additional charges)',
-      value: `${config.transfer_usdt.usdt_payment.advance_fee_usdt} USDT`,
+      value: config.transfer_usdt.usdt_payment.advance_fee_usdt,
+      unit: 'USDT',
     },
     {
       id: 'trx',
       label: 'TRX transfer fee',
-      value: `${config.transfer_trx.trx_payment.fee_trx_amount} TRX`,
+      value: config.transfer_trx.trx_payment.fee_trx_amount,
+      unit: 'TRX',
     },
   ];
 }
 
-function parseFeeValue(value: string): number {
-  const n = parseFloat(value.replace(/[^\d.-]/g, '').trim());
-  return Number.isFinite(n) ? n : 0;
-}
-
 function buildPayload(config: ConfigResponseDto['Config'], fees: FeeItem[]): ConfigPayloadDto {
-  const basic = parseFeeValue(fees.find((f) => f.id === 'usdt-basic')?.value ?? '0');
-  const advanceUsdt = parseFeeValue(fees.find((f) => f.id === 'usdt-additional')?.value ?? '0');
-  const feeTrx = parseFeeValue(fees.find((f) => f.id === 'trx')?.value ?? '0');
+  const basic = fees.find((f) => f.id === 'usdt-basic')?.value ?? 0;
+  const advanceUsdt = fees.find((f) => f.id === 'usdt-additional')?.value ?? 0;
+  const feeTrx = fees.find((f) => f.id === 'trx')?.value ?? 0;
 
   return {
     transfer_usdt: {
@@ -75,9 +74,9 @@ interface TransferFeesProps {
 }
 
 const DEFAULT_FEES: FeeItem[] = [
-  { id: 'usdt-basic', label: 'USDT transfer fee (Basic)', value: '0 USDT' },
-  { id: 'usdt-additional', label: 'USDT transfer fee (Additional charges)', value: '0 USDT' },
-  { id: 'trx', label: 'TRX transfer fee', value: '0 TRX' },
+  { id: 'usdt-basic', label: 'USDT transfer fee (Basic)', value: 0, unit: 'USDT' },
+  { id: 'usdt-additional', label: 'USDT transfer fee (Additional charges)', value: 0, unit: 'USDT' },
+  { id: 'trx', label: 'TRX transfer fee', value: 0, unit: 'TRX' },
 ];
 
 function TransferFees({ className }: TransferFeesProps) {
@@ -95,12 +94,14 @@ function TransferFees({ className }: TransferFeesProps) {
 
   function handleEditClick(item: FeeItem) {
     setEditingId(item.id);
-    setEditValue(item.value);
+    setEditValue(item.value === 0 ? '' : String(item.value));
   }
 
   function handleEditConfirm() {
     if (editingId) {
-      setFees((prev) => prev.map((f) => (f.id === editingId ? { ...f, value: editValue } : f)));
+      const num = editValue === '' ? 0 : Number(editValue);
+      const parsed = Number.isFinite(num) ? num : 0;
+      setFees((prev) => prev.map((f) => (f.id === editingId ? { ...f, value: parsed } : f)));
       setEditingId(null);
       setEditValue('');
     }
@@ -156,6 +157,9 @@ function TransferFees({ className }: TransferFeesProps) {
                 <div className='flex items-center justify-between'>
                   {editingId === item.id ? (
                     <Input
+                      type='number'
+                      min={0}
+                      step={1}
                       value={editValue}
                       onChange={(e) => setEditValue(e.target.value)}
                       onBlur={handleEditConfirm}
@@ -164,7 +168,9 @@ function TransferFees({ className }: TransferFeesProps) {
                       autoFocus
                     />
                   ) : (
-                    <span className='text-sm'>{item.value}</span>
+                    <span className='text-sm'>
+                      {item.value} {item.unit}
+                    </span>
                   )}
                   <Button
                     variant='ghost'
