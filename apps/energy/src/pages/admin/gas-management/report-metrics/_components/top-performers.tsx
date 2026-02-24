@@ -10,6 +10,7 @@ import { DateRange } from 'react-day-picker';
 import { Link } from 'react-router';
 import dayjs from 'dayjs';
 import { formatNumber, formatCurrency } from '@nexsoft-admin/utils';
+import { toIndexerDateParams } from '@/utils/date-range';
 import { usePerformers } from '@/services/report-metrics';
 
 interface TopPerformersProps {
@@ -22,10 +23,7 @@ function TopPerformers({ className }: TopPerformersProps) {
     to: dayjs().subtract(1, 'day').toDate(),
   }));
 
-  const from_date =
-    selectedDateRanger?.from != null ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
-  const to_date =
-    selectedDateRanger?.to != null ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
+  const { from_date, to_date } = toIndexerDateParams(selectedDateRanger);
 
   const {
     data,

@@ -8,6 +8,7 @@ import { useState } from 'react';
 import type { DateRange } from 'react-day-picker';
 import dayjs from 'dayjs';
 import { Link } from 'react-router';
+import { toIndexerDateParams } from '@/utils/date-range';
 import { formatCurrency } from '@nexsoft-admin/utils';
 import { useStatisticOverview } from '@/services/report-metrics';
 
@@ -21,10 +22,7 @@ function OverallStatistics({ className }: OverallStatisticsProps) {
     to: dayjs().toDate(),
   }));
 
-  const from_date =
-    selectedDateRanger?.from != null ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
-  const to_date =
-    selectedDateRanger?.to != null ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
+  const { from_date, to_date } = toIndexerDateParams(selectedDateRanger);
 
   const {
     data,

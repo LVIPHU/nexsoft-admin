@@ -16,6 +16,7 @@ import { i18n } from '@lingui/core';
 import { useState, useMemo } from 'react';
 import { DateRange } from 'react-day-picker';
 import dayjs from 'dayjs';
+import { toIndexerDateParams } from '@/utils/date-range';
 import { useConsumption } from '@/services/report-metrics';
 
 interface ConsumptionGraphProps {
@@ -110,17 +111,13 @@ function CustomTooltip({ active, payload, label, activeTab }: CustomTooltipProps
 
 function ConsumptionGraph({ className }: ConsumptionGraphProps) {
   const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(() => ({
-    from: dayjs().subtract(7, 'day').toDate(),
-    to: dayjs().toDate(),
+    from: dayjs().subtract(8, 'day').toDate(),
+    to: dayjs().subtract(1, 'day').toDate(),
   }));
 
   const [activeTab, setActiveTab] = useState<ChartType>('energy');
 
-  const from_date =
-    selectedDateRanger?.from != null ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
-
-  const to_date =
-    selectedDateRanger?.to != null ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
+  const { from_date, to_date } = toIndexerDateParams(selectedDateRanger);
 
   const {
     data,

@@ -10,13 +10,17 @@ interface DateRangePickerProps {
   selected?: DateRange;
   defaultSelected?: DateRange;
   onSelect?: (range: DateRange | undefined) => void;
+  /** Max selectable date (default: end of yesterday - API requires date earlier than today) */
+  maxDate?: Date;
 }
 
 function DateRangePicker({
   defaultSelected = { from: new Date(), to: new Date() },
   selected,
   onSelect,
+  maxDate: maxDateProp,
 }: DateRangePickerProps) {
+  const maxDate = maxDateProp ?? dayjs().subtract(1, 'day').endOf('day').toDate();
   const [range, setRange] = React.useState<DateRange | undefined>(defaultSelected);
 
   function handleSelect(nextRange: DateRange | undefined) {
@@ -42,7 +46,13 @@ function DateRangePicker({
         </PopoverTrigger>
 
         <PopoverContent className='w-auto overflow-hidden p-0' align='start'>
-          <Calendar mode='range' captionLayout='dropdown' selected={displayRange} onSelect={handleSelect} />
+          <Calendar
+            mode='range'
+            captionLayout='dropdown'
+            selected={displayRange}
+            onSelect={handleSelect}
+            disabled={{ after: maxDate }}
+          />
         </PopoverContent>
       </Popover>
     </div>

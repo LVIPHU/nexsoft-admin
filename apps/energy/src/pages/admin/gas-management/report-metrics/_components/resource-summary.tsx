@@ -7,6 +7,7 @@ import { i18n } from '@lingui/core';
 import { useState } from 'react';
 import type { DateRange } from 'react-day-picker';
 import dayjs from 'dayjs';
+import { toIndexerDateParams } from '@/utils/date-range';
 import { useSummary } from '@/services/report-metrics';
 
 interface ResourceSummaryProps {
@@ -31,10 +32,7 @@ function ResourceSummary({ className }: ResourceSummaryProps) {
     to: dayjs().subtract(1, 'day').toDate(),
   }));
 
-  const from_date =
-    selectedDateRanger?.from != null ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
-  const to_date =
-    selectedDateRanger?.to != null ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
+  const { from_date, to_date } = toIndexerDateParams(selectedDateRanger);
 
   const {
     data,
