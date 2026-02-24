@@ -8,6 +8,9 @@ export interface AuthCodeData {
   redirectUri: string;
   expiresAt: number;
   appId?: string;
+  access_token?: string;
+  refresh_token?: string;
+  expires_in?: string;
 }
 
 /**

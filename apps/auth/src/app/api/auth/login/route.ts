@@ -53,8 +53,6 @@ export async function POST(request: NextRequest) {
       body: params.toString(),
     });
 
-    console.log(loginResponse);
-
     if (!loginResponse.ok) {
       const errorData = await loginResponse.json().catch(() => ({ message: 'Login failed' }));
       return NextResponse.json(
@@ -81,12 +79,15 @@ export async function POST(request: NextRequest) {
       // Calculate expiry time (5 minutes from now)
       const expiresAt = Date.now() + 5 * 60 * 1000;
 
-      // Store auth code in Redis
+      // Store auth code in Redis with tokens (for token exchange)
       await storeAuthCode(code, {
         userId,
         redirectUri,
         expiresAt,
         appId,
+        access_token: tokenData.access_token,
+        refresh_token: tokenData.refresh_token,
+        expires_in: tokenData.expires_in,
       });
 
       // Build callback URL with code

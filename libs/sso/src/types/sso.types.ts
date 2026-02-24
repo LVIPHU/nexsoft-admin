@@ -14,7 +14,8 @@ export interface AuthCodeResponse {
 export interface TokenResponse {
   access_token: string;
   refresh_token: string;
-  expires_in: string; // ISO 8601 format
+  /** ISO 8601 string or Unix timestamp in seconds */
+  expires_in: string | number;
 }
 
 export interface TokenExchangeRequest {

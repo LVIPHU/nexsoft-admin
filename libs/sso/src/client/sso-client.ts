@@ -106,7 +106,10 @@ export class SSOClient {
    * Save token response to session storage
    */
   private saveSession(tokenResponse: TokenResponse): void {
-    const expiresAt = new Date(tokenResponse.expires_in).getTime();
+    const expiresAt =
+      typeof tokenResponse.expires_in === 'number'
+        ? tokenResponse.expires_in * 1000 // Unix seconds -> milliseconds
+        : new Date(tokenResponse.expires_in).getTime();
 
     const session: SessionData = {
       accessToken: tokenResponse.access_token,

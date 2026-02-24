@@ -22,6 +22,7 @@ function SignInForm({ redirectUri, appId }: SignInFormProps) {
       name: 'identifier',
       label: i18n._(msg`Username`),
       placeholder: i18n._(msg`Enter your username`),
+      description: 'administrator',
       orientation: 'vertical',
     },
     {
@@ -29,6 +30,7 @@ function SignInForm({ redirectUri, appId }: SignInFormProps) {
       label: i18n._(msg`Password`),
       type: 'password',
       placeholder: i18n._(msg`Enter your password`),
+      description: 'nexsoft@123',
       orientation: 'vertical',
     },
   ];
