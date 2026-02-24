@@ -27,8 +27,6 @@ export async function POST(request: NextRequest) {
     // Get auth code data from Redis
     const authCodeData = await getAuthCode(validated.code);
 
-    console.log('authCodeData', authCodeData);
-
     if (!authCodeData) {
       const response = NextResponse.json({ error: 'Invalid or expired auth code' }, { status: 400 });
       return addCorsHeaders(request, response);
@@ -56,13 +54,18 @@ export async function POST(request: NextRequest) {
     const userId = authCodeData.userId;
     const appId = authCodeData.appId;
 
+    // expires_in: number = Unix seconds; string = ISO date. Response DTO expects string.
+    const expiresInRaw = authCodeData.expires_in;
+    const expiresAt =
+      typeof expiresInRaw === 'number' ? expiresInRaw * 1000 : new Date(expiresInRaw).getTime();
+    const expiresInForResponse =
+      typeof expiresInRaw === 'number' ? new Date(expiresInRaw * 1000).toISOString() : expiresInRaw;
+
     const tokens: TokenExchangeResponseDto = {
       access_token: authCodeData.access_token,
       refresh_token: authCodeData.refresh_token,
-      expires_in: authCodeData.expires_in,
+      expires_in: expiresInForResponse,
     };
-
-    const expiresAt = new Date(authCodeData.expires_in).getTime();
     const sessionData = {
       accessToken: tokens.access_token,
       refreshToken: tokens.refresh_token,

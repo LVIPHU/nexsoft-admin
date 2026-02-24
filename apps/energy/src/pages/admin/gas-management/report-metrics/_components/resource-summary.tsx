@@ -6,8 +6,7 @@ import { msg } from '@lingui/core/macro';
 import { i18n } from '@lingui/core';
 import { useState } from 'react';
 import type { DateRange } from 'react-day-picker';
-import dayjs from 'dayjs';
-import { toIndexerDateParams } from '@/utils/date-range';
+import { getDefaultReportMetricsDateRange, toIndexerDateParams } from '@/utils/date-range';
 import { useSummary } from '@/services/report-metrics';
 
 interface ResourceSummaryProps {
@@ -27,10 +26,9 @@ function SkeletonCard() {
 }
 
 function ResourceSummary({ className }: ResourceSummaryProps) {
-  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(() => ({
-    from: dayjs().subtract(8, 'day').toDate(),
-    to: dayjs().subtract(1, 'day').toDate(),
-  }));
+  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(
+    () => getDefaultReportMetricsDateRange()
+  );
 
   const { from_date, to_date } = toIndexerDateParams(selectedDateRanger);
 

@@ -5,6 +5,8 @@ import { msg } from '@lingui/core/macro';
 import { useState } from 'react';
 import { DateRange } from 'react-day-picker';
 import dayjs from 'dayjs';
+import { getDefaultReportMetricsDateRange, toIndexerDateParams } from '@/utils/date-range';
+import { ACTIVITY_DEFAULT_FROM_DAYS_AGO, ACTIVITY_DEFAULT_TO_DAYS_AGO } from '@/constants/report-metrics.constant';
 import { ColumnDef } from '@tanstack/react-table';
 import { Badge, DataTableColumnHeader, DataTable, DataTablePagination, useDataTableInstance } from '@nexsoft-admin/ui';
 import { formatCurrency, formatNumber } from '@nexsoft-admin/utils';
@@ -144,27 +146,26 @@ const columns: ColumnDef<OrderDto>[] = [
 ];
 
 function ActivityHistory({ className }: ActivityHistoryProps) {
-  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(() => ({
-    from: dayjs().subtract(7, 'day').toDate(),
-    to: dayjs().toDate(),
-  }));
+  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(() =>
+    getDefaultReportMetricsDateRange({
+      fromDaysAgo: ACTIVITY_DEFAULT_FROM_DAYS_AGO,
+      toDaysAgo: ACTIVITY_DEFAULT_TO_DAYS_AGO,
+    })
+  );
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 10,
   });
 
-  const from =
-    selectedDateRanger?.from != null ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
-  const to =
-    selectedDateRanger?.to != null ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
+  const { from_date, to_date } = toIndexerDateParams(selectedDateRanger);
 
   const {
     data,
     isPending: loading,
     error,
   } = useOrders({
-    from,
-    to,
+    from: from_date,
+    to: to_date,
     page: pagination.pageIndex + 1,
     limit: pagination.pageSize,
   });

@@ -8,9 +8,8 @@ import { msg } from '@lingui/core/macro';
 import { useState } from 'react';
 import { DateRange } from 'react-day-picker';
 import { Link } from 'react-router';
-import dayjs from 'dayjs';
 import { formatNumber, formatCurrency } from '@nexsoft-admin/utils';
-import { toIndexerDateParams } from '@/utils/date-range';
+import { getDefaultReportMetricsDateRange, toIndexerDateParams } from '@/utils/date-range';
 import { usePerformers } from '@/services/report-metrics';
 
 interface TopPerformersProps {
@@ -18,10 +17,9 @@ interface TopPerformersProps {
 }
 
 function TopPerformers({ className }: TopPerformersProps) {
-  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(() => ({
-    from: dayjs().subtract(8, 'day').toDate(),
-    to: dayjs().subtract(1, 'day').toDate(),
-  }));
+  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(
+    () => getDefaultReportMetricsDateRange()
+  );
 
   const { from_date, to_date } = toIndexerDateParams(selectedDateRanger);
 

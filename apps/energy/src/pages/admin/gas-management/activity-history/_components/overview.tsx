@@ -6,7 +6,8 @@ import { msg } from '@lingui/core/macro';
 import { i18n } from '@lingui/core';
 import { useState } from 'react';
 import { DateRange } from 'react-day-picker';
-import dayjs from 'dayjs';
+import { getDefaultReportMetricsDateRange, toIndexerDateParams } from '@/utils/date-range';
+import { ACTIVITY_DEFAULT_FROM_DAYS_AGO, ACTIVITY_DEFAULT_TO_DAYS_AGO } from '@/constants/report-metrics.constant';
 import { useActivityOverview } from '@/services/activity';
 import type { ActivityOverviewDto } from '@nexsoft-admin/models';
 
@@ -31,15 +32,14 @@ function SkeletonCard() {
 }
 
 function Overview({ className }: OverviewProps) {
-  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(() => ({
-    from: dayjs().subtract(7, 'day').toDate(),
-    to: dayjs().toDate(),
-  }));
+  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(() =>
+    getDefaultReportMetricsDateRange({
+      fromDaysAgo: ACTIVITY_DEFAULT_FROM_DAYS_AGO,
+      toDaysAgo: ACTIVITY_DEFAULT_TO_DAYS_AGO,
+    })
+  );
 
-  const from_date =
-    selectedDateRanger?.from != null ? dayjs(selectedDateRanger.from).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
-  const to_date =
-    selectedDateRanger?.to != null ? dayjs(selectedDateRanger.to).utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z' : '';
+  const { from_date, to_date } = toIndexerDateParams(selectedDateRanger);
 
   const {
     data,

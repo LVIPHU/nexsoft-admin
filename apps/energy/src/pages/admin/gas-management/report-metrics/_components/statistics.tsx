@@ -15,7 +15,7 @@ import {
 } from '@nexsoft-admin/ui/chart';
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 import dayjs from 'dayjs';
-import { toIndexerDateParams } from '@/utils/date-range';
+import { getDefaultReportMetricsDateRange, toIndexerDateParams } from '@/utils/date-range';
 import { useStatistics } from '@/services/report-metrics';
 
 const chartConfig = {
@@ -34,10 +34,9 @@ interface StatisticsProps {
 }
 
 function Statistics({ className }: StatisticsProps) {
-  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(() => ({
-    from: dayjs().subtract(8, 'day').toDate(),
-    to: dayjs().subtract(1, 'day').toDate(),
-  }));
+  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(
+    () => getDefaultReportMetricsDateRange()
+  );
 
   const { from_date, to_date } = toIndexerDateParams(selectedDateRanger);
 

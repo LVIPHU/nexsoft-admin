@@ -6,9 +6,12 @@ import { msg } from '@lingui/core/macro';
 import { i18n } from '@lingui/core';
 import { useState } from 'react';
 import type { DateRange } from 'react-day-picker';
-import dayjs from 'dayjs';
 import { Link } from 'react-router';
-import { toIndexerDateParams } from '@/utils/date-range';
+import {
+  OVERALL_STATISTICS_FROM_DAYS_AGO,
+  OVERALL_STATISTICS_TO_DAYS_AGO,
+} from '@/constants/report-metrics.constant';
+import { getDefaultReportMetricsDateRange, toIndexerDateParams } from '@/utils/date-range';
 import { formatCurrency } from '@nexsoft-admin/utils';
 import { useStatisticOverview } from '@/services/report-metrics';
 
@@ -17,10 +20,12 @@ interface OverallStatisticsProps {
 }
 
 function OverallStatistics({ className }: OverallStatisticsProps) {
-  const [selectedDateRanger] = useState<DateRange | undefined>(() => ({
-    from: dayjs().subtract(7, 'day').toDate(),
-    to: dayjs().toDate(),
-  }));
+  const [selectedDateRanger] = useState<DateRange | undefined>(() =>
+    getDefaultReportMetricsDateRange({
+      fromDaysAgo: OVERALL_STATISTICS_FROM_DAYS_AGO,
+      toDaysAgo: OVERALL_STATISTICS_TO_DAYS_AGO,
+    })
+  );
 
   const { from_date, to_date } = toIndexerDateParams(selectedDateRanger);
 

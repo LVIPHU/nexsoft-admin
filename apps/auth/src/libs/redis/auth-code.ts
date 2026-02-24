@@ -10,7 +10,8 @@ export interface AuthCodeData {
   appId?: string;
   access_token?: string;
   refresh_token?: string;
-  expires_in?: string;
+  /** ISO date string or Unix timestamp in seconds */
+  expires_in?: string | number;
 }
 
 /**
