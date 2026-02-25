@@ -150,7 +150,7 @@ function ActivityHistory({ className }: ActivityHistoryProps) {
     getDefaultReportMetricsDateRange({
       fromDaysAgo: ACTIVITY_DEFAULT_FROM_DAYS_AGO,
       toDaysAgo: ACTIVITY_DEFAULT_TO_DAYS_AGO,
-    })
+    }),
   );
   const [pagination, setPagination] = useState({
     pageIndex: 0,

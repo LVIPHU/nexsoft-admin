@@ -36,7 +36,7 @@ function Overview({ className }: OverviewProps) {
     getDefaultReportMetricsDateRange({
       fromDaysAgo: ACTIVITY_DEFAULT_FROM_DAYS_AGO,
       toDaysAgo: ACTIVITY_DEFAULT_TO_DAYS_AGO,
-    })
+    }),
   );
 
   const { from_date, to_date } = toIndexerDateParams(selectedDateRanger);

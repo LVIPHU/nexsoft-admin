@@ -56,8 +56,7 @@ export async function POST(request: NextRequest) {
 
     // expires_in: number = Unix seconds; string = ISO date. Response DTO expects string.
     const expiresInRaw = authCodeData.expires_in;
-    const expiresAt =
-      typeof expiresInRaw === 'number' ? expiresInRaw * 1000 : new Date(expiresInRaw).getTime();
+    const expiresAt = typeof expiresInRaw === 'number' ? expiresInRaw * 1000 : new Date(expiresInRaw).getTime();
     const expiresInForResponse =
       typeof expiresInRaw === 'number' ? new Date(expiresInRaw * 1000).toISOString() : expiresInRaw;
 

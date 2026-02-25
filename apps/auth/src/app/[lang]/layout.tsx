@@ -2,14 +2,15 @@ import '../global.css';
 import { PropsWithChildren } from 'react';
 import { PageLangParam } from '@/libs/initLingui';
 import { Geist, Geist_Mono } from 'next/font/google';
-import { localeIds } from '@nexsoft-admin/utils';
+import { cn, localeIds } from '@nexsoft-admin/utils';
 import { getI18nInstance } from '@/libs/i18n';
 import { msg } from '@lingui/core/macro';
 import { Metadata } from 'next';
 import Provider from '@/providers';
-import { Separator } from '@nexsoft-admin/ui/separator';
-import { Trans } from '@lingui/react/macro';
 import Image from 'next/image';
+import { InteractiveGridPattern } from '@/components/interactive-grid-pattern';
+import { HoverCard } from '@/components/hover-card';
+import { LightRaysBackground } from '@/components/light-rays-background';
 
 const geistSans = Geist({
   variable: '--font-sans',
@@ -42,29 +43,34 @@ export default async function RootLayout({ children, params }: PropsWithChildren
           <main>
             <div className='grid h-dvh justify-center p-2 lg:grid-cols-12'>
               <div className='relative hidden h-full rounded-3xl bg-[#00170A] lg:col-span-5 lg:flex'>
+                <LightRaysBackground />
                 <div className='absolute top-4 px-4'>
                   <Image src={'/TBChat-app-logo.svg'} alt={'logo'} width={40} height={40} />
                 </div>
+                <InteractiveGridPattern
+                  className={cn('[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]')}
+                  width={100}
+                  height={100}
+                  squares={[8, 12]}
+                />
+                <div className='pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-13 p-4 sm:p-6 md:p-8 lg:p-10'>
+                  <HoverCard className='pointer-events-auto'>
+                    <div className='mx-auto w-fit max-w-full'>
+                      <Image
+                        src={'/screen.png'}
+                        alt={'screen'}
+                        width={482}
+                        height={330}
+                        priority
+                        className='h-full max-h-full w-full object-center'
+                      />
+                    </div>
+                  </HoverCard>
 
-                <div className='absolute bottom-10 flex w-full justify-between px-10'>
-                  <div className='text-primary-foreground flex-1 space-y-1'>
-                    <h2 className='font-medium'>
-                      <Trans>Ready to launch</Trans>?
-                    </h2>
-                    <p className='text-sm'>
-                      <Trans>Clone the repo, install dependencies, and your dashboard is live in minutes</Trans>.
-                    </p>
-                  </div>
-                  <Separator orientation='vertical' className='mx-3 !h-auto' />
-                  <div className='text-primary-foreground flex-1 space-y-1'>
-                    <h2 className='font-medium'>
-                      <Trans>Need help?</Trans>
-                    </h2>
-                    <p className='text-sm'>
-                      <Trans>
-                        Check out the docs or open an issue on GitHub, community support is just a click away
-                      </Trans>
-                      .
+                  <div className='flex flex-col gap-2 px-4 text-center sm:px-6 md:px-8 lg:px-10'>
+                    <p className='text-3xl font-semibold'>Secure, Simple and Powerful</p>
+                    <p className='leading-4'>
+                      Log in to manage data, monitor performance, and control your system in real time.
                     </p>
                   </div>
                 </div>

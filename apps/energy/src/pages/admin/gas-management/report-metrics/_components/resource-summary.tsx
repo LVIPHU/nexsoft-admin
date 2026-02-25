@@ -26,8 +26,8 @@ function SkeletonCard() {
 }
 
 function ResourceSummary({ className }: ResourceSummaryProps) {
-  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(
-    () => getDefaultReportMetricsDateRange()
+  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(() =>
+    getDefaultReportMetricsDateRange(),
   );
 
   const { from_date, to_date } = toIndexerDateParams(selectedDateRanger);

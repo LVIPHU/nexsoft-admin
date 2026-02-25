@@ -110,8 +110,8 @@ function CustomTooltip({ active, payload, label, activeTab }: CustomTooltipProps
 }
 
 function ConsumptionGraph({ className }: ConsumptionGraphProps) {
-  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(
-    () => getDefaultReportMetricsDateRange()
+  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(() =>
+    getDefaultReportMetricsDateRange(),
   );
 
   const [activeTab, setActiveTab] = useState<ChartType>('energy');

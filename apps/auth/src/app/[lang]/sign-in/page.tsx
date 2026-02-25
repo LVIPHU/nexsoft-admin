@@ -16,10 +16,10 @@ export default async function SignInPage(props: SignInPageProps) {
       <div className='mx-auto flex w-full flex-col justify-center space-y-8 sm:w-sm'>
         <div className='space-y-2 text-center'>
           <h2 className='text-3xl font-medium'>
-            <Trans>Sign in to your account</Trans>
+            <Trans>Login to your account</Trans>
           </h2>
           <p className='text-muted-foreground text-sm'>
-            <Trans>Please enter your details to sign in</Trans>.
+            <Trans>Monitor and manageAccess your dashboard and manage your system your gas metrics and transactions</Trans>.
           </p>
         </div>
         <SignInForm redirectUri={searchParams.redirect_uri} appId={searchParams.app_id} />

@@ -7,10 +7,7 @@ import { i18n } from '@lingui/core';
 import { useState } from 'react';
 import type { DateRange } from 'react-day-picker';
 import { Link } from 'react-router';
-import {
-  OVERALL_STATISTICS_FROM_DAYS_AGO,
-  OVERALL_STATISTICS_TO_DAYS_AGO,
-} from '@/constants/report-metrics.constant';
+import { OVERALL_STATISTICS_FROM_DAYS_AGO, OVERALL_STATISTICS_TO_DAYS_AGO } from '@/constants/report-metrics.constant';
 import { getDefaultReportMetricsDateRange, toIndexerDateParams } from '@/utils/date-range';
 import { formatCurrency } from '@nexsoft-admin/utils';
 import { useStatisticOverview } from '@/services/report-metrics';
@@ -24,7 +21,7 @@ function OverallStatistics({ className }: OverallStatisticsProps) {
     getDefaultReportMetricsDateRange({
       fromDaysAgo: OVERALL_STATISTICS_FROM_DAYS_AGO,
       toDaysAgo: OVERALL_STATISTICS_TO_DAYS_AGO,
-    })
+    }),
   );
 
   const { from_date, to_date } = toIndexerDateParams(selectedDateRanger);

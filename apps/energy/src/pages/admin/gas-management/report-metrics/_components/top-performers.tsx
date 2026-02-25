@@ -17,8 +17,8 @@ interface TopPerformersProps {
 }
 
 function TopPerformers({ className }: TopPerformersProps) {
-  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(
-    () => getDefaultReportMetricsDateRange()
+  const [selectedDateRanger, setSelectedDateRanger] = useState<DateRange | undefined>(() =>
+    getDefaultReportMetricsDateRange(),
   );
 
   const { from_date, to_date } = toIndexerDateParams(selectedDateRanger);
