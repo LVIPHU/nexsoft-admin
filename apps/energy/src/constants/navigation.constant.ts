@@ -1,5 +1,5 @@
 import { msg } from '@lingui/core/macro';
-import { BellIcon, FuelIcon, LayoutDashboardIcon, SettingsIcon, UserIcon, WrenchIcon } from 'lucide-react';
+import { BellIcon, FuelIcon, LayoutDashboardIcon, SettingsIcon, UserIcon, UsersIcon, WrenchIcon } from 'lucide-react';
 
 import type { NavItem, Navigation } from '@/types/navigation.type';
 
@@ -29,6 +29,18 @@ export const NAVIGATION_ITEMS: Navigation = [
         id: 'setting',
         href: '/gas-management/setting',
         title: msg`Setting`,
+      },
+    ],
+  },
+  {
+    id: 'social-manager',
+    title: msg`Social Manager`,
+    icon: UsersIcon,
+    items: [
+      {
+        id: 'users',
+        href: '/social-manager/users',
+        title: msg`Users`,
       },
     ],
   },

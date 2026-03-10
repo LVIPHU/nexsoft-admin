@@ -8,3 +8,6 @@ export const STATISTIC_OVERVIEW_KEY = 'report-metrics/statistic-overview' as con
 export const STATISTICS_KEY = 'report-metrics/statistics' as const;
 export const SUMMARY_KEY = 'report-metrics/summary' as const;
 export const CONFIG_KEY = 'setting/config' as const;
+
+export const USER_KEY = 'user' as const;
+export const LIST_USER_KEY = 'users' as const;

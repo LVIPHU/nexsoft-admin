@@ -1,0 +1,146 @@
+import { OverlayItem } from '@/types/overlay.type';
+import { Overlay } from '@/components/overlay';
+import { Form, FormGenerator, type FieldConfig } from '@nexsoft-admin/ui';
+import { useUser } from '@/services/user';
+import { toast } from 'sonner';
+import { t } from '@lingui/core/macro';
+import { createUserSchema, updateUserSchema } from '@nexsoft-admin/models';
+import { useMemo } from 'react';
+
+function UserOverlay({ isTop, mode, props, ...rest }: OverlayItem & { isTop: boolean }) {
+  const shouldFetchUser = (mode === 'update' || mode === 'duplicate') && Boolean(props?.id);
+  const { user, loading, error } = useUser(
+    { id: props?.id || '' },
+    {
+      enabled: shouldFetchUser,
+    },
+  );
+
+  const schema = useMemo(() => {
+    if (mode === 'create') return createUserSchema;
+    if (mode === 'update' || mode === 'duplicate') return updateUserSchema;
+    return updateUserSchema;
+  }, [mode]);
+
+  const fieldConfigs: FieldConfig[] = useMemo(
+    () => [
+      {
+        name: 'username',
+        label: t`Username`,
+        placeholder: t`Enter your username`,
+        orientation: 'vertical',
+        required: mode === 'create',
+      },
+      {
+        name: 'name',
+        label: t`Name`,
+        placeholder: t`Enter your name`,
+        orientation: 'vertical',
+        required: mode === 'create',
+      },
+      {
+        name: 'bio',
+        label: t`Bio`,
+        placeholder: t`Enter your bio`,
+        orientation: 'vertical',
+        type: 'textarea',
+      },
+      {
+        name: 'location',
+        label: t`Location`,
+        placeholder: t`Enter your location`,
+        orientation: 'vertical',
+      },
+      {
+        name: 'website_url',
+        label: t`Website URL`,
+        placeholder: t`https://example.com`,
+        orientation: 'vertical',
+        type: 'url',
+      },
+      {
+        name: 'thumbnail_url',
+        label: t`Thumbnail`,
+        description: t`Upload a thumbnail image (recommended: square format)`,
+        orientation: 'vertical',
+        type: 'image-uploader',
+        aspectRatio: 1,
+        maxSize: 5 * 1024 * 1024,
+        acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
+      },
+      {
+        name: 'avatar_url',
+        label: t`Avatar`,
+        description: t`Upload a profile picture (recommended: square format, 400x400px)`,
+        orientation: 'vertical',
+        type: 'image-uploader',
+        aspectRatio: 1,
+        maxSize: 5 * 1024 * 1024,
+        acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
+      },
+      {
+        name: 'banner_url',
+        label: t`Banner`,
+        description: t`Upload a banner image (recommended: 16:9 aspect ratio)`,
+        orientation: 'vertical',
+        type: 'image-uploader',
+        aspectRatio: 16 / 9,
+        maxSize: 10 * 1024 * 1024,
+        acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
+      },
+    ],
+    [mode],
+  );
+
+  const canRenderForm = mode === 'create' || (shouldFetchUser && user !== undefined);
+
+  const handleSubmit = async (data: unknown) => {
+    try {
+      console.log('Form submitted:', data);
+
+      if (rest.onSubmit) {
+        await rest.onSubmit(mode);
+      }
+
+      toast.success(
+        mode === 'create'
+          ? t`User created successfully`
+          : mode === 'duplicate'
+            ? t`User duplicated successfully`
+            : t`User updated successfully`,
+      );
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast.error(t`Failed to ${mode === 'create' ? 'create' : mode === 'duplicate' ? 'duplicate' : 'update'} user`);
+      throw error;
+    }
+  };
+
+  return (
+    <Overlay isTop={isTop} mode={mode} {...rest}>
+      {error && (
+        <div className='text-destructive border-destructive/50 bg-destructive/10 mb-4 rounded-md border p-3 text-sm'>
+          {error.message}
+        </div>
+      )}
+      {canRenderForm ? (
+        <Form
+          schema={schema}
+          resetValues={mode === 'create' ? undefined : user}
+          fieldConfigs={fieldConfigs}
+          onSubmit={handleSubmit}
+        >
+          <FormGenerator loading={shouldFetchUser && loading} schema={schema} fieldConfigs={fieldConfigs} />
+        </Form>
+      ) : (
+        <div className='flex items-center justify-center py-8'>
+          <div className='text-muted-foreground text-center'>
+            <div className='mb-2'>Loading user data...</div>
+          </div>
+        </div>
+      )}
+    </Overlay>
+  );
+}
+
+export { UserOverlay };

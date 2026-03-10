@@ -14,6 +14,8 @@ import { GasManagementLayout } from '@/pages/admin/gas-management/layout';
 import { ReportMetricsPage } from '@/pages/admin/gas-management/report-metrics/page';
 import { ActivityHistoryPage } from '@/pages/admin/gas-management/activity-history/page';
 import { SettingPage } from '@/pages/admin/gas-management/setting/page';
+import { SocialManagerLayout } from '@/pages/admin/social-manager/layout';
+import { UsersPage } from '@/pages/admin/social-manager/users/page';
 
 export const routes = createRoutesFromElements(
   <Route element={<Providers />}>
@@ -29,6 +31,12 @@ export const routes = createRoutesFromElements(
               <Route path='activity-history' element={<ActivityHistoryPage />} />
               <Route path='setting' element={<SettingPage />} />
               <Route index element={<Navigate replace to='/gas-management/report-metrics' />} />
+            </Route>
+
+            {/* Social Manager */}
+            <Route path='social-manager' element={<SocialManagerLayout />}>
+              <Route path='users' element={<UsersPage />} />
+              <Route index element={<Navigate replace to='/social-manager/users' />} />
             </Route>
 
             {/* Account Management */}

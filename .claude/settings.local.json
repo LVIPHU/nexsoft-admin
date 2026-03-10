@@ -1,7 +1,15 @@
 {
   "permissions": {
     "allow": [
-      "Bash(claude mcp:*)"
+      "Bash(claude mcp:*)",
+      "Read(//mnt/d/nexsoft/**)",
+      "Bash(pnpm lingui:extract:energy)",
+      "Bash(cmd /c \"cd /d D:\\\\nexsoft\\\\nexsoft-admin && pnpm lingui:extract:energy 2>&1\")",
+      "Bash(cmd /c \"cd /d D:\\\\nexsoft\\\\nexsoft-admin && pnpm lingui:extract:energy\")",
+      "Bash(cmd /c \"cd /d D:\\\\nexsoft\\\\nexsoft-admin && pnpm lingui:extract:energy 2>&1 & exit\")",
+      "Bash(cmd /c \"cd /d D:\\\\nexsoft\\\\nexsoft-admin && pnpm lingui:extract:energy && echo DONE\")",
+      "Bash(cmd /c \"cd /d D:\\\\nexsoft\\\\nexsoft-admin && pnpm lingui:extract:energy > C:\\\\temp_output.txt 2>&1\" && type C:\\\\temp_output.txt)",
+      "Bash(cmd /c \"cd /d D:\\\\nexsoft\\\\nexsoft-admin && pnpm lingui:compile:energy > C:\\\\temp_output2.txt 2>&1\" && type C:\\\\temp_output2.txt)"
     ]
   }
 }

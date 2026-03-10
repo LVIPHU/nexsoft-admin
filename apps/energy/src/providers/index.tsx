@@ -6,6 +6,7 @@ import { LocaleProvider } from '@/providers/locale.provider';
 import { ThemeProvider } from '@/providers/theme.provider';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '@/libs/query-client';
+import { OverlayRenderer } from '@/providers/overlay.renderer';
 
 export const Providers = () => {
   const ssoConfig = createSSOConfig({
@@ -22,6 +23,7 @@ export const Providers = () => {
             <TooltipProvider>
               <Outlet />
               <Toaster />
+              <OverlayRenderer />
             </TooltipProvider>
           </ThemeProvider>
         </LocaleProvider>
