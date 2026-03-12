@@ -8,7 +8,6 @@ import { createUserSchema, updateUserSchema } from '@nexsoft-admin/models';
 import { useMemo } from 'react';
 
 function UserOverlay({ isTop, mode, props, ...rest }: OverlayItem & { isTop: boolean }) {
-  // Delete mode is handled by Overlay component, no need to fetch user data
   const shouldFetchUser = (mode === 'update' || mode === 'duplicate') && Boolean(props?.id);
   const { user, loading, error } = useUser(
     { id: props?.id || '' },
@@ -19,90 +18,51 @@ function UserOverlay({ isTop, mode, props, ...rest }: OverlayItem & { isTop: boo
 
   const schema = useMemo(() => {
     if (mode === 'create') return createUserSchema;
-    if (mode === 'update' || mode === 'duplicate') return updateUserSchema;
     return updateUserSchema;
   }, [mode]);
 
   const fieldConfigs: FieldConfig[] = useMemo(
     () => [
       {
-        name: 'username',
+        name: 'Username',
         label: t`Username`,
         placeholder: t`Enter your username`,
         orientation: 'vertical',
         required: mode === 'create',
+        disabled: mode === 'update',
       },
       {
-        name: 'name',
+        name: 'Name',
         label: t`Name`,
         placeholder: t`Enter your name`,
         orientation: 'vertical',
         required: mode === 'create',
       },
       {
-        name: 'bio',
+        name: 'Bio',
         label: t`Bio`,
         placeholder: t`Enter your bio`,
         orientation: 'vertical',
         type: 'textarea',
       },
-      {
-        name: 'location',
-        label: t`Location`,
-        placeholder: t`Enter your location`,
-        orientation: 'vertical',
-      },
-      {
-        name: 'website_url',
-        label: t`Website URL`,
-        placeholder: t`https://example.com`,
-        orientation: 'vertical',
-        type: 'url',
-      },
-      {
-        name: 'thumbnail_url',
-        label: t`Thumbnail`,
-        description: t`Upload a thumbnail image (recommended: square format)`,
-        orientation: 'vertical',
-        type: 'image-uploader',
-        aspectRatio: 1,
-        maxSize: 5 * 1024 * 1024, // 5MB
-        acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
-      },
-      {
-        name: 'avatar_url',
-        label: t`Avatar`,
-        description: t`Upload a profile picture (recommended: square format, 400x400px)`,
-        orientation: 'vertical',
-        type: 'image-uploader',
-        aspectRatio: 1,
-        maxSize: 5 * 1024 * 1024, // 5MB
-        acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
-      },
-      {
-        name: 'banner_url',
-        label: t`Banner`,
-        description: t`Upload a banner image (recommended: 16:9 aspect ratio)`,
-        orientation: 'vertical',
-        type: 'image-uploader',
-        aspectRatio: 16 / 9,
-        maxSize: 10 * 1024 * 1024, // 10MB
-        acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
-      },
     ],
     [mode],
   );
 
-  // Delete mode is handled by Overlay component (AlertDialog), children won't be rendered
-  // For create mode, form can render immediately
-  // For update/duplicate, wait for user data to load
+  const resetValues = useMemo(() => {
+    if (!user) return undefined;
+    return {
+      Name: user.Name,
+      Bio: user.Bio ?? '',
+    };
+  }, [user]);
+
   const canRenderForm = mode === 'create' || (shouldFetchUser && user !== undefined);
 
   const handleSubmit = async (data: unknown) => {
     try {
       console.log('Form submitted:', data);
 
-      // Call parent onSubmit if provided (this will trigger overlay's handleSubmit)
       if (rest.onSubmit) {
         await rest.onSubmit(mode);
       }
@@ -117,12 +77,10 @@ function UserOverlay({ isTop, mode, props, ...rest }: OverlayItem & { isTop: boo
     } catch (error) {
       console.error('Error submitting form:', error);
       toast.error(t`Failed to ${mode === 'create' ? 'create' : mode === 'duplicate' ? 'duplicate' : 'update'} user`);
-      throw error; // Re-throw to prevent overlay from closing
+      throw error;
     }
   };
 
-  // Overlay component handles delete mode with AlertDialog
-  // Children are only rendered for create/update/duplicate modes
   return (
     <Overlay isTop={isTop} mode={mode} {...rest}>
       {error && (
@@ -133,7 +91,7 @@ function UserOverlay({ isTop, mode, props, ...rest }: OverlayItem & { isTop: boo
       {canRenderForm ? (
         <Form
           schema={schema}
-          resetValues={mode === 'create' ? undefined : user}
+          resetValues={mode === 'create' ? undefined : resetValues}
           fieldConfigs={fieldConfigs}
           onSubmit={handleSubmit}
         >

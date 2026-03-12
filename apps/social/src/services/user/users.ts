@@ -1,24 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import { LIST_USER_KEY } from '@/constants/query-keys.constant';
 import { axios } from '@/libs/axios';
-import type { Pagination } from '@/types/pagination.type';
-import type { UserDto } from '@nexsoft-admin/models';
+import { usersListResponseSchema } from '@nexsoft-admin/models';
 
 interface GetUsersParams {
-  search?: string;
-  status?: Array<string>;
+  keyword?: string;
+  sort?: string;
   page: number;
   limit: number;
 }
 
 export const getUsers = async (params: GetUsersParams) => {
-  const response = await axios.get<{
-    data: Array<UserDto>;
-    pagination: Pagination;
-  }>('/v1/authz/user/users.json', {
+  const response = await axios.get('/v1/authz/user', {
     params,
   });
-  return response.data;
+  return usersListResponseSchema.parse(response.data);
 };
 
 export const useUsers = (params: GetUsersParams) => {

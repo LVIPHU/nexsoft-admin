@@ -5,12 +5,11 @@ import { adminSchema } from './admin.js';
 export const updateAdminSchema = adminSchema
   .partial()
   .pick({
-    username: true,
+    Username: true,
+    Name: true,
+    Bio: true,
+    ThumbnailUrl: true,
     password: true,
-    name: true,
-    status: true,
-    thumbnail_url: true,
-    avatar_url: true,
   })
   .extend({
     role: z.string(),

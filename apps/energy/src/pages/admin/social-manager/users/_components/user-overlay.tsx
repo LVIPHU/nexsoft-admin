@@ -1,7 +1,8 @@
 import { OverlayItem } from '@/types/overlay.type';
 import { Overlay } from '@/components/overlay';
 import { Form, FormGenerator, type FieldConfig } from '@nexsoft-admin/ui';
-import { useUser } from '@/services/user';
+import { useUser, useUpdateUser } from '@/services/user';
+import { useProfile } from '@/services/profile';
 import { toast } from 'sonner';
 import { t } from '@lingui/core/macro';
 import { createUserSchema, updateUserSchema } from '@nexsoft-admin/models';
@@ -15,10 +16,11 @@ function UserOverlay({ isTop, mode, props, ...rest }: OverlayItem & { isTop: boo
       enabled: shouldFetchUser,
     },
   );
+  const { updateUser } = useUpdateUser();
+  const { profile } = useProfile();
 
   const schema = useMemo(() => {
     if (mode === 'create') return createUserSchema;
-    if (mode === 'update' || mode === 'duplicate') return updateUserSchema;
     return updateUserSchema;
   }, [mode]);
 
@@ -30,6 +32,7 @@ function UserOverlay({ isTop, mode, props, ...rest }: OverlayItem & { isTop: boo
         placeholder: t`Enter your username`,
         orientation: 'vertical',
         required: mode === 'create',
+        disabled: mode === 'update',
       },
       {
         name: 'name',
@@ -45,58 +48,33 @@ function UserOverlay({ isTop, mode, props, ...rest }: OverlayItem & { isTop: boo
         orientation: 'vertical',
         type: 'textarea',
       },
-      {
-        name: 'location',
-        label: t`Location`,
-        placeholder: t`Enter your location`,
-        orientation: 'vertical',
-      },
-      {
-        name: 'website_url',
-        label: t`Website URL`,
-        placeholder: t`https://example.com`,
-        orientation: 'vertical',
-        type: 'url',
-      },
-      {
-        name: 'thumbnail_url',
-        label: t`Thumbnail`,
-        description: t`Upload a thumbnail image (recommended: square format)`,
-        orientation: 'vertical',
-        type: 'image-uploader',
-        aspectRatio: 1,
-        maxSize: 5 * 1024 * 1024,
-        acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
-      },
-      {
-        name: 'avatar_url',
-        label: t`Avatar`,
-        description: t`Upload a profile picture (recommended: square format, 400x400px)`,
-        orientation: 'vertical',
-        type: 'image-uploader',
-        aspectRatio: 1,
-        maxSize: 5 * 1024 * 1024,
-        acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
-      },
-      {
-        name: 'banner_url',
-        label: t`Banner`,
-        description: t`Upload a banner image (recommended: 16:9 aspect ratio)`,
-        orientation: 'vertical',
-        type: 'image-uploader',
-        aspectRatio: 16 / 9,
-        maxSize: 10 * 1024 * 1024,
-        acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
-      },
     ],
     [mode],
   );
 
+  const resetValues = useMemo(() => {
+    if (!user) return undefined;
+    return {
+      username: user.Username,
+      name: user.Name,
+      bio: user.Bio ?? '',
+    };
+  }, [user]);
+
   const canRenderForm = mode === 'create' || (shouldFetchUser && user !== undefined);
 
-  const handleSubmit = async (data: unknown) => {
+  const handleSubmit = async (data: Record<string, unknown>) => {
     try {
-      console.log('Form submitted:', data);
+      if (mode === 'update' && props?.id && profile) {
+        await updateUser({
+          id: props.id as string,
+          data: {
+            user_id: props.id as string,
+            name: data.name as string,
+            admin_id: String(profile.id),
+          },
+        });
+      }
 
       if (rest.onSubmit) {
         await rest.onSubmit(mode);
@@ -126,7 +104,7 @@ function UserOverlay({ isTop, mode, props, ...rest }: OverlayItem & { isTop: boo
       {canRenderForm ? (
         <Form
           schema={schema}
-          resetValues={mode === 'create' ? undefined : user}
+          resetValues={mode === 'create' ? undefined : resetValues}
           fieldConfigs={fieldConfigs}
           onSubmit={handleSubmit}
         >

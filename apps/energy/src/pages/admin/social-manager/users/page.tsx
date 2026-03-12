@@ -1,10 +1,7 @@
 import { UsersTable } from './_components/users-table';
-import { H1 } from '@/pages/admin/_components/heading';
-import { Trans } from '@lingui/react/macro';
 import { useMemo } from 'react';
-import { EllipsisVerticalIcon, UserIcon } from 'lucide-react';
+import { EllipsisVerticalIcon } from 'lucide-react';
 import {
-  Badge,
   Button,
   Checkbox,
   DropdownMenu,
@@ -47,7 +44,7 @@ function UsersPage() {
       {
         id: 'drag',
         header: () => null,
-        cell: ({ row }) => <DataTableDragHandle id={row.original.user_id} />,
+        cell: ({ row }) => <DataTableDragHandle id={row.original.UserId} />,
         enableSorting: false,
         enableHiding: false,
       },
@@ -75,35 +72,26 @@ function UsersPage() {
         enableHiding: false,
       },
       {
-        id: 'user_id',
-        accessorKey: 'user_id',
+        id: 'UserId',
+        accessorKey: 'UserId',
         header: ({ column }) => <DataTableColumnHeader column={column} title='User ID' />,
-        cell: ({ row }) => <div className='max-w-[200px] truncate'>{row.getValue('user_id')}</div>,
+        cell: ({ row }) => <div className='max-w-50 truncate'>{row.getValue('UserId')}</div>,
       },
       {
-        id: 'username',
-        accessorKey: 'username',
+        id: 'Username',
+        accessorKey: 'Username',
         header: ({ column }) => <DataTableColumnHeader column={column} title='Username' />,
-        cell: ({ row }) => <div className='max-w-[150px] truncate'>{row.getValue('username')}</div>,
+        cell: ({ row }) => <div className='max-w-37.5 truncate'>{row.getValue('Username')}</div>,
       },
       {
-        id: 'name',
-        accessorKey: 'name',
+        id: 'Name',
+        accessorKey: 'Name',
         header: ({ column }) => <DataTableColumnHeader column={column} title='Name' />,
-        cell: ({ row }) => <div className='max-w-[200px] truncate'>{row.getValue('name')}</div>,
-      },
-      {
-        id: 'status',
-        accessorKey: 'status',
-        header: ({ column }) => <DataTableColumnHeader column={column} title='Status' />,
-        cell: ({ row }) => {
-          const isActive = row.getValue('status') === 'ACTIVE';
-          return <Badge variant={isActive ? 'default' : 'destructive'}>{isActive ? 'Active' : 'Inactive'}</Badge>;
-        },
+        cell: ({ row }) => <div className='max-w-50 truncate'>{row.getValue('Name')}</div>,
       },
       {
         id: 'actions',
-        cell: () => (
+        cell: ({ row }) => (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
@@ -117,24 +105,18 @@ function UsersPage() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align='end' className='w-32'>
               <DropdownMenuItem
-                onClick={() =>
-                  openUserOverlay({ mode: 'update', props: { id: 'ELQfzt3BhekiCoa861jpDSetRn9q853hrdBb39qY10obO' } })
-                }
+                onClick={() => openUserOverlay({ mode: 'update', props: { id: row.original.UserId } })}
               >
                 Edit
               </DropdownMenuItem>
               <DropdownMenuItem
-                onClick={() =>
-                  openUserOverlay({ mode: 'duplicate', props: { id: 'ELQfzt3BhekiCoa861jpDSetRn9q853hrdBb39qY10obO' } })
-                }
+                onClick={() => openUserOverlay({ mode: 'duplicate', props: { id: row.original.UserId } })}
               >
                 Make a copy
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                onClick={() =>
-                  openUserOverlay({ mode: 'delete', props: { id: 'ELQfzt3BhekiCoa861jpDSetRn9q853hrdBb39qY10obO' } })
-                }
+                onClick={() => openUserOverlay({ mode: 'delete', props: { id: row.original.UserId } })}
                 className='text-destructive'
               >
                 Delete
@@ -150,22 +132,7 @@ function UsersPage() {
   );
 
   return (
-    <div className='flex flex-1 flex-col gap-4 md:gap-6'>
-      <div className='flex w-full flex-col items-start justify-between gap-4 @xl/main:flex-row @xl/main:items-center'>
-        <div>
-          <H1>
-            <Trans>User Management</Trans>
-          </H1>
-          <p className='text-muted-foreground'>
-            <Trans>Manage all users in the system.</Trans>
-          </p>
-        </div>
-
-        <Button size='lg' onClick={() => openUserOverlay({ mode: 'create' })}>
-          <UserIcon />
-          <Trans>Add user</Trans>
-        </Button>
-      </div>
+    <div className='flex flex-1 flex-col'>
       <UsersTable columns={columns} />
     </div>
   );

@@ -1,27 +1,24 @@
 import { useQuery } from '@tanstack/react-query';
+import { AUTHZ_BASE } from '@/constants/api.constant';
 import { LIST_USER_KEY } from '@/constants/query-keys.constant';
 import { axios } from '@/libs/axios';
-import type { Pagination } from '@/types/pagination.type';
-import type { UserDto } from '@nexsoft-admin/models';
+import { usersListResponseSchema, type UsersListResponseDto } from '@nexsoft-admin/models';
 
-interface GetUsersParams {
-  search?: string;
-  status?: Array<string>;
+const PATH = '/v1/authz/user';
+
+export interface GetUsersParams {
+  keyword?: string;
+  sort?: string;
   page: number;
   limit: number;
 }
 
-export const getUsers = async (params: GetUsersParams) => {
-  const response = await axios.get<{
-    data: Array<UserDto>;
-    pagination: Pagination;
-  }>('/v1/authz/user/users.json', {
-    params,
-  });
-  return response.data;
-};
+export async function getUsers(params: GetUsersParams): Promise<UsersListResponseDto> {
+  const response = await axios.get<unknown>(`${AUTHZ_BASE}${PATH}`, { params });
+  return usersListResponseSchema.parse(response.data);
+}
 
-export const useUsers = (params: GetUsersParams) => {
+export function useUsers(params: GetUsersParams) {
   const {
     error,
     isPending: loading,
@@ -32,4 +29,4 @@ export const useUsers = (params: GetUsersParams) => {
   });
 
   return { users: data, loading, error };
-};
+}

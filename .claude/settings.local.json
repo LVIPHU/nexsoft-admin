@@ -9,7 +9,11 @@
       "Bash(cmd /c \"cd /d D:\\\\nexsoft\\\\nexsoft-admin && pnpm lingui:extract:energy 2>&1 & exit\")",
       "Bash(cmd /c \"cd /d D:\\\\nexsoft\\\\nexsoft-admin && pnpm lingui:extract:energy && echo DONE\")",
       "Bash(cmd /c \"cd /d D:\\\\nexsoft\\\\nexsoft-admin && pnpm lingui:extract:energy > C:\\\\temp_output.txt 2>&1\" && type C:\\\\temp_output.txt)",
-      "Bash(cmd /c \"cd /d D:\\\\nexsoft\\\\nexsoft-admin && pnpm lingui:compile:energy > C:\\\\temp_output2.txt 2>&1\" && type C:\\\\temp_output2.txt)"
+      "Bash(cmd /c \"cd /d D:\\\\nexsoft\\\\nexsoft-admin && pnpm lingui:compile:energy > C:\\\\temp_output2.txt 2>&1\" && type C:\\\\temp_output2.txt)",
+      "Bash(find /d/nexsoft/nexsoft-admin -name \"*transform*\" -o -name \"*mapper*\" -o -name \"*adapter*\" | grep -E \"\\\\.\\(ts|js\\)$\" | head -20)",
+      "Bash(find /d/nexsoft/nexsoft-admin -type f \\\\\\( -name \"*.ts\" -o -name \"*.tsx\" \\\\\\) | xargs grep -l \"UserDto\\\\|UserListItemDto\\\\|userSchema\\\\|userListItemSchema\" | head -30)",
+      "Bash(find /d/nexsoft/nexsoft-admin -type f -name \"users-filter*\" -o -name \"*users*filter*\" | grep -E \"\\\\.\\(ts|tsx\\)$\")",
+      "Bash(npx nx:*)"
     ]
   }
 }

@@ -31,7 +31,6 @@ function UsersPage() {
       name: 'user',
       mode: mode,
       props: props,
-      // Prefetch user data trước khi mở overlay nếu có id
       onBeforeOpen: async () => {
         if (mode !== 'create' && props?.id) {
           await queryClient.prefetchQuery({
@@ -48,7 +47,7 @@ function UsersPage() {
       {
         id: 'drag',
         header: () => null,
-        cell: ({ row }) => <DataTableDragHandle id={row.original.user_id} />,
+        cell: ({ row }) => <DataTableDragHandle id={row.original.UserId} />,
         enableSorting: false,
         enableHiding: false,
       },
@@ -76,35 +75,26 @@ function UsersPage() {
         enableHiding: false,
       },
       {
-        id: 'user_id',
-        accessorKey: 'user_id',
+        id: 'UserId',
+        accessorKey: 'UserId',
         header: ({ column }) => <DataTableColumnHeader column={column} title='User ID' />,
-        cell: ({ row }) => <div className='max-w-[200px] truncate'>{row.getValue('user_id')}</div>,
+        cell: ({ row }) => <div className='max-w-[200px] truncate'>{row.getValue('UserId')}</div>,
       },
       {
-        id: 'username',
-        accessorKey: 'username',
+        id: 'Username',
+        accessorKey: 'Username',
         header: ({ column }) => <DataTableColumnHeader column={column} title='Username' />,
-        cell: ({ row }) => <div className='max-w-[150px] truncate'>{row.getValue('username')}</div>,
+        cell: ({ row }) => <div className='max-w-[150px] truncate'>{row.getValue('Username')}</div>,
       },
       {
-        id: 'name',
-        accessorKey: 'name',
+        id: 'Name',
+        accessorKey: 'Name',
         header: ({ column }) => <DataTableColumnHeader column={column} title='Name' />,
-        cell: ({ row }) => <div className='max-w-[200px] truncate'>{row.getValue('name')}</div>,
-      },
-      {
-        id: 'status',
-        accessorKey: 'status',
-        header: ({ column }) => <DataTableColumnHeader column={column} title='Status' />,
-        cell: ({ row }) => {
-          const isActive = row.getValue('status') === 'ACTIVE';
-          return <Badge variant={isActive ? 'default' : 'destructive'}>{isActive ? 'Active' : 'Inactive'}</Badge>;
-        },
+        cell: ({ row }) => <div className='max-w-[200px] truncate'>{row.getValue('Name')}</div>,
       },
       {
         id: 'actions',
-        cell: () => (
+        cell: ({ row }) => (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
@@ -118,24 +108,18 @@ function UsersPage() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align='end' className='w-32'>
               <DropdownMenuItem
-                onClick={() =>
-                  openUserOverlay({ mode: 'update', props: { id: 'ELQfzt3BhekiCoa861jpDSetRn9q853hrdBb39qY10obO' } })
-                }
+                onClick={() => openUserOverlay({ mode: 'update', props: { id: row.original.UserId } })}
               >
                 Edit
               </DropdownMenuItem>
               <DropdownMenuItem
-                onClick={() =>
-                  openUserOverlay({ mode: 'duplicate', props: { id: 'ELQfzt3BhekiCoa861jpDSetRn9q853hrdBb39qY10obO' } })
-                }
+                onClick={() => openUserOverlay({ mode: 'duplicate', props: { id: row.original.UserId } })}
               >
                 Make a copy
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                onClick={() =>
-                  openUserOverlay({ mode: 'delete', props: { id: 'ELQfzt3BhekiCoa861jpDSetRn9q853hrdBb39qY10obO' } })
-                }
+                onClick={() => openUserOverlay({ mode: 'delete', props: { id: row.original.UserId } })}
                 className='text-destructive'
               >
                 Delete

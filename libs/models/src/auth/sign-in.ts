@@ -1,9 +1,7 @@
 import { z } from 'zod';
 
-import { usernameSchema } from '../user/user.js';
-
 export const signInSchema = z.object({
-  identifier: usernameSchema,
+  identifier: z.string().min(3),
   password: z.string().min(6),
 });
 

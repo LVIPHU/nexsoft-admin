@@ -31,8 +31,6 @@ function UsersTable({ columns }: { columns: Array<ColumnDef<UserDto>> }) {
 
   const data = useMemo(
     () => ({
-      search: undefined,
-      status: undefined,
       page: state.pagination?.pageIndex || PAGE_INDEX.DEFAULT_VALUE,
       limit: state.pagination?.pageSize || PAGE_SIZE.DEFAULT_VALUE,
     }),
@@ -44,8 +42,8 @@ function UsersTable({ columns }: { columns: Array<ColumnDef<UserDto>> }) {
   const [list, setList] = useState<UserDto[]>([]);
 
   useEffect(() => {
-    if (users && users.data && users.data.length) {
-      setList([...users.data]);
+    if (users && users.users && users.users.length) {
+      setList([...users.users]);
     }
   }, [users]);
 
@@ -54,7 +52,7 @@ function UsersTable({ columns }: { columns: Array<ColumnDef<UserDto>> }) {
     columns,
     state,
     handlers,
-    getRowId: (row: any) => row.user_id.toString(),
+    getRowId: (row: UserDto) => row.UserId,
   });
 
   if (error) {

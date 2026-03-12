@@ -1,5 +1,5 @@
 import { axios } from '@/libs/axios';
-import type { UserDto } from '@nexsoft-admin/models';
+import { userDetailResponseSchema, type UserDto } from '@nexsoft-admin/models';
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
 import { USER_KEY } from '@/constants/query-keys.constant';
 
@@ -8,8 +8,8 @@ interface GetUserParams {
 }
 
 export const getUser = async (params: GetUserParams) => {
-  const response = await axios.get<UserDto>(`/v1/authz/user/user-profile/${params.id}.json`);
-  return response.data;
+  const response = await axios.get(`/v1/authz/user/${params.id}`);
+  return userDetailResponseSchema.parse(response.data).user;
 };
 
 export const useUser = (params: GetUserParams, options?: Omit<UseQueryOptions<UserDto>, 'queryKey' | 'queryFn'>) => {
