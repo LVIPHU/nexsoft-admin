@@ -6,3 +6,4 @@ export * from './profile/index.js';
 export * from './report-metrics/index.js';
 export * from './role/index.js';
 export * from './user/index.js';
+export * from './violation/index.js';

@@ -13,7 +13,16 @@
       "Bash(find /d/nexsoft/nexsoft-admin -name \"*transform*\" -o -name \"*mapper*\" -o -name \"*adapter*\" | grep -E \"\\\\.\\(ts|js\\)$\" | head -20)",
       "Bash(find /d/nexsoft/nexsoft-admin -type f \\\\\\( -name \"*.ts\" -o -name \"*.tsx\" \\\\\\) | xargs grep -l \"UserDto\\\\|UserListItemDto\\\\|userSchema\\\\|userListItemSchema\" | head -30)",
       "Bash(find /d/nexsoft/nexsoft-admin -type f -name \"users-filter*\" -o -name \"*users*filter*\" | grep -E \"\\\\.\\(ts|tsx\\)$\")",
-      "Bash(npx nx:*)"
+      "Bash(npx nx:*)",
+      "Bash(find \"C:/Projects/nexsoft-admin/apps/social/src/pages\" -type f -name \"*.tsx\" | xargs grep -l \"content\\\\|moderation\" 2>/dev/null || echo \"No matches found\")",
+      "Bash(find /c/Projects/nexsoft-admin -name \"*violation*\" -o -name \"*moderat*\" -o -name \"*report*\" | grep -E \"\\\\.\\(ts|tsx|md\\)$\" | head -20)",
+      "Bash(find /c/Projects/nexsoft-admin/apps/energy/src/pages -name \"layout.tsx\" | xargs ls -lh)",
+      "Bash(node -e \"const p = require\\('./libs/ui/package.json'\\); console.log\\(JSON.stringify\\(Object.keys\\(p.exports || {}\\), null, 2\\)\\)\" 2>&1 | head -50)",
+      "Bash(node -e \"const p = require\\('./libs/models/package.json'\\); console.log\\(p.dependencies.zod\\)\" 2>&1)",
+      "Bash(cd C:/Projects/nexsoft-admin && npx tsc --noEmit -p apps/energy/tsconfig.json 2>&1 | head -40)",
+      "Bash(cd C:/Projects/nexsoft-admin && npx nx run models:typecheck 2>&1 | tail -10 && npx tsc --noEmit -p apps/energy/tsconfig.json 2>&1 | head -20)",
+      "Bash(cd C:/Projects/nexsoft-admin && npx tsc --noEmit -p apps/energy/tsconfig.json 2>&1)",
+      "Bash(find \"C:\\\\Projects\\\\nexsoft-admin\\\\node_modules\\\\.vite\" -type f -name \"*.json\" 2>/dev/null | head -10)"
     ]
   }
 }

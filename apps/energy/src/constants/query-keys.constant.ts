@@ -11,3 +11,7 @@ export const CONFIG_KEY = 'setting/config' as const;
 
 export const USER_KEY = 'user' as const;
 export const LIST_USER_KEY = 'users' as const;
+
+export const VIOLATION_STATISTIC_KEY = 'content-moderation/statistic' as const;
+export const VIOLATION_CONTENTS_KEY = 'content-moderation/contents' as const;
+export const VIOLATION_CONTENT_KEY = 'content-moderation/content' as const;

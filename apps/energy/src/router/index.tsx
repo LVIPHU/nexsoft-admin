@@ -16,6 +16,8 @@ import { ActivityHistoryPage } from '@/pages/admin/gas-management/activity-histo
 import { SettingPage } from '@/pages/admin/gas-management/setting/page';
 import { SocialManagerLayout } from '@/pages/admin/social-manager/layout';
 import { UsersPage } from '@/pages/admin/social-manager/users/page';
+import { ContentModerationPage } from '@/pages/admin/social-manager/content-moderation/page';
+import { ContentModerationDetailPage } from '@/pages/admin/social-manager/content-moderation/[id]/page';
 
 export const routes = createRoutesFromElements(
   <Route element={<Providers />}>
@@ -36,6 +38,8 @@ export const routes = createRoutesFromElements(
             {/* Social Manager */}
             <Route path='social-manager' element={<SocialManagerLayout />}>
               <Route path='users' element={<UsersPage />} />
+              <Route path='content-moderation' element={<ContentModerationPage />} />
+              <Route path='content-moderation/:id' element={<ContentModerationDetailPage />} />
               <Route index element={<Navigate replace to='/social-manager/users' />} />
             </Route>
 
