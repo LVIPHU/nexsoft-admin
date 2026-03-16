@@ -12,13 +12,13 @@ function SignUpForm() {
 
   const fieldConfigs: FieldConfig[] = [
     {
-      name: 'name',
+      name: 'Name',
       label: i18n._(msg`Name`),
       placeholder: i18n._(msg`Enter your name`),
       orientation: 'vertical',
     },
     {
-      name: 'username',
+      name: 'Username',
       label: i18n._(msg`Username`),
       placeholder: i18n._(msg`Enter your username`),
       orientation: 'vertical',
@@ -35,11 +35,11 @@ function SignUpForm() {
   return (
     <Form
       schema={signUpSchema}
-      defaultValues={{ name: '', username: '', password: '' }}
+      defaultValues={{ Name: '', Username: '', password: '' }}
       fieldConfigs={fieldConfigs}
       onSubmit={(data) => {
         console.log('Form submitted:', data);
-        toast.success(`Signed up as: ${data.username}`);
+        toast.success(`Signed up as: ${data.Username}`);
       }}
     >
       <FormGenerator schema={signUpSchema} fieldConfigs={fieldConfigs} />
