@@ -10,7 +10,7 @@ import { axios } from '@/libs/axios';
 const PATH = '/v1/authz/violation/contents';
 
 export async function bypassContent(id: number): Promise<void> {
-  await axios.post(`${AUTHZ_BASE}${PATH}/${id}/reject`);
+  await axios.post(`${AUTHZ_BASE}${PATH}/${id}/bypass`);
 }
 
 export function useBypassContent() {
