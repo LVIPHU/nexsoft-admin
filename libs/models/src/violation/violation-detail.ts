@@ -32,8 +32,14 @@ const violationDetailContentSchema = z.object({
   hashtags: z.array(z.string()).nullable().optional(),
   created_by: z.string().optional(),
   updated_by: z.string().optional(),
-  created_at: z.union([z.string(), z.date()]).transform((v) => (v instanceof Date ? v.toISOString() : v)).optional(),
-  updated_at: z.union([z.string(), z.date()]).transform((v) => (v instanceof Date ? v.toISOString() : v)).optional(),
+  created_at: z
+    .union([z.string(), z.date()])
+    .transform((v) => (v instanceof Date ? v.toISOString() : v))
+    .optional(),
+  updated_at: z
+    .union([z.string(), z.date()])
+    .transform((v) => (v instanceof Date ? v.toISOString() : v))
+    .optional(),
   user: violationUserSchema.optional(),
   post_metrics: z.record(z.string(), z.number()).optional(),
   parent_id: z.number().nullable().optional(),
@@ -49,8 +55,14 @@ const violationFullSchema = z.object({
   content_data_type: z.string(),
   content: z.string(),
   hashtags: z.array(z.string()).nullable().optional(),
-  content_created_at: z.union([z.string(), z.date()]).transform((v) => (v instanceof Date ? v.toISOString() : v)).optional(),
-  content_updated_at: z.union([z.string(), z.date()]).transform((v) => (v instanceof Date ? v.toISOString() : v)).optional(),
+  content_created_at: z
+    .union([z.string(), z.date()])
+    .transform((v) => (v instanceof Date ? v.toISOString() : v))
+    .optional(),
+  content_updated_at: z
+    .union([z.string(), z.date()])
+    .transform((v) => (v instanceof Date ? v.toISOString() : v))
+    .optional(),
   violation_status: z.string(),
   number_of_violations: z.number(),
   total_by_violation_type: z.array(violationSummarySchema).optional(),

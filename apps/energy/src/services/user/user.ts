@@ -15,10 +15,7 @@ export async function getUser(params: GetUserParams): Promise<UserDto> {
   return userDetailResponseSchema.parse(response.data).user;
 }
 
-export function useUser(
-  params: GetUserParams,
-  options?: Omit<UseQueryOptions<UserDto>, 'queryKey' | 'queryFn'>,
-) {
+export function useUser(params: GetUserParams, options?: Omit<UseQueryOptions<UserDto>, 'queryKey' | 'queryFn'>) {
   const {
     error,
     isPending: loading,

@@ -61,6 +61,7 @@ The `auth` app is the central SSO provider. Client apps (`social`, `energy`) are
 4. Expired tokens: `SSOClient.getAccessToken()` auto-refreshes 5 min before expiry; the Axios interceptor uses `axios-auth-refresh` to retry 401/403 responses.
 
 **Redis key layout (auth app)**
+
 - `session:{userId}` — global user session
 - `app_session:{appId}:{userId}` — per-app session
 - `auth_code:{code}` — one-time auth code (5 min TTL)
@@ -68,10 +69,10 @@ The `auth` app is the central SSO provider. Client apps (`social`, `energy`) are
 ### SSO lib sub-exports
 
 ```ts
-import { SSOClient }       from '@nexsoft-admin/sso';         // client class + types
-import { useSSO, useAuth } from '@nexsoft-admin/sso/react';   // React hooks
-import { generateAuthCode } from '@nexsoft-admin/sso/core';   // server-side utils
-import type { SSOConfig }  from '@nexsoft-admin/sso/config';  // config type
+import { SSOClient } from '@nexsoft-admin/sso'; // client class + types
+import { useSSO, useAuth } from '@nexsoft-admin/sso/react'; // React hooks
+import { generateAuthCode } from '@nexsoft-admin/sso/core'; // server-side utils
+import type { SSOConfig } from '@nexsoft-admin/sso/config'; // config type
 ```
 
 Each client app creates a singleton `SSOClient` in `src/libs/sso.ts` using Vite env vars (`VITE_AUTH_SERVER_URL`, `VITE_APP_ID`, `VITE_TOKEN_STORAGE`, etc.).
@@ -83,6 +84,7 @@ Each client app creates a singleton `SSOClient` in `src/libs/sso.ts` using Vite 
 ### Axios setup (client apps)
 
 Each Vite app has `src/libs/axios.ts` that:
+
 - Sets `baseURL` from `API_BASE` constant, `withCredentials: true`
 - Request interceptor: injects `Authorization: Bearer <token>` via `SSOClient.getAccessToken()`
 - Response interceptor: transforms `created_at`/`updated_at` ISO strings to `Date` objects via `deepSearchAndParseDates` from `@nexsoft-admin/utils`; translates API error messages with `translateError` and shows a Sonner toast
@@ -94,7 +96,7 @@ Components follow atoms → molecules → organisms. Each has a dedicated sub-ex
 
 ```ts
 import { Button } from '@nexsoft-admin/ui/button';
-import { Card }   from '@nexsoft-admin/ui/card';
+import { Card } from '@nexsoft-admin/ui/card';
 ```
 
 Variants use `class-variance-authority` (CVA) and live in `*.variants.ts` files. Storybook stories live alongside each component.

@@ -35,14 +35,14 @@ Trạng thái xử lý của nội dung vi phạm trong hệ thống moderation.
 
 Mức độ ưu tiên xử lý vi phạm.
 
-| Enum               | Giá trị    | Mô tả                                   |
-| ------------------ | ---------- | --------------------------------------- |
-| `PriorityVeryHigh` | VERY\_HIGH | Mức độ rất nghiêm trọng, cần xử lý ngay |
-| `PriorityHigh`     | HIGH       | Mức độ nghiêm trọng cao                 |
-| `PriorityMedium`   | MEDIUM     | Mức độ trung bình                       |
-| `PriorityLow`      | LOW        | Mức độ thấp                             |
+| Enum               | Giá trị   | Mô tả                                   |
+| ------------------ | --------- | --------------------------------------- |
+| `PriorityVeryHigh` | VERY_HIGH | Mức độ rất nghiêm trọng, cần xử lý ngay |
+| `PriorityHigh`     | HIGH      | Mức độ nghiêm trọng cao                 |
+| `PriorityMedium`   | MEDIUM    | Mức độ trung bình                       |
+| `PriorityLow`      | LOW       | Mức độ thấp                             |
 
-***
+---
 
 ## 1. Get content replies
 
@@ -105,11 +105,11 @@ POST v1/authz/violation/replies
 GET /v1/authz/violation/contents
 ```
 
-***
+---
 
 **Query Parameters**
 
-***
+---
 
 **Request**
 
@@ -120,7 +120,7 @@ curl --location '172.28.3.159:8087/v1/authz/violation/contents?limit=10&page=1&v
 --data ''
 ```
 
-***
+---
 
 **Response**
 
@@ -150,18 +150,18 @@ curl --location '172.28.3.159:8087/v1/authz/violation/contents?limit=10&page=1&v
 }
 ```
 
-| Trường                 | Kiểu     | Mô tả                         |
-| ---------------------- | -------- | ----------------------------- |
-| id                     | integer  | ID của nội dung               |
-| type                   | string   | Loại nội dung (POST, COMMENT) |
-| content                | string   | Nội dung text                 |
-| violation\_status      | string   | Trạng thái vi phạm            |
-| number\_of\_violations | integer  | Tổng số lần vi phạm           |
-| priority               | string   | Mức độ ưu tiên xử lý          |
-| created\_at            | datetime | Thời điểm tạo nội dung        |
-| updated\_at            | datetime | Thời điểm cập nhật gần nhất   |
+| Trường               | Kiểu     | Mô tả                         |
+| -------------------- | -------- | ----------------------------- |
+| id                   | integer  | ID của nội dung               |
+| type                 | string   | Loại nội dung (POST, COMMENT) |
+| content              | string   | Nội dung text                 |
+| violation_status     | string   | Trạng thái vi phạm            |
+| number_of_violations | integer  | Tổng số lần vi phạm           |
+| priority             | string   | Mức độ ưu tiên xử lý          |
+| created_at           | datetime | Thời điểm tạo nội dung        |
+| updated_at           | datetime | Thời điểm cập nhật gần nhất   |
 
-***
+---
 
 ## 3. Get statistic
 
@@ -169,11 +169,11 @@ curl --location '172.28.3.159:8087/v1/authz/violation/contents?limit=10&page=1&v
 GET /v1/authz/violation/statistic
 ```
 
-***
+---
 
 **Query Parameters (NONE)**
 
-***
+---
 
 **Request**
 
@@ -184,7 +184,7 @@ curl --location '172.28.3.159:8087/v1/authz/violation/statistic' \
 --data ''
 ```
 
-***
+---
 
 **Response**
 
@@ -195,17 +195,16 @@ curl --location '172.28.3.159:8087/v1/authz/violation/statistic' \
   "total_bypass": 1,
   "total_pending": 3
 }
-
 ```
 
-| Trường         | Kiểu    | Mô tả                                  |
-| -------------- | ------- | -------------------------------------- |
-| total\_high    | integer | Tổng số nội dung có mức độ ưu tiên cao |
-| total\_ban     | integer | Tổng số nội dung đã bị cấm             |
-| total\_bypass  | integer | Tổng số nội dung được bỏ qua           |
-| total\_pending | integer | Tổng số nội dung đang chờ xử lý        |
+| Trường        | Kiểu    | Mô tả                                  |
+| ------------- | ------- | -------------------------------------- |
+| total_high    | integer | Tổng số nội dung có mức độ ưu tiên cao |
+| total_ban     | integer | Tổng số nội dung đã bị cấm             |
+| total_bypass  | integer | Tổng số nội dung được bỏ qua           |
+| total_pending | integer | Tổng số nội dung đang chờ xử lý        |
 
-***
+---
 
 ## 4. Get content detail
 
@@ -213,9 +212,9 @@ curl --location '172.28.3.159:8087/v1/authz/violation/statistic' \
 GET /v1/authz/violation/contents/{id}
 ```
 
-***
+---
 
-***
+---
 
 **Request**
 
@@ -227,23 +226,23 @@ curl --location '172.28.3.159:8087/v1/authz/violation/contents/4' \
 
 ```
 
-***
+---
 
 **Response**
 
 ├── violation (ViolationContent)
 
-│     └── total\_by\_violation\_type (ViolationSummary\[])
+│ └── total_by_violation_type (ViolationSummary\[])
 
 └── content (Post)
 
-&#x20;       └── user (User)
+&#x20; └── user (User)
 
-&#x20;       └── files (File\[])
+&#x20; └── files (File\[])
 
-&#x20;       └── parent\_post (Post)
+&#x20; └── parent_post (Post)
 
-&#x20;       └── reply\_on\_post (Post)
+&#x20; └── reply_on_post (Post)
 
 ```json
 {
@@ -253,10 +252,7 @@ curl --location '172.28.3.159:8087/v1/authz/violation/contents/4' \
     "content_type": "POST",
     "content_data_type": "TEXT",
     "content": "đây là bài viết cho cộng đồng fan, không gì cả",
-    "hashtags": [
-      "news",
-      "icon"
-    ],
+    "hashtags": ["news", "icon"],
     "content_created_at": "2026-01-13T07:19:48.447146Z",
     "content_updated_at": "2026-01-13T07:19:48.447146Z",
     "violation_status": "BAN",
@@ -318,45 +314,42 @@ curl --location '172.28.3.159:8087/v1/authz/violation/contents/4' \
     },
     "parent_post": null,
     "reply_on_post": null,
-    "hashtags": [
-      "news",
-      "icon"
-    ]
+    "hashtags": ["news", "icon"]
   }
 }
 ```
 
-* **ViolationContent**
+- **ViolationContent**
 
-| Trường                     | Kiểu                     | Mô tả                                                |
-| -------------------------- | ------------------------ | ---------------------------------------------------- |
-| id                         | int64                    | ID của bản ghi vi phạm                               |
-| content\_id                | int64                    | ID của nội dung bị báo cáo                           |
-| content\_type              | string                   | Loại nội dung (POST, COMMENT, ...)                   |
-| content\_data\_type        | string                   | Kiểu dữ liệu nội dung (TEXT, IMAGE, VIDEO, ...)      |
-| content                    | string                   | Nội dung text của bài viết                           |
-| hashtags                   | array\[string]           | Danh sách hashtag của nội dung                       |
-| content\_created\_at       | datetime                 | Thời điểm nội dung được tạo                          |
-| content\_updated\_at       | datetime                 | Thời điểm nội dung được cập nhật                     |
-| violation\_status          | string                   | Trạng thái xử lý vi phạm (PENDING, BYPASS, BAN)      |
-| number\_of\_violations     | int32                    | Tổng số lần nội dung bị báo cáo                      |
-| total\_by\_violation\_type | array\[ViolationSummary] | Thống kê số lượng vi phạm theo từng loại             |
-| priority                   | string                   | Mức độ ưu tiên xử lý (LOW, MEDIUM, HIGH, VERY\_HIGH) |
-| created\_at                | datetime                 | Thời điểm tạo bản ghi vi phạm                        |
-| updated\_at                | datetime                 | Thời điểm cập nhật bản ghi vi phạm                   |
+| Trường                  | Kiểu                     | Mô tả                                               |
+| ----------------------- | ------------------------ | --------------------------------------------------- |
+| id                      | int64                    | ID của bản ghi vi phạm                              |
+| content_id              | int64                    | ID của nội dung bị báo cáo                          |
+| content_type            | string                   | Loại nội dung (POST, COMMENT, ...)                  |
+| content_data_type       | string                   | Kiểu dữ liệu nội dung (TEXT, IMAGE, VIDEO, ...)     |
+| content                 | string                   | Nội dung text của bài viết                          |
+| hashtags                | array\[string]           | Danh sách hashtag của nội dung                      |
+| content_created_at      | datetime                 | Thời điểm nội dung được tạo                         |
+| content_updated_at      | datetime                 | Thời điểm nội dung được cập nhật                    |
+| violation_status        | string                   | Trạng thái xử lý vi phạm (PENDING, BYPASS, BAN)     |
+| number_of_violations    | int32                    | Tổng số lần nội dung bị báo cáo                     |
+| total_by_violation_type | array\[ViolationSummary] | Thống kê số lượng vi phạm theo từng loại            |
+| priority                | string                   | Mức độ ưu tiên xử lý (LOW, MEDIUM, HIGH, VERY_HIGH) |
+| created_at              | datetime                 | Thời điểm tạo bản ghi vi phạm                       |
+| updated_at              | datetime                 | Thời điểm cập nhật bản ghi vi phạm                  |
 
-* **ViolationSummary**
+- **ViolationSummary**
 
-| Trường          | Kiểu   | Mô tả                            |
-| --------------- | ------ | -------------------------------- |
-| violation\_type | string | Loại vi phạm                     |
-| total           | int64  | Tổng số lần vi phạm của loại này |
+| Trường         | Kiểu   | Mô tả                            |
+| -------------- | ------ | -------------------------------- |
+| violation_type | string | Loại vi phạm                     |
+| total          | int64  | Tổng số lần vi phạm của loại này |
 
-* **Post**
-* **User**
-* **File**
+- **Post**
+- **User**
+- **File**
 
-***
+---
 
 ## 5. BAN
 
@@ -364,7 +357,7 @@ curl --location '172.28.3.159:8087/v1/authz/violation/contents/4' \
 POST /v1/authz/violation/contents/{id}/ban
 ```
 
-***
+---
 
 **Path Parameters**
 
@@ -372,7 +365,7 @@ POST /v1/authz/violation/contents/{id}/ban
 | ------- | ------- | -------- | ---------------------- |
 | id      | integer | ??       | ID của bản ghi vi phạm |
 
-***
+---
 
 **Request**
 
@@ -383,7 +376,7 @@ curl --location '172.28.3.159:8087/v1/authz/violation/statistic' \
 --data ''
 ```
 
-***
+---
 
 **Response**
 
@@ -397,7 +390,7 @@ curl --location '172.28.3.159:8087/v1/authz/violation/statistic' \
 POST /v1/authz/violation/contents/{id}/reject
 ```
 
-***
+---
 
 **Path Parameters**
 
@@ -405,7 +398,7 @@ POST /v1/authz/violation/contents/{id}/reject
 | ------- | ------- | -------- | -------------- |
 | id      | integer | ??       | ID của bản ghi |
 
-***
+---
 
 **Request**
 
@@ -416,7 +409,7 @@ curl --location '172.28.3.159:8087/v1/authz/violation/statistic' \
 --data ''
 ```
 
-***
+---
 
 **Response**
 

@@ -1,6 +1,11 @@
 import { useMemo, useState } from 'react';
 import { ColumnDef } from '@tanstack/react-table';
-import { DataTable, DataTableColumnHeader, DataTablePagination, useDataTableInstance } from '@nexsoft-admin/ui/data-table';
+import {
+  DataTable,
+  DataTableColumnHeader,
+  DataTablePagination,
+  useDataTableInstance,
+} from '@nexsoft-admin/ui/data-table';
 import { Input } from '@nexsoft-admin/ui/input';
 import { NativeSelect } from '@nexsoft-admin/ui/native-select';
 import { msg } from '@lingui/core/macro';
@@ -27,7 +32,9 @@ function AllContentTable() {
     () => [
       {
         accessorKey: 'content',
-        header: ({ column }) => <DataTableColumnHeader className={HEADER_CLASS} column={column} title={i18n._(msg`Content`)} />,
+        header: ({ column }) => (
+          <DataTableColumnHeader className={HEADER_CLASS} column={column} title={i18n._(msg`Content`)} />
+        ),
         cell: ({ row }) => (
           <div className='max-w-xs truncate text-sm' title={row.original.content}>
             {row.original.content}
@@ -37,19 +44,29 @@ function AllContentTable() {
       },
       {
         accessorKey: 'type',
-        header: ({ column }) => <DataTableColumnHeader className={HEADER_CLASS} column={column} title={i18n._(msg`Type`)} />,
+        header: ({ column }) => (
+          <DataTableColumnHeader className={HEADER_CLASS} column={column} title={i18n._(msg`Type`)} />
+        ),
         cell: ({ row }) => <ContentTypeBadge type={row.original.type} />,
         enableSorting: false,
       },
       {
         accessorKey: 'violation_status',
-        header: ({ column }) => <DataTableColumnHeader className={HEADER_CLASS} column={column} title={i18n._(msg`Status`)} />,
+        header: ({ column }) => (
+          <DataTableColumnHeader className={HEADER_CLASS} column={column} title={i18n._(msg`Status`)} />
+        ),
         cell: ({ row }) => <ViolationStatusBadge status={row.original.violation_status} />,
         enableSorting: false,
       },
       {
         accessorKey: 'number_of_violations',
-        header: ({ column }) => <DataTableColumnHeader className={`${HEADER_CLASS} text-center`} column={column} title={i18n._(msg`Reports`)} />,
+        header: ({ column }) => (
+          <DataTableColumnHeader
+            className={`${HEADER_CLASS} text-center`}
+            column={column}
+            title={i18n._(msg`Reports`)}
+          />
+        ),
         cell: ({ row }) => (
           <div className='flex justify-center'>
             <ReportCountBadge count={row.original.number_of_violations} />
@@ -59,7 +76,9 @@ function AllContentTable() {
       },
       {
         accessorKey: 'priority',
-        header: ({ column }) => <DataTableColumnHeader className={HEADER_CLASS} column={column} title={i18n._(msg`Priority`)} />,
+        header: ({ column }) => (
+          <DataTableColumnHeader className={HEADER_CLASS} column={column} title={i18n._(msg`Priority`)} />
+        ),
         cell: ({ row }) => <PriorityBadge priority={row.original.priority} />,
         enableSorting: false,
       },
@@ -93,11 +112,7 @@ function AllContentTable() {
         </p>
       </div>
       <div className='flex items-center gap-3'>
-        <Input
-          placeholder={i18n._(msg`Search...`)}
-          className='max-w-xs'
-          disabled
-        />
+        <Input placeholder={i18n._(msg`Search...`)} className='max-w-xs' disabled />
         <NativeSelect
           value={statusFilter}
           onChange={(e) => {

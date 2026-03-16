@@ -12,7 +12,11 @@ export async function getViolationStatistic(): Promise<ViolationStatisticDto> {
 }
 
 export function useViolationStatistic() {
-  const { data, isPending: loading, error } = useQuery({
+  const {
+    data,
+    isPending: loading,
+    error,
+  } = useQuery({
     queryKey: [VIOLATION_STATISTIC_KEY],
     queryFn: getViolationStatistic,
   });

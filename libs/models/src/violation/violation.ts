@@ -22,7 +22,10 @@ export const violationSummarySchema = z.object({
 export const violationContentSchema = z.object({
   id: z.number(),
   type: z.string(),
-  content: z.string().nullish().transform((v) => v ?? ''),
+  content: z
+    .string()
+    .nullish()
+    .transform((v) => v ?? ''),
   violation_status: z.string(),
   number_of_violations: z.number(),
   priority: z.string(),

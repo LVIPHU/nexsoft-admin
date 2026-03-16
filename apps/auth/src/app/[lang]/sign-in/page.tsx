@@ -19,7 +19,10 @@ export default async function SignInPage(props: SignInPageProps) {
             <Trans>Login to your account</Trans>
           </h2>
           <p className='text-muted-foreground text-sm'>
-            <Trans>Monitor and manageAccess your dashboard and manage your system your gas metrics and transactions</Trans>.
+            <Trans>
+              Monitor and manageAccess your dashboard and manage your system your gas metrics and transactions
+            </Trans>
+            .
           </p>
         </div>
         <SignInForm redirectUri={searchParams.redirect_uri} appId={searchParams.app_id} />

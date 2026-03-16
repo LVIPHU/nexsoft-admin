@@ -8,7 +8,12 @@ import { Badge } from '@nexsoft-admin/ui/badge';
 import { msg } from '@lingui/core/macro';
 import { i18n } from '@lingui/core';
 import { useViolationContent, useBanContent, useBypassContent } from '@/services/content-moderation';
-import { ViolationStatusBadge, PriorityBadge, ReportCountBadge, ContentTypeBadge } from '../_components/violation-badges';
+import {
+  ViolationStatusBadge,
+  PriorityBadge,
+  ReportCountBadge,
+  ContentTypeBadge,
+} from '../_components/violation-badges';
 
 function ContentModerationDetailPage() {
   const { id } = useParams<{ id: string }>();

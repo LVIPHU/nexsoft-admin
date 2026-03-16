@@ -104,9 +104,7 @@ function UsersPage() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align='end' className='w-32'>
-              <DropdownMenuItem
-                onClick={() => openUserOverlay({ mode: 'update', props: { id: row.original.UserId } })}
-              >
+              <DropdownMenuItem onClick={() => openUserOverlay({ mode: 'update', props: { id: row.original.UserId } })}>
                 Edit
               </DropdownMenuItem>
               <DropdownMenuItem

@@ -22,7 +22,11 @@ export function useViolationContents(
   params: GetViolationContentsParams,
   options?: Omit<UseQueryOptions<ViolationListResponseDto, Error, ViolationListResponseDto>, 'queryKey' | 'queryFn'>,
 ) {
-  const { data, isPending: loading, error } = useQuery({
+  const {
+    data,
+    isPending: loading,
+    error,
+  } = useQuery({
     queryKey: [VIOLATION_CONTENTS_KEY, params],
     queryFn: () => getViolationContents(params),
     ...options,

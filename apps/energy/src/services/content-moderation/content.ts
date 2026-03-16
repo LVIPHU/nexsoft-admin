@@ -12,7 +12,11 @@ export async function getViolationContent(id: number): Promise<ViolationDetailRe
 }
 
 export function useViolationContent(id: number) {
-  const { data, isPending: loading, error } = useQuery({
+  const {
+    data,
+    isPending: loading,
+    error,
+  } = useQuery({
     queryKey: [VIOLATION_CONTENT_KEY, { id }],
     queryFn: () => getViolationContent(id),
     enabled: Boolean(id),

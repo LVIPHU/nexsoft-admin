@@ -1,5 +1,14 @@
 import { msg } from '@lingui/core/macro';
-import { BellIcon, FuelIcon, LayoutDashboardIcon, SettingsIcon, ShieldAlertIcon, UserIcon, UsersIcon, WrenchIcon } from 'lucide-react';
+import {
+  BellIcon,
+  FuelIcon,
+  LayoutDashboardIcon,
+  SettingsIcon,
+  ShieldAlertIcon,
+  UserIcon,
+  UsersIcon,
+  WrenchIcon,
+} from 'lucide-react';
 
 import type { NavItem, Navigation } from '@/types/navigation.type';
 
