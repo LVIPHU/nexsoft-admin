@@ -63,7 +63,6 @@ export default defineConfig(() => ({
     alias: {
       '@': path.resolve(import.meta.dirname, './src'),
     },
-    conditions: ['@nexsoft-admin/source'],
   },
   // Uncomment this if you are using workers.
   // worker: {
