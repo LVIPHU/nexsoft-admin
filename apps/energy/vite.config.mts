@@ -16,12 +16,12 @@ export default defineConfig(() => ({
     host: 'localhost',
     proxy: {
       '/api/indexer-api': {
-        target: 'https://dev-indexer.tbchat.io',
+        target: 'https://qa-indexer.tbchat.io',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/indexer-api/, ''),
       },
       '/api/authz-api': {
-        target: 'https://dev-backoffice-api.tbchat.io',
+        target: 'https://qa-backoffice-api.tbchat.io',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/authz-api/, ''),
       },
