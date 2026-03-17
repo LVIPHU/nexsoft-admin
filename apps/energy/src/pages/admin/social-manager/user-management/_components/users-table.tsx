@@ -10,7 +10,7 @@ import {
 import { useTableAdapter } from '@/hooks/useTableAdapter';
 import { PAGE_INDEX, PAGE_SIZE } from '@/constants/table.constant';
 import { useUsers } from '@/services/user';
-import { UsersFilter } from '@/pages/admin/social-manager/users/_components/users-filter';
+import { UsersFilter } from './users-filter';
 import { Button } from '@nexsoft-admin/ui/button';
 import { Trans } from '@lingui/react/macro';
 import { OverlayMode } from '@/types/overlay.type';

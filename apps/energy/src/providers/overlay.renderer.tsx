@@ -1,6 +1,6 @@
 import { useOverlayStore } from '@/stores/overlay.store';
-import { UserOverlay } from '@/pages/admin/social-manager/users/_components/user-overlay';
-import { UsersFilterOverlay } from '@/pages/admin/social-manager/users/_components/users-filter-overlay';
+import { UserOverlay } from '@/pages/admin/social-manager/user-management/_components/user-overlay';
+import { UsersFilterOverlay } from '@/pages/admin/social-manager/user-management/_components/users-filter-overlay';
 
 const overlayRegistry: Record<string, React.ComponentType<any>> = {
   user: UserOverlay,

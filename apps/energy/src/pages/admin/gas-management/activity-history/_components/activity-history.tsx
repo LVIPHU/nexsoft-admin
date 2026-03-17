@@ -19,8 +19,8 @@ interface ActivityHistoryProps {
   className?: string;
 }
 
-function truncateHash(hash: string, chars = 5) {
-  if (!hash || hash.length <= chars * 2) return hash;
+function truncateHash(hash: string | null, chars = 5) {
+  if (!hash || hash.length <= chars * 2) return hash ?? '—';
   return `${hash.slice(0, chars)}...${hash.slice(-chars)}`;
 }
 
@@ -50,7 +50,7 @@ const columns: ColumnDef<OrderDto>[] = [
     accessorKey: 'user_transaction_hash',
     header: ({ column }) => <DataTableColumnHeader className={HEADER_CLASS} column={column} title='Transaction ID' />,
     cell: ({ row }) => (
-      <span className='font-mono text-sm' title={row.original.user_transaction_hash}>
+      <span className='font-mono text-sm' title={row.original.user_transaction_hash ?? undefined}>
         {truncateHash(row.original.user_transaction_hash)}
       </span>
     ),

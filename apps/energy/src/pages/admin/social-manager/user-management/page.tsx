@@ -20,7 +20,7 @@ import { queryClient } from '@/libs/query-client';
 import { getUser } from '@/services/user';
 import { USER_KEY } from '@/constants/query-keys.constant';
 
-function UsersPage() {
+function UserManagementPage() {
   const openUserOverlay = ({ mode, props }: { mode: OverlayMode; props?: Record<string, any> }) => {
     useOverlayStore.getState().open({
       id: crypto.randomUUID(),
@@ -136,4 +136,4 @@ function UsersPage() {
   );
 }
 
-export { UsersPage };
+export { UserManagementPage };

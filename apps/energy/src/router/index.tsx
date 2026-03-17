@@ -15,7 +15,7 @@ import { ReportMetricsPage } from '@/pages/admin/gas-management/report-metrics/p
 import { ActivityHistoryPage } from '@/pages/admin/gas-management/activity-history/page';
 import { SettingPage } from '@/pages/admin/gas-management/setting/page';
 import { SocialManagerLayout } from '@/pages/admin/social-manager/layout';
-import { UsersPage } from '@/pages/admin/social-manager/users/page';
+import { UserManagementPage } from '@/pages/admin/social-manager/user-management/page';
 import { ContentModerationPage } from '@/pages/admin/social-manager/content-moderation/page';
 import { ContentModerationDetailPage } from '@/pages/admin/social-manager/content-moderation/[id]/page';
 
@@ -37,10 +37,10 @@ export const routes = createRoutesFromElements(
 
             {/* Social Manager */}
             <Route path='social-manager' element={<SocialManagerLayout />}>
-              <Route path='users' element={<UsersPage />} />
+              <Route path='user-management' element={<UserManagementPage />} />
               <Route path='content-moderation' element={<ContentModerationPage />} />
               <Route path='content-moderation/:id' element={<ContentModerationDetailPage />} />
-              <Route index element={<Navigate replace to='/social-manager/users' />} />
+              <Route index element={<Navigate replace to='/social-manager/user-management' />} />
             </Route>
 
             {/* Account Management */}

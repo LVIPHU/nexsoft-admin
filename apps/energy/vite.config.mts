@@ -21,7 +21,7 @@ export default defineConfig(() => ({
         rewrite: (path) => path.replace(/^\/api\/indexer-api/, ''),
       },
       '/api/authz-api': {
-        target: 'http://172.28.3.159:8087',
+        target: 'https://dev-backoffice-api.tbchat.io',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/authz-api/, ''),
       },

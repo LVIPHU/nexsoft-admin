@@ -22,7 +22,10 @@
       "Bash(cd C:/Projects/nexsoft-admin && npx tsc --noEmit -p apps/energy/tsconfig.json 2>&1 | head -40)",
       "Bash(cd C:/Projects/nexsoft-admin && npx nx run models:typecheck 2>&1 | tail -10 && npx tsc --noEmit -p apps/energy/tsconfig.json 2>&1 | head -20)",
       "Bash(cd C:/Projects/nexsoft-admin && npx tsc --noEmit -p apps/energy/tsconfig.json 2>&1)",
-      "Bash(find \"C:\\\\Projects\\\\nexsoft-admin\\\\node_modules\\\\.vite\" -type f -name \"*.json\" 2>/dev/null | head -10)"
+      "Bash(find \"C:\\\\Projects\\\\nexsoft-admin\\\\node_modules\\\\.vite\" -type f -name \"*.json\" 2>/dev/null | head -10)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "mcp__ide__getDiagnostics"
     ]
   }
 }

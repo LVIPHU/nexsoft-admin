@@ -123,6 +123,24 @@ function useDataTableInstance<TData, TValue>({
   manualSorting,
   pageCount,
 }: UseDataTableInstanceProps<TData, TValue>) {
+  const allColumnIds = columns
+    .map((col) =>
+      'id' in col && col.id
+        ? col.id
+        : 'accessorKey' in col && typeof col.accessorKey === 'string'
+          ? col.accessorKey
+          : null,
+    )
+    .filter((id): id is string => id !== null);
+
+  const storedOrder = state?.columnOrder ?? [];
+  const effectiveColumnOrder =
+    storedOrder.length > 0 && allColumnIds.every((id) => storedOrder.includes(id))
+      ? storedOrder
+      : storedOrder.length > 0
+        ? []
+        : storedOrder;
+
   return useReactTable({
     data,
     columns,
@@ -130,7 +148,7 @@ function useDataTableInstance<TData, TValue>({
 
     state: {
       sorting: state?.sorting,
-      columnOrder: state?.columnOrder,
+      columnOrder: effectiveColumnOrder,
       columnFilters: state?.columnFilters,
       columnVisibility: state?.columnVisibility,
       rowSelection: state?.rowSelection ?? {},

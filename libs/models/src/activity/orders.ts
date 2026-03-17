@@ -23,7 +23,7 @@ export const orderSchema = z.object({
   status: z.string(),
   approval_payment_transaction: z.record(z.string(), z.unknown()).nullable(),
   transfer_payment_transaction: z.record(z.string(), z.unknown()).nullable(),
-  user_transaction_hash: z.string(),
+  user_transaction_hash: z.string().nullable(),
   delegate_status: z.string(),
   step: z.string(),
   reclaim_source: z.string(),

@@ -2,8 +2,6 @@ import { msg } from '@lingui/core/macro';
 import {
   BellIcon,
   FuelIcon,
-  LayoutDashboardIcon,
-  SettingsIcon,
   ShieldAlertIcon,
   UserIcon,
   UsersIcon,
@@ -13,12 +11,12 @@ import {
 import type { NavItem, Navigation } from '@/types/navigation.type';
 
 export const NAVIGATION_ITEMS: Navigation = [
-  {
-    id: 'dashboard',
-    href: '/dashboard',
-    title: msg`Dashboard`,
-    icon: LayoutDashboardIcon,
-  },
+  // {
+  //   id: 'dashboard',
+  //   href: '/dashboard',
+  //   title: msg`Dashboard`,
+  //   icon: LayoutDashboardIcon,
+  // },
   {
     id: 'gas-management',
     title: msg`Gas Management`,
@@ -47,37 +45,15 @@ export const NAVIGATION_ITEMS: Navigation = [
     icon: UsersIcon,
     items: [
       {
-        id: 'users',
-        href: '/social-manager/users',
-        title: msg`Users`,
+        id: 'user-management',
+        href: '/social-manager/user-management',
+        title: msg`User Management`,
       },
       {
         id: 'content-moderation',
         href: '/social-manager/content-moderation',
         title: msg`Content Moderation`,
         icon: ShieldAlertIcon,
-      },
-    ],
-  },
-  {
-    id: 'account-management',
-    title: msg`Account Management`,
-    icon: SettingsIcon,
-    items: [
-      {
-        id: 'my-account',
-        href: '/account-management/my-account',
-        title: msg`My Account`,
-      },
-      {
-        id: 'admin-management',
-        href: '/account-management/admin-management',
-        title: msg`Admin Management`,
-      },
-      {
-        id: 'roles-and-permissions',
-        href: '/account-management/roles-and-permissions',
-        title: msg`Roles & Permissions`,
       },
     ],
   },

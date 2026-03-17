@@ -27,7 +27,7 @@ function UserOverlay({ isTop, mode, props, ...rest }: OverlayItem & { isTop: boo
   const fieldConfigs: FieldConfig[] = useMemo(
     () => [
       {
-        name: 'username',
+        name: 'Username',
         label: t`Username`,
         placeholder: t`Enter your username`,
         orientation: 'vertical',
@@ -35,14 +35,14 @@ function UserOverlay({ isTop, mode, props, ...rest }: OverlayItem & { isTop: boo
         disabled: mode === 'update',
       },
       {
-        name: 'name',
+        name: 'Name',
         label: t`Name`,
         placeholder: t`Enter your name`,
         orientation: 'vertical',
         required: mode === 'create',
       },
       {
-        name: 'bio',
+        name: 'Bio',
         label: t`Bio`,
         placeholder: t`Enter your bio`,
         orientation: 'vertical',
@@ -55,9 +55,9 @@ function UserOverlay({ isTop, mode, props, ...rest }: OverlayItem & { isTop: boo
   const resetValues = useMemo(() => {
     if (!user) return undefined;
     return {
-      username: user.Username,
-      name: user.Name,
-      bio: user.Bio ?? '',
+      Username: user.Username,
+      Name: user.Name,
+      Bio: user.Bio ?? '',
     };
   }, [user]);
 
@@ -70,7 +70,7 @@ function UserOverlay({ isTop, mode, props, ...rest }: OverlayItem & { isTop: boo
           id: props.id as string,
           data: {
             user_id: props.id as string,
-            name: data.name as string,
+            name: data.Name as string,
             admin_id: String(profile.id),
           },
         });
