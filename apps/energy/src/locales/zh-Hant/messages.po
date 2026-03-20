@@ -13,10 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#. placeholder {0}: violation.number_of_violations
 #: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:38
-msgid "{0} reports total"
-msgstr ""
+#~ msgid "{0} reports total"
+#~ msgstr ""
 
 #: src/services/errors/translate-error.ts:10
 msgid "A user with this email address and/or username already exists."
@@ -26,29 +25,54 @@ msgstr ""
 #~ msgid "Account Management"
 #~ msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:87
-#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:76
-#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:76
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:89
+#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:78
+#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:78
 #: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-actions-card.tsx:18
 msgid "Actions"
 msgstr ""
 
-#: src/constants/navigation.constant.ts:33
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keyword-overlay.tsx:65
+#: src/pages/admin/social-manager/moderation-keywords/page.tsx:85
+msgid "Active"
+msgstr ""
+
+#: src/constants/navigation.constant.ts:26
 #: src/pages/admin/gas-management/activity-history/_components/activity-history.tsx:189
 msgid "Activity History"
+msgstr ""
+
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keywords-table.tsx:85
+msgid "Add Keyword"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:48
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:62
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:76
+msgid "Additional Fee"
 msgstr ""
 
 #: src/constants/navigation.constant.ts:43
 #~ msgid "Admin Management"
 #~ msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:109
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/content-card.tsx:85
+msgid "All"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:111
 #: src/pages/admin/social-manager/content-moderation/_components/content-moderation-tabs.tsx:35
 msgid "All Content"
 msgstr ""
 
 #: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:124
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:127
 msgid "All Status"
+msgstr ""
+
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keywords-filter.tsx:22
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keywords-filter.tsx:25
+msgid "All Topics"
 msgstr ""
 
 #: src/pages/error/page.tsx:22
@@ -63,7 +87,11 @@ msgstr ""
 msgid "Approve (Not a violation)"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:126
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:94
+msgid "Approve reports"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:129
 msgid "Approved"
 msgstr ""
 
@@ -71,12 +99,17 @@ msgstr ""
 msgid "APPROVED"
 msgstr ""
 
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:94
 #: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-actions-card.tsx:28
 msgid "Approving..."
 msgstr ""
 
 #: src/components/overlay.tsx:55
 msgid "Are you absolutely sure you want to delete this item?"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:115
+msgid "Author"
 msgstr ""
 
 #: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-actions-card.tsx:36
@@ -91,7 +124,7 @@ msgstr ""
 msgid "Bandwidth used"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:127
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:130
 msgid "Banned"
 msgstr ""
 
@@ -101,6 +134,19 @@ msgstr ""
 
 #: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-actions-card.tsx:36
 msgid "Banning..."
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:56
+msgid "Base fee applied when paying with TRX"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:42
+msgid "Base fee applied when paying with USDT"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:41
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:55
+msgid "Basic Fee"
 msgstr ""
 
 #: src/pages/admin/social-manager/user-management/_components/user-overlay.tsx:46
@@ -117,32 +163,40 @@ msgstr ""
 msgid "Change Theme"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:36
-#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:33
-#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:33
-#: src/pages/admin/social-manager/content-moderation/[id]/_components/content-card.tsx:26
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:38
+#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:35
+#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:35
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:116
 msgid "Content"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/[id]/page.tsx:49
+#: src/pages/admin/social-manager/content-moderation/[id]/page.tsx:48
 msgid "Content Detail"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:111
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:112
 msgid "content items"
 msgstr ""
 
-#: src/constants/navigation.constant.ts:55
+#: src/constants/navigation.constant.ts:48
 #: src/pages/admin/social-manager/content-moderation/_components/stats-overview.tsx:27
 msgid "Content Moderation"
 msgstr ""
 
 #: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:99
-msgid "Content pending review"
+#~ msgid "Content pending review"
+#~ msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:99
+msgid "Content pending review."
 msgstr ""
 
 #: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:100
-msgid "Content with high violation levels requiring immediate action"
+#~ msgid "Content with high violation levels requiring immediate action"
+#~ msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:101
+msgid "Content with high violation levels requiring immediate action."
 msgstr ""
 
 #: src/components/overlay.tsx:143
@@ -152,6 +206,12 @@ msgstr ""
 
 #: src/components/overlay.tsx:52
 msgid "Create a new item"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/content-card.tsx:62
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:117
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:231
+msgid "Created"
 msgstr ""
 
 #: src/constants/navigation.constant.ts:10
@@ -179,12 +239,20 @@ msgstr ""
 msgid "Duplicate an existing item"
 msgstr ""
 
+#: src/pages/admin/social-manager/moderation-keywords/page.tsx:123
+msgid "Edit"
+msgstr ""
+
 #: src/constants/navigation.constant.ts:16
 #~ msgid "Energy Management"
 #~ msgstr ""
 
 #: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:168
 msgid "Energy System consumption graph"
+msgstr ""
+
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keyword-overlay.tsx:39
+msgid "Enter keyword"
 msgstr ""
 
 #: src/pages/admin/social-manager/user-management/_components/user-overlay.tsx:47
@@ -211,16 +279,50 @@ msgstr ""
 msgid "ES used"
 msgstr ""
 
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:63
+msgid "Extra fee applied when paying with TRX"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:49
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:77
+msgid "Extra fee applied when paying with USDT"
+msgstr ""
+
 #. placeholder {0}: mode === 'create' ? 'create' : mode === 'duplicate' ? 'duplicate' : 'update'
 #: src/pages/admin/social-manager/user-management/_components/user-overlay.tsx:92
 msgid "Failed to {0} user"
 msgstr ""
 
-#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:124
-msgid "Failed to save"
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keyword-overlay.tsx:100
+msgid "Failed to create keyword"
 msgstr ""
 
-#: src/pages/admin/social-manager/user-management/_components/users-table.tsx:81
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:124
+#~ msgid "Failed to save"
+#~ msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:256
+msgid "Failed to save settings"
+msgstr ""
+
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keyword-overlay.tsx:100
+msgid "Failed to update keyword"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:84
+msgid "Fee charged for TRX-to-TRX transfers"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:134
+msgid "Fee configuration applied when users transfer TRX"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:120
+msgid "Fee configuration applied when users transfer USDT"
+msgstr ""
+
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keywords-table.tsx:81
+#: src/pages/admin/social-manager/user-management/_components/users-table.tsx:98
 msgid "Filter"
 msgstr ""
 
@@ -228,16 +330,28 @@ msgstr ""
 msgid "Floating"
 msgstr ""
 
-#: src/constants/navigation.constant.ts:22
+#: src/constants/navigation.constant.ts:15
 msgid "Gas Management"
 msgstr ""
 
-#: src/constants/navigation.constant.ts:81
+#: src/constants/navigation.constant.ts:79
 msgid "General"
 msgstr ""
 
 #: src/pages/error/page.tsx:54
 msgid "Go to home"
+msgstr ""
+
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keywords-filter.tsx:7
+msgid "Harassment / Bullying"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:118
+msgid "Hashtags"
+msgstr ""
+
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keywords-filter.tsx:8
+msgid "Hate Speech / Discrimination"
 msgstr ""
 
 #: src/pages/admin/social-manager/content-moderation/_components/content-moderation-tabs.tsx:33
@@ -248,12 +362,25 @@ msgstr ""
 msgid "HIGH PRIORITY"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:98
+#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:100
 msgid "High Priority Content"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/content-card.tsx:77
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-info-card.tsx:50
+msgid "Highest report type"
 msgstr ""
 
 #: src/constants/layout.constant.ts:14
 msgid "Icon"
+msgstr ""
+
+#: src/pages/admin/social-manager/moderation-keywords/page.tsx:40
+msgid "ID"
+msgstr ""
+
+#: src/pages/admin/social-manager/moderation-keywords/page.tsx:88
+msgid "Inactive"
 msgstr ""
 
 #: src/constants/layout.constant.ts:5
@@ -276,20 +403,51 @@ msgstr ""
 msgid "It looks like your email address has already been verified."
 msgstr ""
 
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keyword-overlay.tsx:38
+#: src/pages/admin/social-manager/moderation-keywords/page.tsx:48
+msgid "Keyword"
+msgstr ""
+
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keyword-overlay.tsx:97
+msgid "Keyword created successfully"
+msgstr ""
+
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keyword-overlay.tsx:97
+msgid "Keyword updated successfully"
+msgstr ""
+
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keyword-overlay.tsx:46
+#: src/pages/admin/social-manager/moderation-keywords/page.tsx:55
+msgid "Language"
+msgstr ""
+
 #: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:156
 #~ msgid "Last 7 days"
 #~ msgstr ""
 
 #: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:132
-msgid "Loading..."
-msgstr ""
+#~ msgid "Loading..."
+#~ msgstr ""
 
 #: src/pages/admin/_components/sidebar.tsx:46
 msgid "Logout"
 msgstr ""
 
+#: src/pages/admin/social-manager/user-management/page.tsx:143
+msgid "Manage all users in the system."
+msgstr ""
+
 #: src/pages/admin/social-manager/content-moderation/_components/stats-overview.tsx:28
 msgid "Manage and moderate all content in the system"
+msgstr ""
+
+#: src/pages/admin/social-manager/moderation-keywords/page.tsx:141
+msgid "Manage sensitive keywords that trigger auto-ban."
+msgstr ""
+
+#: src/constants/navigation.constant.ts:54
+#: src/pages/admin/social-manager/moderation-keywords/page.tsx:140
+msgid "Moderation Keywords"
 msgstr ""
 
 #: src/constants/navigation.constant.ts:38
@@ -298,6 +456,11 @@ msgstr ""
 
 #: src/pages/admin/social-manager/user-management/_components/user-overlay.tsx:39
 msgid "Name"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:216
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:310
+msgid "Next"
 msgstr ""
 
 #: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:206
@@ -309,16 +472,24 @@ msgstr ""
 msgid "No performers in this period"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:49
-msgid "No reply data available"
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:142
+msgid "No replies yet"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:56
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:49
+#~ msgid "No reply data available"
+#~ msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:255
 msgid "No report details available"
 msgstr ""
 
-#: src/constants/navigation.constant.ts:72
+#: src/constants/navigation.constant.ts:70
 msgid "Notifications"
+msgstr ""
+
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keywords-filter.tsx:9
+msgid "Nudity / Sexual Content"
 msgstr ""
 
 #: src/constants/layout.constant.ts:15
@@ -329,7 +500,11 @@ msgstr ""
 msgid "Oops, the server returned an error."
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/overall-statistics.tsx:39
+#: src/pages/admin/social-manager/moderation-keywords/page.tsx:105
+msgid "Open menu"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/overall-statistics.tsx:38
 msgid "Overall Statistics"
 msgstr ""
 
@@ -337,7 +512,22 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:125
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:199
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:293
+msgid "Page"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:127
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:141
+msgid "Pay with TRX"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:123
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:137
+msgid "Pay with USDT"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:128
 msgid "Pending"
 msgstr ""
 
@@ -345,18 +535,22 @@ msgstr ""
 msgid "PENDING"
 msgstr ""
 
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:208
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:302
+msgid "Previous"
+msgstr ""
+
 #: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:160
 #~ msgid "Previous Week"
 #~ msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:80
-#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:69
-#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-info-card.tsx:26
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:82
+#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:71
 msgid "Priority"
 msgstr ""
 
-#: src/constants/navigation.constant.ts:66
-#: src/constants/navigation.constant.ts:87
+#: src/constants/navigation.constant.ts:64
+#: src/constants/navigation.constant.ts:85
 msgid "Profile"
 msgstr ""
 
@@ -364,34 +558,61 @@ msgstr ""
 msgid "Profit Overview"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/[id]/_components/quick-stats-card.tsx:16
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/quick-stats-card.tsx:38
 msgid "Quick Stats"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:36
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:229
+msgid "Reason"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/quick-stats-card.tsx:39
+msgid "Recent engagement snapshot"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:98
+msgid "Reject reports"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:98
+msgid "Rejecting..."
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:73
 msgid "Related replies & reports"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:43
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:75
+msgid "replies"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:106
 msgid "Replies"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:44
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:107
 msgid "Report Detail"
 msgstr ""
 
-#: src/constants/navigation.constant.ts:28
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:79
+msgid "report entries"
+msgstr ""
+
+#: src/constants/navigation.constant.ts:21
 msgid "Report Metrics"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-info-card.tsx:18
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-info-card.tsx:39
 msgid "Report Summary"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:67
-#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:56
-#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:64
-#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-info-card.tsx:30
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-info-card.tsx:41
+msgid "reports"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:69
+#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:58
+#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:66
 msgid "Reports"
 msgstr ""
 
@@ -409,14 +630,18 @@ msgid "Save Changes"
 msgstr ""
 
 #: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:189
-msgid "Save Information"
+#~ msgid "Save Information"
+#~ msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:330
+msgid "Save Settings"
 msgstr ""
 
 #: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:122
-msgid "Saved"
-msgstr ""
+#~ msgid "Saved"
+#~ msgstr ""
 
-#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:189
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:330
 msgid "Saving..."
 msgstr ""
 
@@ -428,12 +653,32 @@ msgstr ""
 msgid "Search..."
 msgstr ""
 
-#: src/constants/navigation.constant.ts:38
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keyword-overlay.tsx:47
+msgid "Select language"
+msgstr ""
+
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keyword-overlay.tsx:57
+msgid "Select topics"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:70
+msgid "Service charge applied when paying with USDT"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:69
+msgid "Service Fee"
+msgstr ""
+
+#: src/constants/navigation.constant.ts:31
 msgid "Setting"
 msgstr ""
 
 #: src/pages/admin/gas-management/setting/page.tsx:14
 msgid "Settings"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:254
+msgid "Settings saved successfully"
 msgstr ""
 
 #: src/constants/layout.constant.ts:6
@@ -444,7 +689,7 @@ msgstr ""
 #~ msgid "Sign out"
 #~ msgstr ""
 
-#: src/constants/navigation.constant.ts:44
+#: src/constants/navigation.constant.ts:37
 msgid "Social Manager"
 msgstr ""
 
@@ -452,13 +697,18 @@ msgstr ""
 msgid "Something went wrong while processing your request. Please try again later or raise an issue on GitHub."
 msgstr ""
 
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keywords-filter.tsx:6
+msgid "Spam / Scam"
+msgstr ""
+
 #: src/pages/admin/gas-management/report-metrics/_components/statistics.tsx:67
 msgid "Statistics"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:56
-#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:53
-#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-info-card.tsx:22
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:58
+#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:55
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:230
+#: src/pages/admin/social-manager/moderation-keywords/page.tsx:82
 msgid "Status"
 msgstr ""
 
@@ -506,7 +756,14 @@ msgstr ""
 msgid "Top User"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:111
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keyword-overlay.tsx:56
+#: src/pages/admin/social-manager/moderation-keywords/page.tsx:67
+msgid "Topics"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:112
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:75
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-info-card.tsx:41
 msgid "Total"
 msgstr ""
 
@@ -555,7 +812,7 @@ msgstr ""
 msgid "Total Energy Used"
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/overall-statistics.tsx:81
+#: src/pages/admin/gas-management/report-metrics/_components/overall-statistics.tsx:69
 msgid "Total Income"
 msgstr ""
 
@@ -579,19 +836,40 @@ msgstr ""
 msgid "Total Transaction Value"
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/overall-statistics.tsx:69
+#: src/pages/admin/gas-management/report-metrics/_components/overall-statistics.tsx:67
 #: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:52
 msgid "Total Transactions"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:48
-#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:45
-#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:45
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:83
+msgid "Transfer Fee"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:133
+msgid "TRX Transfer Fees"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:50
+#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:47
+#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:47
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:228
 msgid "Type"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/content-card.tsx:52
+msgid "Unknown"
 msgstr ""
 
 #: src/components/overlay.tsx:53
 msgid "Update an existing item"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/content-card.tsx:68
+msgid "Updated"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:119
+msgid "USDT Transfer Fees"
 msgstr ""
 
 #: src/components/theme-switch.tsx:38
@@ -610,7 +888,8 @@ msgstr ""
 msgid "User duplicated successfully"
 msgstr ""
 
-#: src/constants/navigation.constant.ts:50
+#: src/constants/navigation.constant.ts:43
+#: src/pages/admin/social-manager/user-management/page.tsx:143
 msgid "User Management"
 msgstr ""
 
@@ -630,15 +909,19 @@ msgstr ""
 msgid "View and manage all energy system transactions"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/[id]/page.tsx:50
+#: src/pages/admin/social-manager/content-moderation/[id]/page.tsx:48
 msgid "Violation report #{numericId}"
 msgstr ""
 
 #: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-info-card.tsx:35
-msgid "Violation Types"
+#~ msgid "Violation Types"
+#~ msgstr ""
+
+#: src/pages/admin/social-manager/moderation-keywords/_components/moderation-keywords-filter.tsx:10
+msgid "Violence / Harmful Content"
 msgstr ""
 
-#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:98
+#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:99
 msgid "Warning Content"
 msgstr ""
 
