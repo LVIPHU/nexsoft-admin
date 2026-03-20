@@ -59,7 +59,7 @@ msgstr "Enter your password"
 msgid "Enter your username"
 msgstr "Enter your username"
 
-#: src/app/[lang]/_components/sign-in-form.tsx:32
+#: src/app/[lang]/_components/sign-in-form.tsx:33
 msgid "ex: Admintbc123"
 msgstr "ex: Admintbc123"
 
@@ -67,7 +67,7 @@ msgstr "ex: Admintbc123"
 msgid "ex: Admintbc123@gmail.com"
 msgstr "ex: Admintbc123@gmail.com"
 
-#: src/app/[lang]/_components/sign-in-form.tsx:99
+#: src/app/[lang]/_components/sign-in-form.tsx:101
 msgid "Login"
 msgstr "Login"
 
@@ -91,7 +91,7 @@ msgstr "Name"
 msgid "No results found"
 msgstr "No results found"
 
-#: src/app/[lang]/_components/sign-in-form.tsx:30
+#: src/app/[lang]/_components/sign-in-form.tsx:31
 #: src/app/[lang]/_components/sign-up-form.tsx:28
 msgid "Password"
 msgstr "Password"
@@ -128,7 +128,7 @@ msgstr "Sign up"
 #~ msgid "Sign Up"
 #~ msgstr "Sign Up"
 
-#: src/app/[lang]/_components/sign-in-form.tsx:99
+#: src/app/[lang]/_components/sign-in-form.tsx:101
 msgid "Signing in..."
 msgstr "Signing in..."
 
@@ -140,7 +140,7 @@ msgstr "Switch to Dark Mode"
 msgid "Switch to Light Mode"
 msgstr "Switch to Light Mode"
 
-#: src/app/[lang]/layout.tsx:32
+#: src/app/[lang]/layout.tsx:33
 msgid "TBC Auth"
 msgstr "TBC Auth"
 

@@ -3,8 +3,8 @@ import { z } from 'zod';
 import { violationContentSchema } from './violation.js';
 
 export const violationListPaginationSchema = z.object({
-  total_rows: z.number(),
-  total_pages: z.number(),
+  total_rows: z.number().optional().default(0),
+  total_pages: z.number().optional().default(0),
   limit: z.number(),
   page: z.number(),
   sort: z.unknown().optional(),

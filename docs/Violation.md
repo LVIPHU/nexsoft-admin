@@ -13,13 +13,12 @@
 
 Các loại vi phạm mà người dùng có thể báo cáo (report) đối với nội dung.
 
-| Enum                                       | Giá trị                      | Mô tả                                               |
-| ------------------------------------------ | ---------------------------- | --------------------------------------------------- |
-| `ViolationTopicSpamOrScam`                 | Spam Or Scam                 | Nội dung spam, lừa đảo, quảng cáo không mong muốn   |
-| `ViolationTopicHarassmentOrBullying`       | Harassment Or Bullying       | Nội dung quấy rối, bắt nạt hoặc xúc phạm người khác |
-| `ViolationTopicHateSpeechOrDiscrimination` | HateSpeech Or Discrimination | Nội dung kích động thù ghét hoặc phân biệt đối xử   |
-| `ViolationTopicNudityOrSexualContent`      | Nudity Or Sexual Content     | Nội dung khỏa thân hoặc mang tính chất tình dục     |
-| `ViolationTopicViolenceOrHarmfulContent`   | Violence Or Harmful Content  | Nội dung bạo lực hoặc gây nguy hiểm                 |
+| Enum | Giá trị | Mô tả |
+`                | Spam Or Scam                 | Nội dung spam, lừa đảo, quảng cáo không mong muốn   |
+|`ViolationTopicHarassmentOrBullying`      | Harassment Or Bullying       | Nội dung quấy rối, bắt nạt hoặc xúc phạm người khác |
+|`ViolationTopicHateSpeechOrDiscrimination`| HateSpeech Or Discrimination | Nội dung kích động thù ghét hoặc phân biệt đối xử   |
+|`ViolationTopicNudityOrSexualContent`     | Nudity Or Sexual Content     | Nội dung khỏa thân hoặc mang tính chất tình dục     |
+|`ViolationTopicViolenceOrHarmfulContent` | Violence Or Harmful Content | Nội dung bạo lực hoặc gây nguy hiểm |
 
 ### Violation Post Status
 
@@ -31,7 +30,8 @@ Trạng thái xử lý của nội dung vi phạm trong hệ thống moderation.
 | `ViolationPostStatusBypass`  | BYPASS  | Nội dung được xác nhận không vi phạm      |
 | `ViolationPostStatusBan`     | BAN     | Nội dung bị xác nhận vi phạm và đã bị cấm |
 
-### Priority
+| ------------------------------------------ | ---------------------------- | --------------------------------------------------- |
+| `ViolationTopicSpamOrScam### Priority
 
 Mức độ ưu tiên xử lý vi phạm.
 
@@ -415,4 +415,167 @@ curl --location '172.28.3.159:8087/v1/authz/violation/statistic' \
 
 ```json
 {}
+```
+
+## 7. Get content replies
+
+```shellscript
+POST /v1/authz/violation/replies
+```
+
+**Query parameters**
+
+| Tham số | Kiểu | Bắt buộc | Mô tả              |
+| ------- | ---- | -------- | ------------------ |
+| page    | int  |          | số trang           |
+| limit   | int  |          | giới hạn mỗi trang |
+| post_id | int  | true     | 4                  |
+
+**Request**
+
+```shellscript
+curl --location '172.28.3.159:8087/v1/authz/violation/replies' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <access_token>' \
+--data '{
+    "post_id": 4,
+    "page": 1,
+    "limit": 2
+}'
+```
+
+**Response**
+
+```shellscript
+{
+    "data": [
+        {
+            "id": 1713,
+            "content": "Pipilapu What the dog doing?",
+            "hashtags": [
+                "test"
+            ],
+            "reply_on_id": 4,
+            "creator": {
+                "user_id": "G5P5HDShMsFyovFRhtgcLsxRwTzHKeM2e413mxVHtAda",
+                "username": "g5p5h",
+                "name": "Dyno Nek",
+                "thumbnail_url": "2"
+            }
+        },
+        {
+            "id": 1671,
+            "content": "Huh HUh",
+            "hashtags": null,
+            "reply_on_id": 4,
+            "creator": {
+                "user_id": "9G8tyJM4mz84b5kQQqDKjE5Ns1RkumVvNCsQHKhSuFnn",
+                "username": "ahihihi",
+                "name": "Ahihi",
+                "thumbnail_url": "105"
+            }
+        }
+    ],
+    "pagination": {
+        "total_rows": 65,
+        "total_pages": 33,
+        "limit": 2,
+        "page": 1,
+        "sort": {
+            "created_at": "DESC"
+        }
+    }
+}
+```
+
+## 8. Save moderation keyword
+
+```shellscript
+POST /v1/authz/violation/moderation/keywords
+```
+
+**Request body**
+
+| Fields    | Kiểu         | Bắt buộc | Mô tả                                 |
+| --------- | ------------ | -------- | ------------------------------------- |
+| id        | int          | optional | id của keyword nếu cần update         |
+| keyword   | string       | true     | keyword là keyword                    |
+| lang_code | string       | true     | keyword thuộc lang nào, e.g. en, zh,… |
+| is_active | bool         | true     | có active keyword không               |
+| topic     | array string | true     | danh sách topic của keyword           |
+
+**Request**
+
+```shellscript
+# Create keyword
+	curl --location 'localhost:8087/v1/authz/violation/moderation/keywords' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <access_token>' \
+--data '{
+    "keyword": "fckup",
+    "lang_code": "en",
+    "is_active": true,
+    "topics": [
+        "Harassment_Or_Bullying"
+    ]
+}'
+
+# Update keyword
+curl --location 'localhost:8087/v1/authz/violation/moderation/keywords' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <access_token>' \
+--data '{
+    "id": 42,
+    "keyword": "fckup",
+    "lang_code": "en",
+    "is_active": true,
+    "topics": [
+        "Harassment_Or_Bullying",
+        "Spam_Or_Scam"
+    ]
+}'
+```
+
+**Response**
+
+```
+{
+    "id": 42
+}
+```
+
+## 9. List moderation languages
+
+```
+GET /v1/authz/violation/moderation/languages
+```
+
+**Request**
+
+```
+curl --location '172.28.3.159:8087/v1/authz/violation/moderation/languages' \\
+--header 'Authorization: Bearer <access_token>'
+```
+
+**Response**
+
+```
+{
+    "data": [
+        {
+            "id": 1,
+            "lang_code": "af",
+            "text": "Afrikaans",
+            "order": 1
+        },
+        {
+            "id": 2,
+            "lang_code": "am",
+            "text": "Amharic",
+            "order": 2
+        },
+       //....
+    ]
+}
+
 ```

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router';
 import { ColumnDef } from '@tanstack/react-table';
 import { UserDto } from '@nexsoft-admin/models';
 import {
@@ -8,7 +9,7 @@ import {
   useDataTableInstance,
 } from '@nexsoft-admin/ui/data-table';
 import { useTableAdapter } from '@/hooks/useTableAdapter';
-import { PAGE_INDEX, PAGE_SIZE } from '@/constants/table.constant';
+import { KEYWORD, PAGE_INDEX, PAGE_SIZE } from '@/constants/table.constant';
 import { useUsers } from '@/services/user';
 import { UsersFilter } from './users-filter';
 import { Button } from '@nexsoft-admin/ui/button';
@@ -18,6 +19,21 @@ import { useOverlayStore } from '@/stores/overlay.store';
 
 function UsersTable({ columns }: { columns: Array<ColumnDef<UserDto>> }) {
   const { state, handlers } = useTableAdapter('users');
+  const [params, setParams] = useSearchParams();
+
+  const keyword = params.get(KEYWORD.KEY) ?? '';
+
+  const handleSearch = (value: string) => {
+    setParams((prev) => {
+      if (value) {
+        prev.set(KEYWORD.KEY, value);
+      } else {
+        prev.delete(KEYWORD.KEY);
+      }
+      prev.set(PAGE_INDEX.KEY, '1');
+      return prev;
+    });
+  };
 
   const openUsersFilterOverlay = ({ mode, props }: { mode: OverlayMode; props?: Record<string, any> }) => {
     useOverlayStore.getState().open({
@@ -33,8 +49,9 @@ function UsersTable({ columns }: { columns: Array<ColumnDef<UserDto>> }) {
     () => ({
       page: state.pagination?.pageIndex || PAGE_INDEX.DEFAULT_VALUE,
       limit: state.pagination?.pageSize || PAGE_SIZE.DEFAULT_VALUE,
+      keyword: keyword || undefined,
     }),
-    [state.pagination?.pageIndex, state.pagination?.pageSize],
+    [state.pagination?.pageIndex, state.pagination?.pageSize, keyword],
   );
 
   const { users, loading, error } = useUsers(data);
@@ -70,7 +87,7 @@ function UsersTable({ columns }: { columns: Array<ColumnDef<UserDto>> }) {
     <div className='flex flex-col gap-6'>
       <div className='flex justify-end gap-4 lg:justify-between'>
         <div className='hidden lg:block'>
-          <UsersFilter />
+          <UsersFilter keyword={keyword} onSearch={handleSearch} />
         </div>
         <Button
           variant='outline'

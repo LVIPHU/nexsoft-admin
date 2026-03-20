@@ -1,12 +1,5 @@
 import { msg } from '@lingui/core/macro';
-import {
-  BellIcon,
-  FuelIcon,
-  ShieldAlertIcon,
-  UserIcon,
-  UsersIcon,
-  WrenchIcon,
-} from 'lucide-react';
+import { BellIcon, FuelIcon, ShieldAlertIcon, UserIcon, UsersIcon, WrenchIcon } from 'lucide-react';
 
 import type { NavItem, Navigation } from '@/types/navigation.type';
 
@@ -54,6 +47,11 @@ export const NAVIGATION_ITEMS: Navigation = [
         href: '/social-manager/content-moderation',
         title: msg`Content Moderation`,
         icon: ShieldAlertIcon,
+      },
+      {
+        id: 'moderation-keywords',
+        href: '/social-manager/moderation-keywords',
+        title: msg`Moderation Keywords`,
       },
     ],
   },

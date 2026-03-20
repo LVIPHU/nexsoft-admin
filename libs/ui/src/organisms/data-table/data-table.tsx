@@ -199,11 +199,11 @@ function DataTableColumnHeader<TData, TValue>({ column, title, className }: Data
     return <div className={cn(className)}>{title}</div>;
   }
   return (
-    <div className={cn('flex items-center space-x-2', className)}>
+    <div className={'flex items-center space-x-2'}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant='ghost' size='sm' className='data-[state=open]:bg-accent -ml-3 h-8'>
-            <span>{title}</span>
+            <span className={cn(className)}>{title}</span>
             {getSortIcon(column.getIsSorted())}
           </Button>
         </DropdownMenuTrigger>

@@ -70,7 +70,7 @@ function Statistics({ className }: StatisticsProps) {
           />
         </CardHeader>
         <CardContent className='spy-0 px-5'>
-          {loading && <Skeleton className='h-[300px] w-full rounded-lg' />}
+          {loading && <Skeleton className='h-75 w-full rounded-lg' />}
           {error && <p className='text-destructive py-6 text-center text-sm'>{error.message}</p>}
           {isEmpty && (
             <p className='text-muted-foreground py-12 text-center text-sm'>{i18n._(msg`No data in this period`)}</p>

@@ -13,21 +13,42 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#. placeholder {0}: violation.number_of_violations
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:38
+msgid "{0} reports total"
+msgstr ""
+
 #: src/services/errors/translate-error.ts:10
 msgid "A user with this email address and/or username already exists."
 msgstr ""
 
 #: src/constants/navigation.constant.ts:32
-msgid "Account Management"
+#~ msgid "Account Management"
+#~ msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:87
+#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:76
+#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:76
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-actions-card.tsx:18
+msgid "Actions"
 msgstr ""
 
-#: src/constants/navigation.constant.ts:26
-#: src/pages/admin/gas-management/activity-history/_components/activity-history.tsx:25
+#: src/constants/navigation.constant.ts:33
+#: src/pages/admin/gas-management/activity-history/_components/activity-history.tsx:189
 msgid "Activity History"
 msgstr ""
 
 #: src/constants/navigation.constant.ts:43
-msgid "Admin Management"
+#~ msgid "Admin Management"
+#~ msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:109
+#: src/pages/admin/social-manager/content-moderation/_components/content-moderation-tabs.tsx:35
+msgid "All Content"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:124
+msgid "All Status"
 msgstr ""
 
 #: src/pages/error/page.tsx:22
@@ -38,56 +59,197 @@ msgstr ""
 msgid "An unexpected error occurred."
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:120
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-actions-card.tsx:28
+msgid "Approve (Not a violation)"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:126
+msgid "Approved"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/stats-overview.tsx:43
+msgid "APPROVED"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-actions-card.tsx:28
+msgid "Approving..."
+msgstr ""
+
+#: src/components/overlay.tsx:55
+msgid "Are you absolutely sure you want to delete this item?"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-actions-card.tsx:36
+msgid "Ban (Confirm violation)"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:89
 msgid "Bandwidth earned"
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:121
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:90
 msgid "Bandwidth used"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:127
+msgid "Banned"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/stats-overview.tsx:44
+msgid "BANNED"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-actions-card.tsx:36
+msgid "Banning..."
+msgstr ""
+
+#: src/pages/admin/social-manager/user-management/_components/user-overlay.tsx:46
+msgid "Bio"
+msgstr ""
+
+#: src/components/overlay.tsx:108
+#: src/components/overlay.tsx:151
+#: src/components/overlay.tsx:174
+msgid "Cancel"
 msgstr ""
 
 #: src/components/theme-switch.tsx:33
 msgid "Change Theme"
 msgstr ""
 
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:36
+#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:33
+#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:33
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/content-card.tsx:26
+msgid "Content"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/page.tsx:49
+msgid "Content Detail"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:111
+msgid "content items"
+msgstr ""
+
+#: src/constants/navigation.constant.ts:55
+#: src/pages/admin/social-manager/content-moderation/_components/stats-overview.tsx:27
+msgid "Content Moderation"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:99
+msgid "Content pending review"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:100
+msgid "Content with high violation levels requiring immediate action"
+msgstr ""
+
+#: src/components/overlay.tsx:143
+#: src/components/overlay.tsx:180
+msgid "Create"
+msgstr ""
+
+#: src/components/overlay.tsx:52
+msgid "Create a new item"
+msgstr ""
+
 #: src/constants/navigation.constant.ts:10
-msgid "Dashboard"
+#~ msgid "Dashboard"
+#~ msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:158
+msgid "Delegated Bandwidth"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:154
+msgid "Delegated Energy"
+msgstr ""
+
+#: src/components/overlay.tsx:110
+msgid "Delete"
+msgstr ""
+
+#: src/components/overlay.tsx:147
+#: src/components/overlay.tsx:184
+msgid "Duplicate"
+msgstr ""
+
+#: src/components/overlay.tsx:54
+msgid "Duplicate an existing item"
 msgstr ""
 
 #: src/constants/navigation.constant.ts:16
 #~ msgid "Energy Management"
 #~ msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:170
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:168
 msgid "Energy System consumption graph"
+msgstr ""
+
+#: src/pages/admin/social-manager/user-management/_components/user-overlay.tsx:47
+msgid "Enter your bio"
+msgstr ""
+
+#: src/pages/admin/social-manager/user-management/_components/user-overlay.tsx:40
+msgid "Enter your name"
+msgstr ""
+
+#: src/pages/admin/social-manager/user-management/_components/user-overlay.tsx:32
+msgid "Enter your username"
 msgstr ""
 
 #: src/pages/error/page.tsx:45
 msgid "Error {statusCode}"
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:120
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:89
 msgid "ES earned"
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:121
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:90
 msgid "ES used"
+msgstr ""
+
+#. placeholder {0}: mode === 'create' ? 'create' : mode === 'duplicate' ? 'duplicate' : 'update'
+#: src/pages/admin/social-manager/user-management/_components/user-overlay.tsx:92
+msgid "Failed to {0} user"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:124
+msgid "Failed to save"
+msgstr ""
+
+#: src/pages/admin/social-manager/user-management/_components/users-table.tsx:81
+msgid "Filter"
 msgstr ""
 
 #: src/constants/layout.constant.ts:7
 msgid "Floating"
 msgstr ""
 
-#: src/constants/navigation.constant.ts:15
+#: src/constants/navigation.constant.ts:22
 msgid "Gas Management"
 msgstr ""
 
-#: src/constants/navigation.constant.ts:73
+#: src/constants/navigation.constant.ts:81
 msgid "General"
 msgstr ""
 
 #: src/pages/error/page.tsx:54
 msgid "Go to home"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/content-moderation-tabs.tsx:33
+msgid "High Priority"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/stats-overview.tsx:41
+msgid "HIGH PRIORITY"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:98
+msgid "High Priority Content"
 msgstr ""
 
 #: src/constants/layout.constant.ts:14
@@ -115,18 +277,47 @@ msgid "It looks like your email address has already been verified."
 msgstr ""
 
 #: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:156
-msgid "Last 7 days"
+#~ msgid "Last 7 days"
+#~ msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:132
+msgid "Loading..."
 msgstr ""
 
 #: src/pages/admin/_components/sidebar.tsx:46
 msgid "Logout"
 msgstr ""
 
-#: src/constants/navigation.constant.ts:38
-msgid "My Account"
+#: src/pages/admin/social-manager/content-moderation/_components/stats-overview.tsx:28
+msgid "Manage and moderate all content in the system"
 msgstr ""
 
-#: src/constants/navigation.constant.ts:64
+#: src/constants/navigation.constant.ts:38
+#~ msgid "My Account"
+#~ msgstr ""
+
+#: src/pages/admin/social-manager/user-management/_components/user-overlay.tsx:39
+msgid "Name"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:206
+#: src/pages/admin/gas-management/report-metrics/_components/statistics.tsx:76
+msgid "No data in this period"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:77
+msgid "No performers in this period"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:49
+msgid "No reply data available"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:56
+msgid "No report details available"
+msgstr ""
+
+#: src/constants/navigation.constant.ts:72
 msgid "Notifications"
 msgstr ""
 
@@ -134,24 +325,38 @@ msgstr ""
 msgid "Off canvas"
 msgstr ""
 
-#: src/libs/axios.ts:42
+#: src/libs/axios.ts:43
 msgid "Oops, the server returned an error."
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/overall-statistics.tsx:16
+#: src/pages/admin/gas-management/report-metrics/_components/overall-statistics.tsx:39
 msgid "Overall Statistics"
 msgstr ""
 
-#: src/pages/admin/gas-management/activity-history/_components/overview.tsx:33
+#: src/pages/admin/gas-management/activity-history/_components/overview.tsx:59
 msgid "Overview"
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:160
-msgid "Previous Week"
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:125
+msgid "Pending"
 msgstr ""
 
-#: src/constants/navigation.constant.ts:58
-#: src/constants/navigation.constant.ts:79
+#: src/pages/admin/social-manager/content-moderation/_components/stats-overview.tsx:42
+msgid "PENDING"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:160
+#~ msgid "Previous Week"
+#~ msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:80
+#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:69
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-info-card.tsx:26
+msgid "Priority"
+msgstr ""
+
+#: src/constants/navigation.constant.ts:66
+#: src/constants/navigation.constant.ts:87
 msgid "Profile"
 msgstr ""
 
@@ -159,25 +364,77 @@ msgstr ""
 msgid "Profit Overview"
 msgstr ""
 
-#: src/constants/navigation.constant.ts:21
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/quick-stats-card.tsx:16
+msgid "Quick Stats"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:36
+msgid "Related replies & reports"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:43
+msgid "Replies"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/related-reports-section.tsx:44
+msgid "Report Detail"
+msgstr ""
+
+#: src/constants/navigation.constant.ts:28
 msgid "Report Metrics"
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/resource-summary.tsx:25
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-info-card.tsx:18
+msgid "Report Summary"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:67
+#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:56
+#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:64
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-info-card.tsx:30
+msgid "Reports"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/resource-summary.tsx:46
 msgid "Resource Summary"
 msgstr ""
 
 #: src/constants/navigation.constant.ts:48
-msgid "Roles & Permissions"
+#~ msgid "Roles & Permissions"
+#~ msgstr ""
+
+#: src/components/overlay.tsx:145
+#: src/components/overlay.tsx:182
+msgid "Save Changes"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:189
+msgid "Save Information"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:122
+msgid "Saved"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/_components/transfer-fees.tsx:189
+msgid "Saving..."
 msgstr ""
 
 #: src/constants/layout.constant.ts:23
 msgid "Scroll"
 msgstr ""
 
-#: src/constants/navigation.constant.ts:22
-#~ msgid "Settings"
-#~ msgstr ""
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:115
+msgid "Search..."
+msgstr ""
+
+#: src/constants/navigation.constant.ts:38
+msgid "Setting"
+msgstr ""
+
+#: src/pages/admin/gas-management/setting/page.tsx:14
+msgid "Settings"
+msgstr ""
 
 #: src/constants/layout.constant.ts:6
 msgid "Sidebar"
@@ -187,12 +444,22 @@ msgstr ""
 #~ msgid "Sign out"
 #~ msgstr ""
 
+#: src/constants/navigation.constant.ts:44
+msgid "Social Manager"
+msgstr ""
+
 #: src/services/errors/translate-error.ts:28
 msgid "Something went wrong while processing your request. Please try again later or raise an issue on GitHub."
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/statistics.tsx:52
+#: src/pages/admin/gas-management/report-metrics/_components/statistics.tsx:67
 msgid "Statistics"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:56
+#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:53
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-info-card.tsx:22
+msgid "Status"
 msgstr ""
 
 #: src/constants/layout.constant.ts:22
@@ -207,6 +474,10 @@ msgstr ""
 msgid "Switch to Light Mode"
 msgstr ""
 
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-actions-card.tsx:19
+msgid "Take action on this content"
+msgstr ""
+
 #: src/pages/error/page.tsx:16
 msgid "The page you're looking for doesn't exist."
 msgstr ""
@@ -215,78 +486,164 @@ msgstr ""
 msgid "The request was invalid."
 msgstr ""
 
+#: src/components/overlay.tsx:62
+msgid "This action cannot be undone."
+msgstr ""
+
 #: src/services/errors/translate-error.ts:16
 msgid "This email address is associated with an OAuth account. Please sign in with your OAuth provider."
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:72
+#: src/pages/admin/gas-management/setting/page.tsx:15
+msgid "This section provides configuration for all Energy System-related information"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:40
 msgid "Top Performers"
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:83
+#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:51
 msgid "Top User"
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:187
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:111
+msgid "Total"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:192
 msgid "TOTAL BANDWIDTH BURN"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/resource-summary.tsx:75
+msgid "Total Bandwidth Earned"
 msgstr ""
 
 #: src/pages/admin/gas-management/activity-history/_components/overview.tsx:42
 #: src/pages/admin/gas-management/activity-history/_components/overview.tsx:43
 #: src/pages/admin/gas-management/activity-history/_components/overview.tsx:44
-msgid "TOTAL BANDWIDTH EARNED"
-msgstr ""
+#~ msgid "TOTAL BANDWIDTH EARNED"
+#~ msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:86
+#: src/pages/admin/gas-management/report-metrics/_components/resource-summary.tsx:85
+#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:54
 msgid "Total Bandwidth Used"
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:180
+#: src/pages/admin/gas-management/report-metrics/_components/consumption-graph.tsx:185
 msgid "TOTAL ENERGY BURN"
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/overall-statistics.tsx:20
-#: src/pages/admin/gas-management/report-metrics/_components/overall-statistics.tsx:21
 #: src/pages/admin/gas-management/report-metrics/_components/profit-overview.tsx:21
 #: src/pages/admin/gas-management/report-metrics/_components/profit-overview.tsx:23
 #: src/pages/admin/gas-management/report-metrics/_components/profit-overview.tsx:29
-#: src/pages/admin/gas-management/report-metrics/_components/resource-summary.tsx:33
-#: src/pages/admin/gas-management/report-metrics/_components/resource-summary.tsx:34
-#: src/pages/admin/gas-management/report-metrics/_components/resource-summary.tsx:35
-#: src/pages/admin/gas-management/report-metrics/_components/resource-summary.tsx:36
 msgid "Total Energy System earned"
 msgstr ""
 
-#: src/pages/admin/gas-management/activity-history/_components/overview.tsx:41
-msgid "TOTAL ENERGY SYSTEM EARNED"
+#: src/pages/admin/gas-management/report-metrics/_components/resource-summary.tsx:70
+msgid "Total Energy System Earned"
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:85
+#: src/pages/admin/gas-management/activity-history/_components/overview.tsx:41
+#~ msgid "TOTAL ENERGY SYSTEM EARNED"
+#~ msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/resource-summary.tsx:80
+msgid "Total Energy System Used"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:53
 msgid "Total Energy Used"
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:87
+#: src/pages/admin/gas-management/report-metrics/_components/overall-statistics.tsx:81
+msgid "Total Income"
+msgstr ""
+
+#: src/pages/admin/gas-management/activity-history/_components/overview.tsx:75
+msgid "TOTAL REQUEST"
+msgstr ""
+
+#: src/pages/admin/gas-management/activity-history/_components/overview.tsx:78
+msgid "TOTAL REQUEST ERROR"
+msgstr ""
+
+#: src/pages/admin/gas-management/activity-history/_components/overview.tsx:77
+msgid "TOTAL REQUEST PROCESSING"
+msgstr ""
+
+#: src/pages/admin/gas-management/activity-history/_components/overview.tsx:76
+msgid "TOTAL REQUEST SUCCESS"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:55
 msgid "Total Transaction Value"
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:84
+#: src/pages/admin/gas-management/report-metrics/_components/overall-statistics.tsx:69
+#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:52
 msgid "Total Transactions"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/all-content-table.tsx:48
+#: src/pages/admin/social-manager/content-moderation/_components/high-priority-table.tsx:45
+#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:45
+msgid "Type"
+msgstr ""
+
+#: src/components/overlay.tsx:53
+msgid "Update an existing item"
 msgstr ""
 
 #: src/components/theme-switch.tsx:38
 msgid "Use System Theme"
 msgstr ""
 
+#: src/pages/admin/social-manager/user-management/_components/user-overlay.tsx:85
+msgid "User created successfully"
+msgstr ""
+
 #: src/services/errors/translate-error.ts:13
 msgid "User does not have an associated 'secrets' record. Please report this issue on GitHub."
 msgstr ""
 
-#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:112
+#: src/pages/admin/social-manager/user-management/_components/user-overlay.tsx:87
+msgid "User duplicated successfully"
+msgstr ""
+
+#: src/constants/navigation.constant.ts:50
+msgid "User Management"
+msgstr ""
+
+#: src/pages/admin/social-manager/user-management/_components/user-overlay.tsx:88
+msgid "User updated successfully"
+msgstr ""
+
+#: src/pages/admin/social-manager/user-management/_components/user-overlay.tsx:31
+msgid "Username"
+msgstr ""
+
+#: src/pages/admin/gas-management/report-metrics/_components/top-performers.tsx:117
 msgid "View all"
 msgstr ""
 
-#: src/pages/admin/gas-management/activity-history/_components/activity-history.tsx:26
+#: src/pages/admin/gas-management/activity-history/_components/activity-history.tsx:190
 msgid "View and manage all energy system transactions"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/page.tsx:50
+msgid "Violation report #{numericId}"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/[id]/_components/violation-info-card.tsx:35
+msgid "Violation Types"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/warnings-table.tsx:98
+msgid "Warning Content"
+msgstr ""
+
+#: src/pages/admin/social-manager/content-moderation/_components/content-moderation-tabs.tsx:34
+msgid "Warnings"
 msgstr ""
 
 #: src/pages/error/page.tsx:25

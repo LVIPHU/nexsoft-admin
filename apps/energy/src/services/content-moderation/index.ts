@@ -3,3 +3,7 @@ export * from './contents';
 export * from './content';
 export * from './ban-content';
 export * from './bypass-content';
+export * from './replies';
+export * from './reports';
+export * from './moderation-keywords';
+export * from './moderation-languages';

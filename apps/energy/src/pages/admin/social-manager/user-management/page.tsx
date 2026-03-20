@@ -11,6 +11,9 @@ import {
   DropdownMenuSeparator,
   DataTableDragHandle,
   DataTableColumnHeader,
+  Card,
+  CardHeader,
+  CardContent,
 } from '@nexsoft-admin/ui';
 import { UserDto } from '@nexsoft-admin/models';
 import { ColumnDef } from '@tanstack/react-table';
@@ -19,6 +22,11 @@ import { OverlayMode } from '@/types/overlay.type';
 import { queryClient } from '@/libs/query-client';
 import { getUser } from '@/services/user';
 import { USER_KEY } from '@/constants/query-keys.constant';
+import { i18n } from '@lingui/core';
+import { msg } from '@lingui/core/macro';
+import { HeaderCard } from '@/components/header-card';
+
+const HEADER_CLASS = 'uppercase font-bold text-muted-foreground';
 
 function UserManagementPage() {
   const openUserOverlay = ({ mode, props }: { mode: OverlayMode; props?: Record<string, any> }) => {
@@ -74,19 +82,19 @@ function UserManagementPage() {
       {
         id: 'UserId',
         accessorKey: 'UserId',
-        header: ({ column }) => <DataTableColumnHeader column={column} title='User ID' />,
+        header: ({ column }) => <DataTableColumnHeader className={HEADER_CLASS} column={column} title='User ID' />,
         cell: ({ row }) => <div className='max-w-50 truncate'>{row.getValue('UserId')}</div>,
       },
       {
         id: 'Username',
         accessorKey: 'Username',
-        header: ({ column }) => <DataTableColumnHeader column={column} title='Username' />,
+        header: ({ column }) => <DataTableColumnHeader className={HEADER_CLASS} column={column} title='Username' />,
         cell: ({ row }) => <div className='max-w-37.5 truncate'>{row.getValue('Username')}</div>,
       },
       {
         id: 'Name',
         accessorKey: 'Name',
-        header: ({ column }) => <DataTableColumnHeader column={column} title='Name' />,
+        header: ({ column }) => <DataTableColumnHeader className={HEADER_CLASS} column={column} title='Name' />,
         cell: ({ row }) => <div className='max-w-50 truncate'>{row.getValue('Name')}</div>,
       },
       {
@@ -130,9 +138,14 @@ function UserManagementPage() {
   );
 
   return (
-    <div className='flex flex-1 flex-col'>
-      <UsersTable columns={columns} />
-    </div>
+    <Card className='gap-4'>
+      <CardHeader>
+        <HeaderCard title={i18n._(msg`User Management`)} description={i18n._(msg`Manage all users in the system.`)} />
+      </CardHeader>
+      <CardContent className='px-6'>
+        <UsersTable columns={columns} />
+      </CardContent>
+    </Card>
   );
 }
 

@@ -25,7 +25,17 @@
       "Bash(find \"C:\\\\Projects\\\\nexsoft-admin\\\\node_modules\\\\.vite\" -type f -name \"*.json\" 2>/dev/null | head -10)",
       "Bash(find:*)",
       "Bash(ls:*)",
-      "mcp__ide__getDiagnostics"
+      "mcp__ide__getDiagnostics",
+      "Bash(git -C \"C:/Projects/admin\" status --short)",
+      "Bash(git -C \"C:/Projects/admin\" diff --cached --name-only)",
+      "Bash(git -C \"C:/Projects/admin\" ls-files --cached)",
+      "Bash(git -C \"C:/Projects/admin\" ls-tree -r HEAD --name-only)",
+      "Bash(git -C \"C:/Projects/admin\" ls-tree -r fc23579 --name-only)",
+      "Bash(find /c/Projects/admin/nexsoft-admin -path */services/*user* -o -path */constants/*user*)",
+      "Bash(find /c/Projects/admin/nexsoft-admin/apps/energy/src -name *overlay* -type f)",
+      "Bash(xargs cat:*)",
+      "Bash(xargs wc:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }

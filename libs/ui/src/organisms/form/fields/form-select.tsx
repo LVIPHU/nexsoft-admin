@@ -3,6 +3,7 @@
 import { useFormContext, type FieldPath, type FieldValues } from 'react-hook-form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../organisms/select/select';
 import { FormField } from '../form-field';
+import { cn } from '@nexsoft-admin/utils';
 import { FormFieldSkeleton } from '../form-field-skeleton';
 import type { FieldConfig, FieldOption } from '../generator/field-config';
 
@@ -47,7 +48,7 @@ function FormSelect<T extends FieldValues>({
           }}
           disabled={disabled}
         >
-          <SelectTrigger aria-invalid={error ? 'true' : 'false'} className={className}>
+          <SelectTrigger aria-invalid={error ? 'true' : 'false'} className={cn('w-full', className)}>
             <SelectValue placeholder={config?.placeholder || 'Select an option'} />
           </SelectTrigger>
           <SelectContent>

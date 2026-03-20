@@ -57,3 +57,9 @@ out
 
 # Storybook
 storybook-static
+
+# AI Agent
+.agents
+.ai
+.claude
+.cursor

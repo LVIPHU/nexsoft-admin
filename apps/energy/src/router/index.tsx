@@ -18,6 +18,7 @@ import { SocialManagerLayout } from '@/pages/admin/social-manager/layout';
 import { UserManagementPage } from '@/pages/admin/social-manager/user-management/page';
 import { ContentModerationPage } from '@/pages/admin/social-manager/content-moderation/page';
 import { ContentModerationDetailPage } from '@/pages/admin/social-manager/content-moderation/[id]/page';
+import { ModerationKeywordsPage } from '@/pages/admin/social-manager/moderation-keywords/page';
 
 export const routes = createRoutesFromElements(
   <Route element={<Providers />}>
@@ -40,6 +41,7 @@ export const routes = createRoutesFromElements(
               <Route path='user-management' element={<UserManagementPage />} />
               <Route path='content-moderation' element={<ContentModerationPage />} />
               <Route path='content-moderation/:id' element={<ContentModerationDetailPage />} />
+              <Route path='moderation-keywords' element={<ModerationKeywordsPage />} />
               <Route index element={<Navigate replace to='/social-manager/user-management' />} />
             </Route>
 
@@ -51,7 +53,7 @@ export const routes = createRoutesFromElements(
               <Route index element={<Navigate replace to='/account-management/my-account' />} />
             </Route>
 
-            <Route index element={<Navigate replace to='/dashboard' />} />
+            <Route index element={<Navigate replace to='/gas-management/report-metrics' />} />
           </Route>
         </Route>
 

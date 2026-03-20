@@ -11,8 +11,10 @@ import { i18n } from '@lingui/core';
 import type { ViolationContentDto } from '@nexsoft-admin/models';
 import { useViolationContents } from '@/services/content-moderation';
 import { PAGE_SIZE } from '@/constants/table.constant';
+import { VIOLATION_STATUS } from '@/constants/violation.constant';
 import { ContentTypeBadge, ViolationStatusBadge, ReportCountBadge } from './violation-badges';
 import { ActionButtons } from './action-buttons';
+import { HeaderCard } from '@/components/header-card';
 
 const HEADER_CLASS = 'text-xs uppercase';
 
@@ -20,7 +22,7 @@ function WarningsTable() {
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: PAGE_SIZE.DEFAULT_VALUE });
 
   const { data, loading, error } = useViolationContents({
-    violation_status: 'PENDING',
+    violation_status: VIOLATION_STATUS.PENDING,
     page: pagination.pageIndex + 1,
     limit: pagination.pageSize,
   });
@@ -94,10 +96,7 @@ function WarningsTable() {
 
   return (
     <div className='flex flex-col gap-4'>
-      <div>
-        <h3 className='font-semibold'>{i18n._(msg`Warning Content`)}</h3>
-        <p className='text-muted-foreground text-sm'>{i18n._(msg`Content pending review`)}</p>
-      </div>
+      <HeaderCard title={i18n._(msg`Warning Content`)} description={i18n._(msg`Content pending review.`)} />
       {error && <p className='text-destructive text-sm'>{error.message}</p>}
       <div className='overflow-hidden rounded-lg border'>
         <DataTable table={table} columns={columns} loading={loading} />

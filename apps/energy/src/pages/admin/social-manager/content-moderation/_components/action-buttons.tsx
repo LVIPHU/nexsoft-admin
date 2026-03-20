@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { EyeIcon, CheckCircleIcon, XCircleIcon } from 'lucide-react';
 import { Button } from '@nexsoft-admin/ui/button';
 import { useBanContent, useBypassContent } from '@/services/content-moderation';
+import { VIOLATION_STATUS } from '@/constants/violation.constant';
 interface ActionButtonsProps {
   id: number;
   status: string;
@@ -43,7 +44,7 @@ function ActionButtons({ id, status }: ActionButtonsProps) {
         <EyeIcon className='size-4' />
         <span className='sr-only'>View</span>
       </Button>
-      {status === 'PENDING' && (
+      {status === VIOLATION_STATUS.PENDING && (
         <>
           <Button
             variant='ghost'

@@ -15,3 +15,8 @@ export const LIST_USER_KEY = 'users' as const;
 export const VIOLATION_STATISTIC_KEY = 'content-moderation/statistic' as const;
 export const VIOLATION_CONTENTS_KEY = 'content-moderation/contents' as const;
 export const VIOLATION_CONTENT_KEY = 'content-moderation/content' as const;
+export const VIOLATION_REPLIES_KEY = 'content-moderation/replies' as const;
+export const VIOLATION_REPORTS_KEY = 'content-moderation/reports' as const;
+
+export const MODERATION_KEYWORDS_KEY = 'content-moderation/moderation-keywords' as const;
+export const MODERATION_LANGUAGES_KEY = 'content-moderation/moderation-languages' as const;

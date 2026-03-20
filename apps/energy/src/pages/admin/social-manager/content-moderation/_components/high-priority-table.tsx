@@ -11,8 +11,10 @@ import { i18n } from '@lingui/core';
 import type { ViolationContentDto } from '@nexsoft-admin/models';
 import { useViolationContents } from '@/services/content-moderation';
 import { PAGE_SIZE } from '@/constants/table.constant';
+import { VIOLATION_PRIORITY } from '@/constants/violation.constant';
 import { ContentTypeBadge, PriorityBadge, ReportCountBadge } from './violation-badges';
 import { ActionButtons } from './action-buttons';
+import { HeaderCard } from '@/components/header-card';
 
 const HEADER_CLASS = 'text-xs uppercase';
 
@@ -20,7 +22,7 @@ function HighPriorityTable() {
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: PAGE_SIZE.DEFAULT_VALUE });
 
   const { data, loading, error } = useViolationContents({
-    priority: 'VERY_HIGH,HIGH',
+    priority: `${VIOLATION_PRIORITY.VERY_HIGH},${VIOLATION_PRIORITY.HIGH}`,
     page: pagination.pageIndex + 1,
     limit: pagination.pageSize,
   });
@@ -94,12 +96,10 @@ function HighPriorityTable() {
 
   return (
     <div className='flex flex-col gap-4'>
-      <div>
-        <h3 className='text-destructive flex items-center gap-2 font-semibold'>{i18n._(msg`High Priority Content`)}</h3>
-        <p className='text-muted-foreground text-sm'>
-          {i18n._(msg`Content with high violation levels requiring immediate action`)}
-        </p>
-      </div>
+      <HeaderCard
+        title={i18n._(msg`High Priority Content`)}
+        description={i18n._(msg`Content with high violation levels requiring immediate action.`)}
+      />
       {error && <p className='text-destructive text-sm'>{error.message}</p>}
       <div className='overflow-hidden rounded-lg border'>
         <DataTable table={table} columns={columns} loading={loading} />

@@ -5,11 +5,11 @@ import { Skeleton } from '@nexsoft-admin/ui/skeleton';
 import { msg } from '@lingui/core/macro';
 import { i18n } from '@lingui/core';
 import { useViolationContent, useBanContent, useBypassContent } from '@/services/content-moderation';
+import { VIOLATION_STATUS } from '@/constants/violation.constant';
 import { DetailPageHeader } from '@/components/detail-page-header';
 import { ContentCard } from './_components/content-card';
 import { QuickStatsCard } from './_components/quick-stats-card';
 import { ViolationInfoCard } from './_components/violation-info-card';
-import { ViolationActionsCard } from './_components/violation-actions-card';
 import { RelatedReportsSection } from './_components/related-reports-section';
 
 function ContentModerationDetailPage() {
@@ -45,10 +45,7 @@ function ContentModerationDetailPage() {
 
   return (
     <div className='flex flex-col gap-4'>
-      <DetailPageHeader
-        title={i18n._(msg`Content Detail`)}
-        subtitle={i18n._(msg`Violation report #${numericId}`)}
-      />
+      <DetailPageHeader title={i18n._(msg`Content Detail`)} subtitle={i18n._(msg`Violation report #${numericId}`)} />
 
       {error && (
         <Card>
@@ -79,23 +76,25 @@ function ContentModerationDetailPage() {
 
       {!loading && !error && violation && (
         <div className='grid gap-4 @5xl/main:grid-cols-3'>
-          <div className='flex flex-col gap-4 @5xl/main:col-span-2'>
+          <div className='@5xl/main:col-span-2'>
             <ContentCard violation={violation} content={content} user={user} />
-            <RelatedReportsSection violation={violation} />
           </div>
 
           <div className='flex flex-col gap-4'>
             <QuickStatsCard metrics={content?.post_metrics} />
             <ViolationInfoCard violation={violation} />
-            {violation.violation_status === 'PENDING' && (
-              <ViolationActionsCard
-                onBan={handleBan}
-                onBypass={handleBypass}
-                banning={banning}
-                bypassing={bypassing}
-                pendingAction={pendingAction}
-              />
-            )}
+          </div>
+
+          <div className='@5xl/main:col-span-3'>
+            <RelatedReportsSection
+              violation={violation}
+              isPending={violation.violation_status === VIOLATION_STATUS.PENDING}
+              onBypass={handleBypass}
+              onBan={handleBan}
+              banning={banning}
+              bypassing={bypassing}
+              pendingAction={pendingAction}
+            />
           </div>
         </div>
       )}

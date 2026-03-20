@@ -7,16 +7,18 @@ import {
   useDataTableInstance,
 } from '@nexsoft-admin/ui/data-table';
 import { Input } from '@nexsoft-admin/ui/input';
-import { NativeSelect } from '@nexsoft-admin/ui/native-select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@nexsoft-admin/ui/select';
 import { msg } from '@lingui/core/macro';
 import { i18n } from '@lingui/core';
 import type { ViolationContentDto } from '@nexsoft-admin/models';
 import { useViolationContents } from '@/services/content-moderation';
 import { PAGE_SIZE } from '@/constants/table.constant';
+import { VIOLATION_STATUS } from '@/constants/violation.constant';
 import { ContentTypeBadge, ViolationStatusBadge, PriorityBadge, ReportCountBadge } from './violation-badges';
 import { ActionButtons } from './action-buttons';
+import { HeaderCard } from '@/components/header-card';
 
-const HEADER_CLASS = 'text-xs uppercase';
+const HEADER_CLASS = 'uppercase';
 
 function AllContentTable() {
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: PAGE_SIZE.DEFAULT_VALUE });
@@ -105,27 +107,29 @@ function AllContentTable() {
 
   return (
     <div className='flex flex-col gap-4'>
-      <div>
-        <h3 className='font-semibold'>{i18n._(msg`All Content`)}</h3>
-        <p className='text-muted-foreground text-sm'>
-          {i18n._(msg`Total`)} {data?.pagination.total_rows ?? 0} {i18n._(msg`content items`)}
-        </p>
-      </div>
+      <HeaderCard
+        title={i18n._(msg`All Content`)}
+        description={`${i18n._(msg`Total`)} ${data?.pagination.total_rows ?? 0} ${i18n._(msg`content items`)}`}
+      />
       <div className='flex items-center gap-3'>
         <Input placeholder={i18n._(msg`Search...`)} className='max-w-xs' disabled />
-        <NativeSelect
+        <Select
           value={statusFilter}
-          onChange={(e) => {
-            setStatusFilter(e.target.value);
+          onValueChange={(val) => {
+            setStatusFilter(val === 'ALL' ? '' : val);
             setPagination((prev) => ({ ...prev, pageIndex: 0 }));
           }}
-          className='w-36'
         >
-          <option value=''>{i18n._(msg`All Status`)}</option>
-          <option value='PENDING'>{i18n._(msg`Pending`)}</option>
-          <option value='BYPASS'>{i18n._(msg`Approved`)}</option>
-          <option value='BAN'>{i18n._(msg`Banned`)}</option>
-        </NativeSelect>
+          <SelectTrigger className='w-36'>
+            <SelectValue placeholder={i18n._(msg`All Status`)} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value='ALL'>{i18n._(msg`All Status`)}</SelectItem>
+            <SelectItem value={VIOLATION_STATUS.PENDING}>{i18n._(msg`Pending`)}</SelectItem>
+            <SelectItem value={VIOLATION_STATUS.BYPASS}>{i18n._(msg`Approved`)}</SelectItem>
+            <SelectItem value={VIOLATION_STATUS.BAN}>{i18n._(msg`Banned`)}</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
       {error && <p className='text-destructive text-sm'>{error.message}</p>}
       <div className='overflow-hidden rounded-lg border'>

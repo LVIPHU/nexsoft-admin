@@ -6,7 +6,6 @@ import { msg } from '@lingui/core/macro';
 import { i18n } from '@lingui/core';
 import { useState } from 'react';
 import type { DateRange } from 'react-day-picker';
-import { Link } from 'react-router';
 import { OVERALL_STATISTICS_FROM_DAYS_AGO, OVERALL_STATISTICS_TO_DAYS_AGO } from '@/constants/report-metrics.constant';
 import { getDefaultReportMetricsDateRange, toIndexerDateParams } from '@/utils/date-range';
 import { formatCurrency } from '@nexsoft-admin/utils';
@@ -65,18 +64,7 @@ function OverallStatistics({ className }: OverallStatisticsProps) {
             )}
             {!loading && !error && data && (
               <>
-                <SectionCard
-                  title={i18n._(msg`Total Transactions`)}
-                  value={data.total_transactions}
-                  addonEnd={
-                    <Link
-                      to='/gas-management/activity-history'
-                      className='text-primary ml-2 text-sm font-medium hover:underline'
-                    >
-                      View history &gt;
-                    </Link>
-                  }
-                />
+                <SectionCard title={i18n._(msg`Total Transactions`)} value={data.total_transactions} />
                 <div data-slot='card' className='flex flex-col gap-4 p-6'>
                   <p className='truncate text-sm font-medium uppercase'>{i18n._(msg`Total Income`)}</p>
                   <p className='truncate text-2xl font-semibold'>{formatCurrency(data.total_income)}</p>
