@@ -79,7 +79,7 @@ Each client app creates a singleton `SSOClient` in `src/libs/sso.ts` using Vite 
 
 ### Models lib
 
-`@nexsoft-admin/models` exports Zod schemas and inferred TypeScript types for every DTO, organized by domain: `auth`, `user`, `admin`, `profile`, `role`, `activity`, `report-metrics`, `setting`. Import directly from the package; do not duplicate schemas in apps.
+`@nexsoft-admin/models` exports Zod schemas and inferred TypeScript types for every DTO, organized by domain: `auth`, `user`, `admin`, `profile`, `role`, `activity`, `report-metrics`, `setting`, `violation`. Import directly from the package; do not duplicate schemas in apps.
 
 ### Axios setup (client apps)
 
@@ -115,8 +115,30 @@ React Router 7 with `createBrowserRouter`. All authenticated routes are wrapped 
 
 ### State
 
-- **Server state**: TanStack Query — query keys defined in `src/constants/query-keys.constant.ts`
+- **Server state**: TanStack Query — query keys defined in `src/constants/query-keys.constant.ts`; configured with `staleTime: 60s`, no refetch on mount/focus/reconnect, mutations don't retry.
 - **UI/layout state**: Zustand stores in `src/stores/*.store.ts`
+
+### Auth app routing
+
+Next.js App Router with a `[lang]` dynamic segment at the root (`src/app/[lang]/`). API routes in `src/app/api/auth/{code,login,logout,refresh,token}/route.ts` all support CORS preflight (OPTIONS handler). Redis is required; see env vars below.
+
+### Import aliases
+
+Apps use `@/*` → `./src/*`. Libs are resolved via Nx path mappings (`@nexsoft-admin/<lib>` and sub-exports). Never use relative paths across workspace boundaries.
+
+### Environment variables
+
+**Auth app** (`apps/auth/.env.local`):
+- `REDIS_URL` — required for session/auth-code storage
+- `NEXT_PUBLIC_AUTH_SERVER_URL` / `AUTH_SERVER_URL`
+- `EXTERNAL_AUTH_API_URL` — upstream login/token endpoint
+- `ACCESS_TOKEN_EXPIRY`, `AUTH_CODE_EXPIRY` (seconds; defaults 3600 / 300)
+
+**Vite apps** (`apps/social/.env`, `apps/energy/.env`):
+- `VITE_AUTH_SERVER_URL` — auth app origin
+- `VITE_APP_ID` — unique per app (`social` / `energy`)
+- `VITE_APP_URL` — this app's own origin (used as `redirect_uri`)
+- `VITE_TOKEN_STORAGE` — `localStorage` | `sessionStorage` | `cookie` | `memory`
 
 ### i18n
 

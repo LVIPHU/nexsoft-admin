@@ -1,7 +1,15 @@
 {
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/api/indexer-api/:path*",
+      "destination": "https://dev-indexer.tbchat.io/:path*"
+    },
+    {
+      "source": "/api/authz-api/:path*",
+      "destination": "https://dev-backoffice-api.tbchat.io/:path*"
+    },
+    {
+      "source": "/((?!api).*)",
       "destination": "/index.html"
     }
   ]

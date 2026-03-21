@@ -35,7 +35,8 @@
       "Bash(find /c/Projects/admin/nexsoft-admin/apps/energy/src -name *overlay* -type f)",
       "Bash(xargs cat:*)",
       "Bash(xargs wc:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(grep -A 10 \"\"\"deploy\"\"\" /d/nexsoft/nexsoft-admin/package.json)"
     ]
   }
 }
